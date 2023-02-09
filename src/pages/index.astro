@@ -14,9 +14,6 @@ allEntries = allEntries.sort(
 		Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
 		Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
 );
-
-const sortedPosts = getSortedPosts(articleEntries);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 ---
 
 <Layout title="Welcome to Astro.">
