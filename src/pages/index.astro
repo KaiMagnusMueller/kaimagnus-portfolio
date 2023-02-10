@@ -4,6 +4,7 @@ import getSortedPosts from '@utils/getSortedPosts';
 import slugify from '@utils/slugify';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import CollectionList from '@components/CollectionList.astro';
 
 const articleEntries = await getCollection('articles');
 const projectEntries = await getCollection('projects');
@@ -16,8 +17,11 @@ allEntries = allEntries.sort(
 );
 
 let featured = allEntries.filter((elem) => {
-	console.log(elem);
-	elem.featured === true;
+	return elem.data.tags.includes("featured");
+});
+
+let university = allEntries.filter((elem) => {
+	return elem.data.tags.includes("university project");
 });
 ---
 
@@ -39,38 +43,10 @@ let featured = allEntries.filter((elem) => {
 	</main>
 
 	<section class="">
-		<div class="post-list text-regular">
-			<h2 class="color-text-low-contrast">Noteworthy</h2>
-			<ul>
-				{
-					allEntries.map((articleEntry) => (
-						<li class="">
-							<a
-								class="text-regular"
-								href={`/${articleEntry.collection}/${articleEntry.slug}`}>
-								{articleEntry.data.title}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</div>
-		<div class="post-list text-regular">
-			<h2 class="color-text-low-contrast">Noteworthy</h2>
-			<ul>
-				{
-					featured.map((articleEntry) => (
-						<li class="">
-							<a
-								class="text-regular"
-								href={`/${articleEntry.collection}/${articleEntry.slug}`}>
-								{articleEntry.data.title}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</div>
+        <CollectionList title="Noteworthy" entries={featured}></CollectionList>
+        <CollectionList title="Work" entries={allEntries}></CollectionList>
+        <CollectionList title="University Projects" entries={university}></CollectionList>
+        <CollectionList title="Posts" entries={articleEntries}></CollectionList>
 	</section>
 </Layout>
 <style lang="scss">
@@ -84,23 +60,4 @@ let featured = allEntries.filter((elem) => {
 		margin-top: 128px;
 	}
 
-	.post-list {
-		ul {
-			list-style: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		h2 {
-			margin: 3px 0;
-		}
-
-		a {
-			color: var(--text-color);
-			text-decoration: none;
-		}
-		li {
-			margin: 3px 0;
-		}
-	}
 </style>

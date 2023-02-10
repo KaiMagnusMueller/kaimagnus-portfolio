@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+	title: string;
+	entries: CollectionEntry<any>[];
+}
+const { title, entries } = Astro.props;
+---
+
+<div class="post-list text-regular">
+	<h2 class="color-text-low-contrast">{title}</h2>
+	<ul>
+		{
+			entries.map((entry) => (
+				<li>
+					<a class="text-regular" href={`/${entry.collection}/${entry.slug}`}>
+						{entry.data.title}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</div>
+
+<style lang="scss">
+	.post-list {
+		margin-bottom: 4em;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	h2 {
+		margin: 3px 0;
+	}
+
+	li {
+		margin: 3px 0;
+	}
+</style>
