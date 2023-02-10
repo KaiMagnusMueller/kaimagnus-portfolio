@@ -1,4 +1,5 @@
 ---
+import '@styles/styles.scss';
 export interface Props {
 	title: string;
 }
@@ -26,7 +27,13 @@ const { title } = Astro.props;
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
+		background: var(--color-background);
+	}
+	body {
+		max-width: 970px;
+		display: grid;
+		grid-template-columns: repeat(9, 1fr);
+		margin: auto;
 	}
 	code {
 		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,

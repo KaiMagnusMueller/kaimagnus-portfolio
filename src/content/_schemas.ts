@@ -10,8 +10,8 @@ export const projectSchema = z
 		tags: z.array(z.string()).default(['others']),
 		ogImage: z.string().optional(),
 		description: z.string(),
-		semesterDate: z.string(),
-		course: z.string(),
+		semesterDate: z.string().optional(),
+		course: z.string().optional(),
 	})
 	.strict();
 

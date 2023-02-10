@@ -1,0 +1,62 @@
+:root {
+	--color-background: url(200-20-10-monochrome.png), #fbfbf9;
+	--color-text: #303030;
+	--color-text-low-contrast: #8f8f8f;
+	--color-highlight: #ffbb0b;
+
+	/* TYPO */
+	--font-stack: 'Sofia Pro', system-ui;
+	/* GENERAL STYLES */
+	color: var(--color-text);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background: url(200-20-10-monochrome.png), #161612;
+		--color-text: #e7e7e7;
+		--color-text-low-contrast: #696969;
+		--color-highlight: #ffbb0b;
+	}
+}
+
+.color-text {
+	color: var(--color-text);
+}
+
+.color-text-low-contrast {
+	color: var(--color-text-low-contrast);
+}
+
+h1,
+.text-large,
+.text-large p {
+	font-family: var(--font-stack);
+	font-style: normal;
+	font-weight: 500;
+	font-size: 26px;
+	line-height: 35px;
+}
+
+h1,
+h2,
+h3,
+h4,
+.text-large p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+p,
+.text-regular,
+.text-regular h2 {
+	font-family: var(--font-stack);
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+.text-regular h2 {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
