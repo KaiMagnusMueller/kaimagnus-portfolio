@@ -20,23 +20,23 @@ const { title } = Astro.props;
 		<slot />
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
+<style lang="scss" is:global>
+	@import '../styles/_vars.scss';
+
 	html {
-		font-family: system-ui, sans-serif;
 		background: var(--color-background);
 	}
 	body {
-		max-width: 970px;
+		max-width: var(--screen-lg);
 		display: grid;
 		grid-template-columns: repeat(9, 1fr);
 		margin: auto;
+		padding: 0 128px;
 	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+
+	@media (max-width: $screen-md) {
+		body {
+			padding: 0 32px;
+		}
 	}
 </style>

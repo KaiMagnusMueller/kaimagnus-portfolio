@@ -1,5 +1,7 @@
+@use '_vars.scss';
+
 :root {
-	--color-background: url(200-20-10-monochrome.png), #fbfbf9;
+	--color-background: url(200-20-5-monochrome.png), #fbfbf9;
 	--color-text: #303030;
 	--color-text-low-contrast: #8f8f8f;
 	--color-highlight: #ffbb0b;
@@ -8,11 +10,18 @@
 	--font-stack: 'Sofia Pro', system-ui;
 	/* GENERAL STYLES */
 	color: var(--color-text);
+
+	// BREAKPOINTS
+	--screen-sm: 640px;
+	--screen-md: 768px;
+	--screen-lg: 1024px;
+	--screen-xl: 1280px;
+	--screen-2xl: 1536px;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-background: url(200-20-10-monochrome.png), #161612;
+		--color-background: url(200-20-5-monochrome.png), #161612;
 		--color-text: #e7e7e7;
 		--color-text-low-contrast: #696969;
 		--color-highlight: #ffbb0b;
@@ -25,6 +34,21 @@
 
 .color-text-low-contrast {
 	color: var(--color-text-low-contrast);
+}
+
+p,
+.text-regular,
+.text-regular h2 {
+	font-family: var(--font-stack);
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+.text-regular h2 {
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 h1,
@@ -46,22 +70,26 @@ h4,
 	margin-bottom: 0.5em;
 }
 
-p,
-.text-regular,
-.text-regular h2 {
-	font-family: var(--font-stack);
-	font-style: normal;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 22px;
-}
-
-.text-regular h2 {
-	margin-top: 3px;
-	margin-bottom: 3px;
-}
-
 a {
 	color: var(--text-color);
 	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.text {
+	a {
+		text-decoration: underline;
+	}
+}
+
+@media (max-width: vars.$screen-md) {
+	h1,
+	.text-large,
+	.text-large p {
+		font-size: 22px;
+		line-height: unset;
+	}
 }

@@ -1,14 +1,14 @@
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
-import svelte from "@astrojs/svelte";
+import svelte from '@astrojs/svelte';
 
 // https://astro.build/config
-import mdx from "@astrojs/mdx";
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [svelte(), mdx()]
+	integrations: [svelte(), mdx()],
 });
