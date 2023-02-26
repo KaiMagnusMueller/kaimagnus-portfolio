@@ -1,7 +1,7 @@
 ---
 author: Kai Magnus Müller
 pubDatetime: 2017-02-04T15:22:00Z
-title: Aral Sea
+title: Aral Sea - A Chronicle
 highlight: true
 draft: false
 tags:
@@ -10,10 +10,16 @@ tags:
 ogImage: ''
 semesterDate: Winter 2016
 course: INTERACTIVE COMMUNICATION SYSTEMS
-description: Formerly one of the four largest lakes in the world, the Aral Sea has been steadily shrinking since the 1960s. With this project, we want to give a comprehensive overview of the greatest man made intervention in history of nature. The project was awarded with the Digital Talents Award from the Annual Multimedia Awards 2018.
+description: Tells the story of how the Aral Sea was drained for cotton plantations and other agriculture during the soviet era. Users can navigate through the drying process by removing water themselves in the form of blue acrylic sheets.
+# descriptionLong: Formerly one of the four largest lakes in the world, the Aral Sea has been steadily shrinking since the 1960s. With this project, we want to give a comprehensive overview of the greatest man made intervention in history of nature. The project was awarded with the Digital Talents Award from the Annual Multimedia Awards 2018.
 ---
 
+import { Image, Picture } from '@astrojs/image/components';
+import Figure from '@components/Figure.astro';
 import Video from '@components/Video.svelte';
+import UseCase from '@components/UseCase.svelte';
+
+<Figure alt="" src="/video/aralsea/aralsea-header.mp4" type="video" fullWidth></Figure>
 
 ## Goal
 
@@ -25,6 +31,50 @@ sea's condition.
 ## A Man-Made Disaster
 
 The Aral Sea between Kazakhstan and Uzbekistan was formerly one of the four largest lakes in the world. In the early
+20<sup>th</sup> century the Soviet government decided to irrigate the desert and grow rice, melons and cotton. The remaining water flowing into the Aral Sea could not match losses through evaporation and the sea began to shrink. By 1960 between 20km<sup>2</sup> and 60km<sup>2</sup> of water was diverted each year. In the 1970s the Aral Seas level fell by 50-60cm each year. By 2009 only its northern part and a small strip in the south remained.
+
+The process of drying up the sea has left plains covered with salt and chemicals from weapon testing and industry,
+pesticides and fertilizer. The region's fishing industry has been devastated which caused rising unemployment. Dust
+storms are blowing toxic sand into settlements, causing serious public health issues.
+
+<Figure
+	alt="lsjfglksdjfg ldskjf"
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677016518/aralsea-physical_s7k0kb.jpg"
+	aspectRatio="16:9"></Figure>
+
+export const _srcSet2 = [
+	{
+		title: 'Navigating Decades',
+		src: 'video/aralsea/aralsea-1.mp4',
+		alt: 'The user can navigate through the decades and watch the Aral Sea shrink based on historical records. Each year has different hotspots placed on the map (some are missing in this video).',
+	},
+	{
+		title: 'Hotspot',
+		src: 'video/aralsea/aralsea-2.mp4',
+		alt: 'Hotspots slide in from the left when selected. They aim to educate the user about many different topics surrounding the Aral Sea. Our mature user group gets the information they want from in depth texts. For children and parents pictures and statistics draw attention and make information visible at a glance.',
+	},
+	{
+		title: 'Overlays',
+		src: 'video/aralsea/aralsea-3.mp4',
+		alt: 'Some hotspots display data directly on the map. Areas of influence of diseases and health statistics show who was and is still suffering in the region',
+	},
+	{
+		title: 'Expand Hotspot',
+		src: 'video/aralsea/aralsea-4.mp4',
+		alt: 'Some hotspots have a white arrow that indicates they can be expanded to show additional information to users that wish to know more about a subject.',
+	},
+	{
+		title: 'Statistics',
+		src: 'video/aralsea/aralsea-5.mp4',
+		alt: 'A button to the right and shortcuts in some hotspots access a separate statistics screen. Here the user can view detailed statistics of health records, economy and hydrology. They can hide and show diseases to their liking to get a closer look at small patient numbers. Stats about the local economy are shown in the style of isotype to give a better impression of scale.',
+	},
+];
+
+<UseCase client:visible srcSet={_srcSet2}></UseCase>
+
+## ASDF
+
+The Aral Sea between Kazakhstan and Uzbekistan was formerly one of the four largest lakes in the world. In the early
 20th century the Soviet government decided to irrigate the desert and grow rice, melons and cotton. The remaining water
 flowing into the Aral Sea could not match losses through evaporation and the sea began to shrink. By 1960 between 20km2
 and 60km2 of water was diverted each year. In the 1970s the Aral Seas level fell by 50-60cm each year. By 2009 only its
@@ -34,4 +84,7 @@ The process of drying up the sea has left plains covered with salt and chemicals
 pesticides and fertilizer. The region's fishing industry has been devastated which caused rising unemployment. Dust
 storms are blowing toxic sand into settlements, causing serious public health issues.
 
-<Video client:visible src="/video/aralsea/aralsea-1.mp4" />
+<Figure
+	alt="lsjfglksdjfg ldskjf"
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677016519/aralsea-hotspot13_cvntys.png"
+	aspectRatio="16:9"></Figure>

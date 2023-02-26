@@ -1,13 +1,12 @@
 import type { SocialObjects } from './types';
 
 export const SITE = {
-	website: 'https://astro-paper.pages.dev/',
-	author: 'Sat Naing',
-	desc: 'A minimal, responsive and SEO-friendly Astro blog theme.',
+	// website: 'https://www.kaimagnus.de/',
+	author: 'Kai Magnus Müller',
+	desc: 'Professional projects and other works of Kai Magnus Müller, interaction designer',
 	title: 'Kai Magnus–',
 	ogImage: 'astropaper-og.jpg',
 	lightAndDarkMode: true,
-	postPerPage: 3,
 };
 
 export const LOGO_IMAGE = {
@@ -20,7 +19,7 @@ export const LOGO_IMAGE = {
 export const SOCIALS: SocialObjects = [
 	{
 		name: 'Github',
-		href: 'https://github.com/satnaing/astro-paper',
+		href: 'https://github.com/kaimagnusmueller',
 		linkTitle: ` ${SITE.title} on Github`,
 		active: true,
 	},

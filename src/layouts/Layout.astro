@@ -1,5 +1,7 @@
 ---
+export const prerender = true;
 import '@styles/styles.scss';
+import { SITE } from '@config';
 export interface Props {
 	title: string;
 }
@@ -14,10 +16,24 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+
+		<meta name="description" content={SITE.desc} />
+		<meta name="author" content={SITE.author} />
+		<meta name="color-scheme" content="light dark" />
+
 		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
+		<footer class="color-text-low-contrast">
+			<span>Kai Magnus Müller – <time>{new Date().getFullYear()}</time></span>
+			<ul class="list--horizontal">
+				<li><a href="http://www.twitter.com/_kaimagnus">Twitter</a></li>
+				<li><a href="http://github.com/kaimagnusmueller">GitHub</a></li>
+				<li><a href="http://www.linkedin.com/kaimagnusmueller">LinkedIn</a></li>
+				<li class="m-left--auto"><a href="./rss.xml">Get the RSS feed</a></li>
+			</ul>
+		</footer>
 	</body>
 </html>
 <style lang="scss" is:global>
@@ -25,18 +41,31 @@ const { title } = Astro.props;
 
 	html {
 		background: var(--color-background);
+		padding: 0 8rem;
 	}
 	body {
-		max-width: var(--screen-lg);
-		display: grid;
-		grid-template-columns: repeat(9, 1fr);
+		max-width: $screen-lg;
+		position: relative;
 		margin: auto;
-		padding: 0 128px;
+	}
+
+	footer {
+		margin: 8rem 0 1rem;
+		display: flex;
+		gap: 2rem;
 	}
 
 	@media (max-width: $screen-md) {
-		body {
-			padding: 0 32px;
+		html {
+			padding: 0 1.5rem;
+		}
+
+		footer {
+			flex-direction: column;
+
+			span {
+				order: 1;
+			}
 		}
 	}
 </style>

@@ -1,5 +1,5 @@
 {
-	"spellright.language": ["de", "en"],
+	"spellright.language": ["en"],
 	"spellright.documentTypes": ["markdown", "latex", "plaintext"],
 	"spellright.parserByClass": {
 		"mdx": {

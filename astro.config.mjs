@@ -7,8 +7,19 @@ import svelte from '@astrojs/svelte';
 import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
+import image from '@astrojs/image';
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [svelte(), mdx()],
+	site: 'https://kaimagnus-portfolio-git-dev-kaimagnusmueller.vercel.app/',
+	integrations: [
+		svelte(),
+		mdx(),
+		image({
+			serviceEntryPoint: '@astrojs/image/sharp',
+		}),
+	],
+	vite: {
+		plugins: [],
+	},
 });

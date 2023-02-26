@@ -1,6 +1,5 @@
 ---
 import { SITE } from '@config';
-import '@styles/styles.scss';
 
 import { CollectionEntry, getCollection } from 'astro:content';
 import getSortedPosts from '@utils/getSortedPosts';
@@ -29,43 +28,63 @@ let university = allEntries.filter((elem) => {
 ---
 
 <Layout title={SITE.title}>
-	<main class="color-text-low-contrast text text-large">
-		<h1 class="">
-			<span class="color-text">Hi, I’m Kai Magnus.</span>
-		</h1>
-		<p>
-			A product designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on
-			human centered experiences and products. Previously, I spent some time at <a
-				href="https://www.intuity.de">Intuity</a
-			> working for automotive companies and at <a href="https://www.precious-forever.com/"
-				>precious design</a
-			> working for a CRM startup.
-		</p>
-		<p>
-			While studying, I wrote a bachelor thesis about <a href="projects/destinations"
-				>building wayfinding systems</a
-			>, designed a <a href="/projects/halo">browser built for research</a>, went to Japan and
-			developed an award winning
-			<a href="/projects/aral-sea">interactive exhibit</a>.
-		</p>
-	</main>
-
-	<section class="">
-		<CollectionList title="Noteworthy" entries={featured} />
-		<CollectionList title="Work" entries={allEntries} />
-		<CollectionList title="University Projects" entries={university} />
-		<CollectionList title="Posts" entries={articleEntries} />
-	</section>
+	<div class="grid--main">
+		<main class="hero--section color-text-low-contrast text text-large">
+			<h1 class="">
+				<span class="color-text">Hi, I’m Kai Magnus.</span>
+			</h1>
+			<p>
+				A product designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on human centered
+				experiences and products. Previously, I spent some time at <a href="https://www.intuity.de">Intuity</a> working
+				for automotive companies and at <a href="https://www.precious-forever.com/">precious design</a> working for
+				a CRM startup.
+			</p>
+			<p>
+				While studying, I wrote a bachelor thesis about <a href="projects/destinations"
+					>building wayfinding systems</a
+				>, designed a <a href="/projects/halo">browser built for research</a>, went to Japan and developed an
+				award winning
+				<a href="/projects/aral-sea">interactive exhibit</a>.
+			</p>
+		</main>
+		<section class="">
+			<CollectionList title="Noteworthy" ariaDetails="Noteworthy projects and articles" entries={featured} />
+			<CollectionList title="Work" ariaDetails="Professional projects" entries={allEntries} />
+			<CollectionList title="University Projects" entries={university} />
+			<CollectionList title="Posts" entries={articleEntries} />
+			<p class="position--relative"><span class="highlight-star" title="">*</span>Worth checking out</p>
+		</section>
+	</div>
 </Layout>
 <style lang="scss">
 	@import '../styles/_vars.scss';
+
+	.grid--main {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		gap: 0 20px;
+		margin: auto;
+	}
 	main {
-		grid-column: span 6;
-		margin-top: 128px;
+		grid-column: span 8;
+		margin-top: 8rem;
 	}
 	section {
 		grid-column: 1/-1;
-		margin-top: 128px;
+		margin-top: 8rem;
+	}
+
+	h1 {
+		margin-bottom: 0.5em;
+	}
+
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+
+	span.highlight-star {
+		position: absolute;
+		transform: translate(-110%, -20%);
 	}
 
 	@media (max-width: $screen-lg) {
