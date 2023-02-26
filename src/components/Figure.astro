@@ -55,7 +55,7 @@ let options = {
 
 <div class="container">
 	<figure class="grid--container">
-		<div class:list={['media--container', fullWidth && 'grid--full']}>
+		<div class:list={['media--container', (fullWidth && 'grid--full') || 'media--9col']}>
 			{
 				type === 'picture' && (
 					<>
@@ -104,6 +104,9 @@ let options = {
 
 	.media--container {
 		position: relative;
+	}
+
+	.media--9col {
 		grid-column: 1 / span 9;
 	}
 
