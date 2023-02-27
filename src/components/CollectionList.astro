@@ -9,34 +9,37 @@ export interface Props {
 const { title, entries, ariaDetails } = Astro.props;
 ---
 
-<div class="post-list text-regular">
-	<h2 class="color-text-low-contrast">{title}</h2>
-	<ul>
-		{
-			entries.map((entry) => (
-				<li>
-					<a
-						class={
-							entry.data.highlight
-								? 'highlight text-regular position--relative'
-								: 'text-regular position--relative'
-						}
-						href={`/${entry.collection}/${entry.slug}`}
-						aria-label={entry.data.description}>
-						{entry.data.title}
-					</a>
-					{entry.data.highlight && (
-						<span
-							class="highlight-star highlight-star-position"
-							title="This project is worth checking out!">
-							*
-						</span>
-					)}
-				</li>
-			))
-		}
-	</ul>
-</div>
+{
+	// check if entries is empty, only display list if there are entries
+	entries && (
+		<div class="post-list text-regular">
+			<h2 class="color-text-low-contrast">{title}</h2>
+			<ul>
+				{entries.map((entry) => (
+					<li>
+						<a
+							class={
+								entry.data.highlight
+									? 'highlight text-regular position--relative'
+									: 'text-regular position--relative'
+							}
+							href={`/${entry.collection}/${entry.slug}`}
+							aria-label={entry.data.description}>
+							{entry.data.title}
+						</a>
+						{entry.data.highlight && (
+							<span
+								class="highlight-star highlight-star-position"
+								title="This project is worth checking out!">
+								*
+							</span>
+						)}
+					</li>
+				))}
+			</ul>
+		</div>
+	)
+}
 
 <style lang="scss">
 	.post-list {

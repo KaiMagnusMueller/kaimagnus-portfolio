@@ -22,6 +22,10 @@ let featured = allEntries.filter((elem) => {
 	return elem.data.tags.includes('featured');
 });
 
+let work = allEntries.filter((elem) => {
+	return elem.data.tags.includes('work');
+});
+
 let university = allEntries.filter((elem) => {
 	return elem.data.tags.includes('university project');
 });
@@ -49,7 +53,7 @@ let university = allEntries.filter((elem) => {
 		</main>
 		<section class="">
 			<CollectionList title="Noteworthy" ariaDetails="Noteworthy projects and articles" entries={featured} />
-			<CollectionList title="Work" ariaDetails="Professional projects" entries={allEntries} />
+			<CollectionList title="Work" ariaDetails="Professional projects" entries={} />
 			<CollectionList title="University Projects" entries={university} />
 			<CollectionList title="Posts" entries={articleEntries} />
 			<p class="position--relative"><span class="highlight-star" title="">*</span>Worth checking out</p>
