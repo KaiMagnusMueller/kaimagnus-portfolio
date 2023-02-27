@@ -229,7 +229,6 @@
 
 		figcaption {
 			position: relative;
-			width: 80%;
 		}
 
 		.caption-helper {

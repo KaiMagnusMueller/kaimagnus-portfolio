@@ -1,0 +1,49 @@
+---
+author: Kai Magnus Müller
+pubDatetime: 2016-10-10T10:19:47Z
+title: QUASAR
+highlight: true
+draft: false
+tags:
+    - university project
+ogImage: ''
+semesterDate: Winter 2016
+course: DESIGN IN THREE DIMENSIONAL SPACE
+description: QUASAR is a Pong-style game with a spin, players have to use three paddles to catch as many balls as possible until the time runs out. It was created during a four week workshop with Prof. Franklin Hernandez-Castro.
+---
+
+import { Image, Picture } from '@astrojs/image/components';
+import Figure from '@components/Figure.astro';
+import Video from '@components/Video.svelte';
+import UseCase from '@components/UseCase.svelte';
+
+<div style="padding:56.25% 0 0 0;position:relative;">
+	<iframe
+		src="https://player.vimeo.com/video/795727830?h=b0f050fb77&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+		frameborder="0"
+		allow="autoplay; fullscreen; picture-in-picture"
+		allowfullscreen
+		style="position:absolute;top:0;left:0;width:100%;height:100%;"
+		title="QUASAR"></iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+## Goal
+
+Topic for this workshop was to create an arcade-like game. We were free to choose our own direction for our game. Only constraint was the display should have a vertical orientation because the game should be played with a slightly inclined projection surface.
+
+## Gameplay
+
+As an arcade game, gameplay was the most important part we needed to get right. We chose to take a different spin to the classic Pong gameplay. From the center of the screen, balls start to spawn and move in random directions. The player has to catch the balls with one of three paddles that matches the ball in color to gain points. Every second the player loses points until none are left and the game is over. The longer they manage to stay in the game the better is their score.
+
+## Tutorial and Variation
+
+Arcade games tend to be overwhelming for beginners with too many objects to focus on and true random spawns lead to boring gameplay. Because of this we implemented special spawns in addition to our default random spawns. A tutorial segment gives the player a few seconds to get comfortable but the difficulty rises quickly. The pattern starts to change and random spawns start. Now the player has to show they have understood the basic principles. To keep the game from becoming dull various patterns emerge.
+
+## Epilogue
+
+During my fourth semester, I added sounds as part of the course „Audio in Interaction Design“. Sounds now indicate the various states, from 'main menu', 'countdown', to the various 'special spawns' and 'game over'.
+
+## About
+
+This is a student project created during winter semester 2016 together with Sebastian Schmid, [Marius Schnabel](http://www.marius-schnabel.de), [Yichuang Wang](https://www.yihuangwang.com) and [Martin Wehl](http://www.martinwehl.de). The workshop Design in Three Dimensional Space was presented by [Prof. Franklin Hernandez-Castro](http://www.skizata.com).

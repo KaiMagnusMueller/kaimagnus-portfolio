@@ -1,6 +1,6 @@
 ---
 author: Kai Magnus Müller
-pubDatetime: 2017-02-04T15:22:00Z
+pubDatetime: 2020-08-20T10:19:47Z
 title: Destinations
 highlight: true
 draft: false
@@ -10,28 +10,120 @@ tags:
 ogImage: ''
 semesterDate: Summer 2020
 course: Bachelor Thesis
-description: Formerly one of the four largest lakes in the world, the Aral Sea has been steadily shrinking since the 1960s. With this project, we want to give a comprehensive overview of the greatest man made intervention in history of nature. The project was awarded with the Digital Talents Award from the Annual Multimedia Awards 2018.
+description: Destinations is an application concept that simplifies the design process of wayfinding systems. Users can view a digital representation of a project site, visually plan visitor routes, sign placements and messages.
 ---
 
+import { Image, Picture } from '@astrojs/image/components';
+import Figure from '@components/Figure.astro';
 import Video from '@components/Video.svelte';
+import UseCase from '@components/UseCase.svelte';
 
-## Goal
+<div style="padding:62.5% 0 0 0;position:relative;">
+	<iframe
+		src="https://player.vimeo.com/video/802851320?h=672644920c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+		frameborder="0"
+		allow="autoplay; fullscreen; picture-in-picture"
+		allowfullscreen
+		style="position:absolute;top:0;left:0;width:100%;height:100%;"
+		title="Destinations"></iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+## Introduction
 
-The course Interactive Communication Systems I aims to provide a look into exhibition design. After initial research
-into multiple topics, we were expected to choose one and present it to a user group of our choice. With this project we
-wanted to educate children in school and their parents in an exhibition setting about the causes and solutions to the
-sea's condition.
+Wayfinding systems are used to help and guide visitors navigating large buildings or places. In cities, we are constantly surrounded by such systems to give us orientation. Wayfinding systems have the difficult task of connecting rooms and floors of buildings or even whole buildings on a strategic level. At the same time, every sign has to be easily understood by first-time-visitors. After entering a building, visitors have many different goals or objectives in mind that they want to complete and they expect to be guided to them without friction.
 
-## A Man-Made Disaster
+Most ambiguities in a guidance system can be eliminated by increasing the number of signs. More elegant than increasing the frequency of information is to achieve the best possible positioning of signs in a space. The foundation for this is a sound wayfinding strategy.
 
-The Aral Sea between Kazakhstan and Uzbekistan was formerly one of the four largest lakes in the world. In the early
-20th century the Soviet government decided to irrigate the desert and grow rice, melons and cotton. The remaining water
-flowing into the Aral Sea could not match losses through evaporation and the sea began to shrink. By 1960 between 20km2
-and 60km2 of water was diverted each year. In the 1970s the Aral Seas level fell by 50-60cm each year. By 2009 only its
-northern part and a small strip in the south remained.
+> Goal of this project is to first understand the design process of wayfinding systems and then design a specialized application for it.
 
-The process of drying up the sea has left plains covered with salt and chemicals from weapon testing and industry,
-pesticides and fertilizer. The region's fishing industry has been devastated which caused rising unemployment. Dust
-storms are blowing toxic sand into settlements, causing serious public health issues.
+## The Current Design Process
 
-<Video client:visible src="/video/aralsea/aralsea-1.mp4" />
+The relevant stages of the wayfinding design process for our project are analysis, strategy, programming and design.
+
+During analysis designers get an understanding for the architecture, either through plans, renders or by visiting a building if it exists already. They analyze lines of sight and circulation patterns.
+
+Following analysis, a strategy is developed outlining how visitors should be guided through a site. Where traffic flows should be combined or split up, which hallways should be highlighted and how a hierarchy should be constructed.
+
+> "[We worked very graphically] while piecing those sequences together and checked step-by-step if the routes are cohesive."
+
+During programming, designers determine where visitors have to make decisions and create the first signs and sign sequences. They also start working on which messages - like rooms and directions - should be displayed on them. Visitors should not be overwhelmed with information and get confirmation on their way in a predictable manner.
+
+Finally, in the design phase different variants of signs are created. Prototypes are manufactured to test different materials, colors and the signs themselves in their intended size. Sometimes walls or even rooms are created from cardboard to test how signs have to be positioned in their environment.
+
+<Figure
+	alt="During our research phase we compared the design process how it is described in 'Wayshowing > Wayfinding' and 'The Wayfinding Handbook'."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532227/destinations-system-design-process_r98cbc.jpg"
+	aspectRatio="3185:1255"></Figure>
+
+## Circulation Patterns
+
+Studying traffic flows is one of the most important steps in developing a wayfinding system. For this purpose, traffic flows are drawn on floor plans. First, all rooms, entrances, elevators, staircases, and other transitions between floors are marked. After that, all destinations and connectors are marked. Finally, traffic flows with their direction of movement can now be entered and illustrated.
+
+Designers commonly receive documents detailing current or predicted traffic flows and important destinations from the developers and architects. In existing buildings they conduct on-site surveys as well.
+
+Sign positions can then be drawn where they are needed to get an overview of the decisions visitors have to make.
+
+<Figure
+	alt="Signage development in three steps. First, circulation patterns for all types of traffic are created. Second, preliminary sign positions are marked on the floor plan. Finally, signs are marked on the plan with their reference codes to the database."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532242/destinations-circulation-patterns_shenbs.jpg"
+	aspectRatio="3375:1185"></Figure>
+
+## Signage Databases
+
+A wayfinding system can easily grow to include hundreds of different signs and become very complex. Therefore, it is necessary to create a separate database with all signs, in which data such as sign type, size, messages and exact position is recorded.
+
+All of this data must be kept up-to-date in an ongoing project. Inevitably, changes occur during work and after coordination with project partners. This makes the process prone to errors and creates a lot of manual work. This becomes even more of a problem when working on large projects that can encompass 3.000 signs or more. For this reason, one of our interview partners uses a custom database software to manage their projects internally.
+
+> Following our research, we formulated three how might we questions that encapsulate our findings
+
+1. How might we aid designers in analyzing project sites?
+2. How might we eliminate repetitive tasks and simplify management of signage databases?
+3. How can we use simulation to preview sign concepts before production?
+
+export const _srcSet2 = [
+	{
+		title: 'Route Creation',
+		src: 'video/destinations/destinations-1.mp4',
+		alt: 'After selecting a location, visitor routes from and to it can be created. A simulation of visitor paths is displayed on the floor plan.',
+	},
+	{
+		title: 'Decision Points',
+		src: 'video/destinations/destinations-2.mp4',
+		alt: 'After switching to the information path tab, users can view the shortest possible connection between start and end point. Along that path decision points, identified by the system, are displayed. Multiple paths can run through the same points as well. /r/l After toggling the placement analysis mode the system displays possible sign locations depending on visibility and other factors. ',
+	},
+	{
+		title: 'Sign Locations',
+		src: 'video/destinations/destinations-3.mp4',
+		alt: 'Now, designers can place estimated sign positions on the plan. Destinations does not automate the creation of wayfinding systems, instead the goal is to simplify and assist in design process. /r/l Sign locations are tied to decision points and once created, they are available to other paths as well.',
+	},
+	{
+		title: 'Dynamic Messages',
+		src: 'video/destinations/destinations-4.mp4',
+		alt: 'In the next tab, users can view all paths and their connected signs. After creating templates in graphic design software, certain text areas can be filled with variables like room numbers. Here, signs are displayed including data connected to other paths. ',
+	},
+	{
+		title: '3D Simulation',
+		src: 'video/destinations/destinations-5.mp4',
+		alt: 'Finally signs can be accurately placed on surfaces and simulated. Designers can now better judge how signs interact with their surroundings.',
+	},
+];
+
+<UseCase client:visible srcSet={_srcSet2} aspectRatio="16/10"></UseCase>
+
+## Data Structure
+
+One of the most important aspects of Destinations is it's data structure that is highly optimized for the design workflow. Basis is a 2D or 3D model of a site, from which decision points are generated. On top of these two components users create information sequences between places. They connect the previously generated decision points on their way to their destination. When signs are created they are assigned to a decision point and have access to all information sequences that run through that point. Because of this, signs can access the destinations referenced by sequences and in turn properties of those destinations.
+
+As the last puzzle piece, templates connected to signs can be dynamically filled with referenced data like room properties.
+
+This approach makes Destinations and its workflow highly flexible. Properties are dynamic and editable and connected elements are updated correspondingly.
+
+## About
+
+This project was created during summer semester 2020 together with [Martin Wehl](http://www.martinwehl.de) as part of our bachelor thesis in Interaction Design at HfG Schwäbisch Gmünd. The project was supervised by Prof. Marc Guntow and [ Prof. Daniel Utz](http://www.danielutz.de).
+
+It is part of the goHfG startup program and was awarded the goAward in February 2021. More information and updates available at [www.build-destinations.com](https://www.build-destinations.com).
+
+[Get the Documentation (.pdf, 47MB)][Doc]
+
+[Doc]: https://www.cdn.kaimagnus.de/portfolio/docs/Dokumentation_MartinWehl_KaiMagnusMueller.pdf

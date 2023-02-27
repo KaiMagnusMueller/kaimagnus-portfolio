@@ -23,7 +23,7 @@ const { title } = Astro.props;
 
 	nav {
 		grid-column: 1/-1;
-		margin: 1rem 0 5rem;
+		margin: 1rem 0 2rem;
 		display: flex;
 		gap: 2rem;
 	}
@@ -65,9 +65,6 @@ const { title } = Astro.props;
 			line-height: normal;
 		}
 
-		figcaption {
-		}
-
 		p {
 			font-size: 1.125em;
 			margin-top: 0.35em;
@@ -93,10 +90,12 @@ const { title } = Astro.props;
 
 	@media (max-width: $screen-md) {
 		nav {
-			margin: 1rem 0 2rem;
+			margin: 1rem 0 1rem;
 		}
 
 		.post-content {
+			margin-top: 1rem;
+
 			h2,
 			h3,
 			h4,

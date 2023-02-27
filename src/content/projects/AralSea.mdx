@@ -1,0 +1,147 @@
+---
+author: Kai Magnus Müller
+pubDatetime: 2017-02-04T15:22:00Z
+title: Aral Sea - A Chronicle
+highlight: true
+draft: false
+tags:
+    - university project
+    - featured
+ogImage: ''
+semesterDate: Winter 2016
+course: INTERACTIVE COMMUNICATION SYSTEMS
+description: Tells the story of how the Aral Sea was drained for cotton plantations and other agriculture during the soviet era. Users can navigate through the drying process by removing water themselves in the form of blue acrylic sheets.
+# descriptionLong: Formerly one of the four largest lakes in the world, the Aral Sea has been steadily shrinking since the 1960s. With this project, we want to give a comprehensive overview of the greatest man made intervention in history of nature. The project was awarded with the Digital Talents Award from the Annual Multimedia Awards 2018.
+---
+
+import { Image, Picture } from '@astrojs/image/components';
+import Figure from '@components/Figure.astro';
+import Video from '@components/Video.svelte';
+import UseCase from '@components/UseCase.svelte';
+
+<div style="padding:56.25% 0 0 0;position:relative;">
+	<iframe
+		src="https://player.vimeo.com/video/795725754?h=fe3fdd77e1&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+		frameborder="0"
+		allow="autoplay; fullscreen; picture-in-picture"
+		allowfullscreen
+		style="position:absolute;top:0;left:0;width:100%;height:100%;"
+		title="Aralsee - Eine Chronik"></iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+{/* <Figure alt="" src="/video/aralsea/aralsea-header.mp4" type="video" fullWidth></Figure> */}
+
+## Goal
+
+The course Interactive Communication Systems I aims to provide a look into exhibition design. After initial research
+into multiple topics, we were expected to choose one and present it to a user group of our choice. With this project we
+wanted to educate children in school and their parents in an exhibition setting about the causes and solutions to the
+sea's condition.
+
+## A Man-Made Disaster
+
+The Aral Sea between Kazakhstan and Uzbekistan was formerly one of the four largest lakes in the world. In the early
+20<sup>th</sup> century the Soviet government decided to irrigate the desert and grow rice, melons and cotton. The remaining water flowing into the Aral Sea could not match losses through evaporation and the sea began to shrink. By 1960 between 20km<sup>2</sup> and 60km<sup>2</sup> of water was diverted each year. In the 1970s the Aral Seas level fell by 50-60cm each year. By 2009 only its northern part and a small strip in the south remained.
+
+The process of drying up the sea has left plains covered with salt and chemicals from weapon testing and industry,
+pesticides and fertilizer. The region's fishing industry has been devastated which caused rising unemployment. Dust
+storms are blowing toxic sand into settlements, causing serious public health issues.
+
+## Introduction
+
+We wanted to raise awareness of this issue with our project as the Aral Sea has largely been ignored in the public. We
+wanted to show the process of drying up that happened over multiple decades from the 1960s until today.
+
+A central map of the Aral sea and it's surroundings shows the decreasing surface area. While navigating through the
+decades, users can access „hotspots“ around the map and see where and when events occurred. The causes and events around
+the drying and its influences on the population are presented in diverse and engaging media textually and visually.
+
+export const _srcSet2 = [
+	{
+		title: 'Navigating Decades',
+		src: 'video/aralsea/aralsea-1.mp4',
+		alt: 'The user can navigate through the decades and watch the Aral Sea shrink based on historical records. Each year has different hotspots placed on the map (some are missing in this video).',
+	},
+	{
+		title: 'Hotspot',
+		src: 'video/aralsea/aralsea-2.mp4',
+		alt: 'Hotspots slide in from the left when selected. They aim to educate the user about many different topics surrounding the Aral Sea. Our mature user group gets the information they want from in depth texts. For children and parents pictures and statistics draw attention and make information visible at a glance.',
+	},
+	{
+		title: 'Overlays',
+		src: 'video/aralsea/aralsea-3.mp4',
+		alt: 'Some hotspots display data directly on the map. Areas of influence of diseases and health statistics show who was and is still suffering in the region',
+	},
+	{
+		title: 'Expand Hotspot',
+		src: 'video/aralsea/aralsea-4.mp4',
+		alt: 'Some hotspots have a white arrow that indicates they can be expanded to show additional information to users that wish to know more about a subject.',
+	},
+	{
+		title: 'Statistics',
+		src: 'video/aralsea/aralsea-5.mp4',
+		alt: 'A button to the right and shortcuts in some hotspots access a separate statistics screen. Here the user can view detailed statistics of health records, economy and hydrology. They can hide and show diseases to their liking to get a closer look at small patient numbers. Stats about the local economy are shown in the style of isotype to give a better impression of scale.',
+	},
+];
+
+<UseCase client:visible srcSet={_srcSet2}></UseCase>
+
+## Hotspots
+
+For each decade we gathered information and summarized them for our users. We present them not only in the relevant time
+period but also at the position they were happening. Users can activate those red spots, which we call "hotspots", by
+touching the screen.
+
+We decided to use hotspots as our means of conveying information to let our users play with the available information.
+Separate decades give a loose chronological separation while the hotspots have no clear order. Users are free to explore
+different topics at their own pace. Already read spots are greyed out to prevent confusion.
+
+<Figure
+	alt="An opened hotspot with other hotspots in the back. Users can expand some hotspots to reveal more information
+should they desire so. A tap on the 'x' closes it. alternatively they can switch to another one directly via the map."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677016519/aralsea-hotspot13_cvntys.png"
+	aspectRatio="16:9"></Figure>
+
+## Physical Interaction
+
+To navigate through the decades, we built a physical model where the user takes acrylic sheets out of the sea and can
+figuratively drain the sea themselves. The model acts to draw the attention of visitors at an exhibition towards our
+exhibit. Functionality-wise, it offers a natural way of navigating through time. The acrylic sheets are laser cut to
+represent the shorelines of every decade from 1960 onwards.
+
+<Figure
+	alt="The model is made of sheets of 6 mm plywood with cutouts representing the different shorelines. We painted
+contacts on the plywood and small strips on the acrylic sheets to close the circuits. The contacts are then connected to
+a MakeyMakey which relays them to our Framer prototype as easy to parse key inputs."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677016518/aralsea-physical_s7k0kb.jpg"
+	aspectRatio="16:9"></Figure>
+
+## Outlook
+
+Despite the dire situation, the Kazakh government has made effort to restore the North Aral Sea in recent years. The
+Kok-Aral dam was completed in 2005 and almost completely restored the northern Aral Sea. Uzbekistan has made no efforts
+towards restoring the sea and continues to divert water thus the southern part remains desert.
+
+## Process and Technology
+
+As the first major group project, this project taught us a lot about coordination, discussing problems and reaching
+agreements as a team. After initial research we created an information architecture and started with sketches and
+prototypes on paper. Once that part was developed far enough we started doing screen design and continued to iterate.
+
+My focus in this project was on designing and layouting hotspots and parts of the statistics with Illustrator and
+creating our prototype with Framer Studio. We decided to use Framer because its JavaScript (Coffeescript to be precise)
+foundations allow for more flexible custom inputs via keyboard.
+
+## About
+
+This is a student project created during winter semester 2016 together with Vanessa Boutzikoudi
+and [Martin Wehl](http://www.martinwehl.de). The course Interactive Communication Systems I course was presented by
+Bernadett Ritter.
+
+Our project was featured
+at [bareconductive.com](https://www.bareconductive.com/news/an-interactive-project-about-the-aral-sea-made-with-electric-paint/)
+and was awarded with the Digital Talents Award from
+the [Annual Multimedia Awards 2018](https://web.archive.org/web/20180218221816/http://www.annual-multimedia.de/gewinner_2018/).
+
+View it at [hfg-gmuend.de](http://www.hfg-gmuend.de/annual-multimediaaward-hfg.html).

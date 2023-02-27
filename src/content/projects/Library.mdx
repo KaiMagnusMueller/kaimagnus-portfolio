@@ -1,0 +1,116 @@
+---
+author: Kai Magnus Müller
+pubDatetime: 2017-07-17T10:22:00Z
+title: Library Catalogue
+highlight: false
+draft: false
+tags:
+    - university project
+ogImage: ''
+semesterDate: Summer 2017
+course: Application Design
+description: This project is a redesign of the public library of Stuttgart’s online catalogue. As a redesign, we analyzed the current catalogue and created an improved concept using our findings.
+---
+
+import { Image, Picture } from '@astrojs/image/components';
+import Figure from '@components/Figure.astro';
+import Video from '@components/Video.svelte';
+import UseCase from '@components/UseCase.svelte';
+
+<div style="padding:56.25% 0 0 0;position:relative;">
+	<iframe
+		src="https://player.vimeo.com/video/802826371?h=d9a58af693&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+		frameborder="0"
+		allow="autoplay; fullscreen; picture-in-picture"
+		allowfullscreen
+		style="position:absolute;top:0;left:0;width:100%;height:100%;"
+		title="OPAC Stuttgart Redesign"></iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+## Goal
+
+Application Design I serves as an introduction to larger application design projects. Topic of this course was to pick an existing application and redesign it. To create the redesign, we extensively analyzed the existing application and its users, goals, strengths and shortcomings.
+
+## Introduction
+
+Stuttgart's library has moved to a new building. Its online catalogue runs on numerous terminals inside and online and is a big part in each visitors borrowing experience. However it has remained the same for more than ten years as of Summer 2017 and could help users much more in finding the books they need.
+
+## Analysis
+
+The official catalogue features a functional main page. Users can search by typing into multiple text fields, depending on how they want to search. They can for example decide to search for a title or an author. After searching the results are presented on the left side of the screen. Results are ordered by relevance and are marked with an icon representing their form of media. They are labeled with title, author and date of release in on average three lines. The user can select an element and a detailed view opens to the right of the results. Here, users can view additional details of an element and see a list of all branches and the element's availability. They can make a reservation or click on the authors name for example and get a new list with all things published by that author.
+
+<Figure
+	alt="An overview of the official catalogue and its features."
+	src="/video/library/library-opac.mp4"
+	type="video"></Figure>
+
+## Conclusion
+
+Searching is currently not very flexible. Separate fields for each category are prone to errors. Results are hard to distinguish from another due to narrow spaces between elements and line spaces. Finally, the detail pages’ layout for media data is rather confusing.
+
+The current catalogue functions only if the user already knows what they want to borrow and just need to reserve it or want to know its position. We saw the opportunity to add a new way of using the catalogue if users don’t already know what to search for. We wanted to give those users tools to find their desired media.
+
+Additionally, we wanted to add to the overall experience by introducing many small quality of life changes. A more readable layout, easier login and reserving, a more useful search and better results among others.
+
+export const _srcSet2 = [
+	{
+		title: 'Search',
+		src: 'video/library/library-1.mp4',
+		alt: 'Users can search the catalogue at any point. When a list of relevant results appears the most relevant matches are highlighted. By clicking on the magnifier icon or hitting the enter key the user can get the full list of results.',
+	},
+	{
+		title: 'Results',
+		src: 'video/library/library-2.mp4',
+		alt: 'The list of results can be filtered. The user can select a branch of the library and see which elements are available there. When the card view is active, more results fit on the screen but a part of the information is hidden and appears on hover.',
+	},
+	{
+		title: 'Filter',
+		src: 'video/library/library-3.mp4',
+		alt: 'The list of results can be filtered. The user can select a branch of the library and see which elements are available there. When the card view is active, more results fit on the screen but a part of the information is hidden and appears on hover.',
+	},
+	{
+		title: 'Bookmarks',
+		src: 'video/library/library-4.mp4',
+		alt: 'When an element is bookmarked it is added to the bookmarked list. This list is available from anywhere on the catalogue. And the user can jump directly to the detail view of an element. Note how a grey dot appears in the top right corner when an element is added.',
+	},
+	{
+		title: 'Detail Page',
+		src: 'video/library/library-5.mp4',
+		alt: 'The detail page lists more information about a book for example and displays its availability in any branch. To the right is a list of suggestions of the same or other relevant topics. The goal is to give users more ways to find information other than simply offering a search.',
+	},
+	{
+		title: 'Reserve',
+		src: 'video/library/library-6.mp4',
+		alt: 'Because money is involved in the process of reserving a medium a popup appears when the button is clicked to guide the user through the process. In three steps the user logs in, selects their desired branch and confirms the reservation. A success animation plays after it is confirmed.',
+	},
+	{
+		title: 'Detail Page',
+		src: 'video/library/library-7.mp4',
+		alt: 'Our redesign also introduces a main page. It consists of curated lists that are horizontally scrollable. They showcase the most borrowed media, recommendations or bestseller lists from other publications.',
+	},
+];
+
+<UseCase client:visible srcSet={_srcSet2}></UseCase>
+
+## Redesign
+
+Our Redesign offers users better ways to discover new media. To achieve this, we use recommendations on the detail pages for related media and links to series and other types of media for the viewed piece. On the new main page, we use lists to display a wide range of recent and classic media.
+
+With filters, users can browse results and get to the relevant content faster than before.
+
+When they have found the result they were looking for, they can bookmark them and find them easier at another time or reserve all at once.
+
+## Process and Technology
+
+After our topic was set we began with analyzing the current catalogue and their current and potential user groups. We drew 'reverse wireframes' on top of screenshots to determine the various sections making up the catalogue. We did this for competing catalogues as well, ranging from other libraries to Amazon. As the next step we created an information architecture of several catalogues and distilled a new architecture that should make up our redesign. Lastly we defined sample use cases according to our persona.
+
+Once that part was done we started with the screen design process and the visual design. We iterated from quick wireframes to the final screens.
+
+My focus on this project was on designing the bookmark popups, detail page and search with Illustrator. We decided the best presentation method for our redesign was as an animation. This way we would be able to focus on small details like the hover effects and filter behavior. The animation was created with After Effects.
+
+## About
+
+This is a student project created during summer semester 2017 together with [David Glock](http://www.davidglock.de) and [Kai Wanschura](http://www.kaiwanschura.de). The Application Design II course was given by Jürgen Graef.
+
+[Documentation](https://www.cdn.kaimagnus.de/portfolio/docs/Application_Design_OPAC__David_KaiMagnus_Kai.pdf)
