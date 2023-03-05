@@ -26,6 +26,10 @@ const { title } = Astro.props;
 		margin: 1rem 0 2rem;
 		display: flex;
 		gap: 2rem;
+
+		a {
+			text-decoration: none;
+		}
 	}
 
 	figure {
@@ -38,11 +42,12 @@ const { title } = Astro.props;
 	.post-content {
 		grid-column: 1 / -1;
 		width: 100%;
-		margin-top: 2rem;
+		margin-top: 4rem;
 		word-break: break-word;
 
 		h1 {
-			font-size: 38px;
+			font-weight: 600;
+			font-size: 2rem;
 		}
 
 		h2,
@@ -59,11 +64,18 @@ const { title } = Astro.props;
 		h3,
 		h4,
 		h5,
-		p {
+		p,
+		blockquote,
+		ol,
+		ul {
 			width: 50%;
 			margin-left: 0;
 			margin-right: auto;
 			line-height: normal;
+		}
+
+		blockquote * {
+			width: revert;
 		}
 
 		p {
@@ -73,6 +85,14 @@ const { title } = Astro.props;
 		}
 
 		img {
+		}
+
+		a {
+			color: var(--color-link);
+
+			&:visited {
+				color: var(--color-link-visited);
+			}
 		}
 	}
 
@@ -95,7 +115,7 @@ const { title } = Astro.props;
 		}
 
 		.post-content {
-			margin-top: 1rem;
+			margin-top: 2rem;
 
 			h2,
 			h3,

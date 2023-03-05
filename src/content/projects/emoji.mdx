@@ -1,0 +1,88 @@
+---
+author: Kai Magnus Müller
+pubDatetime: 2017-02-04T15:22:00Z
+title: OpenMoji
+highlight: true
+draft: false
+tags:
+    - university project
+    - featured
+ogImage: ''
+semesterDate: Winter 2017
+course: OpenMoji
+description: A special course by Benjamin Groß
+---
+
+import { Image, Picture } from '@astrojs/image/components';
+import Figure from '@components/Figure.astro';
+import Video from '@components/Video.svelte';
+import UseCase from '@components/UseCase.svelte';
+
+<div style="padding:56.25% 0 0 0;position:relative;">
+	<iframe
+		src="https://www.openmoji.org/library/"
+		frameborder="0"
+		style="position:absolute;top:0;left:0;width:100%;height:100%; border:1px solid var(--color-text); background:white"></iframe>
+</div>
+
+## Introduction
+
+Why is the design of new emoji left to tech giants?
+Emoji break language barriers and make communication of emotions more efficient and have become an important part of our daily communication worldwide. Too important to be left out of their users hands. OpenMoji is an open source emoji library and an attempt to democratize emoji. Everyone is invited to submit new emoji and improve the library.
+
+## Project
+
+At its core, the course titled "Open Source / Emoji" is a lesson in iconography and collaboration. At first simple pixel icons resembling the original emoji drawn by Shigetaka Kurita [^1] were created with focus on the essential features of objects. Gradually, additional elements were introduced and the icons got more complex. After each iteration we got together to discuss our icons and decisions.
+
+<Figure
+	alt="Drawing pixel icons sharpens perception of the most essential parts of objects. Next up: black and white vector icons with less restrictions on dimensions and vector icons with color. To the right the official light bulb emoji adhering to our style guide. (Not created by me.)"
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1678049688/emoji-stages-2_xczbpp.png"
+	aspectRatio="2880:720"></Figure>
+
+## Style Guide
+
+At this point we started our work on the OpenMoji library. To account for the amount of students involved and the size of our planned library a common style guide was needed to make sure all emoji fit together visually. The best emoji out of everything we created so far were selected. And a style guide team was founded to develop a common style guide together with our professors.
+
+## Collaboration
+
+Apart from our style guide many other things had to be prepared in order for this project to succeed. Other teams were tasked to gather a list of emoji to be included, create use cases and demos, develop a social media presence, create our project website, font creation and backend tech.
+
+Additionally, every student was to create a block of emoji once the list was finalized. Which meant every student had weekly meetings with a member of the style guide team as well.
+
+## Process
+
+This project was different than most other courses. Instead of each team working on independent projects, here all teams were responsible for a smaller part of our bigger project. This meant communication and coordination - not just in each team - but also between teams was more important than ever.
+
+At times challenging and chaotic, with the guidance from our supervising professors the project was completed and successfully released.
+
+My focus – apart from designing my set of emoji – was on sketching concepts for our website and doing backend work regarding SVG exporting and resizing.
+
+## About
+
+This student project was created during winter semester 2017/18 as part of the Open Source / Emoji course by [Daniel Utz](http://www.danielutz.de) and [Benedikt Groß](http://benedikt-gross.de) with
+
+[Sofie Ascherl](https://www.behance.net/sofieasche36e2)  
+Jose Avila  
+[Ronja Baeurlen](https://ronjabaeurlen.myportfolio.com)  
+[Selina Bauder](http://selinabauder.de)  
+Vanessa Boutzikoudi  
+Rana Cakir  
+Baris Camli  
+Julian Grüneberg  
+Laura Humpfer  
+Emily Jäger  
+[Hilda Kalyoncu](http://hilda-kalyoncu.de)  
+[Jonas Rossner](http://info.jonasrossner.de/)  
+[Marius Schnabel](http://marius-schnabel.de/)  
+Lisa Schulz  
+[Sina Schulz](http://www.skschulz.com)  
+Mariella Steeb  
+[Lisa Thiel](https://lisathiel.wixsite.com/portfolio)  
+[Miriam Vollmeier](http://www.miriamvollmeier.com)  
+[Kai Wanschura](http://www.kaiwanschura.de)  
+[Johanna Wellnitz](http://johannawellnitz.de)  
+[Martin Wehl](http://martinwehl.de)
+
+Featured on the [Page Blog](https://page-online.de/kreation/sollte-man-das-design-von-emojis-google-apple-co-ueberlassen/).
+
+[^1]: https://www.moma.org/collection/works/196070

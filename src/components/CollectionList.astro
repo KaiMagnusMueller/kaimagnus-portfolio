@@ -63,4 +63,12 @@ const { title, entries, ariaDetails } = Astro.props;
 
 	span:hover {
 	}
+
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: revert;
+		}
+	}
 </style>
