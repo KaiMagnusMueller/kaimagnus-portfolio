@@ -36,9 +36,14 @@
 	}
 
 	img,
-	video {
+	video,
+	iframe {
 		filter: brightness(0.8);
 	}
+}
+
+* {
+	box-sizing: border-box;
 }
 
 iframe {

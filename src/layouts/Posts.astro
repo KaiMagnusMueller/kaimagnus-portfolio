@@ -33,10 +33,7 @@ const { title } = Astro.props;
 	}
 
 	figure {
-		// position: absolute;
 		width: 100%;
-		// left: 0;
-		// margin: 0;
 	}
 
 	.post-content {
@@ -59,23 +56,12 @@ const { title } = Astro.props;
 			margin-bottom: 0.25em;
 		}
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		p,
-		blockquote,
-		ol,
-		ul {
+		// Currently all elements that should be full size are also divs, so this is easy.
+		& > *:not(div) {
 			width: 50%;
 			margin-left: 0;
 			margin-right: auto;
 			line-height: normal;
-		}
-
-		blockquote * {
-			width: revert;
 		}
 
 		p {
@@ -98,12 +84,7 @@ const { title } = Astro.props;
 
 	@media (max-width: $screen-lg) {
 		.post-content {
-			h1,
-			h2,
-			h3,
-			h4,
-			h5,
-			p {
+			& > *:not(div) {
 				width: 100%;
 			}
 		}

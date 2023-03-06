@@ -87,6 +87,10 @@
 			figCaptionElem.style.height = captionText.clientHeight + 'px';
 		}
 	}
+
+	function splitJSONStringIntoArray(string: string) {
+		return string.split('\n');
+	}
 </script>
 
 <div class="useCase--container">
@@ -123,7 +127,9 @@
 							in:fly|local={{ duration: 1000, x: 25, delay: 200 }}
 							out:fly={{ duration: 1000, x: -25, delay: 100 }}
 							bind:this={captionText}>
-							{_srcSet[activeIndex].alt}
+							{#each splitJSONStringIntoArray(_srcSet[activeIndex].alt) as paragraph}
+								<p>{paragraph}</p>
+							{/each}
 						</div>
 					{/key}
 				</figcaption>
