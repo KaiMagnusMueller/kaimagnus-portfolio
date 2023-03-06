@@ -26,14 +26,14 @@ const { title, entries, ariaDetails } = Astro.props;
 							href={`/${entry.collection}/${entry.slug}`}
 							aria-label={entry.data.description}>
 							{entry.data.title}
+							{entry.data.highlight && (
+								<span
+									class="highlight-star highlight-star-position"
+									title="This project is worth checking out!">
+									*
+								</span>
+							)}
 						</a>
-						{entry.data.highlight && (
-							<span
-								class="highlight-star highlight-star-position"
-								title="This project is worth checking out!">
-								*
-							</span>
-						)}
 					</li>
 				))}
 			</ul>
@@ -42,8 +42,10 @@ const { title, entries, ariaDetails } = Astro.props;
 }
 
 <style lang="scss">
+	@import '../styles/_vars.scss';
+
 	.post-list {
-		margin-bottom: 4em;
+		margin-bottom: 4rem;
 		// line-height: 22px;
 	}
 
@@ -58,7 +60,7 @@ const { title, entries, ariaDetails } = Astro.props;
 	}
 
 	li {
-		margin: 2px 0;
+		margin: 0.125rem 0;
 	}
 
 	span:hover {
@@ -66,9 +68,16 @@ const { title, entries, ariaDetails } = Astro.props;
 
 	a {
 		text-decoration: none;
+		display: inline-block;
 
 		&:hover {
 			text-decoration: revert;
+		}
+	}
+
+	@media (pointer: coarse) {
+		a {
+			line-height: 2rem;
 		}
 	}
 </style>
