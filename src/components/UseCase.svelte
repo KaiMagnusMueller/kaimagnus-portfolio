@@ -190,6 +190,10 @@
 		bottom: 0;
 	}
 
+	p:last-child {
+		margin-bottom: 0;
+	}
+
 	// USE CASE
 
 	.useCase--navigation {

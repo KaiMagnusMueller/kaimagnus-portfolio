@@ -1,0 +1,99 @@
+---
+author: Kai Magnus Müller
+pubDatetime: 2017-07-04T15:22:00Z
+title: Feedback
+highlight: false
+draft: false
+tags:
+    - university project
+ogImage: ''
+semesterDate: Summer 2017
+course: Invention Design
+description: The use of gestures today suffers from a key problem which prevents them from gaining widespread application. Gestures are not precise. We set out to experiment with various forms of feedback and created a working prototype with our findings.
+---
+
+import { Image, Picture } from '@astrojs/image/components';
+import Figure from '@components/Figure.astro';
+import Video from '@components/Video.svelte';
+import UseCase from '@components/UseCase.svelte';
+
+<Figure
+	alt="The use of gestures today suffers from a key problem which prevents them from gaining widespread application. Gestures are not precise. We set out to experiment with various forms of feedback and created a working prototype with our findings."
+	src="/video/feedback/feedback-4.mp4"
+	type="video"
+	aspectRatio="16/9"></Figure>
+
+## Goal
+
+Invention Design I is a course with less limitations than other courses. It gives freedom to explore topics and create solutions that are impossible with current technology. Focus lies on the process itself and less on the result, a prototype for example. This means, we created ideas and tested them on a weekly basis. Every week we met with our professor and presented our work up to that point. Communication and presenting ideas in a comprehensible way is a main task in this course.
+
+## Introduction
+
+The use of gestures today suffers from a key problem which prevents them from gaining widespread application. Gestures are not precise. Especially devices, where a set value cannot be directly noticed, are hard to control via gestures. We set out to experiment with various forms of feedback and created a working prototype with our findings. This project had the by far longest research phase of all student projects I worked on.
+
+## Sprint Project
+
+At the start of our project, we conducted experiments in which we removed notionally all buttons and dials from ordinary objects ranging from a toilet to an electric kettle. Then we brainstormed on which hand gestures would be best suited. We came up with a variety of specialized gestures for each object before we reduced them to two essential gestures: A hand-closing-gesture for simple toggles and an up-down-moving-gesture to input a range of values along an invisible vertical axis.
+
+<Figure
+	alt="During our sprint project we decided on a hand-closing-gesture for simple toggles and an up-down-moving-gesture to input a range of values."
+	src="/video/feedback/feedback-sprint-gestures.mp4"
+	type="video"
+	aspectRatio="16/9"></Figure>
+
+## Experiments
+
+With these two gestures, we wanted to test various forms of feedback and how precision could be improved. We created a testing setup with a Leap Motion Controller connected to an Arduino. Participants were asked to select a value on a scale using our feedback. We then measured how close they got to the specific value on average. The forms of feedback can roughly be divided in visual feedback, auditory feedback and haptic feedback.
+
+We tested visual feedback in multiple ways. Ranging from a full-fledged screen, a row of LEDs to a single monochromatic LED. While users could recognize the different values and reliably set given values the best with a screen, we decided to continue testing with a single RGB LED. We simply didn't want to require a screen in every device. A RGB LED, programmed to display the range of values with a gradient from red to orange and green, resulted in the best scores (after the screen). During our other tests it became clear, auditory feedback is less desirable. It cannot be directed at the recipient and annoys others who are not involved. Although it could be directed to the user as well with the help of in-ear headphones. Lastly, haptic feedback involved an additional device. We tested vibration feedback with the help of a wristband and motor. It was successful in telling the user when a value was changed but didn’t help in identifying a certain value. The user had no idea which value was set. Ultimately, this functionality, especially haptic feedback, could be integrated into smartwatches or similar devices. We decided to drop haptic and audible feedback in favor of a simple, integrated LED.
+
+<Figure
+	alt="One of our early experiments consisted of a single LED to give feedback."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1678141346/feedback-test_km8qgr.jpg"
+	aspectRatio="1932:979"></Figure>
+
+## Application of Our Findings
+
+Our final application, where we incorporated our findings, was a gesture controlled fan. We wanted to be as general as possible in our application to allow for an implementation in a wide range of possible use cases. A single RGB LED gives feedback with a red-green scale. We differentiate between an inactive and an active state, the device is inactive per default and becomes active if a hand enters the tracked volume. When inactive the LEDs brightness is reduced, it displays the correct color but doesn’t distract. A brighter active state signals the user they can now perform a gesture or, more specifically, input a value. The LEDs color changes if the user slides through different values. If an upper or a lower bound is reached the user is notified with two LED flashes (the Led switches briefly to inactive). To confirm a value, the user can form a fist with their hand and the LED confirms with a brief flash.
+
+export const _srcSet2 = [
+	{
+		title: 'Enter Area',
+		src: 'video/feedback/feedback-1.mp4',
+		alt: 'As long as no hand is tracked in the volume, the device lowers its brightness to suggest inactivity.',
+	},
+	{
+		title: 'Choose Values',
+		src: 'video/feedback/feedback-2.mp4',
+		alt: 'When a hand enters the volume it lights up and the user can select values, the LED tells them where they are in the selectable value range.',
+	},
+	{
+		title: 'Minimum / Maximum',
+		src: 'video/feedback/feedback-3.mp4',
+		alt: 'Should they cross the upper or lower boundaries, the LED blinks twice to indicate that raising or lowering their hand will not change values anymore.',
+	},
+	{
+		title: 'Set Value',
+		src: 'video/feedback/feedback-4.mp4',
+		alt: 'By doing the mentioned pinch-gesture, a chosen value can be saved. This prototype changes its fan speed accordingly. When no hand is tracked the device switches to standby and the LED lowers its brightness again.',
+	},
+	{
+		title: 'Exit',
+		src: 'video/feedback/feedback-5.mp4',
+		alt: 'The user can exit the volume at any height and the value gets reset.',
+	},
+];
+
+<UseCase client:visible srcSet={_srcSet2} aspectRatio="16/9"></UseCase>
+
+It is now possible to set and confirm values precisely and safe even if an application does not directly react to user input.
+
+## Process and Technology
+
+As a rather theoretical project, we didn't do any screen design or similar. We set up an Electron application to bridge the gap between reading from a Leap Motion and sending instructions to an Arduino via Johnny-Five.js. The fan was assembled and painted at the HfGs own workshop.
+
+My focus during this project was to create and plan the various experiments. To present our findings, I designed the use case and programmed our prototype towards the late semester.
+
+## About
+
+This was a student project created during summer semester 2017 as part of the Invention Design I course by Jörg Beck with [Fabian Seeger](http://www.fabianseeger.com) and [Kai Wanschura](http://www.kaiwanschura.de).

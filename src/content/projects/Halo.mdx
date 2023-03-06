@@ -1,0 +1,147 @@
+---
+author: Kai Magnus Müller
+pubDatetime: 2020-02-04T15:22:00Z
+title: Halo - Research Browser
+highlight: true
+draft: false
+tags:
+    - university project
+ogImage: ''
+semesterDate: Winter 2019
+course: Interaction Design
+description: Halo is a tool for web based research. Users can browse the web with a newly designed radial interface using semantic connections. A history lets users review research sessions so they can focus on exploring while not having to worry about losing information.
+---
+
+import { Image, Picture } from '@astrojs/image/components';
+import Figure from '@components/Figure.astro';
+import Video from '@components/Video.svelte';
+import UseCase from '@components/UseCase.svelte';
+
+<div style="padding:56.25% 0 0 0;position:relative;">
+	<iframe
+		src="https://player.vimeo.com/video/802828920?h=89c131a80b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+		frameborder="0"
+		allow="autoplay; fullscreen; picture-in-picture"
+		allowfullscreen
+		style="position:absolute;top:0;left:0;width:100%;height:100%;"
+		title="Halo"></iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+## Introduction
+
+Today, internet research is a fundamental part of any research. There are countless resources for any kind of topic and levels of complexity from simple overviews to academic literature.
+
+Especially during long research processes - and after opening a lot of different pages or tabs - however, users can start to become overwhelmed. This happens when they are unable to remember the connections between tabs, which link led to what page, and what information they found there. To help users find and save important information browsers have features like history and bookmarks. However, they can not show the relationships between history entries and bookmarks have to be manually updated.
+
+It is time to find a new approach to internet research. In this project, we want to analyze web-browsers and their components, study the research process and user behavior. It is our goal to create a user-centered redesign of the browser as an application that is optimized for research.
+
+## User Research
+
+To learn more about how our users typically research we conducted interviews.
+
+When our interviewees start researching, they usually follow the same pattern. First, interesting Information is collected by opening links in new tabs. They mention not wanting to lose sight of the previous pages which is what happens when a link is opened in the same tab. This process is repeated until enough interesting information is collected to start reviewing. To save information, a variety of apps to create notes or documents is used. Others use their group chat to save links as well. A method, they admit, that involves lots of scrolling.
+
+> How can a browser built for research look like?
+
+Our interview partners repeatedly mention the fear of losing information. Sometimes, they close tabs or whole windows and have to go look for them in the history. When researching multiple topics at the same time, they report having trouble to keep them apart.
+
+## Design Sprint
+
+Next, we started a design sprint for rapid prototyping and experiments.
+
+<Figure
+	alt="First prototype based on our initial interviews and research. Links are opened in descending order in the background and highlighted content can be saved in the right sidebar."
+	src="/video/halo/halo_browser_prototype.mp4"
+	type="video"
+	aspectRatio="16/10"></Figure>
+
+We then did some user testing with this prototype. While some users were initially irritated by the tab structure, the highlight feature was received positively.
+
+What we discovered however, after opening a few pages our test subjects often had an Aha! moment when they finally switched to the first page. Suddenly, they realized that this way they could first scan all the search results and then continue with all the links that they found interesting.
+
+After our research and sprint, we defined requirements for our project:
+
+1. Keep track of research phases and view connections
+2. Free and fast exploration of content without fear of losing information
+3. Review explored content
+4. Save important quotes for later use
+
+## Serendipity in Computing
+
+During our research phase we came across the term 'serendipity' which describes an unplanned fortunate discovery. A solution to a problem that one did not explicitly search for. There are three types of serendipity: first, finding a solution while not looking for any information. Second, finding a solution to problem A while looking for a solution for problem B. And last, finding a solution to an unknown problem.
+
+Many online platforms work against that and use convergent systems that try to predict their users interests and try to show the right recommendation at the perfect moment. Divergent systems that enable serendipity show new and more unpredictable things instead. The problem lies in the fact that convergent systems show more familiar content and have a higher relevance on average which leads to higher klick rates.
+
+Serendipity is an investment by users and platforms. Users need to spend time searching and reading, platforms need to give up space and engagement. However, enabling serendipity can increase satisfaction over longer time periods.
+
+> How do we enable serendipity in a digital interface?
+
+Serendipity can be encouraged by doing repetitive, simple tasks and relaxation that allow the building of mental connections and the mind to wander. Anxiety and a hectic environment on the other hand stand in the way of serendipity. This led us to formulate four requirements to encourage serendipity in our application.
+
+1. Support reflection and the creation of mental connections
+2. Adjust to the changing importance of information
+3. Be relaxing and serene
+4. Reduce amount of information and feeling of being overwhelmed, prevent disorientation
+
+## Final Prototype
+
+Based on our research, we developed an application that is designed to help users while searching information. Additionally, it facilitates diving deeper into related topics as well as analyzing and extracting information.
+
+export const _srcSet2 = [
+	{
+		title: 'Open and Save',
+		src: 'video/halo/halo-1.mp4',
+		alt: 'After searching, the results appear in the main exploration view together with important keywords. Users can select and open results to read or watch. To remember intersting information, they can click the "save" button to highlight that item on the graph.',
+	},
+	{
+		title: 'Navigation',
+		src: 'video/halo/halo-2.mp4',
+		alt: 'By clicking on keywords, users can start new searches and explore related content. New results are displayed in a second layer. An infinite amount of new layers can be opened and a minimap helps to keep track of the overall graph. \nAuthors and other semantic data is highlighted and can be used for navigation as well.',
+	},
+	{
+		title: 'History & Review',
+		src: 'video/halo/halo-3.mp4',
+		alt: 'Following the exploration phase, users can toggle a switch to review the information they found so far and trace their actions step-by-step. This history view uses the same data and color codings as the exploration graph and is updated concurrently.',
+	},
+	{
+		title: 'Save Snippets',
+		src: 'video/halo/halo-4.mp4',
+		alt: 'Saved items are highlighted here as well. After exploring a broad selection of intersting items, users can save smaller quotes of the most important pieces of information.',
+	},
+	{
+		title: 'Save Explorations',
+		src: 'video/halo/halo-5.mp4',
+		alt: 'To make it easier to focus while allowing users to work on multiple topics at the same time, Halo can save and load separate explorations.',
+	},
+];
+
+<UseCase client:visible srcSet={_srcSet2} aspectRatio="16/9"></UseCase>
+
+The application consists of three main features. First, what we call the exploration graph enables users to quickly explore the results of a search query in a two-dimensional space. Important keywords that can be expanded directly in the graph speed up the exploration and let users grow a library of information that can be read and sorted.
+
+After exploring, users can review what they found by looking at the history graph. Here they can keep an overview even of larger research projects.
+
+Quotes can be saved right in Halo without the need to copy them into a second document. They also keep their reference to the original website automatically.
+
+## Navigation
+
+<Figure
+	alt="Users can use the exploration graph to expand keywords and dive deeper into interesting topics."
+	src="/video/halo/halo-navigation.mp4"
+	type="video"
+	aspectRatio="16/10"></Figure>
+
+## Outlook
+
+During this project we worked on a few other features that didn't find their way into our final prototype. Working with quotes could be expanded for example with a way to view all of them at once as well as sorting and editing features. This could be realized with a third option behind the 'Review' toggle.
+
+The current proposal focuses on the research process of one person. It would be interesting to think how this concept could be expanded so that multiple persons could work and research together and share their findings.
+
+## About
+
+This project was created during winter semester 2019/2020 together with [Martin Wehl](http://www.martinwehl.de) as part of the Interaction Design at HfG Schwäbisch Gmünd. The project was supervised by Prof. Hans Krämer and Prof. Carmen Hartmann-Menzel.
+
+[Get the Documentation (.pdf, 3MB)][Doc]
+
+[Doc]: https://www.cdn.kaimagnus.de/portfolio/docs/Halo_Dokumentation.pdf
