@@ -19,15 +19,19 @@ allEntries = allEntries.sort(
 );
 
 let featured = allEntries.filter((elem) => {
-	return elem.data.tags.includes('featured');
+	return elem.data.tags.includes('featured') && !elem.data.draft;
 });
 
 let work = allEntries.filter((elem) => {
-	return elem.data.tags.includes('work');
+	return elem.data.tags.includes('work') && !elem.data.draft;
 });
 
-let university = allEntries.filter((elem) => {
-	return elem.data.tags.includes('university project');
+let university = projectEntries.filter((elem) => {
+	return elem.data.tags.includes('university project') && !elem.data.draft;
+});
+
+let articles = articleEntries.filter((elem) => {
+	return !elem.data.draft;
 });
 ---
 
@@ -55,7 +59,7 @@ let university = allEntries.filter((elem) => {
 			<CollectionList title="Noteworthy" ariaDetails="Noteworthy projects and articles" entries={featured} />
 			<CollectionList title="Work" ariaDetails="Professional projects" entries={} />
 			<CollectionList title="University Projects" entries={university} />
-			<CollectionList title="Posts" entries={articleEntries} />
+			<CollectionList title="Posts" entries={articles} />
 			<p class="position--relative"><span class="highlight-star" title="">*</span>Worth checking out</p>
 		</section>
 	</div>
