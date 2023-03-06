@@ -197,3 +197,16 @@ blockquote {
 		// line-height: unset;
 	}
 }
+
+// openmoji special
+.openmoji-iframe {
+	padding: 56.25% 0 0 0;
+	position: relative;
+}
+
+@media (max-width: vars.$screen-md) {
+	.openmoji-iframe {
+		padding: 150% 0 0 0;
+		position: relative;
+	}
+}

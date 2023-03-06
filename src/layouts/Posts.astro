@@ -90,6 +90,32 @@ const { title } = Astro.props;
 		}
 	}
 
+	.heading-wrapper {
+		display: flex;
+		flex-direction: row;
+		align-items: baseline;
+		margin-left: -26px;
+		gap: 6px;
+
+		a,
+		a:visited {
+			color: var(--color-text);
+		}
+	}
+
+	.heading-wrapper:hover .anchor-icon {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.anchor-icon {
+		width: 20px;
+		height: 20px;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+	}
+
 	@media (max-width: $screen-md) {
 		nav {
 			margin: 1rem 0 1rem;
