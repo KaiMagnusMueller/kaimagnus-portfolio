@@ -95,8 +95,7 @@ const { title } = Astro.props;
 		display: flex;
 		flex-direction: row;
 		align-items: baseline;
-		margin-left: -26px;
-		gap: 6px;
+		gap: 12px;
 
 		a,
 		a:visited {
@@ -112,9 +111,14 @@ const { title } = Astro.props;
 	.anchor-link {
 		width: 20px;
 		height: 20px;
-		visibility: hidden;
-		opacity: 0;
 		transition: opacity 0.2s ease;
+	}
+
+	@media (hover: hover) {
+		.anchor-link {
+			visibility: hidden;
+			opacity: 0;
+		}
 	}
 
 	@media (max-width: $screen-md) {
