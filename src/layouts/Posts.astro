@@ -47,6 +47,11 @@ const { title } = Astro.props;
 			font-size: 2rem;
 		}
 
+		// fix first figure having a too large margin-top
+		h1 + figure {
+			margin-top: 0;
+		}
+
 		h2,
 		h3,
 		h4,
@@ -56,7 +61,7 @@ const { title } = Astro.props;
 		}
 
 		// Currently all elements that should be full size are also divs, so this is easy.
-		& > *:not(div) {
+		& > *:not(div, .full-width) {
 			width: 50%;
 			margin-left: 0;
 			margin-right: auto;
@@ -83,7 +88,7 @@ const { title } = Astro.props;
 
 	@media (max-width: $screen-lg) {
 		.post-content {
-			& > *:not(div) {
+			& > *:not(div, .full-width) {
 				width: 100%;
 			}
 		}

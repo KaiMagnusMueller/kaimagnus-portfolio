@@ -79,7 +79,7 @@
 	}
 
 	// SET FIGCAPTION HEIGHT
-	let captionText: HTMLDivElement;
+	let captionText: HTMLElement;
 	let figCaptionElem: HTMLElement;
 
 	$: {
@@ -105,7 +105,7 @@
 		{#if _srcSet.length > 0}
 			<figure class="grid--container">
 				{#key activeIndex}
-					<div class="media--container" transition:fade|local={{ duration: 500 }}>
+					<span class="media--container" transition:fade|local={{ duration: 500 }}>
 						<video
 							bind:this={videoElem}
 							on:ended={() => handleChangeVideo(activeIndex)}
@@ -116,13 +116,13 @@
 							muted
 							autoplay
 							controls />
-					</div>
+					</span>
 				{/key}
 				<div class="height-helper" style="aspect-ratio: {aspectRatio};" />
 
 				<figcaption bind:this={figCaptionElem}>
 					{#key activeIndex}
-						<div
+						<span
 							class="caption-helper"
 							in:fly|local={{ duration: 1000, x: 25, delay: 200 }}
 							out:fly={{ duration: 1000, x: -25, delay: 100 }}
@@ -130,7 +130,7 @@
 							{#each splitJSONStringIntoArray(_srcSet[activeIndex].alt) as paragraph}
 								<p>{paragraph}</p>
 							{/each}
-						</div>
+						</span>
 					{/key}
 				</figcaption>
 			</figure>
