@@ -99,7 +99,7 @@ const { title } = Astro.props;
 
 		a,
 		a:visited {
-			color: var(--color-text);
+			color: var(--color-text-low-contrast);
 		}
 	}
 
@@ -115,6 +115,12 @@ const { title } = Astro.props;
 	}
 
 	@media (hover: hover) {
+		.heading-wrapper {
+			a,
+			a:visited {
+				color: var(--color-text);
+			}
+		}
 		.anchor-link {
 			visibility: hidden;
 			opacity: 0;
