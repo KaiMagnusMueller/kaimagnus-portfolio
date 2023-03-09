@@ -23,9 +23,7 @@ const AnchorLinkIcon = h(
 
 export const autolinkConfig: Options = {
 	properties: { class: 'anchor-link' },
-	behavior: 'before',
-	group: ({ tagName }) => h('div', { tabIndex: -1, class: `heading-wrapper level-${tagName}` }),
-	content(node) {
-		return [AnchorLinkIcon];
-	},
+	behavior: 'after',
+	group: ({ tagName }) => h('span', { tabIndex: -1, class: `heading-wrapper level-${tagName}` }),
+	content: AnchorLinkIcon,
 };

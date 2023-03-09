@@ -47,6 +47,11 @@ const { title } = Astro.props;
 			font-size: 2rem;
 		}
 
+		// fix first figure having a too large margin-top
+		h1 + figure {
+			margin-top: 0;
+		}
+
 		h2,
 		h3,
 		h4,
@@ -56,7 +61,7 @@ const { title } = Astro.props;
 		}
 
 		// Currently all elements that should be full size are also divs, so this is easy.
-		& > *:not(div) {
+		& > *:not(div, .full-width) {
 			width: 50%;
 			margin-left: 0;
 			margin-right: auto;
@@ -83,7 +88,7 @@ const { title } = Astro.props;
 
 	@media (max-width: $screen-lg) {
 		.post-content {
-			& > *:not(div) {
+			& > *:not(div, .full-width) {
 				width: 100%;
 			}
 		}
@@ -94,13 +99,12 @@ const { title } = Astro.props;
 		margin-bottom: 0.25em;
 		display: flex;
 		flex-direction: row;
-		align-items: baseline;
-		margin-left: -26px;
-		gap: 6px;
+		align-items: center;
+		gap: 12px;
 
 		a,
 		a:visited {
-			color: var(--color-text);
+			color: var(--color-text-low-contrast);
 		}
 	}
 
@@ -112,9 +116,20 @@ const { title } = Astro.props;
 	.anchor-link {
 		width: 20px;
 		height: 20px;
-		visibility: hidden;
-		opacity: 0;
 		transition: opacity 0.2s ease;
+	}
+
+	@media (hover: hover) {
+		.heading-wrapper {
+			a,
+			a:visited {
+				color: var(--color-text);
+			}
+		}
+		.anchor-link {
+			visibility: hidden;
+			opacity: 0;
+		}
 	}
 
 	@media (max-width: $screen-md) {
@@ -125,10 +140,7 @@ const { title } = Astro.props;
 		.post-content {
 			margin-top: 2rem;
 
-			h2,
-			h3,
-			h4,
-			h5 {
+			.heading-wrapper {
 				margin-top: 1.5em;
 			}
 

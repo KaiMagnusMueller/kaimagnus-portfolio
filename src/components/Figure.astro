@@ -53,38 +53,37 @@ let options = {
 	videos.forEach((elem) => observer.observe(elem));
 </script>
 
-<div class="container">
-	<figure class="grid--container">
-		<div class:list={['media--container', (fullWidth && 'grid--full') || 'media--9col']}>
-			{
-				type === 'picture' && (
-					<>
-						<a href={src}>
-							<slot>
-								<Picture
-									src={src}
-									widths={[200, 400, 800, 1600]}
-									aspectRatio={aspectRatio}
-									sizes="(max-width: 800px) 100vw, 800px, 1600px"
-									alt={alt}
-								/>
-							</slot>
-						</a>
-					</>
-				)
-			}
+<figure class="container grid--container full-width">
+	<span class:list={['media--container', (fullWidth && 'grid--full') || 'media--9col']}>
+		{
+			type === 'picture' && (
+				<>
+					<a href={src}>
+						<slot>
+							<Picture
+								src={src}
+								widths={[200, 400, 800, 1600]}
+								aspectRatio={aspectRatio}
+								sizes="(max-width: 800px) 100vw, 800px, 1600px"
+								alt={alt}
+							/>
+						</slot>
+					</a>
+				</>
+			)
+		}
 
-			{
-				type === 'video' && (
-					<>
-						<video class="video" width="100%" height="100%" src={_src} muted controls autoplay loop />
-					</>
-				)
-			}
-		</div>
-		{alt && <figcaption>{alt}</figcaption>}
-	</figure>
-</div>
+		{
+			type === 'video' && (
+				<>
+					<video class="video" width="100%" height="100%" src={_src} muted controls autoplay loop />
+				</>
+			)
+		}
+	</span>
+	{alt && <figcaption>{alt}</figcaption>}
+</figure>
+
 <style lang="scss">
 	@import '../styles/_vars.scss';
 

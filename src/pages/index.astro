@@ -1,38 +1,32 @@
 ---
 import { SITE } from '@config';
 
-import { CollectionEntry, getCollection } from 'astro:content';
-import getSortedPosts from '@utils/getSortedPosts';
-import slugify from '@utils/slugify';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 import CollectionList from '@components/CollectionList.astro';
 
-const articleEntries = await getCollection('articles');
-const projectEntries = await getCollection('projects');
+const articleEntries = await getCollection('articles', ({ data }) => {
+	return data.draft === false;
+});
+const projectEntries = await getCollection('projects', ({ data }) => {
+	return data.draft === false;
+});
 
 let allEntries = [...projectEntries, ...articleEntries];
-allEntries = allEntries.sort(
-	(a, b) =>
-		Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
-		Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
-);
 
 let featured = allEntries.filter((elem) => {
-	return elem.data.tags.includes('featured') && !elem.data.draft;
+	return elem.data.tags.includes('featured');
 });
 
 let work = allEntries.filter((elem) => {
-	return elem.data.tags.includes('work') && !elem.data.draft;
+	return elem.data.tags.includes('work');
 });
 
 let university = projectEntries.filter((elem) => {
-	return elem.data.tags.includes('university project') && !elem.data.draft;
+	return elem.data.tags.includes('university project');
 });
 
-let articles = articleEntries.filter((elem) => {
-	return !elem.data.draft;
-});
+let articles = articleEntries;
 ---
 
 <Layout title={SITE.title}>

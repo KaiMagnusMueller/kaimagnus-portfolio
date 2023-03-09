@@ -7,6 +7,14 @@ export interface Props {
 	ariaDetails?: string;
 }
 const { title, entries, ariaDetails } = Astro.props;
+
+function sort(entries: CollectionEntry<any>[]) {
+	return entries.sort(
+		(a, b) =>
+			Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
+			Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
+	);
+}
 ---
 
 {
@@ -15,7 +23,7 @@ const { title, entries, ariaDetails } = Astro.props;
 		<div class="post-list text-regular">
 			<h2 class="color-text-low-contrast">{title}</h2>
 			<ul>
-				{entries.map((entry) => (
+				{sort(entries).map((entry) => (
 					<li>
 						<a
 							class={
