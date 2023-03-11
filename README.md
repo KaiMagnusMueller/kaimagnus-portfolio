@@ -1,6 +1,6 @@
 # Kai Magnus Müller Portfolio Website
 
-Built with Astro.js and some Svelte components, hosted on Vercel.
+Built with [Astro](https://astro.build) and some [Svelte](https://svelte.dev) components, hosted on [Vercel](https://vercel.com/).
 
 ## ⚙️ TODO: Document components
 
