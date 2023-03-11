@@ -47,11 +47,6 @@ const { title } = Astro.props;
 			font-size: 2rem;
 		}
 
-		// fix first figure having a too large margin-top
-		h1 + figure {
-			margin-top: 0;
-		}
-
 		h2,
 		h3,
 		h4,
@@ -137,12 +132,12 @@ const { title } = Astro.props;
 			margin: 1rem 0 1rem;
 		}
 
+		.heading-wrapper {
+			margin-top: 3em;
+		}
+
 		.post-content {
 			margin-top: 2rem;
-
-			.heading-wrapper {
-				margin-top: 1.5em;
-			}
 
 			p {
 				font-size: revert;

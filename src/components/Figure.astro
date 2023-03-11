@@ -87,12 +87,8 @@ let options = {
 <style lang="scss">
 	@import '../styles/_vars.scss';
 
-	.container {
-		margin: 3em 0;
-	}
-
 	figure {
-		margin: 0;
+		margin: 3em 0;
 	}
 
 	.grid--container {
@@ -124,12 +120,16 @@ let options = {
 		height: auto;
 	}
 
+	// fix first figures after headings having a too large margin-top
+	:global(h1 + figure, .heading-wrapper + figure) {
+		margin-top: 1rem;
+	}
+
 	@media (max-width: $screen-lg) {
 		.grid--container {
 			display: flex;
 			flex-direction: column;
 			gap: 8px;
-			margin: 0;
 		}
 
 		.media--container {
@@ -141,8 +141,8 @@ let options = {
 	}
 
 	@media (max-width: $screen-md) {
-		.container {
-			margin: 2em 0;
+		.figure {
+			margin: 2.5em 0;
 		}
 		figcaption {
 			width: 100%;
