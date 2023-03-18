@@ -1,14 +1,16 @@
 ---
+import { SITE } from '@config';
 import Layout from './Layout.astro';
 
 export interface Props {
-	title: string;
+	pageTitle: string;
+	pageDescr: string;
 }
 
-const { title } = Astro.props;
+const { pageTitle, pageDescr } = Astro.props;
 ---
 
-<Layout title={title}>
+<Layout pageTitle={pageTitle + " // " + SITE.title} pageDescr={pageDescr}>
 	<nav class="color-text-low-contrast">
 		<ul class="list--horizontal">
 			<li><a href="/">Home</a></li>
