@@ -103,8 +103,8 @@ h1 {
 	font-style: normal;
 	// TODO: Add 500 font weight
 	font-weight: 400;
-	font-size: 26px;
-	line-height: 35px;
+	font-size: 1.625rem;
+	line-height: 1.6em;
 }
 
 h2,
@@ -188,11 +188,19 @@ blockquote {
 }
 
 @media (max-width: vars.$screen-md) {
+	p,
+	.text-regular,
+	.text-regular h2 {
+		font-size: 1.125rem;
+	}
+
 	.text-large,
 	.text-large p,
 	.text-large h1 {
 		font-size: 1.375rem;
-		line-height: 2rem;
+		line-height: 1.5em;
+
+		// line-height: 2rem;
 		// font-size: 22px;
 		// line-height: unset;
 	}
