@@ -1,5 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components';
+import { Picture } from '@astrojs/image/components';
 
 export interface Props {
 	src?: string;
@@ -62,7 +62,14 @@ let options = {
 				<>
 					<a href={src}>
 						<slot>
-							<Image src={src} alt={alt} width={883 * 2} aspectRatio={aspectRatio} />
+							<Picture
+								src={src}
+								widths={[200, 400, 800, 1766]}
+								aspectRatio={aspectRatio}
+								sizes="(max-width: 800px) 100vw, 800px, 1766px"
+								alt={alt}
+								loading={loading}
+							/>
 						</slot>
 					</a>
 				</>
