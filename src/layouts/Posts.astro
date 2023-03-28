@@ -43,6 +43,7 @@ const { pageTitle, pageDescr } = Astro.props;
 		width: 100%;
 		margin-top: 4rem;
 		word-break: break-word;
+		font-size: 1.125rem;
 
 		h1 {
 			font-weight: 600;
@@ -66,12 +67,15 @@ const { pageTitle, pageDescr } = Astro.props;
 		}
 
 		p {
-			font-size: 1.125em;
 			margin-top: 0.35em;
 			margin-bottom: 1em;
 		}
 
-		img {
+		img,
+		picture,
+		video {
+			border-radius: 2px;
+			overflow: clip;
 		}
 
 		a {
@@ -141,9 +145,9 @@ const { pageTitle, pageDescr } = Astro.props;
 		.post-content {
 			margin-top: 2rem;
 
-			p {
-				font-size: revert;
-			}
+			// p {
+			// 	font-size: revert;
+			// }
 		}
 	}
 </style>
