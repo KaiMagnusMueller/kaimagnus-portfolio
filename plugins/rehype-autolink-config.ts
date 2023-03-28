@@ -1,5 +1,6 @@
 import { h } from 'hastscript';
 import type { Options } from 'rehype-autolink-headings';
+import { toString } from 'hast-util-to-string';
 
 const AnchorLinkIcon = h(
 	'span',
@@ -21,9 +22,13 @@ const AnchorLinkIcon = h(
 	)
 );
 
+const createSROnlyLabel = (text: string) => {
+	return h('span', { 'is:raw': true, class: 'sr-only' }, `Section titled ${text}`);
+};
+
 export const autolinkConfig: Options = {
 	properties: { class: 'anchor-link' },
 	behavior: 'after',
 	group: ({ tagName }) => h('span', { tabIndex: -1, class: `heading-wrapper level-${tagName}` }),
-	content: AnchorLinkIcon,
+	content: (heading) => [AnchorLinkIcon, createSROnlyLabel(toString(heading))],
 };

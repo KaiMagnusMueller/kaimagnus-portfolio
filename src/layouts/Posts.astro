@@ -1,14 +1,16 @@
 ---
+import { SITE } from '@config';
 import Layout from './Layout.astro';
 
 export interface Props {
-	title: string;
+	pageTitle: string;
+	pageDescr: string;
 }
 
-const { title } = Astro.props;
+const { pageTitle, pageDescr } = Astro.props;
 ---
 
-<Layout title={title}>
+<Layout pageTitle={pageTitle + " // " + SITE.title} pageDescr={pageDescr}>
 	<nav class="color-text-low-contrast">
 		<ul class="list--horizontal">
 			<li><a href="/">Home</a></li>
@@ -45,11 +47,6 @@ const { title } = Astro.props;
 		h1 {
 			font-weight: 600;
 			font-size: 2rem;
-		}
-
-		// fix first figure having a too large margin-top
-		h1 + figure {
-			margin-top: 0;
 		}
 
 		h2,
@@ -137,12 +134,12 @@ const { title } = Astro.props;
 			margin: 1rem 0 1rem;
 		}
 
+		.heading-wrapper {
+			margin-top: 3em;
+		}
+
 		.post-content {
 			margin-top: 2rem;
-
-			.heading-wrapper {
-				margin-top: 1.5em;
-			}
 
 			p {
 				font-size: revert;

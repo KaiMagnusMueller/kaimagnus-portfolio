@@ -3,10 +3,11 @@ export const prerender = true;
 import '@styles/styles.scss';
 import { SITE } from '@config';
 export interface Props {
-	title: string;
+	pageTitle: string;
+	pageDescr: string;
 }
 
-const { title } = Astro.props;
+const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -14,14 +15,17 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
 
-		<meta name="description" content={SITE.desc} />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+		<meta name="description" content={pageDescr} />
 		<meta name="author" content={SITE.author} />
 		<meta name="color-scheme" content="light dark" />
+		<meta name="generator" content={Astro.generator} />
 
-		<title>{title}</title>
+		<title>{pageTitle}</title>
 	</head>
 	<body>
 		<slot />
@@ -31,7 +35,7 @@ const { title } = Astro.props;
 				<li><a href="http://github.com/kaimagnusmueller">GitHub</a></li>
 				<li><a href="./rss.xml">RSS</a><sup>beta</sup></li>
 				<li><a href="http://www.twitter.com/_kaimagnus">Twitter</a></li>
-				<li><a href="http://www.linkedin.com/kaimagnusmueller">LinkedIn</a></li>
+				<li><a href="https://www.linkedin.com/in/kai-magnus-m%C3%BCller-25a176207/">LinkedIn</a></li>
 			</ul>
 		</footer>
 	</body>
@@ -53,6 +57,7 @@ const { title } = Astro.props;
 		margin: 8rem 0 1rem;
 		display: flex;
 		gap: 2rem;
+		align-items: baseline;
 	}
 
 	@media (max-width: $screen-md) {
@@ -71,7 +76,7 @@ const { title } = Astro.props;
 
 	@media (pointer: coarse) {
 		footer a {
-			line-height: 1.8rem;
+			line-height: 1.8em;
 			display: inline-block;
 		}
 	}
