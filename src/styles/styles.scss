@@ -81,7 +81,6 @@ p,
 .text-regular,
 .text-regular h2 {
 	font-style: normal;
-	// TODO: Add 500 font weight
 	font-weight: 400;
 	font-size: 1rem;
 	// margin-top: 0.25em;
@@ -101,10 +100,9 @@ h1 {
 .text-large p,
 .text-large h1 {
 	font-style: normal;
-	// TODO: Add 500 font weight
 	font-weight: 400;
-	font-size: 26px;
-	line-height: 35px;
+	font-size: 1.625rem;
+	line-height: 1.5em;
 }
 
 h2,
@@ -192,9 +190,7 @@ blockquote {
 	.text-large p,
 	.text-large h1 {
 		font-size: 1.375rem;
-		line-height: 2rem;
-		// font-size: 22px;
-		// line-height: unset;
+		line-height: 1.5em;
 	}
 }
 
@@ -209,4 +205,16 @@ blockquote {
 		padding: 150% 0 0 0;
 		position: relative;
 	}
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
 }

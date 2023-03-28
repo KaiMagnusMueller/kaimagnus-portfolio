@@ -9,6 +9,7 @@ export interface Props {
 	sizes?: string;
 	type?: 'picture' | 'video' | 'useCase';
 	fullWidth?: boolean;
+	loading?: 'eager' | 'lazy';
 }
 
 const {
@@ -17,6 +18,7 @@ const {
 	aspectRatio = '16:10',
 	type = 'picture',
 	fullWidth = false,
+	loading = 'lazy',
 } = Astro.props;
 
 let _src = '';
@@ -62,10 +64,11 @@ let options = {
 						<slot>
 							<Picture
 								src={src}
-								widths={[200, 400, 800, 1600]}
+								widths={[200, 400, 800, 1766]}
 								aspectRatio={aspectRatio}
-								sizes="(max-width: 800px) 100vw, 800px, 1600px"
+								sizes="(max-width: 800px) 100vw, 800px, 1766px"
 								alt={alt}
+								loading={loading}
 							/>
 						</slot>
 					</a>
