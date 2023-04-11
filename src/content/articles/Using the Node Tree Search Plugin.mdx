@@ -11,19 +11,16 @@ description: Tree Navigator Plugin documentation and feature overview
 
 import Figure from '@components/Figure.astro';
 
-## Introduction
-
 Tree Navigator is a plugin for Figma that makes it easier to navigate patterns with repeated elements like lists, tables or other complex designs, compared to box dragging or <kbd>CMD</kbd> + <kbd>Shift</kbd> - clicking individual layers.
 
 Central feature of this plugin is the layer tree. When a layer is selected, the layer tree displays all of its ancestors up to the current page. By selecting a parent from the tree, the plugin selects all layers matching the selected element inside the chosen parent. This way, it is possible to quickliy select many repeating list elements, table cells and all other repeating layers.
 
-[video, Selektion in liste]
-
 <Figure
-	alt="Selecting and changing the color style of all links in the bookmark list with the layer tree."
-	src="/video/tree-navigator/2023-03-28 14-30-24.mp4"
+	alt="With the layer tree visualization, selecting similar layers in specific columns or screens becomes fast and easy."
+	src="/video/tree-navigator/110423_intro_video.mp4"
 	type="video"
-	aspectRatio="16/9"></Figure>
+	aspectRatio="16/10"
+	fullWidth></Figure>
 
 ## Layer Tree
 
@@ -31,18 +28,22 @@ A common use case for the procedure described above is selecting all cells of on
 
 <Figure
 	alt=""
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1680008433/LayerTree_02_i544hp.png"
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1680009276/LayerTree_02_i544hp.png"
 	aspectRatio="16:10"></Figure>
 
 ### Scoping to sibling layers
 
-Tree Navigator also works with multiple selected elements. As long as they share the same name and type, the layer tree will display the combined ancestor tree of all selected layers. Instead of being restricted to a parent -> child relationship for scoping the selection, this makes it really easy to restrict the search to sibling layers like multiple screens or specific table columns. When multiple layers are selected, the layer tree will show an additional vertical selector that scopes the search to the topmost sibling layers of the selection.
+Tree Navigator also works with multiple selected elements. As long as they share the same name and type, the layer tree will display the combined ancestor tree of all selected layers. Instead of being restricted to a parent -> child relationship for scoping the selection, this makes it really easy to get a selection only in specific screens or table columns for example. When multiple layers are selected, the layer tree will show an additional vertical selector that when clicked scopes the search to the topmost sibling layers of the selection.
 
-[video, selection of siblings]
+<Figure
+	alt="It is easy to target only specific frames for the selection."
+	src="/video/tree-navigator/110423_sibling_select_demo.mp4"
+	type="video"
+	aspectRatio="16/10"></Figure>
 
 ## Layer Search
 
-Tree Navigator also includes a free text search. Like the standard search in Figma, it is possible to enter a search term and to filter the results by layer type. Additionally a search can also be scoped to the current selection or the current top level frame. The available filters are:
+Tree Navigator also includes a free text search. Like the standard search in Figma, it is possible to enter a search term and to filter the results by layer type. Additionally, a search can also be scoped to the current selection or the current top level frame. The available filters are:
 
 -   Layer type
 -   Search scope
@@ -56,6 +57,9 @@ Tree Navigator also includes a free text search. Like the standard search in Fig
 
 Performing a search will save the selected filter settings to make it easy to rerun common searches in the future. Recent searches are shared in a file, so you and your colleagues can access the same common searches.
 
-## [image, search scope filter detail]
+<Figure
+	alt=""
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1681250483/search_scoping_kdbhwa.jpg"
+	aspectRatio="16:10"></Figure>
 
-[^1]: Most common layer types are frames, component instances or text layers, but all other types like sections, groups or images are also valid.
+[^1]: Internally, layers are called 'nodes' and they are separated into different types to give each of them custom properties and behavior. See also https://www.figma.com/plugin-docs/api/nodes for a list of all existing node types in Figma/FigJam.
