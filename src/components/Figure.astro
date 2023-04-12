@@ -10,6 +10,7 @@ export interface Props {
 	type?: 'picture' | 'video' | 'useCase';
 	fullWidth?: boolean;
 	loading?: 'eager' | 'lazy';
+	captionHidden?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
 	type = 'picture',
 	fullWidth = false,
 	loading = 'lazy',
+	captionHidden = false,
 } = Astro.props;
 
 let _src = '';
@@ -26,11 +28,6 @@ let _src = '';
 if (type === 'video') {
 	_src = import.meta.env.PUBLIC_APACHE_URL + src;
 }
-
-let options = {
-	rootMargin: '0px',
-	threshold: 1.0,
-};
 ---
 
 <script>
@@ -79,12 +76,22 @@ let options = {
 		{
 			type === 'video' && (
 				<>
-					<video class="video" width="100%" height="100%" src={_src} muted controls autoplay loop />
+					<video
+						title={alt}
+						class="video"
+						width="100%"
+						height="100%"
+						src={_src}
+						muted
+						controls
+						autoplay
+						loop
+					/>
 				</>
 			)
 		}
 	</span>
-	{alt && <figcaption>{alt}</figcaption>}
+	{alt && !captionHidden && <figcaption>{alt}</figcaption>}
 </figure>
 
 <style lang="scss">
@@ -114,7 +121,7 @@ let options = {
 		margin-bottom: -4px;
 	}
 
-	.full-width figcaption {
+	.grid--full + figcaption {
 		width: 50%;
 		grid-column: 1/ -1;
 	}
@@ -144,16 +151,15 @@ let options = {
 			position: relative;
 		}
 
+		.grid--full + figcaption,
 		figcaption {
+			width: 100%;
 		}
 	}
 
 	@media (max-width: $screen-md) {
 		.figure {
 			margin: 2.5em 0;
-		}
-		figcaption {
-			width: 100%;
 		}
 	}
 </style>
