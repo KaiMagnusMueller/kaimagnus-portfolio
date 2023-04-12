@@ -85,6 +85,16 @@ const { pageTitle, pageDescr } = Astro.props;
 				color: var(--color-link-visited);
 			}
 		}
+
+		.footnotes {
+			margin-top: 4rem;
+			padding-top: 1rem;
+			border-top: 1px solid var(--color-text-low-contrast);
+
+			.heading-wrapper {
+				display: none;
+			}
+		}
 	}
 
 	@media (max-width: $screen-lg) {
