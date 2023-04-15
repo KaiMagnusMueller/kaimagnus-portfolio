@@ -1,0 +1,72 @@
+---
+author: Kai Magnus Müller
+pubDatetime: 2023-03-10T14:22:00Z
+title: Tree Navigator Feature Overview
+draft: false
+tags:
+    - icons
+ogImage: ''
+description: Tree Navigator Plugin documentation and feature overview
+---
+
+import Figure from '@components/Figure.astro';
+
+Tree Navigator is a plugin for Figma that makes it easier to navigate patterns with repeated elements like lists, tables or other complex designs, compared to box dragging or <kbd>CMD</kbd> + <kbd>Shift</kbd> - clicking individual layers.
+
+Main feature of this plugin is the layer tree. When a layer is selected, the layer tree displays its ancestors up to the current page. By clicking on a parent from the tree, it is possible to get a selection of all layers matching the selected layer inside the chosen parent. This way, selections of repeated layers that normally take careful box dragging become faster and much less cumbersome.
+
+<Figure
+	alt="With the layer tree visualization, selecting similar layers in specific columns or screens becomes fast and easy."
+	src="/video/tree-navigator/110423_intro_video.mp4"
+	type="video"
+	aspectRatio="16/10"
+	fullWidth></Figure>
+
+## Layer Tree
+
+A common use case for the procedure described above is selecting all cells of one or more table columns. First, select a cell to tell the plugin the layer name and type[^1] of the layers you want to find. The plugin then displays a tree view of all the parent elements of the selected layer up to the page level, for example the column frame, table frame, section frame and finally screen frame. By selecting parent from the tree, you can now define the selection scope in which the plugin should select all layers and start the search. For example the column frame, if you want to select all cells in a column. Once the search is finished you have a selection of all cells in that table column ready to be edited.
+
+<Figure
+	alt="Screenshot of the Tree Navigator plugin showing all common ancestors of two selected table cells in Figma."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1681576736/layer_tree_app_screen_gpenbh.jpg"
+	aspectRatio="16:10"></Figure>
+
+### Scoping to sibling layers
+
+Tree Navigator also works with multiple selected elements. If they share the same name and type, the layer tree will display the combined ancestor tree of all selected layers. When multiple layers are selected, the layer tree will show an additional vertical selector that when clicked scopes the search to the topmost sibling layers of the selection. Instead of being restricted to only simple parent -> child relationships for scoping the selection, this makes it easy to scope a search to only run in specific frames or for example table columns.
+
+In the example below, we can select layers only from the two left columns by clicking on the vertical bar. Selecting the parent called 'App' would select the third column as well, since there are matching cells as well.
+
+<Figure
+	alt="It is easy to select layers only in specific frames."
+	src="/video/tree-navigator/110423_sibling_select_demo.mp4"
+	type="video"
+	aspectRatio="16/10"></Figure>
+
+## Layer Search
+
+Like the standard search in Figma, it is possible to enter a search term and to filter the results by layer type. Additionally, a search can also be scoped to the current selection or the current top-level frame. The available filters are:
+
+-   Layer type
+-   Search scope
+    -   Whole page
+    -   Current selection
+    -   Top level frame
+-   Case sensitivity
+-   Fuzzy and exact search
+
+## Recent Searches
+
+Performing a search will save the selected filter settings to make it easy to rerun common searches in the future. Recent searches are shared in a file, so you and your colleagues can access the same common searches.
+
+<Figure
+	alt="Collage of screenshots highlighting recent searches and an open flyout, showing the search scope options."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1681250483/search_scoping_kdbhwa.jpg"
+	aspectRatio="16:10"
+	captionHidden="true"></Figure>
+
+## Contribution and Feature Requests
+
+The source code of the plugin is available on GitHub: https://github.com/KaiMagnusMueller/Find-Nodes. To submit bug reports and feature requests, feel free to use the issue templates to share your ideas.
+
+[^1]: Internally, layers are called 'nodes' and they are separated into different types to give each of them custom properties and behavior. See also https://www.figma.com/plugin-docs/api/nodes for a list of all existing node types in Figma/FigJam.
