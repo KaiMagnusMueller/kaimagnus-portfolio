@@ -98,13 +98,14 @@ if (type === 'video') {
 	@import '../styles/_vars.scss';
 
 	figure {
-		margin: 3em 0;
+		margin: 2em 0;
+		position: relative;
 	}
 
 	.grid--container {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
-		gap: 20px;
+		gap: 2rem;
 	}
 
 	.media--container {
@@ -122,8 +123,12 @@ if (type === 'video') {
 	}
 
 	.grid--full + figcaption {
-		width: 50%;
-		grid-column: 1/ -1;
+		grid-column: 10/-1;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		transform: translateY(100%);
+		padding-top: 2rem;
 	}
 
 	:global(.media--container *) {
@@ -154,6 +159,9 @@ if (type === 'video') {
 		.grid--full + figcaption,
 		figcaption {
 			width: 100%;
+			position: relative;
+			transform: none;
+			padding-top: 0;
 		}
 	}
 
