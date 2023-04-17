@@ -10,7 +10,7 @@ export interface Props {
 const { pageTitle, pageDescr } = Astro.props;
 ---
 
-<Layout pageTitle={pageTitle + " // " + SITE.title} pageDescr={pageDescr}>
+<Layout pageTitle={pageTitle + ' // ' + SITE.title} pageDescr={pageDescr}>
 	<nav class="color-text-low-contrast">
 		<ul class="list--horizontal">
 			<li><a href="/">Home</a></li>
@@ -43,6 +43,7 @@ const { pageTitle, pageDescr } = Astro.props;
 		width: 100%;
 		margin-top: 4rem;
 		word-break: break-word;
+		font-size: 1.125rem;
 
 		h1 {
 			font-weight: 600;
@@ -53,7 +54,7 @@ const { pageTitle, pageDescr } = Astro.props;
 		h3,
 		h4,
 		h5 {
-			font-weight: 400;
+			font-weight: 600;
 			margin: 0;
 		}
 
@@ -66,12 +67,15 @@ const { pageTitle, pageDescr } = Astro.props;
 		}
 
 		p {
-			font-size: 1.125em;
 			margin-top: 0.35em;
 			margin-bottom: 1em;
 		}
 
-		img {
+		img,
+		picture,
+		video {
+			border-radius: 2px;
+			overflow: clip;
 		}
 
 		a {
@@ -79,6 +83,16 @@ const { pageTitle, pageDescr } = Astro.props;
 
 			&:visited {
 				color: var(--color-link-visited);
+			}
+		}
+
+		.footnotes {
+			margin-top: 4rem;
+			padding-top: 1rem;
+			border-top: 1px solid var(--color-text-low-contrast);
+
+			.heading-wrapper {
+				display: none;
 			}
 		}
 	}
@@ -140,9 +154,10 @@ const { pageTitle, pageDescr } = Astro.props;
 
 		.post-content {
 			margin-top: 2rem;
+			font-size: 1rem;
 
-			p {
-				font-size: revert;
+			h1 {
+				font-size: 1.8rem;
 			}
 		}
 	}
