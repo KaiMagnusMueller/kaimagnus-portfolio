@@ -12,10 +12,14 @@ import image from '@astrojs/image';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { autolinkConfig } from './plugins/rehype-autolink-config';
+import vercel from '@astrojs/vercel/static';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://kaimagnus-portfolio-git-dev-kaimagnusmueller.vercel.app/',
+	adapter: vercel({
+		analytics: true,
+	}),
+	site: 'https://kaimagnus.de/',
 	integrations: [
 		svelte(),
 		mdx(),
