@@ -30,7 +30,7 @@ let articles = articleEntries;
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
-	<div class="grid--main index-page color-text">
+	<div class="index-page color-text">
 		<main class="hero--section color-text-low-contrast text text-large">
 			<h1 class="">
 				<span class="color-text">Hi, I'm Kai Magnus.</span>
@@ -70,19 +70,11 @@ let articles = articleEntries;
 <style lang="scss">
 	@import '../styles/_vars.scss';
 
-	.grid--main {
-		display: grid;
-		grid-template-columns: repeat(12, 1fr);
-		gap: 0 20px;
-		margin: auto;
-	}
-
 	main {
-		grid-column: span 8;
+		max-width: 46ch;
 		margin-top: 8rem;
 	}
 	section {
-		grid-column: 1/-1;
 		margin-top: 8rem;
 	}
 
