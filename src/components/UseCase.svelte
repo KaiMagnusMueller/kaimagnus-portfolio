@@ -206,6 +206,8 @@
 	}
 
 	button {
+		appearance: none;
+		font-family: inherit;
 		// border: 2px solid transparent;
 		border: none;
 		// border-radius: 4px;
@@ -224,10 +226,6 @@
 	button:hover h2 {
 		color: var(--color-text);
 	}
-
-	// button:hover {
-	// 	border-color: gainsboro;
-	// }
 
 	@media (max-width: $screen-lg) {
 		.grid--container {
