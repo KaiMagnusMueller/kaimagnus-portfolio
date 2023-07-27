@@ -24,7 +24,12 @@ export async function get(context) {
 		pubDate: new Date(elem.data.pubDatetime),
 		content:
 			elem.data.description +
-			'<blockquote>Note: This feed is still in beta until I figure out how to properly render .mdx content in Astro.</blockquote>',
+			'<blockquote>Note: This feed is still in beta until I figure out how to properly render .mdx content in Astro.</blockquote><br> in the meantime, ' +
+			'<a href="' +
+			elem.collection +
+			'/' +
+			elem.slug +
+			'">view the full post here</a>',
 		...elem.data,
 	}));
 
