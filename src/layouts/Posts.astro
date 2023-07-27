@@ -26,7 +26,7 @@ const { pageTitle, pageDescr } = Astro.props;
 	nav {
 		grid-column: 1/-1;
 		margin: 1rem 0 2rem;
-		display: flex;
+		display: none;
 		gap: 2rem;
 
 		a {
@@ -39,16 +39,10 @@ const { pageTitle, pageDescr } = Astro.props;
 	}
 
 	.post-content {
-		grid-column: 1 / -1;
 		width: 100%;
-		margin-top: 4rem;
+		margin-top: 2rem;
 		word-break: break-word;
 		font-size: 1.125rem;
-
-		h1 {
-			font-weight: 600;
-			font-size: 2rem;
-		}
 
 		h2,
 		h3,
@@ -58,8 +52,25 @@ const { pageTitle, pageDescr } = Astro.props;
 			margin: 0;
 		}
 
+		// part of the articles and project pages
+		.course-data {
+			margin-bottom: 2rem;
+			margin-top: 0.5rem;
+			display: flex;
+			gap: 1rem;
+		}
+
+		// part of the articles and project pages
+		h1 {
+			font-weight: 700;
+			font-size: 3rem;
+			margin-bottom: 0rem;
+			line-height: 1.1;
+			margin-left: -0.1rem;
+		}
+
 		// Currently all elements that should be full size are also divs, so this is easy.
-		& > *:not(div, .full-width) {
+		& > *:not(div, .full-width, h1) {
 			width: 50%;
 			margin-left: 0;
 			margin-right: auto;
