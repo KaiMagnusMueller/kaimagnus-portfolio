@@ -4,7 +4,7 @@ export const SITE = {
 	// website: 'https://www.kaimagnus.de/',
 	author: 'Kai Magnus Müller',
 	desc: 'Professional projects and other works of Kai Magnus Müller, interaction designer',
-	title: 'Kai Magnus–',
+	title: 'Kai Magnus – Interaction Design',
 	ogImage: 'astropaper-og.jpg',
 	lightAndDarkMode: true,
 };
