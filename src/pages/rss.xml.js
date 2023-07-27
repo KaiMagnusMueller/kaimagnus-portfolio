@@ -23,8 +23,8 @@ export async function get(context) {
 		description: elem.data.description,
 		pubDate: new Date(elem.data.pubDatetime),
 		content:
-			'<blockquote>Note: This feed is still in beta until I figure out how to properly render .mdx content in Astro.</blockquote>' +
-			sanitizeHtml(parser.render(elem.body)),
+			elem.data.description +
+			'<blockquote>Note: This feed is still in beta until I figure out how to properly render .mdx content in Astro.</blockquote>',
 		...elem.data,
 	}));
 
