@@ -25,8 +25,8 @@ const { pageTitle, pageDescr } = Astro.props;
 
 	nav {
 		grid-column: 1/-1;
-		margin: 1rem 0 2rem;
-		display: none;
+		margin: 1rem 0 0;
+		display: flex;
 		gap: 2rem;
 
 		a {
@@ -40,7 +40,7 @@ const { pageTitle, pageDescr } = Astro.props;
 
 	.post-content {
 		width: 100%;
-		margin-top: 2rem;
+		margin-top: 1.5rem;
 		word-break: break-word;
 		font-size: 1.125rem;
 
@@ -155,20 +155,16 @@ const { pageTitle, pageDescr } = Astro.props;
 	}
 
 	@media (max-width: $screen-md) {
-		nav {
-			margin: 1rem 0 1rem;
-		}
-
 		.heading-wrapper {
 			margin-top: 3em;
 		}
 
 		.post-content {
-			margin-top: 2rem;
+			margin-top: 1rem;
 			font-size: 1rem;
 
 			h1 {
-				font-size: 1.8rem;
+				font-size: 2rem;
 			}
 		}
 	}
