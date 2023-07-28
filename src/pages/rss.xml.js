@@ -19,18 +19,23 @@ export async function get(context) {
 	let _items = _blog.map((elem) => ({
 		link: elem.collection + '/' + elem.slug,
 		title: elem.data.title,
-		author: elem.data.author,
+		author: 'author@example.org (' + elem.data.author + ')',
 		description: elem.data.description,
 		pubDate: new Date(elem.data.pubDatetime),
 		content:
+			elem.data.description +
 			'<blockquote>Note: This feed is still in beta until I figure out how to properly render .mdx content in Astro.</blockquote>' +
-			sanitizeHtml(parser.render(elem.body)),
+			'<a href="' +
+			elem.collection +
+			'/' +
+			elem.slug +
+			'">View the full post here -></a>',
 		...elem.data,
 	}));
 
 	return rss({
 		// `<title>` field in output xml
-		title: `${SITE.title}`,
+		title: `${SITE.author}`,
 		// `<description>` field in output xml
 		description: `${SITE.desc}`,
 		// Pull in your project "site" from the endpoint context

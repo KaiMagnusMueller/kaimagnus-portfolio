@@ -5,16 +5,16 @@ import Layout from './Layout.astro';
 export interface Props {
 	pageTitle: string;
 	pageDescr: string;
+	entryCollection: string;
 }
 
-const { pageTitle, pageDescr } = Astro.props;
+const { pageTitle, pageDescr, entryCollection } = Astro.props;
 ---
 
-<Layout pageTitle={pageTitle + ' // ' + SITE.title} pageDescr={pageDescr}>
+<Layout pageTitle={pageTitle} pageDescr={pageDescr}>
 	<nav class="color-text-low-contrast">
-		<ul class="list--horizontal">
-			<li><a href="/">Home</a></li>
-		</ul>
+		<a href="/">Home</a> /
+		{entryCollection !== undefined && <span>{entryCollection}</span>}
 	</nav>
 	<article class="post-content">
 		<slot />
@@ -25,12 +25,13 @@ const { pageTitle, pageDescr } = Astro.props;
 
 	nav {
 		grid-column: 1/-1;
-		margin: 1rem 0 2rem;
+		margin: 1rem 0 0;
 		display: flex;
-		gap: 2rem;
+		gap: 1rem;
 
-		a {
-			text-decoration: none;
+		a,
+		span {
+			text-transform: capitalize;
 		}
 	}
 
@@ -39,16 +40,10 @@ const { pageTitle, pageDescr } = Astro.props;
 	}
 
 	.post-content {
-		grid-column: 1 / -1;
 		width: 100%;
-		margin-top: 4rem;
+		margin-top: 2rem;
 		word-break: break-word;
 		font-size: 1.125rem;
-
-		h1 {
-			font-weight: 600;
-			font-size: 2rem;
-		}
 
 		h2,
 		h3,
@@ -58,8 +53,25 @@ const { pageTitle, pageDescr } = Astro.props;
 			margin: 0;
 		}
 
+		// part of the articles and project pages
+		.course-data {
+			margin-bottom: 2rem;
+			margin-top: 0.2rem;
+			display: flex;
+			gap: 1rem;
+		}
+
+		// part of the articles and project pages
+		h1 {
+			font-weight: 700;
+			font-size: 3rem;
+			margin-bottom: 0rem;
+			line-height: 1.2;
+			margin-left: -0.1rem;
+		}
+
 		// Currently all elements that should be full size are also divs, so this is easy.
-		& > *:not(div, .full-width) {
+		& > *:not(div, .full-width, h1) {
 			width: 50%;
 			margin-left: 0;
 			margin-right: auto;
@@ -144,20 +156,15 @@ const { pageTitle, pageDescr } = Astro.props;
 	}
 
 	@media (max-width: $screen-md) {
-		nav {
-			margin: 1rem 0 1rem;
-		}
-
 		.heading-wrapper {
 			margin-top: 3em;
 		}
 
 		.post-content {
-			margin-top: 2rem;
 			font-size: 1rem;
 
 			h1 {
-				font-size: 1.8rem;
+				font-size: 2rem;
 			}
 		}
 	}
