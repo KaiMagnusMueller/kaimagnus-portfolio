@@ -5,16 +5,16 @@ import Layout from './Layout.astro';
 export interface Props {
 	pageTitle: string;
 	pageDescr: string;
+	entryCollection: string;
 }
 
-const { pageTitle, pageDescr } = Astro.props;
+const { pageTitle, pageDescr, entryCollection } = Astro.props;
 ---
 
-<Layout pageTitle={pageTitle + ' // ' + SITE.title} pageDescr={pageDescr}>
+<Layout pageTitle={pageTitle} pageDescr={pageDescr}>
 	<nav class="color-text-low-contrast">
-		<ul class="list--horizontal">
-			<li><a href="/">Home</a></li>
-		</ul>
+		<a href="/">Home</a> /
+		{entryCollection !== undefined && <span>{entryCollection}</span>}
 	</nav>
 	<article class="post-content">
 		<slot />
@@ -27,10 +27,11 @@ const { pageTitle, pageDescr } = Astro.props;
 		grid-column: 1/-1;
 		margin: 1rem 0 0;
 		display: flex;
-		gap: 2rem;
+		gap: 1rem;
 
-		a {
-			text-decoration: none;
+		a,
+		span {
+			text-transform: capitalize;
 		}
 	}
 
@@ -40,7 +41,7 @@ const { pageTitle, pageDescr } = Astro.props;
 
 	.post-content {
 		width: 100%;
-		margin-top: 1.5rem;
+		margin-top: 2rem;
 		word-break: break-word;
 		font-size: 1.125rem;
 
@@ -65,7 +66,7 @@ const { pageTitle, pageDescr } = Astro.props;
 			font-weight: 700;
 			font-size: 3rem;
 			margin-bottom: 0rem;
-			line-height: 1.4;
+			line-height: 1.2;
 			margin-left: -0.1rem;
 		}
 
@@ -160,7 +161,6 @@ const { pageTitle, pageDescr } = Astro.props;
 		}
 
 		.post-content {
-			margin-top: 1rem;
 			font-size: 1rem;
 
 			h1 {

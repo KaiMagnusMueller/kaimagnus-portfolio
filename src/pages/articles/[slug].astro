@@ -16,16 +16,16 @@ const { Content } = await entry.render();
 const date = new Date(entry.data.pubDatetime).toLocaleDateString('en-US', { dateStyle: 'long' });
 ---
 
-<Posts pageTitle={entry.data.title} pageDescr={entry.data.description}>
+<Posts entryCollection={entry.collection} pageTitle={entry.data.title} pageDescr={entry.data.description}>
 	<h1>{entry.data.title}</h1>
-	<div class="course-data color-text-low-contrast">
+	<span class="course-data color-text-low-contrast">
 		{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
 
 		<span>
 			<time datetime="{entry.data.pubDatetime}">{date}</time>
 		</span>
-	</div>
-	<Content <Content />
+	</span>
+	<Content />
 </Posts>
 
 <style lang="scss"></style>

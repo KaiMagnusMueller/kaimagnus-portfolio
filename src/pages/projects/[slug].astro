@@ -14,11 +14,11 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Posts pageTitle={entry.data.title} pageDescr={entry.data.description}>
+<Posts entryCollection={entry.collection} pageTitle={entry.data.title} pageDescr={entry.data.description}>
 	<h1>{entry.data.title}</h1>
-	<div class="course-data color-text-low-contrast">
+	<span class="course-data color-text-low-contrast">
 		<span>{entry.data.course}</span><span>{entry.data.semesterDate}</span>
-	</div>
+	</span>
 	<Content />
 </Posts>
 
