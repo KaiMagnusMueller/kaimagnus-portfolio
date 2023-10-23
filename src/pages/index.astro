@@ -27,6 +27,10 @@ let university = projectEntries.filter((elem) => {
 });
 
 let articles = articleEntries;
+
+let envProd = import.meta.env.PROD.toString();
+let envPub = import.meta.env.PUBLIC_PROD.toString();
+let env = import.meta.env.PROD;
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
@@ -35,6 +39,10 @@ let articles = articleEntries;
 			<h1 class="">
 				<span class="color-text">Hi, I'm Kai Magnus.</span>
 			</h1>
+			{envProd}
+			{envPub}
+			{env}
+			{import.meta.env.PROD}
 			<p>
 				A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on new products for
 				the insurance space. Currently, I teach Interactive Communications Systems at <a
