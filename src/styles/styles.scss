@@ -27,9 +27,9 @@
 @media (prefers-color-scheme: dark) {
 	:root {
 		--color-background: url(200-20-5-monochrome.png), #161612;
-		--color-text: #c9c9c9;
+		--color-text: #d1d1d1;
 		--color-text-transparent: #e7e7e79e;
-		--color-text-low-contrast: #696969;
+		--color-text-low-contrast: #787878;
 		--color-highlight: #ffbb0b;
 		--color-link: #6bb7f5;
 		--color-link-visited: #c078f7;
@@ -45,7 +45,7 @@
 html {
 	font-style: normal;
 	font-weight: 400;
-	font-size: 1rem;
+	font-size: 16px;
 }
 
 * {
@@ -207,6 +207,15 @@ kbd {
 	.text-large p,
 	.text-large h1 {
 		font-size: 1.375rem;
+		line-height: 1.5em;
+	}
+}
+
+@media (max-width: vars.$screen-sm) {
+	.text-large,
+	.text-large p,
+	.text-large h1 {
+		font-size: 1.125rem;
 		line-height: 1.5em;
 	}
 }

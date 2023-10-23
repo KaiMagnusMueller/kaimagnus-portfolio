@@ -6,10 +6,10 @@ import Layout from '../layouts/Layout.astro';
 import CollectionList from '@components/CollectionList.astro';
 
 const articleEntries = await getCollection('articles', ({ data }) => {
-	return data.draft === false;
+	return import.meta.env.PROD ? data.draft !== true : true;
 });
 const projectEntries = await getCollection('projects', ({ data }) => {
-	return data.draft === false;
+	return import.meta.env.PROD ? data.draft !== true : true;
 });
 
 let allEntries = [...projectEntries, ...articleEntries];
