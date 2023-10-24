@@ -53,13 +53,6 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 			margin: 0;
 		}
 
-		h2:target,
-		h3:target,
-		h4:target,
-		h5:target {
-			margin-top: 2em;
-		}
-
 		// part of the articles and project pages
 		.course-data {
 			margin-bottom: 2rem;
@@ -79,11 +72,12 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		}
 
 		// Currently all elements that should be full size are also divs, so this is easy.
-		& > *:not(div, .full-width, h1) {
-			width: 50%;
+		& > *:not(div, .full-width, h1),
+		figcaption {
+			max-width: 58ch;
+			line-height: 1.5;
 			margin-left: 0;
 			margin-right: auto;
-			line-height: normal;
 		}
 
 		p {
@@ -120,7 +114,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 	@media (max-width: $screen-lg) {
 		.post-content {
 			& > *:not(div, .full-width) {
-				width: 100%;
+				max-width: 100%;
 			}
 		}
 	}

@@ -42,20 +42,6 @@
 	}
 }
 
-html {
-	font-style: normal;
-	font-weight: 400;
-	font-size: 16px;
-}
-
-* {
-	box-sizing: border-box;
-}
-
-iframe {
-	background-color: transparent;
-}
-
 .color-text {
 	color: var(--color-text);
 
@@ -88,6 +74,7 @@ iframe {
 	font-style: normal;
 	font-weight: 400;
 	font-size: 1rem;
+	line-height: normal;
 	// margin-top: 0.25em;
 	// margin-bottom: 0.25em;
 }
@@ -107,7 +94,7 @@ h1 {
 	font-style: normal;
 	font-weight: 400;
 	font-size: 1.625rem;
-	line-height: 1.5em;
+	line-height: 1.5;
 }
 
 h2,

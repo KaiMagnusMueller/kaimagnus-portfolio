@@ -1,5 +1,6 @@
 ---
 export const prerender = true;
+import '@styles/resets.scss';
 import '@styles/styles.scss';
 import { SITE } from '@config';
 export interface Props {
@@ -46,7 +47,7 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 
 	html {
 		background: var(--color-background);
-		padding: 0 8rem;
+		padding: 0 10rem;
 	}
 	body {
 		max-width: $screen-lg;
@@ -59,7 +60,7 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 		gap: 0.6rem 2rem;
 		flex-wrap: wrap;
 		align-items: baseline;
-		margin: 8rem 0 1rem;
+		margin: 8rem 0 2rem;
 	}
 
 	@media (max-width: $screen-md) {
