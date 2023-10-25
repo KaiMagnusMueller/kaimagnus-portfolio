@@ -1,3 +1,5 @@
+@import '../styles/_vars.scss';
+
 html {
 	font-style: normal;
 	font-weight: 400;
@@ -6,6 +8,12 @@ html {
 	-webkit-text-size-adjust: none;
 	text-size-adjust: none;
 	scroll-behavior: smooth;
+}
+
+@media (max-width: $screen-md) {
+	html {
+		font-size: 18px;
+	}
 }
 
 *,
