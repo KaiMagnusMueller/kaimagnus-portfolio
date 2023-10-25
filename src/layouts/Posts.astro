@@ -56,7 +56,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		// part of the articles and project pages
 		.course-data {
 			margin-bottom: 2rem;
-			margin-top: 0.2rem;
+			margin-top: 0.4rem;
 			display: flex;
 			gap: 0 1rem;
 			flex-wrap: wrap;
@@ -111,7 +111,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		}
 	}
 
-	@media (max-width: $screen-lg) {
+	@media (max-width: $screen-md) {
 		.post-content {
 			& > *:not(div, .full-width) {
 				max-width: 100%;

@@ -10,7 +10,7 @@ html {
 	scroll-behavior: smooth;
 }
 
-@media (max-width: $screen-md) {
+@media (max-width: $screen-md) and (pointer: coarse) {
 	html {
 		font-size: 18px;
 	}
