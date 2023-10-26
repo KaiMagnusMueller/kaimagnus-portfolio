@@ -35,10 +35,6 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		}
 	}
 
-	figure {
-		width: 100%;
-	}
-
 	.post-content {
 		width: 100%;
 		margin-top: 2rem;
@@ -72,7 +68,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		}
 
 		// Currently all elements that should be full size are also divs, so this is easy.
-		& > *:not(div, .full-width, h1),
+		& > *:not(div, .full-width-reset, h1),
 		figcaption {
 			max-width: 58ch;
 			line-height: 1.5;

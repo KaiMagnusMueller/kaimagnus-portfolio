@@ -233,3 +233,76 @@ kbd {
 	white-space: nowrap;
 	border-width: 0;
 }
+
+//MEDIA
+.media--container {
+	margin: 2rem 0;
+	position: relative;
+}
+
+.media--grid-container {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1rem;
+}
+
+.media--1-9col {
+	grid-column: 1 / span 9;
+}
+
+figcaption {
+	grid-column: span 3;
+	margin-top: auto;
+	margin-bottom: -4px;
+}
+
+.grid--full + figcaption {
+	grid-column: 10/-1;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	transform: translateY(100%);
+	padding-top: 2rem;
+}
+
+.media--elem-wrapper * {
+	display: block;
+}
+
+.media--elem-wrapper img {
+	width: 100%;
+	height: auto;
+}
+
+@media (max-width: vars.$screen-lg) {
+	.media--grid-container {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.grid--full + figcaption,
+	figcaption {
+		width: 100%;
+		position: relative;
+		transform: none;
+	}
+
+	figcaption {
+		margin-bottom: 0;
+	}
+
+	.figcaption--style {
+		// 	padding: 0.5em;
+		// 	border-width: 0 0 2px 2px;
+		// 	border-style: solid;
+		// 	border-color: var(--color-text-low-contrast);
+		// 	border-bottom-left-radius: 4px;
+	}
+}
+
+@media (max-width: vars.$screen-md) {
+	.figure {
+		margin: 2.5em 0;
+	}
+}

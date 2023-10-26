@@ -103,9 +103,9 @@
 
 	<div class="useCase-media--container" data-index={activeIndex}>
 		{#if _srcSet.length > 0}
-			<figure class="grid--container">
+			<figure class="media--grid-container">
 				{#key activeIndex}
-					<span class="media--container" transition:fade|local={{ duration: 500 }}>
+					<span class="media--pos-absolute" transition:fade|local={{ duration: 500 }}>
 						<video
 							bind:this={videoElem}
 							on:ended={() => handleChangeVideo(activeIndex)}
@@ -118,12 +118,12 @@
 							controls />
 					</span>
 				{/key}
-				<div class="height-helper" style="aspect-ratio: {aspectRatio};" />
+				<div class="media--1-9col" style="aspect-ratio: {aspectRatio};" />
 
 				<figcaption bind:this={figCaptionElem}>
 					{#key activeIndex}
 						<span
-							class="caption-helper"
+							class="caption-helper figcaption--style"
 							in:fly|local={{ duration: 1000, x: 25, delay: 200 }}
 							out:fly={{ duration: 1000, x: -25, delay: 100 }}
 							bind:this={captionText}>
@@ -144,50 +144,28 @@
 	.useCase--container {
 		margin: 3em 0;
 	}
-
-	figure {
-		margin: 0;
-		position: relative;
+    
+    .useCase--navigation {
+		grid-column: 1 / -1;
 	}
 
-	.grid--container {
-		display: grid;
-		grid-template-columns: repeat(12, 1fr);
-		gap: 20px;
-	}
-
-	.media--container {
+	.media--pos-absolute {
 		grid-column: 1 / span 9;
 		position: absolute;
 		top: 0;
 	}
 
-	figcaption {
-		grid-column: span 3;
-		// font-style: italic;
-		margin-bottom: -4px;
-	}
-
-	:global(.media--container *) {
-		display: block;
-	}
-
-	:global(.media--container img) {
-		width: 100%;
-		height: auto;
-	}
-
-	.useCase--navigation {
-		grid-column: 1 / -1;
-	}
-
-	.height-helper {
-		grid-column: 1 / span 9;
+    figure {
+		position: relative;
 	}
 
 	.caption-helper {
 		position: absolute;
 		bottom: 0;
+	}
+
+	p:first-child {
+		margin-top: 0;
 	}
 
 	p:last-child {
@@ -228,17 +206,6 @@
 	}
 
 	@media (max-width: $screen-lg) {
-		.grid--container {
-			display: flex;
-			flex-direction: column;
-			gap: 8px;
-			margin: 0;
-		}
-
-		figcaption {
-			position: relative;
-		}
-
 		.caption-helper {
 			position: absolute;
 			top: 0;
@@ -246,9 +213,4 @@
 		}
 	}
 
-	@media (max-width: $screen-md) {
-		figcaption {
-			width: 100%;
-		}
-	}
 </style>

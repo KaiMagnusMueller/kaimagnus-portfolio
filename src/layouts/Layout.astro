@@ -47,7 +47,7 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 
 	html {
 		background: var(--color-background);
-		padding: 0 10rem;
+		padding-inline: clamp(1rem, 10vw, 10rem);
 	}
 	body {
 		max-width: $screen-lg;
@@ -65,15 +65,11 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 
 	@media (max-width: $screen-md) {
 		html {
-			padding: 0 2rem;
+			padding-inline: clamp(1rem, 4vw, 10rem);
 		}
 	}
 
 	@media (max-width: $screen-sm) {
-		html {
-			padding: 0 1rem;
-		}
-
 		footer {
 			margin: 6rem 0 2rem;
 		}

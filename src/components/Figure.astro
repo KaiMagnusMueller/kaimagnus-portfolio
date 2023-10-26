@@ -52,8 +52,8 @@ if (type === 'video') {
 	videos.forEach((elem) => observer.observe(elem));
 </script>
 
-<figure class="container grid--container full-width">
-	<span class:list={['media--container', (fullWidth && 'grid--full') || 'media--9col']}>
+<figure class="media--container container media--grid-container full-width-reset">
+	<span class:list={['media--elem-wrapper', (fullWidth && 'grid--full') || 'media--1-9col']}>
 		{
 			type === 'picture' && (
 				<>
@@ -91,83 +91,9 @@ if (type === 'video') {
 			)
 		}
 	</span>
-	{alt && !captionHidden && <figcaption>{alt}</figcaption>}
+	{alt && !captionHidden && <figcaption class="figcaption--style">{alt}</figcaption>}
 </figure>
 
 <style lang="scss">
-	@import '../styles/_vars.scss';
-
-	figure {
-		margin: 2rem 0;
-		position: relative;
-	}
-
-	.grid--container {
-		display: grid;
-		grid-template-columns: repeat(12, 1fr);
-		gap: 2rem;
-	}
-
-	.media--container {
-		position: relative;
-	}
-
-	.media--9col {
-		grid-column: 1 / span 9;
-	}
-
-	figcaption {
-		grid-column: span 3;
-		margin-top: auto;
-		margin-bottom: -4px;
-	}
-
-	.grid--full + figcaption {
-		grid-column: 10/-1;
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		transform: translateY(100%);
-		padding-top: 2rem;
-	}
-
-	:global(.media--container *) {
-		display: block;
-	}
-
-	:global(.media--container img) {
-		width: 100%;
-		height: auto;
-	}
-
-	// fix first figures after headings having a too large margin-top
-	:global(h1 + figure, .heading-wrapper + figure) {
-		margin-top: 1rem;
-	}
-
-	@media (max-width: $screen-lg) {
-		.grid--container {
-			display: flex;
-			flex-direction: column;
-			gap: 8px;
-		}
-
-		.media--container {
-			position: relative;
-		}
-
-		.grid--full + figcaption,
-		figcaption {
-			width: 100%;
-			position: relative;
-			transform: none;
-			padding-top: 0;
-		}
-	}
-
-	@media (max-width: $screen-md) {
-		.figure {
-			margin: 2.5em 0;
-		}
-	}
+	// Media styles in src/styles/styles.scss
 </style>
