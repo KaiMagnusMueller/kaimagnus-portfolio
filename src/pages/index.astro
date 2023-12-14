@@ -36,33 +36,45 @@ let articles = articleEntries;
 				<span class="color-text">Hi, I'm Kai Magnus.</span>
 			</h1>
 			<p>
-				A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on new products for
-				the insurance space. Currently, I teach Interactive Communications Systems at <a
+				A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on insurance and
+				finance applications. I also used to teach Interactive Communications Systems at <a
 					href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a
-				>
-				and have recently released my <a href="https://www.figma.com/community/plugin/1229905434435887252/"
-					>Tree Navigator</a
-				> plugin for Figma.
+				>.
 			</p>
 			<p>
-				While studying, I wrote a bachelor thesis about <a href="projects/destinations"
-					>building wayfinding systems</a
-				>, designed a <a href="/projects/halo">browser built for research</a>, went to Japan and developed an <a
-					href="/projects/aralsea">interactive exhibit</a
-				>.
-				<!-- An extended version of it made it to the <a
-					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
-					>Überseemuseum Bremen</a
-				>. -->
+				In my spare time, I developed <a href="https://www.figma.com/community/plugin/1229905434435887252/"
+					>Tree Navigator</a
+				>, a Figma plugin to speed up selecting deeply nested elements and <a
+					href="https://www.figma.com/community/plugin/1229905434435887252/">Icon Library Manager</a
+				> to update and manage icon libraries.
+			</p>
+
+			<p>
+				Right now I am working on <a href="https://www.intersections.de">Intersections</a>, a research lab
+				focusing on tools for reflection, thinking and creativity.
 			</p>
 		</main>
 		<section>
 			<CollectionList title="Noteworthy" ariaDetails="Noteworthy projects and articles" entries={featured} />
-			<CollectionList title="Work" ariaDetails="Professional projects" entries={work} />
+			<CollectionList title="Professional Work" ariaDetails="Professional projects" entries={work} />
+			<p class="insert-text color-text-low-contrast text text-large">
+				While studying, I wrote a bachelor thesis about <a href="projects/destinations"
+					>building wayfinding systems</a
+				>, designed a <a href="/projects/halo">browser built for research</a>, went to Japan and developed an <a
+					href="/projects/aralsea">interactive exhibit</a
+				>. An extended version of it made it to the <a
+					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
+					>Überseemuseum Bremen</a
+				>.
+			</p>
 			<CollectionList title="University Projects" entries={university} />
+			<p class="insert-text color-text-low-contrast text text-large">
+				Sometimes I write about what's on my mind. Sometimes…
+			</p>
 			<CollectionList title="Posts" entries={articles} />
 			<p class="position--relative">
-				<span class="highlight-star" title="">*</span>These are definitely worth a visit!
+				<span class="highlight-star" title="">*</span>If you got limited time, I recommend looking at one of
+				these!
 			</p>
 		</section>
 	</div>
@@ -74,8 +86,18 @@ let articles = articleEntries;
 		max-width: 46ch;
 		margin-top: 8rem;
 	}
+
+	.insert-text {
+		max-width: 46ch;
+		margin-block-start: 6rem;
+		margin-block-end: 4rem;
+	}
+
 	section {
-		margin-top: 8rem;
+		margin-top: 6rem;
+		// display: grid;
+		// gap: 2rem;
+		// grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	}
 
 	h1 {
