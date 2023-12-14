@@ -26,10 +26,10 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-background: url(200-20-5-monochrome.png), #161612;
+		--color-background: url(200-20-10-monochrome-min.png), #0b0b09;
 		--color-text: #d1d1d1;
 		--color-text-transparent: #e7e7e79e;
-		--color-text-low-contrast: #787878;
+		--color-text-low-contrast: #848484;
 		--color-highlight: #ffbb0b;
 		--color-link: #6bb7f5;
 		--color-link-visited: #c078f7;
@@ -63,10 +63,6 @@
 
 .m-left--auto {
 	margin-left: auto;
-}
-
-.grid--full {
-	grid-column: 1/-1;
 }
 
 .text-regular,
@@ -129,7 +125,7 @@ sup {
 }
 
 blockquote {
-	border-left: 2px solid;
+	border-left: 2.5px solid;
 	margin: 2rem 0;
 	padding: 0.5rem 0.5rem 0.5rem 1rem;
 	position: relative;
@@ -137,9 +133,7 @@ blockquote {
 	// &::before,
 	// &::after {
 	// 	content: '"';
-
 	// 	font-size: 3rem;
-	// 	position: absolute;
 	// }
 
 	// &::after {
@@ -154,6 +148,10 @@ blockquote {
 
 	* {
 		margin: 0 !important;
+		font-size: 1.625em;
+		// TODO: Check fonts on Windows
+		font-family: 'Charter', 'Cambria', 'Constantia', serif;
+		font-style: italic;
 	}
 }
 
@@ -236,8 +234,8 @@ kbd {
 
 //MEDIA
 .media--container {
-	margin: 2rem 0;
 	position: relative;
+	margin: 2rem 0;
 }
 
 .media--grid-container {
@@ -246,14 +244,18 @@ kbd {
 	gap: 1rem;
 }
 
-.media--1-9col {
-	grid-column: 1 / span 9;
-}
-
 figcaption {
 	grid-column: span 3;
 	margin-top: auto;
 	margin-bottom: -4px;
+}
+
+.grid--full {
+	grid-column: 1/-1;
+}
+
+.media--1-9col {
+	grid-column: 1 / span 9;
 }
 
 .grid--full + figcaption {
@@ -262,7 +264,8 @@ figcaption {
 	bottom: 0;
 	right: 0;
 	transform: translateY(100%);
-	padding-top: 2rem;
+	padding-top: 1rem;
+	margin-bottom: 0;
 }
 
 .media--elem-wrapper * {

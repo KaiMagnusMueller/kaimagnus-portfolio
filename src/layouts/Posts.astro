@@ -67,7 +67,6 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 			margin-left: -0.1rem;
 		}
 
-		// Currently all elements that should be full size are also divs, so this is easy.
 		& > *:not(div, .full-width-reset, h1),
 		figcaption {
 			max-width: 58ch;
@@ -75,6 +74,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 			margin-left: 0;
 			margin-right: auto;
 		}
+		// Currently all elements that should be full size are also divs, so this is easy.
 
 		p {
 			margin-top: 0.35em;
@@ -117,7 +117,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 
 	.heading-wrapper {
 		margin-top: 2em;
-		margin-bottom: 0.25em;
+		margin-bottom: 1em;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
