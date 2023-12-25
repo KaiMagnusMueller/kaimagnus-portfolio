@@ -22,6 +22,10 @@
 	--screen-lg: 1024px;
 	--screen-xl: 1280px;
 	--screen-2xl: 1536px;
+
+	--color-card-border: #b7b7b7;
+	--color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
+	--card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +37,10 @@
 		--color-highlight: #ffbb0b;
 		--color-link: #6bb7f5;
 		--color-link-visited: #c078f7;
+
+		--color-card-border: #424242;
+		--color-card-background: url(200-20-10-monochrome-min.png), #222220;
+		--card-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.55);
 	}
 
 	img,

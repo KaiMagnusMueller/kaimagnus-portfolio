@@ -36,13 +36,13 @@ let articles = articleEntries;
 				<span class="color-text">Hi, I'm Kai Magnus.</span>
 			</h1>
 			<p>
-				A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on insurance and
+				A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on investment and
 				finance applications. I also used to teach Interactive Communications Systems at <a
 					href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a
 				>.
 			</p>
 			<p>
-				In my spare time, I developed <a href="https://www.figma.com/community/plugin/1229905434435887252/"
+				In my spare time, I develop <a href="https://www.figma.com/community/plugin/1229905434435887252/"
 					>Tree Navigator</a
 				>, a Figma plugin to speed up selecting deeply nested elements and <a
 					href="https://www.figma.com/community/plugin/1229905434435887252/">Icon Library Manager</a
@@ -54,10 +54,46 @@ let articles = articleEntries;
 				focusing on tools for reflection, thinking and creativity.
 			</p>
 		</main>
+
+		<!-- <aside class="quick-links"> -->
+		<!-- <a href="/project-timeline">
+				<div class="link-card text-regular">
+					<h2>Project Timeline Visualization</h2>
+					<p class="color-text-low-contrast">A visual timeline of my past and current projects</p>
+				</div>
+			</a> -->
+		<!-- <a href="https://www.figma.com/community/plugin/1229905434435887252/">
+				<div class="link-card text-regular">
+					<h2>Tree Navigator</h2>
+					<p class="color-text-low-contrast">Download for Figma</p>
+				</div>
+			</a> -->
+		<!-- <a href="https://www.figma.com/community/plugin/1229905434435887252/">
+				<div class="link-card text-regular">
+					<h2>Tree Navigator</h2>
+					<p class="color-text-low-contrast">Download for Figma</p>
+				</div>
+			</a> -->
+		<!-- </aside> -->
+
 		<section>
+			<!-- Featured means noteworthy -->
 			<CollectionList title="Noteworthy" ariaDetails="Noteworthy projects and articles" entries={featured} />
+			<!-- WORK -->
+			<!-- <div class="insert-text color-text-low-contrast">
+				<p class="">
+					During my work at Syncier and Kaiser X Labs, I worked on a number of investment management
+					applications for <a href="https://www.idsdata.com/solutions/de/esg/">IDS</a> as designer and design lead
+					and was part of an in-house innovation lab.
+				</p>
+				<p>
+					I also love to tinker, improve my workflow and make my MacBook work for me. Some of the results even
+					made it here:
+				</p>
+			</div> -->
 			<CollectionList title="Professional Work" ariaDetails="Professional projects" entries={work} />
-			<p class="insert-text color-text-low-contrast text text-large">
+			<!-- UNIVERSITY -->
+			<!-- <p class="insert-text color-text-low-contrast">
 				While studying, I wrote a bachelor thesis about <a href="projects/destinations"
 					>building wayfinding systems</a
 				>, designed a <a href="/projects/halo">browser built for research</a>, went to Japan and developed an <a
@@ -66,11 +102,10 @@ let articles = articleEntries;
 					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
 					>Überseemuseum Bremen</a
 				>.
-			</p>
+			</p> -->
 			<CollectionList title="University Projects" entries={university} />
-			<p class="insert-text color-text-low-contrast text text-large">
-				Sometimes I write about what's on my mind. Sometimes…
-			</p>
+			<!-- POSTS -->
+			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 			<CollectionList title="Posts" entries={articles} />
 			<p class="position--relative">
 				<span class="highlight-star" title="">*</span>If you got limited time, I recommend looking at one of
@@ -87,10 +122,11 @@ let articles = articleEntries;
 		margin-top: 8rem;
 	}
 
+	.insert-text p,
 	.insert-text {
 		max-width: 46ch;
-		margin-block-start: 6rem;
-		margin-block-end: 4rem;
+		margin-block-start: 0.5rem;
+		margin-block-end: 0.5rem;
 	}
 
 	section {
@@ -104,13 +140,39 @@ let articles = articleEntries;
 		margin-bottom: 0.5em;
 	}
 
-	p:last-of-type {
-		margin-bottom: 0;
-	}
-
 	span.highlight-star {
 		position: absolute;
 		transform: translate(-110%, -20%);
+	}
+
+	.quick-links {
+		margin-block: 6rem;
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		a {
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: revert;
+			}
+		}
+	}
+
+	.link-card {
+		height: 100%;
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		// justify-content: space-between;
+
+		border: 1px solid var(--color-card-border);
+		background: var(--color-card-background);
+		box-shadow: var(--card-shadow);
+		h2 {
+			margin: 0;
+		}
 	}
 
 	@media (max-width: $screen-lg) {
