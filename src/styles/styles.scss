@@ -30,7 +30,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-background: url(200-20-10-monochrome-min.png), #0b0b09;
+		--color-background: url(200-20-5-monochrome.png), hsl(60, 5%, 4%);
 		--color-text: #d1d1d1;
 		--color-text-transparent: #e7e7e79e;
 		--color-text-low-contrast: #848484;
@@ -39,7 +39,7 @@
 		--color-link-visited: #c078f7;
 
 		--color-card-border: #424242;
-		--color-card-background: url(200-20-10-monochrome-min.png), #222220;
+		--color-card-background: url(200-20-5-monochrome.png), #222220;
 		--card-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.55);
 	}
 
