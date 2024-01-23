@@ -76,5 +76,7 @@ iframe {
 }
 
 :target {
-	scroll-margin-block: 2rem;
+	scroll-margin-block: 10rem;
+	outline: 2px solid var(--color-highlight);
+	border-radius: 2px;
 }

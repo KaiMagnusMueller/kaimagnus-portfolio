@@ -11,7 +11,7 @@
 	--color-link-visited: #840be0;
 
 	/* TYPO */
-	--font-stack: 'SofiaPro', system-ui;
+	--font-stack: 'Sofia Pro', system-ui;
 	/* GENERAL STYLES */
 	color: var(--color-text);
 	font-family: var(--font-stack);
@@ -256,6 +256,7 @@ figcaption {
 	grid-column: span 3;
 	margin-top: auto;
 	margin-bottom: -4px;
+	text-wrap: balance;
 }
 
 .grid--full {
