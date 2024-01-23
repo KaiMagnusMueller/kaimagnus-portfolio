@@ -68,7 +68,7 @@
 
 	function createIntersectionObservers(
 		elems: Array<Element>,
-		callback: (entries: IntersectionObserverEntry[]) => void
+		callback: (entries: IntersectionObserverEntry[]) => void,
 	) {
 		let options = {
 			rootMargin: '0px',
@@ -144,8 +144,8 @@
 	.useCase--container {
 		margin: 3em 0;
 	}
-    
-    .useCase--navigation {
+
+	.useCase--navigation {
 		grid-column: 1 / -1;
 	}
 
@@ -155,13 +155,13 @@
 		top: 0;
 	}
 
-    figure {
+	figure {
 		position: relative;
 	}
 
 	.caption-helper {
 		position: absolute;
-		bottom: 0;
+		bottom: -4px;
 	}
 
 	p:first-child {
@@ -212,5 +212,4 @@
 			bottom: unset;
 		}
 	}
-
 </style>
