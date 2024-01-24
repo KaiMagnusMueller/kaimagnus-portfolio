@@ -11,7 +11,7 @@ export interface Props {
 const { pageTitle, pageDescr, entryCollection } = Astro.props;
 ---
 
-<Layout pageTitle={pageTitle} pageDescr={pageDescr}>
+<Layout pageTitle={pageTitle + ' • ' + SITE.titleShort} pageDescr={pageDescr}>
 	<nav class="color-text-low-contrast">
 		<a href="/">Home</a> /
 		{entryCollection !== undefined && <span>{entryCollection}</span>}
@@ -92,7 +92,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		iframe {
 			border-radius: 2px;
 			overflow: clip;
-			box-shadow: 0 2px 8px #0000003d;
+			box-shadow: 0 2px 8px #0000002b;
 		}
 
 		a {

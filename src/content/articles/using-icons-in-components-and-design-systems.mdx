@@ -13,42 +13,46 @@ description: Constructing mask based icon placeholder components for use in Figm
 ---
 import Figure from '@components/Figure.astro';
 
-I've long used icons by downloading Figma community files and publishing them as components in my teams for use in other components of our design system. This works pretty well, but there are a few issues that make this implementation cumbersome. In this post, I want to highlight some of the issues and show methods on how to create modular, customizable and easy to use icon components.
+For the past few years I worked as a designer on various applications and projects and been a maintainer and author of internal design systems. Over the years I've spent a lot of time finding ways to build robust components and improving 'designer experience' and usability.  A recurring topic has been the handling of icons and in this post I want to show how we use icons in our design system.
 
-## Naive Approach: Naked Icon Components
+This post assumes basic knowledge of components, instances and libraries in Figma. I recommend visiting Figma help and the official tutorial files as an introduction.
+
+As great as Figma is, it is not without it's issues and from my experience, icons are an area where many aspects come together in a very condensed fashion. Community files are a great source of icons and I've used them as team libraries many times. For the most part this works pretty well, but there are a few things to keep in mind that I want to highlight here. 
+
+{/* ## Naive Approach: Naked Icon Components */}
+
+
+
+Imagine you want to create a button component. A very simple approach would be to create a label text and insert an icon from your library directly. This works pretty well. You, the design system maintainer, can change its color to create secondary, and tertiary variants according to your style guide. Designers using your component can select the icon, swap it with other icons from the library and select different variants. In the screenshot below, I created a simple primary button with a white label and icon. What could go wrong?
 
 <Figure
-	alt="Component, label and done is the component. Let's publish…"
-	src="/src/assets/images/sample-icon-button.png"
-	aspectRatio="16:9"></Figure>
-
-A very simple approach to create a button component with label and icon would be to simply insert an icon component directly. It is swappable and can be colored according to a styleguide. In the screenshot above, I created a simple primary button with a white label and icon. What could go wrong?
-
-
-<Figure
-	alt="Oops, what happened? Seems like some icons reverted back to their original black color."
-	src="src/assets/images/icon-button-with-swapped-instance.png"
+	alt="Icon, label and done is the component. Let's publish…"
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090267/Figma%20Icons/sample-icon-button_awx2xd.png"
 	aspectRatio="16:9"></Figure>
 
 Turns out a lot. (relatively speaking)
 
-When we swap the icon out to customize our button, suddenly some parts of the icon become black again. What happens here is that Figma tries to apply the color override[^1] of the original white colored icon on the swapped icon, but because the new icon has more layers than the original instance, it only applies the override to the first layer it finds and not to any additional layers. 
+When we swap the icon out to customize our button, some parts of the icon become black again. What happens here is that Figma tries to apply the white color override[^1] of the original icon on the swapped icon. But, because the new icon has more layers than the original instance, it only applies the override to the first layer it finds and not to any extra layers. So as a result, they appear in the default color.
 
-This issue is sometimes hard to spot. In the [IBM Carbon icon file that I maintain](https://www.figma.com/community/file/1141743458996921050/ibm-carbon-icons) for example, all icons are converted to outline strokes and then joined together into  union groups to minimize any issues. But there are always some that can't be completely reduced to one element, so the issue will eventually pop up. 
+<Figure
+	alt="Oops, what happened? Seems like some icons reverted back to their original black color."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090267/Figma%20Icons/icon-button-with-swapped-instance_ljdhtx.png"
+	aspectRatio="16:9"></Figure>
+
+
+This issue is sometimes hard to spot. In the [IBM Carbon icon file that I maintain](https://www.figma.com/community/file/1141743458996921050/ibm-carbon-icons) for example, all icons are converted to outline strokes and then joined together into union groups. This way it only happens with a very small number of them. But there are some that can't be completely reduced to one element, so the issue will sometimes pop up.
 
 ## A Better Approach: Placeholder Component
 
-So, how can this issue can be fixed?  Instead of coloring the icon directly, we can use a color layer above the icon, so there is always only one override for Figma to take care of.  To restore the icon paths, there are two possible solutions. We can either mask the color layer with the icon or create an intersect group with the layer and icon. This means the original icon only provides the shape (kinda like a stencil) and the color layer is the one that is actually visible in the end. 
+So, how to fix this issue? Instead of applying color to the icon layer, we can use an extra layer on top of the icon as a helper. Now there is always only one override for Figma to take care of and we don't have to care about the icon paths anymore. To restore the icon paths – since the icon is now hidden behind the color layer – there are two possible solutions. We can either mask the color layer with the icon or create an intersect group with the layer and icon. This means the icon only provides the shape (kinda like a stencil) and the color layer is the one that is actually visible in the end.
 
-The intersect technique also has the same problem as mentioned earlier, if there are more paths after swapping an icon than before, the color will also not be applied and it even has a few other issues.[^2] You can experiment with it in the playground file below, where I've included both methods. 
+During testing I discovered the intersect technique has the same problem I mentioned earlier. If there are more paths after swapping an icon than before, the color will still not be applied to all parts of the icon and there are a few other issues[^2]. You can experiment with it in the playground file below, where I've included both methods.
 
-Because of these issues I use a mask in my icon placeholder component. To construct a mask based component, we first have to group the icon because otherwise the mask would also stop working when swapping out the icon later, seems to be another bug. Then we place a rectangle as the color layer on top. The resize constraints for all layers should be set to "scale", so icons are easily resizable. Now we select both layers and apply the mask with <kbd>⌃ ⌘ M</kbd> and finally create the component with <kbd>⌥ ⌘ K</kbd>. 
-
-To make the component a bit more nice to use, create an instance swap property for the icon component, so the next time you select another icon in one of your placeholder component instances, you'll get a list of all icons in your library file to swap. This even works with icons team libraries. Very convenient.
+Because of these issues I use a mask in my icon placeholder component. To construct it, we first have to navigate around what seems to be another bug. Swapping out the icon in an instance later, causes the mask to stop working, which seems to be another bug. But we can circumvent this by grouping the icon first. Then we place a rectangle as the color layer on top. The resize constraints for all layers should be set to 'scale', so the component is resizable. Now we select both layers and apply the mask with <kbd>⌃ ⌘ M</kbd> and finally create the component with <kbd>⌥ ⌘ K</kbd>.
 
 <Figure
 	alt="Create a mask based icon component in four steps."
-	src="./src/assets/images/icon-placeholder-explosion-steps-3.jpg"
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090273/Figma%20Icons/icon-placeholder-explosion-steps-3_vhiw4m.jpg"
 	aspectRatio="16:9"></Figure>
 
 {/* <Figure
@@ -56,7 +60,7 @@ To make the component a bit more nice to use, create an instance swap property f
 	src="../src/assets/images/icon-placeholder-comp-layers.png"
 	aspectRatio="12:5"></Figure> */}
 
-
+To make the component a bit more nice to use, I like to create an instance swap property for the icon component inside. So designers in your team can select another icon right from the placeholder component instance. Like with all components, Figma displays a list with all components in the same file as the selected one. So if you're using a separate file or downloaded one from the community, it will display all icons you have available. This even works with icons team libraries, very convenient.
 
 ## Playground
 
