@@ -17,11 +17,15 @@ For the past few years, I worked as a designer on various applications and proje
 
 This post assumes basic knowledge of components, instances and libraries in Figma. I recommend visiting [Figma learn](https://help.figma.com/hc/en-us/categories/360002051613-Getting-Started) and the official tutorial files as an introduction.
 
-{/* As mentioned before, community files are a great source of icons and I've used them as team libraries many times. For the most part this works pretty well, but there are a few things to keep in mind when using them that I want to highlight here.  */}
+Community files are a great source of icons. In our team we either search if there is already a file of the set that we want to use in the Figma community, or we build our own libraries with Icon Library Manager. If you're interested, you can read about how to import and update your own libraries in [the next post here](https://www.kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager). We then publish them as team libraries, so all projects and files have access to the same always up to date icons.
 
-## Icon Buttons the Naive Way
+With that out of the way, let's imagine you want to create a button component. 
 
-Imagine you want to create a button component. A very simple approach would be to create a label text and insert an icon from your file or library directly. This works pretty well. You, the design system maintainer, can change its color to create secondary, and tertiary variants according to your style guide. Designers using your component can select the icon, swap it with other icons from the library and select different variants. In the screenshot below, I created a simple primary button with a white label and icon. What could go wrong?
+{/* As I [mentioned previously](https://www.kaimagnus.de/articles/icons-in-figma-part-1), c */}
+
+## Icon Buttons, the Naive Way
+
+A very simple approach would be to create a label text and insert an icon from your file or library directly. This works pretty well. You, the design system maintainer, can change its color to create secondary, and tertiary variants according to your style guide. Designers using your component can select the icon, swap it with other icons from the library and select different variants. In the screenshot below, I created a simple primary button with a white label and icon. What could go wrong?
 
 <Figure
 	alt="Icon, label and done is the component. Let's publish…"
@@ -52,6 +56,11 @@ Because of these issues I use a mask in my icon placeholder component. To constr
 	alt="Create a mask based icon component in four steps."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090273/Figma%20Icons/icon-placeholder-explosion-steps-3_vhiw4m.jpg"
 	aspectRatio="16:9"></Figure>
+
+{/* <Figure
+	alt="Create a mask based icon component in four steps."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706171014/Figma%20Icons/icon-placeholder-explosion_ivxqyh.jpg"
+	aspectRatio="16:9"></Figure> */}
 
 {/* <Figure
 	alt=""
