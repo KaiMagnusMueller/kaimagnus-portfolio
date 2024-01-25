@@ -1,5 +1,4 @@
 @use '_vars.scss';
-@use '_fonts.scss';
 
 :root {
 	--color-background: url(200-20-5-monochrome.png), #fbfbf9;
@@ -11,7 +10,7 @@
 	--color-link-visited: #840be0;
 
 	/* TYPO */
-	--font-stack: 'SofiaPro', system-ui;
+	--font-stack: 'Libre Baskerville', system-ui;
 	/* GENERAL STYLES */
 	color: var(--color-text);
 	font-family: var(--font-stack);
@@ -78,7 +77,6 @@
 	font-style: normal;
 	font-weight: 400;
 	font-size: 1rem;
-	line-height: normal;
 	// margin-top: 0.25em;
 	// margin-bottom: 0.25em;
 }
@@ -98,7 +96,6 @@ h1 {
 	font-style: normal;
 	font-weight: 400;
 	font-size: 1.625rem;
-	line-height: 1.5;
 }
 
 h2,
@@ -201,7 +198,7 @@ kbd {
 	.text-large p,
 	.text-large h1 {
 		font-size: 1.375rem;
-		line-height: 1.5em;
+		line-height: 1.6em;
 	}
 }
 
@@ -210,7 +207,7 @@ kbd {
 	.text-large p,
 	.text-large h1 {
 		font-size: 1.125rem;
-		line-height: 1.5em;
+		line-height: 1.6em;
 	}
 }
 

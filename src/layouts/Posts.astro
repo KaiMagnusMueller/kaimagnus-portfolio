@@ -25,7 +25,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 
 	nav {
 		grid-column: 1/-1;
-		margin: 1rem 0 0;
+		margin: 2rem 0 0;
 		display: flex;
 		gap: 1rem;
 
@@ -45,7 +45,6 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		// figcaption {
 		// 	font-family: system-ui;
 		// }
-
 		h2,
 		h3,
 		h4,
@@ -57,10 +56,18 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		// part of the articles and project pages
 		.course-data {
 			margin-bottom: 2rem;
-			margin-top: 0.4rem;
+			margin-top: 0.5rem;
 			display: flex;
 			gap: 0 1rem;
 			flex-wrap: wrap;
+			// line-height: 1;
+
+			// span {
+			// 	padding: 0.5rem 0.75rem;
+			// 	border-radius: 20px;
+			// 	background-color: #ffffff19;
+			// 	// border: 1px solid #ffffff19;
+			// }
 		}
 
 		// part of the articles and project pages
@@ -70,13 +77,12 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 			margin-bottom: 0rem;
 			line-height: 1.2;
 			margin-left: -0.1rem;
-			width: 32ch;
+			width: 100%;
 		}
 
 		& > *:not(div, .full-width-reset, h1, iframe),
 		figcaption {
-			max-width: 58ch;
-			line-height: 1.5;
+			max-width: 52ch;
 			margin-left: 0;
 			margin-right: auto;
 		}
@@ -161,6 +167,9 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 	}
 
 	@media (max-width: $screen-md) {
+		nav {
+			margin: 1rem 0 0;
+		}
 		.heading-wrapper {
 			margin-top: 3em;
 		}
