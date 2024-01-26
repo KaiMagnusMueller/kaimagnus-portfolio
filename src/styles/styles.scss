@@ -4,13 +4,13 @@
 	--color-background: url(200-20-5-monochrome.png), #fbfbf9;
 	--color-text: #303030;
 	--color-text-transparent: #3030309e;
-	--color-text-low-contrast: #8f8f8f;
+	--color-text-low-contrast: #7c7c7c;
 	--color-highlight: #ffbb0b;
 	--color-link: #0c93ec;
 	--color-link-visited: #840be0;
 
 	/* TYPO */
-	--font-stack: 'Libre Baskerville', system-ui;
+	--font-stack: 'Libre Baskerville', 'Charter', 'Cambria', 'Constantia', serif, system-ui;
 	/* GENERAL STYLES */
 	color: var(--color-text);
 	font-family: var(--font-stack);
@@ -257,6 +257,14 @@ figcaption {
 	text-wrap: balance;
 }
 
+@media (max-width: vars.$screen-lg) {
+	figcaption {
+		// font-size: 0.875rem;
+		text-wrap: unset;
+		color: var(--color-text-low-contrast);
+	}
+}
+
 .grid--full {
 	grid-column: 1/-1;
 }
@@ -291,11 +299,11 @@ figcaption {
 		gap: 0.5rem;
 	}
 
-	.grid--full + figcaption,
-	figcaption {
+	.grid--full + figcaption {
 		width: 100%;
 		position: relative;
 		transform: none;
+		max-width: unset;
 	}
 
 	figcaption {
