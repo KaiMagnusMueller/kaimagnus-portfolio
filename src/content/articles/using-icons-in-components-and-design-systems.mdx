@@ -13,11 +13,11 @@ description: Constructing mask based icon placeholder components for use in Figm
 ---
 import Figure from '@components/Figure.astro';
 
-For the past few years, I worked as a designer on various applications and projects and been a user, maintainer and author of internal design systems. Over the years I've spent a lot of time finding ways to build robust components, improving 'designer experience' and usability.  A recurring topic has been the handling of icons and in this post I want to show how we use icons in our design system. As great as Figma is, it is not without it's issues and from my experience, icons are an area where we can and have to use many tricks and techniques in a very condensed fashion. 
+For the past few years, I worked on various projects as a user, maintainer and author of internal design systems. Over the years I've spent a lot of time finding ways to build robust components, improving 'designer experience' and usability. A recurring topic has been the handling of icons and in this post I want to show how we use icons in our design system. As great as Figma is, it is not without its issues and from my experience, icons are an area where we can and have to use many tricks and techniques to achieve good results.
 
 This post assumes basic knowledge of components, instances and libraries in Figma. I recommend visiting [Figma learn](https://help.figma.com/hc/en-us/categories/360002051613-Getting-Started) and the official tutorial files as an introduction.
 
-Community files are a great source of icons. In our team we either search if there is already a file of the set that we want to use in the Figma community, or we build our own libraries with Icon Library Manager. If you're interested, you can read about how to import and update your own libraries in [the next post here](https://www.kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager). We then publish them as team libraries, so all projects and files have access to the same always up to date icons.
+Community files are a great source of icons. In our team, we either search if there is already a file of the set that we want to use available, or we build our own libraries with Icon Library Manager. If you're interested, you can read about how to import SVGs and update your own libraries in [the next post here](https://www.kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager). We then publish them as team libraries, so all projects and files have access to the same, always up to date icons.
 
 With that out of the way, let's imagine you want to create a button component. 
 
@@ -25,7 +25,7 @@ With that out of the way, let's imagine you want to create a button component.
 
 ## Icon Buttons, the Naive Way
 
-A very simple approach would be to create a label text and insert an icon from your file or library directly. This works pretty well. You, the design system maintainer, can change its color to create secondary, and tertiary variants according to your style guide. Designers using your component can select the icon, swap it with other icons from the library and select different variants. In the screenshot below, I created a simple primary button with a white label and icon. What could go wrong?
+A very simple approach would be to create a label text and insert an icon from your file or library directly. This works pretty well. You, the design system maintainer, can change its color to create secondary, and tertiary variants according to your style guide. Designers using your component can select the icon, swap it with another icon and select different button variants. In the screenshot below, I created a simple primary button with a white label and icon. What could go wrong?
 
 <Figure
 	alt="Icon, label and done is the component. Let's publish…"
@@ -71,7 +71,7 @@ To make the component a bit more nice to use, I like to create an instance swap 
 
 ## Playground
 
-I've prepared a [playground file](https://www.figma.com/community/file/1331327712728500688/icon-placeholder-component) with the different methods I mentioned above, so you can try them your yourself or copy them into your libraries. 
+I've prepared a [playground file](https://www.figma.com/community/file/1331327712728500688/icon-placeholder-component) with the different methods I mentioned above, so you can try them yourself or copy them into your libraries. 
 
 {/* <details class="full-width-reset">
 <summary>Open playground file</summary>
@@ -80,5 +80,5 @@ I've prepared a [playground file](https://www.figma.com/community/file/133132771
  */}
 
 
-[^1]: See the Figma documentation for more details. https://help.figma.com/hc/en-us/articles/360039150733-Apply-overrides-to-instances#Preserve_overrides
+[^1]: See the Figma documentation for more details. https://help.figma.com/hc/en-us/articles/360039150733-Apply-overrides-to-instances#Preserve_overrides  Basically, Figma tries to match layer types, names and the layer structure to restore any values that the user may have changed.
 [^2]: The intersection operation doesn't work for some icons and a bug in Figma and will cause the intersection to stop working after the icon instance is swapped.
