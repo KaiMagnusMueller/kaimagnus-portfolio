@@ -51,7 +51,7 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		h4,
 		h5 {
 			font-weight: 600;
-			margin: 0;
+			width: fit-content;
 		}
 
 		// part of the articles and project pages
@@ -64,10 +64,10 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 			// line-height: 1;
 
 			// span {
-			// 	padding: 0.5rem 0.75rem;
+			// 	padding: 0.25rem 0.75rem;
 			// 	border-radius: 20px;
-			// 	background-color: #ffffff19;
-			// 	// border: 1px solid #ffffff19;
+			// 	background-color: #7f7f7f19;
+			// 	// border: 1px solid #7f7f7f53;
 			// }
 		}
 
@@ -84,8 +84,8 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		& > *:not(div, .full-width-reset, h1, iframe),
 		figcaption {
 			max-width: 600px;
-			margin-left: 0;
-			margin-right: auto;
+			// margin-left: 0;
+			// margin-right: auto;
 		}
 		// Currently all elements that should be full size are also divs, so this is easy.
 
@@ -114,10 +114,6 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 			margin-top: 4rem;
 			padding-top: 1rem;
 			border-top: 1px solid var(--color-text-low-contrast);
-
-			.heading-wrapper {
-				display: none;
-			}
 		}
 	}
 
@@ -130,38 +126,31 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		}
 	}
 
-	.heading-wrapper {
-		margin-top: 2em;
-		margin-bottom: 1em;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 12px;
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin-top: 2.25rem;
+		margin-bottom: 0.75rem;
+	}
 
-		a,
-		a:visited {
-			color: var(--color-text-low-contrast);
+	h1:hover,
+	h2:hover,
+	h3:hover,
+	h4:hover {
+		.anchor-link {
+			visibility: visible;
+			opacity: 1;
 		}
 	}
-
-	.heading-wrapper:hover .anchor-link {
-		visibility: visible;
-		opacity: 1;
-	}
-
 	.anchor-link {
+		margin-left: 0.5rem;
 		width: 20px;
 		height: 20px;
 		transition: opacity 0.2s ease;
 	}
 
 	@media (hover: hover) {
-		.heading-wrapper {
-			a,
-			a:visited {
-				color: var(--color-text);
-			}
-		}
 		.anchor-link {
 			visibility: hidden;
 			opacity: 0;
@@ -171,9 +160,6 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 	@media (max-width: $screen-md) {
 		nav {
 			margin: 1rem 0 0;
-		}
-		.heading-wrapper {
-			margin-top: 3em;
 		}
 
 		.post-content {

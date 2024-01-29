@@ -157,6 +157,7 @@ blockquote {
 		// TODO: Check fonts on Windows
 		font-family: 'Charter', 'Cambria', 'Constantia', serif;
 		font-style: italic;
+		line-height: 1.5;
 	}
 }
 
@@ -225,8 +226,7 @@ kbd {
 }
 
 // fully hide footnote anchor link
-.sr-only,
-#footnote-label + * {
+.sr-only {
 	position: absolute;
 	width: 1px;
 	height: 1px;

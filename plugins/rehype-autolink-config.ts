@@ -28,7 +28,7 @@ const createSROnlyLabel = (text: string) => {
 
 export const autolinkConfig: Options = {
 	properties: { class: 'anchor-link' },
-	behavior: 'after',
+	behavior: 'append',
 	group: ({ tagName }) => h('span', { tabIndex: -1, class: `heading-wrapper level-${tagName}` }),
 	content: (heading) => [AnchorLinkIcon, createSROnlyLabel(toString(heading))],
 };

@@ -36,11 +36,15 @@ Turns out a lot. (relatively speaking)
 
 When we swap the icon out to customize our button, some parts of the icon become black again. What happens here is that Figma tries to apply the white color override[^1] of the original icon on the swapped icon. But, because the new icon has more layers than the original instance, it only applies the override to the first layer it finds and not to any extra layers. So as a result, they appear in the default color.
 
-<Figure
+{/* <Figure
 	alt="Oops, what happened? Seems like some icons reverted back to their original black color."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090267/Figma%20Icons/icon-button-with-swapped-instance_ljdhtx.png"
-	aspectRatio="16:9"></Figure>
+	aspectRatio="16:9"></Figure> */}
 
+<Figure
+	alt="Oops, what happened? Seems like some part of the icon reverted back to its original black color."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706518740/Figma%20Icons/icon-button-with-swapped-instance_sunwmp.jpg"
+	aspectRatio="16:9"></Figure>
 
 This issue is sometimes hard to spot. In the [IBM Carbon icon file that I maintain](https://www.figma.com/community/file/1141743458996921050/ibm-carbon-icons) for example, all icons are converted to outline strokes and then joined together into union groups. This way it only happens with a very small number of them. But there are some that can't be completely reduced to one element, so the issue will sometimes pop up.
 
