@@ -14,7 +14,11 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Posts entryCollection={entry.collection} pageTitle={entry.data.title} pageDescr={entry.data.description}>
+<Posts
+	entryCollection={entry.collection}
+	pageTitle={entry.data.title}
+	pageDescr={entry.data.description}
+	ogImage={entry.data.ogImage}>
 	<h1>{entry.data.title}</h1>
 	<span class="course-data color-text-low-contrast">
 		<span>{entry.data.course}</span><span>{entry.data.semesterDate}</span>
