@@ -8,6 +8,9 @@
 	--color-highlight: #ffbb0b;
 	--color-link: #0c93ec;
 	--color-link-visited: #840be0;
+	--color-bg-negative: #242424;
+	--color-border-negative-secondary: #424242;
+	--color-text-negative: #e4e4e4;
 
 	/* TYPO */
 	--font-stack: 'Libre Baskerville', 'Charter', 'Cambria', 'Constantia', serif, system-ui;
@@ -36,6 +39,9 @@
 		--color-highlight: #ffbb0b;
 		--color-link: #6bb7f5;
 		--color-link-visited: #c078f7;
+		--color-bg-negative: #fbfbf9;
+		--color-text-negative: #030303;
+		--color-border-negative-secondary: #5e5e5e;
 
 		--color-card-border: #424242;
 		--color-card-background: url(200-20-5-monochrome.png), #222220;
@@ -158,6 +164,34 @@ blockquote {
 		font-family: 'Charter', 'Cambria', 'Constantia', serif;
 		font-style: italic;
 		line-height: 1.5;
+	}
+}
+
+p > code {
+	border-radius: 2px;
+	background-color: #24292e;
+	color: #e1e4e8;
+	padding: 0.125rem 0.25rem;
+	border: 1px solid var(--color-bg-negative);
+}
+
+pre {
+	border: 1px solid var(--color-border-negative-secondary);
+	padding: 0.5rem 0.75rem;
+	background-color: unset;
+	border-radius: 2px;
+	margin-bottom: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+	.shiki,
+	.shiki span {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+		/* Optional, if you also want font styles */
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
 	}
 }
 

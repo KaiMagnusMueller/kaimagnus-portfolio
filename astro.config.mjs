@@ -33,6 +33,13 @@ export default defineConfig({
 	},
 
 	markdown: {
+		shikiConfig: {
+			wrap: false,
+			theme: {
+				'dracula'
+			},
+			defaultColor: false,
+		},
 		rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, autolinkConfig]],
 	},
 });
