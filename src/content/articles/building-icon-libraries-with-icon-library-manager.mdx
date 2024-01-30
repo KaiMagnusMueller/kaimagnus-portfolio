@@ -1,7 +1,7 @@
 ---
 author: Kai Magnus Müller
 pubDatetime: 2024-02-05T14:25:00Z
-title: 'Building Icon Libraries in Figma With Icon Library Manager'
+title: 'Building Icon Libraries in Figma with Icon Library Manager'
 highlight: false
 draft: true
 tags:
@@ -12,6 +12,47 @@ ogImage: ''
 description: Constructing mask based icon placeholder components for use in Figma based components and design systems
 ---
 import Figure from '@components/Figure.astro';
+
+One of the biggest pain points when working with Figma Community files is keeping them up to date. There is currently no way to update them like a library or merging new changes as if they were on a branch. Regardless, especially with in development icon sets, there is a need to have updated icon sets. 
+
+This plugin takes a local folder of SVGs and imports them in Figma as components. The folder structure will be preserved in the component name for easy filtering and the SVGs themselves will be flattened as much as possible, [see my last post](https://www.kaimagnus.de/articles/using-icons-in-figma-components) where I go into detail on why this is important. 
+
+[Get it in the Figma community &rarr;](https://www.figma.com/community/plugin/1229905434435887252)
+
+```
+
+
+video video video video video video video  
+
+
+
+```
+
+This blog will walk you through the steps to create your first icon library. Knowledge of [Node.js/npm](https://nodejs.org/en), the [(macOS) Terminal](https://support.apple.com/de-de/guide/terminal/welcome/mac), Figma components, libraries and general web tech is useful, but not necessary. If you are reading this, it's probably fair to assume you have some prior experience anyway ;). 
+
+## How to Use
+
+If you already have an icon set downloaded, skip to the usage instructions below
+
+### Downloading Icons From NPM
+
+To create our first library, we need to get the icon set that we want to use as SVG files. NPM is a great resource for this, the [IBM Carbon Icons](https://www.npmjs.com/package/@carbon/icons) or [Heroicons](https://www.npmjs.com/package/heroicons) sets are available to download there. To do this, we need to install Node.js and npm from [here](https://nodejs.org/en). Then, we create a folder and open a new Terminal window by right clicking on the new folder. Now we are ready to download an icon set. `aösldfjlskdfhskljdfhs` ösdljfgölsdjfg dlfkgj 
+
+`npm install @carbon/icons`
+
+This 
+
+```
+fdälgjdlf ägj
+erg d
+ertjg
+eprgtj 
+eprj
+```
+
+
+
+Icon Library Manager 
 
 - Icon Library Manager
 - SVG2Component

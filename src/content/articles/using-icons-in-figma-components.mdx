@@ -17,11 +17,12 @@ For the past few years, I worked on various projects as a user, maintainer and a
 
 This post assumes basic knowledge of components, instances and libraries in Figma. I recommend visiting [Figma learn](https://help.figma.com/hc/en-us/categories/360002051613-Getting-Started) and the official tutorial files as an introduction.
 
+{/* As I [mentioned previously](https://www.kaimagnus.de/articles/icons-in-figma-part-1), c */}
 Community files are a great source of icons. In our team, we either search if there is already a file of the set that we want to use available, or we build our own libraries with Icon Library Manager. If you're interested, you can read about how to import SVGs and update your own libraries in [the next post here](https://www.kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager). We then publish them as team libraries, so all projects and files have access to the same, always up to date icons.
 
 With that out of the way, let's imagine you want to create a button component. 
 
-{/* As I [mentioned previously](https://www.kaimagnus.de/articles/icons-in-figma-part-1), c */}
+
 
 ## Icon Buttons, the Naive Way
 
@@ -48,7 +49,7 @@ When we swap the icon out to customize our button, some parts of the icon become
 
 This issue is sometimes hard to spot. In the [IBM Carbon icon file that I maintain](https://www.figma.com/community/file/1141743458996921050/ibm-carbon-icons) for example, all icons are converted to outline strokes and then joined together into union groups. This way it only happens with a very small number of them. But there are some that can't be completely reduced to one element, so the issue will sometimes pop up.
 
-## A Better Approach: Placeholder Component
+## A Better Approach: Placeholder Components
 
 So, how to fix this issue? Instead of applying color to the icon layer, we can use an extra layer on top of the icon as a helper. Now there is always only one override for Figma to take care of and we don't have to care about the icon paths anymore. To restore the icon paths – since the icon is now hidden behind the color layer – there are two possible solutions. We can either mask the color layer with the icon or create an intersect group with the layer and icon. This means the icon only provides the shape (kinda like a stencil) and the color layer is the one that is actually visible in the end.
 
