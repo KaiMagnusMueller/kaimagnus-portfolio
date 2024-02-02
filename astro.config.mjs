@@ -35,9 +35,7 @@ export default defineConfig({
 	markdown: {
 		shikiConfig: {
 			wrap: false,
-			theme: {
-				'dracula'
-			},
+			theme: 'github-dark',
 			defaultColor: false,
 		},
 		rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, autolinkConfig]],
