@@ -209,6 +209,13 @@ kbd {
 	white-space: nowrap;
 }
 
+details {
+	margin-block: 1em;
+	font-weight: 600;
+	cursor: pointer;
+	width: fit-content;
+}
+
 @media (max-width: vars.$screen-md) {
 	.list--horizontal {
 		li:last-of-type {
