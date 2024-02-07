@@ -33,6 +33,11 @@ export default defineConfig({
 	},
 
 	markdown: {
+		shikiConfig: {
+			wrap: false,
+			theme: 'github-dark',
+			defaultColor: false,
+		},
 		rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, autolinkConfig]],
 	},
 });

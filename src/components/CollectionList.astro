@@ -22,6 +22,7 @@ function sort(entries: CollectionEntry<any>[]) {
 	entries && entries.length > 0 && (
 		<div class="post-list text-regular">
 			<h2 class="color-text-low-contrast">{title}</h2>
+			<slot />
 			<ul>
 				{sort(entries).map((entry) => (
 					<li>
@@ -51,8 +52,10 @@ function sort(entries: CollectionEntry<any>[]) {
 	@import '../styles/_vars.scss';
 
 	.post-list {
-		margin-bottom: 4rem;
+		margin-block-start: 4rem;
+		margin-block-end: 4rem;
 		// line-height: 22px;
+		// line-height: 1.6; //If font is SF Pro
 	}
 
 	ul {
@@ -65,8 +68,10 @@ function sort(entries: CollectionEntry<any>[]) {
 		margin: 3px 0;
 	}
 
-	li {
-		margin: 0.125rem 0;
+	li,
+	h2 {
+		margin: 0.4rem 0;
+		line-height: 1.5;
 	}
 
 	span:hover {
@@ -84,6 +89,12 @@ function sort(entries: CollectionEntry<any>[]) {
 	@media (pointer: coarse) {
 		a {
 			line-height: 1.8rem;
+		}
+	}
+
+	@media (max-width: $screen-md) {
+		.post-list {
+			margin-bottom: 3rem;
 		}
 	}
 </style>

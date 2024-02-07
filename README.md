@@ -22,3 +22,11 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Environment Variables
+
+Vite automatically provides the env vars `MODE`, `DEV` and `PROD` [see Vite docs](https://vitejs.dev/guide/env-and-mode). To filter draft posts during production builds (via `npm run preview/build`), `index.astro` uses the following shorthand:
+
+```
+return import.meta.env.PROD ? data.draft !== true : true;
+```

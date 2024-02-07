@@ -1,0 +1,60 @@
+---
+author: Kai Magnus Müller
+pubDatetime: 2023-10-23T15:22:00Z
+title: 'Icons in Figma 1: Getting Icons'
+highlight: false
+draft: true
+tags:
+    - Icons
+    - Figma
+ogImage: ''
+description: Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit?.
+---
+
+There are many different approaches on how to handle icons in Figma and in this series of posts, I want to discuss some approaches on how to get icons and how to use them in projects. All of this is founded on my learnings while working extensively with icons in a team of designers in the last couple of years.
+
+In this post we're going to learn where to get icons. In the next few posts, I want to discuss how to use icons in components and designs, how to construct icon placeholder components and my plugin that simplifies icon library management. The plugin was built to enable the currently best way to handle icons in Figma that my team and I settled on. It gives design teams flexibility and independence, a robust update flow using standard Figma features and works with virtually any icon library that provides SVG icon files.
+
+But let's do it step by step.
+
+//TODO: What do we want to use icons for?
+
+## Plugins
+
+A pretty popular approach to add icons to a design is via first party plugins like Google Material Symbols or the Streamline Icons Plugin. These official plugins are frequently updated with the latest icons in their respective set and are generally trustworthy. There are not that many of them and here I want to highlight the two mentioned above.
+
+### Google Material Symbols (GMS)
+
+Since the Material Symbols icon set https://fonts.google.com/icons has grown to over 3 thousand glyphs with a wide number of customizations (in part thanks to variable fonts) it can be quite a challenge to manage them. [^1] To make this easier, Google created the Material Symbols Plugin. It provides probably the best interface out of all the icon plugins included are all the parameters Material Symbols uses, like outlined and rounded styles, fills and stroke weight. Choosing different options also updates the previews, so WYSIWYG. The search uses a tag system so searching for "para" for example not only turns up the "paragraph" icon, but also the icons for alignment and indentation, which is quite handy.
+
+> It provides probably the best interface out of all the icon plugins included are all the parameters Material Symbols uses, like outlined and rounded styles, fills and stroke weight.
+
+When an icon is selected in the plugin, it is inserted at the current viewport center, according to the current settings. If the parameter options are updated an icon is selected in Figma, it is updated as well. It will also swap glyphs when we click on another icon. This comes in pretty handy, since we can update icons in place instead of deleting and creating new ones whenever we change something.
+
+### Streamline Icons
+
+Streamline is a pretty famous if not the most notable independent icon set. And therefore a dedicated plugin is only natural. Streamline is also very extensive and there are many different icon sets of varying size spread across nine different themes. Streamline is not a single icon set, but a whole series of icon sets in different styles. All of those are listed in the plugin, and a few of the basic sets have a passable amount of free icons. I wish they would be grouped a bit better, right now the "Core" series is listed four times, each of the styles (solid, line, duo, etc…) appear separately. It would help to group them like in the Material Symbols plugin. It is also not as pretty as Googles' and a bit slower while inserting icons but still a solid plugin overall. It doesn't replace selected icons so we can't easily change an icon after it is inserted. The search is not tagged, but it still manages to do a decent job by inserting a group layer in each icon with faux tags in its name. This does bloat the layer list sometimes, but has the advantage that we can now search by "tags" natively inside Figma.
+
+I have one major gripe though. Instead of providing icons as outlined shapes, Streamline inserts the raw, unchanged paths. This means using the icons in button components with different sizes for example is not really ergonomic since the stroke widths will stay the same, which will result in unnatural thick stroke proportions when the icons are used in other dimensions than the original size when we inserted it. This is an issue with all sets I tested where icons have lines and only the solid variants were fine.
+
+### Iconify
+
+Iconify is a open source Plugin that in includes a wide variety of icon libraries and a JSON based format to create your own. There are Carbon Icons, Material Icons, including the different varieties I mentioned above [insert icon set] and many more. The plugin is loaded with features, but unfortunately that comes at the cost of a very cluttered interface with no coherent system and hierarchy. However, it does work reliably with few bugs. It is also the first plugin I saw that supports multi-select, making it possible to add many icons at a time. Since the icon lists are paginated, this can get tedious when adding many icons at once because multi-select only works with one page at a time. Before importing an icon we can even set a color, but I don't know
+
+### Regrettable Mentions
+
+#### Icons8
+
+While the plugin is at first glance well made, it got a few issues that make it a non starter. Search is tagged and returns related icons, not just those where the search term appears directly. Infuriatingly though, it can't deal with incomplete search terms, so typing "para" will not return any results, you got to type it out. Included is a large amount of different icon sets, including a knockoff SF Symbols, an art deco style icon set with icons made from grey gradients among many others. Unfortunately the list doesn't have any previews, so it's hard to tell which ones are interesting.
+
+The quality is mixed to put it gently and inconsistent stroke widths, weird decisions and misalignments are common. One time I scrolled really far down and suddenly saw some icons of Simpsons characters, I don't know when that would come in handy, but maybe some time… Included in the free version are only pixelated versions, vector icons are $15 per month.
+
+#### Iconduck
+
+I only know about them through them spamming the Figma plugin section, releasing plugin after plugin for every single icon set in existence. I spotted some icons with errors and for some reason the icon size you get depends on your current viewport zoom. Thankfully midway through testing they started begging me to enter my email and locked me out of all of their plugins.
+
+## Community Files
+
+Another way to get icons to use in projects apart from plugins are community files. This is the way I handle icons in my projects. There are files for most well known icon sets, but it is unfortunately not guaranteed.
+
+[^1]: At the time of writing, Google reports 3065 glyphs, when we multiply that with the three different styles (outlined, sharp, rounded), filled/not filled and the three parameters weight (7 steps), grade (three steps) and optical size (4 steps) we get a combined total of 2.795.280 possible glyphs. I have to admit, using a plugin is probably the easiest way to manage those. (3065\*2\*3\*(2^7+2^3+2^4))

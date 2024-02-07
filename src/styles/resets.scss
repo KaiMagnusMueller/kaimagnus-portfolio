@@ -1,0 +1,83 @@
+@import '../styles/_vars.scss';
+
+html {
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.6;
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+	scroll-behavior: smooth;
+}
+
+// @media (max-width: $screen-md) and (pointer: coarse) {
+// 	html {
+// 		font-size: 18px;
+// 	}
+// }
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol,
+pre {
+	margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+label {
+	line-height: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	text-wrap: balance;
+}
+
+p,
+li,
+.intro-text,
+dd {
+	text-wrap: pretty;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+iframe {
+	background-color: transparent;
+}
+
+:target {
+	scroll-margin-block: 10rem;
+	outline: 2px solid var(--color-highlight);
+	border-radius: 2px;
+}

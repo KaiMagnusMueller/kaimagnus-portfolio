@@ -1,13 +1,18 @@
 ---
 export const prerender = true;
+import '@styles/resets.scss';
 import '@styles/styles.scss';
+import '@fontsource/libre-baskerville/400.css';
+import '@fontsource/libre-baskerville/700.css';
+
 import { SITE } from '@config';
 export interface Props {
 	pageTitle: string;
 	pageDescr: string;
+	ogImage: string;
 }
 
-const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
+const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -25,6 +30,8 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 		<meta name="color-scheme" content="light dark" />
 		<meta name="generator" content={Astro.generator} />
 
+		{ogImage !== undefined && ogImage !== '' && <meta property="og:image" content={ogImage} />}
+
 		<title>{pageTitle}</title>
 	</head>
 	<body>
@@ -34,7 +41,7 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 				<li><a href="https://www.figma.com/@kaimagnus">Figma</a></li>
 				<li><a href="https://github.com/kaimagnusmueller">GitHub</a></li>
 				<li><a href="./rss.xml">RSS</a><sup>beta</sup></li>
-				<li><a href="https://www.twitter.com/_kaimagnus">Twitter</a></li>
+				<li><a href="https://www.threads.net/@ofcoursekai">Threads</a></li>
 				<li><a href="https://www.linkedin.com/in/kai-magnus-m%C3%BCller-25a176207/">LinkedIn</a></li>
 			</ul>
 			<span>Kai Magnus Müller – <time>{new Date().getFullYear()}</time></span>
@@ -46,7 +53,7 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 
 	html {
 		background: var(--color-background);
-		padding: 0 8rem;
+		padding-inline: clamp(1rem, 10vw, 10rem);
 	}
 	body {
 		max-width: $screen-lg;
@@ -59,12 +66,18 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc } = Astro.props;
 		gap: 0.6rem 2rem;
 		flex-wrap: wrap;
 		align-items: baseline;
-		margin: 8rem 0 1rem;
+		margin: 8rem 0 2rem;
 	}
 
 	@media (max-width: $screen-md) {
 		html {
-			padding: 0 1.5rem;
+			padding-inline: clamp(1rem, 4vw, 10rem);
+		}
+	}
+
+	@media (max-width: $screen-sm) {
+		footer {
+			margin: 6rem 0 2rem;
 		}
 	}
 

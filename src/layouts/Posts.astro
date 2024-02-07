@@ -6,12 +6,13 @@ export interface Props {
 	pageTitle: string;
 	pageDescr: string;
 	entryCollection: string;
+	ogImage: string;
 }
 
-const { pageTitle, pageDescr, entryCollection } = Astro.props;
+const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 ---
 
-<Layout pageTitle={pageTitle} pageDescr={pageDescr}>
+<Layout pageTitle={pageTitle + ' • ' + SITE.titleShort} pageDescr={pageDescr} {ogImage}>
 	<nav class="color-text-low-contrast">
 		<a href="/">Home</a> /
 		{entryCollection !== undefined && <span>{entryCollection}</span>}
@@ -25,7 +26,7 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 
 	nav {
 		grid-column: 1/-1;
-		margin: 1rem 0 0;
+		margin: 2rem 0 0;
 		display: flex;
 		gap: 1rem;
 
@@ -35,49 +36,59 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		}
 	}
 
-	figure {
-		width: 100%;
-	}
-
 	.post-content {
 		width: 100%;
 		margin-top: 2rem;
 		word-break: break-word;
-		font-size: 1.125rem;
+		// font-size: 1.125rem;
 
+		// p,
+		// figcaption {
+		// 	font-family: system-ui;
+		// }
 		h2,
 		h3,
 		h4,
 		h5 {
 			font-weight: 600;
-			margin: 0;
+			width: fit-content;
 		}
 
 		// part of the articles and project pages
 		.course-data {
 			margin-bottom: 2rem;
-			margin-top: 0.2rem;
+			margin-top: 0.5rem;
 			display: flex;
 			gap: 0 1rem;
 			flex-wrap: wrap;
+			// line-height: 1;
+
+			// span {
+			// 	padding: 0.25rem 0.75rem;
+			// 	border-radius: 20px;
+			// 	background-color: #7f7f7f19;
+			// 	// border: 1px solid #7f7f7f53;
+			// }
 		}
 
 		// part of the articles and project pages
 		h1 {
 			font-weight: 700;
 			font-size: 3rem;
+			margin-top: 2rem;
 			margin-bottom: 0rem;
-			line-height: 1.2;
+			line-height: 1.3;
 			margin-left: -0.1rem;
+			width: 100%;
 		}
 
-		// Currently all elements that should be full size are also divs, so this is easy.
-		& > *:not(div, .full-width, h1) {
-			width: 50%;
-			margin-left: 0;
-			margin-right: auto;
-			line-height: normal;
+		& > *:not(div, .full-width-reset, h1, iframe),
+		figcaption {
+			max-width: 600px;
+			// margin-left: 0;
+			// margin-right: auto;
 		}
+		// Currently all elements that should be full size are also divs, so this is easy.
 
 		p {
 			margin-top: 0.35em;
@@ -85,10 +96,11 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 		}
 
 		img,
-		picture,
-		video {
+		video,
+		iframe {
 			border-radius: 2px;
 			overflow: clip;
+			box-shadow: 0 2px 8px #0000002b;
 		}
 
 		a {
@@ -103,53 +115,43 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 			margin-top: 4rem;
 			padding-top: 1rem;
 			border-top: 1px solid var(--color-text-low-contrast);
-
-			.heading-wrapper {
-				display: none;
-			}
 		}
 	}
 
-	@media (max-width: $screen-lg) {
+	@media (max-width: $screen-md) {
 		.post-content {
-			& > *:not(div, .full-width) {
-				width: 100%;
+			& > *:not(div, .full-width-reset, h1, iframe),
+			figcaption {
+				max-width: 100%;
 			}
 		}
 	}
 
-	.heading-wrapper {
-		margin-top: 2em;
-		margin-bottom: 0.25em;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 12px;
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin-top: 2.25rem;
+		margin-bottom: 0.75rem;
+	}
 
-		a,
-		a:visited {
-			color: var(--color-text-low-contrast);
+	h1:hover,
+	h2:hover,
+	h3:hover,
+	h4:hover {
+		.anchor-link {
+			visibility: visible;
+			opacity: 1;
 		}
 	}
-
-	.heading-wrapper:hover .anchor-link {
-		visibility: visible;
-		opacity: 1;
-	}
-
 	.anchor-link {
+		margin-left: 0.5rem;
 		width: 20px;
 		height: 20px;
 		transition: opacity 0.2s ease;
 	}
 
 	@media (hover: hover) {
-		.heading-wrapper {
-			a,
-			a:visited {
-				color: var(--color-text);
-			}
-		}
 		.anchor-link {
 			visibility: hidden;
 			opacity: 0;
@@ -157,12 +159,12 @@ const { pageTitle, pageDescr, entryCollection } = Astro.props;
 	}
 
 	@media (max-width: $screen-md) {
-		.heading-wrapper {
-			margin-top: 3em;
+		nav {
+			margin: 1rem 0 0;
 		}
 
 		.post-content {
-			font-size: 1rem;
+			// font-size: 1rem;
 
 			h1 {
 				font-size: 2rem;
