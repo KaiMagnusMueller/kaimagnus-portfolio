@@ -35,7 +35,7 @@
 		--color-background: url(200-20-5-monochrome.png), hsl(60, 5%, 4%);
 		--color-text: #d1d1d1;
 		--color-text-transparent: #e7e7e79e;
-		--color-text-low-contrast: #848484;
+		--color-text-low-contrast: #919191;
 		--color-highlight: #ffbb0b;
 		--color-link: #6bb7f5;
 		--color-link-visited: #c078f7;
@@ -109,7 +109,7 @@ h3,
 h4,
 .text-large p {
 	margin-top: 0.5em;
-	margin-bottom: 0.5em;
+	margin-bottom: 1em;
 }
 
 sup {
@@ -220,6 +220,7 @@ details {
 		li:last-of-type {
 			margin-left: unset;
 		}
+		gap: 0 1rem;
 	}
 }
 
