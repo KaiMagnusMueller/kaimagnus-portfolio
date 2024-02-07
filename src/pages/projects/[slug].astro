@@ -21,7 +21,10 @@ const { Content } = await entry.render();
 	ogImage={entry.data.ogImage}>
 	<h1>{entry.data.title}</h1>
 	<span class="course-data color-text-low-contrast">
-		<span>{entry.data.course}</span><span>{entry.data.semesterDate}</span>
+		<span class="sr-only">Course:</span>
+		<span>{entry.data.course}</span>
+		<span class="sr-only">Project date:</span>
+		<span>{entry.data.semesterDate}</span>
 	</span>
 	<Content />
 </Posts>

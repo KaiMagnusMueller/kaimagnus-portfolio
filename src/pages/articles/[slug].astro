@@ -23,10 +23,11 @@ const date = new Date(entry.data.pubDatetime).toLocaleDateString('en-US', { date
 	ogImage={entry.data.ogImage}>
 	<h1>{entry.data.title}</h1>
 	<span hidden class="course-data color-text-low-contrast">
+		<span class="sr-only">Tags:</span>
 		{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
-
 		<span>
-			<time datetime="{entry.data.pubDatetime}">{date}</time>
+			<span class="sr-only">Published on:</span>
+			<time datetime={entry.data.pubDatetime}>{date}</time>
 		</span>
 	</span>
 	<Content />
