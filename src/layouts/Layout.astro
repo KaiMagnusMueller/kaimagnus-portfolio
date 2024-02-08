@@ -44,9 +44,21 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 				<li><a href="https://www.threads.net/@ofcoursekai">Threads</a></li>
 				<li><a href="https://www.linkedin.com/in/kai-magnus-m%C3%BCller-25a176207/">LinkedIn</a></li>
 			</ul>
+
+			<!-- <span id="date-elem"></span> -->
 			<span>Kai Magnus Müller – <time>{new Date().getFullYear()}</time></span>
 		</footer>
 	</body>
+	<!-- <script>
+		const dateElem = document.getElementById('date-elem');
+		if (typeof dateElem !== 'undefined') {
+			let currentDate = Date.now();
+			setInterval(() => {
+				currentDate = Date.now();
+				dateElem.textContent = currentDate.toString();
+			}, 1000);
+		}
+	</script> -->
 </html>
 <style lang="scss" is:global>
 	@import '../styles/_vars.scss';
