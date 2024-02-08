@@ -34,7 +34,8 @@ A very simple approach would be to create a label text and insert an icon from y
 <Figure
 	alt="Icon, label and done is the component. Let's publish…"
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090267/Figma%20Icons/sample-icon-button_awx2xd.png"
-	aspectRatio="16:9"></Figure>
+	width="5120"
+	height="2880"></Figure>
 
 Turns out a lot. (relatively speaking)
 
@@ -43,7 +44,8 @@ When we swap the icon out to customize our button, some parts of the icon become
 <Figure
 	alt="Oops, what happened? Seems like some part of the icon reverted back to its original black color."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706518740/Figma%20Icons/icon-button-with-swapped-instance_sunwmp.jpg"
-	aspectRatio="16:9"></Figure>
+	width="2560"
+	height="1440"></Figure>
 
 This issue is sometimes hard to spot. In the [IBM Carbon icon file that I maintain](https://www.figma.com/community/file/1141743458996921050/ibm-carbon-icons) for example, all icons are converted to outline strokes and then joined together into union groups to minimize the chance of this happening. But there are always some icons that can't be completely reduced to one element and the issue will eventually pop up.
 
@@ -58,7 +60,8 @@ Because of these issues I use a mask in my icon placeholder component. To constr
 <Figure
 	alt="How to construct a robust icon component: Get an icon instance from your library and group it. Then place a color helper rectangle on top and mask both. Finally, create the component."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090273/Figma%20Icons/icon-placeholder-explosion-steps-3_vhiw4m.jpg"
-	aspectRatio="16:9"></Figure>
+	width="1440"
+	height="810"></Figure>
 
 To make the component a bit more nice to use, I like to create an instance swap property for the icon. So when using it in designs, it is easier to select a different icon without having to dig deep into the mask. Also make sure all layers have their resize constraints set to 'scale' to make the component resizable.
 {/* Like with all components, Figma displays a list with all components in the same file as the selected one. So if you're using a separate file or downloaded one from the community, it will display all icons you have available. Very convenient with icons in team libraries. */}

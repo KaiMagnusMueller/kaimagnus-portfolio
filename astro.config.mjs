@@ -6,9 +6,6 @@ import svelte from '@astrojs/svelte';
 // https://astro.build/config
 import mdx from '@astrojs/mdx';
 
-// https://astro.build/config
-import image from '@astrojs/image';
-
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { autolinkConfig } from './plugins/rehype-autolink-config';
@@ -20,16 +17,13 @@ export default defineConfig({
 		analytics: true,
 	}),
 	site: 'https://kaimagnus.de/',
-	integrations: [
-		svelte(),
-		mdx(),
-
-		image({
-			serviceEntryPoint: '@astrojs/image/sharp',
-		}),
-	],
+	integrations: [svelte(), mdx()],
 	vite: {
 		plugins: [],
+	},
+
+	image: {
+		remotePatterns: [{ protocol: 'https' }],
 	},
 
 	markdown: {

@@ -1,5 +1,5 @@
 ---
-import { Picture } from '@astrojs/image/components';
+import { Picture } from 'astro:assets';
 
 export interface Props {
 	src?: string;
@@ -11,6 +11,9 @@ export interface Props {
 	fullWidth?: boolean;
 	loading?: 'eager' | 'lazy';
 	captionHidden?: boolean;
+	width?: number;
+	height?: number;
+	shadow?: boolean;
 }
 
 const {
@@ -21,6 +24,9 @@ const {
 	fullWidth = false,
 	loading = 'lazy',
 	captionHidden = false,
+	width,
+	height,
+	shadow = true,
 } = Astro.props;
 
 let _src = '';
@@ -61,10 +67,10 @@ if (type === 'video') {
 						<slot>
 							<Picture
 								src={src}
-								widths={[200, 400, 800, 1768]}
-								aspectRatio={aspectRatio}
-								sizes="(max-width: 884px) 100vw, 884px, 1768px"
+								width={width}
+								height={height}
 								alt={alt}
+								decoding="async"
 								loading={loading}
 							/>
 						</slot>

@@ -11,10 +11,7 @@ semesterDate: Summer 2020
 course: Bachelor Thesis
 description: Destinations is an application concept that simplifies the design process of wayfinding systems. Users can view a digital representation of a project site, visually plan visitor routes, sign placements and messages.
 ---
-
-import { Image, Picture } from '@astrojs/image/components';
 import Figure from '@components/Figure.astro';
-import Video from '@components/Video.svelte';
 import UseCase from '@components/UseCase.svelte';
 
 <div style="padding:62.5% 0 0 0;position:relative;">
@@ -52,7 +49,8 @@ Finally, in the design phase different variants of signs are created. Prototypes
 <Figure
 	alt="During our research phase we compared the design process how it is described in 'Wayshowing > Wayfinding' and 'The Wayfinding Handbook'."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532227/destinations-system-design-process_r98cbc.jpg"
-	aspectRatio="3185:1255"></Figure>
+	width="3185"
+	height="1255"></Figure>
 
 ## Circulation Patterns
 
@@ -65,7 +63,7 @@ Sign positions can then be drawn where they are needed to get an overview of the
 <Figure
 	alt="Signage development in three steps. First, circulation patterns for all types of traffic are created. Second, preliminary sign positions are marked on the floor plan. Finally, signs are marked on the plan with their reference codes to the database."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532242/destinations-circulation-patterns_shenbs.jpg"
-	aspectRatio="3375:1185"></Figure>
+	width="3375" height="1185"></Figure>
 
 ## Signage Databases
 
