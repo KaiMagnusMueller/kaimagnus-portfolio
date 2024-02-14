@@ -15,7 +15,6 @@ export interface Props {
 const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -45,58 +44,47 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 				<li><a href="https://www.linkedin.com/in/kai-magnus-m%C3%BCller-25a176207/">LinkedIn</a></li>
 			</ul>
 
-			<!-- <span id="date-elem"></span> -->
 			<span>Kai Magnus Müller – <time>{new Date().getFullYear()}</time></span>
 		</footer>
+		<style lang="scss" is:global>
+			@import '../styles/_vars.scss';
+
+			html {
+				background: var(--color-background);
+				padding-inline: clamp(1rem, 10vw, 10rem);
+			}
+			body {
+				max-width: $screen-lg;
+				position: relative;
+				margin: auto;
+			}
+
+			footer {
+				display: flex;
+				gap: 0.6rem 2rem;
+				flex-wrap: wrap;
+				align-items: baseline;
+				margin: 8rem 0 2rem;
+			}
+
+			@media (max-width: $screen-md) {
+				html {
+					padding-inline: clamp(1rem, 4vw, 10rem);
+				}
+			}
+
+			@media (max-width: $screen-sm) {
+				footer {
+					margin: 6rem 0 2rem;
+				}
+			}
+
+			@media (pointer: coarse) {
+				footer a {
+					line-height: 1.8em;
+					display: inline-block;
+				}
+			}
+		</style>
 	</body>
-	<!-- <script>
-		const dateElem = document.getElementById('date-elem');
-		if (typeof dateElem !== 'undefined') {
-			let currentDate = Date.now();
-			setInterval(() => {
-				currentDate = Date.now();
-				dateElem.textContent = currentDate.toString();
-			}, 1000);
-		}
-	</script> -->
 </html>
-<style lang="scss" is:global>
-	@import '../styles/_vars.scss';
-
-	html {
-		background: var(--color-background);
-		padding-inline: clamp(1rem, 10vw, 10rem);
-	}
-	body {
-		max-width: $screen-lg;
-		position: relative;
-		margin: auto;
-	}
-
-	footer {
-		display: flex;
-		gap: 0.6rem 2rem;
-		flex-wrap: wrap;
-		align-items: baseline;
-		margin: 8rem 0 2rem;
-	}
-
-	@media (max-width: $screen-md) {
-		html {
-			padding-inline: clamp(1rem, 4vw, 10rem);
-		}
-	}
-
-	@media (max-width: $screen-sm) {
-		footer {
-			margin: 6rem 0 2rem;
-		}
-	}
-
-	@media (pointer: coarse) {
-		footer a {
-			line-height: 1.8em;
-			display: inline-block;
-		}
-	}
-</style>

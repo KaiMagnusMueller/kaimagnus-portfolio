@@ -12,7 +12,7 @@ function sort(entries: CollectionEntry<any>[]) {
 	return entries.sort(
 		(a, b) =>
 			Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
-			Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
+			Math.floor(new Date(a.data.pubDatetime).getTime() / 1000),
 	);
 }
 ---

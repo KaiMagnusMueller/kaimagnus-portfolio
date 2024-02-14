@@ -1,6 +1,6 @@
 ---
 author: Kai Magnus Müller
-pubDatetime: 2024-02-09T09:00:00Z
+pubDatetime: 2024-02-15T09:00:00Z
 title: 'Building Icon Libraries in Figma with Icon Library Manager'
 highlight: false
 draft: false
@@ -20,17 +20,15 @@ This is why I made Icon Library Manager (or ILM). It takes a local folder of SVG
 [Get it in the Figma community &rarr;](https://www.figma.com/community/plugin/1229905434435887252)
 
 <Figure
-	alt="A quick demo on how to create and update libraries with ILM."
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706632142/Icon%20Library%20Plugin/ism-og-image_dqlgqt.jpg" fullWidth
-	width="1920" height="960"></Figure>
-
-```
-video video video video video video video  
-```
+	alt="With the layer tree visualization, selecting similar layers in specific columns or screens becomes fast and easy."
+	src="video/icon-library-manager/140224-ilm-demo.mp4"
+	type="video"
+	aspectRatio="16/10"
+	fullWidth></Figure>
 
 This post will show you the process of creating and updating a icon library with ILM. Knowledge of [Node.js/npm](https://nodejs.org/en), the [(macOS) Terminal](https://support.apple.com/de-de/guide/terminal/welcome/mac), Figma components, libraries and general web tech is useful, but not necessary.
 
-If you already have an icon set downloaded, [skip to the usage instructions](#creating-a-figma-icon-library) below.
+If you already have an icon set downloaded, [skip to the usage instructions](#create-an-icon-library-with-ilm) below.
 
 ## Downloading Icons From NPM
 
@@ -61,31 +59,31 @@ carbon-icons-current/
 
 ```
 
-This will vary from set to set and for carbon we can ignore most of it. Interesting for us is the 'svg' folder, which contains all icons. 
+This will vary from set to set and for carbon we can ignore most of it. Interesting for us is the 'svg' folder, which contains all icons. Now we are ready to create our library in Figma. 
 
-## Create a Icon Library With ILM
+## Create an Icon Library With ILM
 
-Now we are ready to create our library in Figma. Create a new file and launch 'Icon Library Manager' if it's not already running. 
+Create a new file and launch 'Icon Library Manager' if it's not already running. 
 
 <Figure
-	alt=""
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706691697/Icon%20Library%20Plugin/ilm-figma-empty-file-screenshot_jacnsl.png"
+	alt="Create a new library by importing a folder with SVG files."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1707907156/Icon%20Library%20Plugin/ilm-figma-empty-file-screenshot-2_yosmza.jpg"
 	aspectRatio="16:9" width="5120" height="2880"></Figure>
 
 Click on 'Select Folder' and navigate to the 'svg' folder as mentioned before (or to wherever you keep your icon files) and click 'Upload' to load the SVGs into Figma. Once ILM has finished loading, it shows you a summary of how many icons will be added, changed or marked as deleted with the update.[^1] (Currently the plugin doesn't delete icons)
 
 Click 'Create Library' to apply the changes and insert all the icons into your file. Done! You are now ready to publish this file as a library to your team and use it in your designs. 
 
-The original folder structure is preserved in the component names for easy filtering. So Carbon icons are named '32/folder-add', '16/chevron-down' and so on. They are also flattened as much as possible. [See my previous post](https://www.kaimagnus.de/articles/create-robust-figma-icon-components) where I go into detail on why this is important.
+The original folder structure is preserved in the component names for easy filtering. So Carbon icons are named '32/folder-add', '16/chevron-down' and so on.
 
 <Figure
-	alt=""
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706630984/Icon%20Library%20Plugin/ilm-new-library-2_tjttyd.png"
-	aspectRatio="16:10" width="3148" height="1858"></Figure>
+	alt="ILM highlights added, changed and removed icons before applying an update."
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1707906821/Icon%20Library%20Plugin/ilm-changes_avkj1i.jpg"
+	 width="3148" height="1858"></Figure>
 
 ## Updating Icon Libraries
 
-This plugin doesn't just create libraries. A big issue when working with icon sets that are in active development is managing updates. I've seen designers update icon libraries by hand, inserting SVGs one by one. To make this tedious process quicker, ILM searches for changes between an existing library in a file and the selected folder and updates only the changed components.[^2] Now you can publish updates to your Figma library without having to switch out the whole library for each update.
+This plugin doesn't just create libraries. A big issue when working with icon sets that are in active development is managing updates. I've seen designers update icon libraries by hand, inserting SVGs one by one. To make this tedious process quicker, ILM searches for changes between an existing library in a file and the selected folder and updates only the changed components.[^3] Now you can publish updates to your Figma library without having to switch out the whole library for each update.
 
 To try this out yourself, download an old version, for example carbon icons 11. Follow the same steps as above, create a second folder 'carbon-icons-old' and use the command below to download the icons. 
 
@@ -99,15 +97,17 @@ Lastly, click on 'Apply Changes' to update the file and you are done! 🎉 Now y
 
 <Figure
 	alt=""
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706635019/Icon%20Library%20Plugin/ilm-summary-1_irc5ej.jpg"
+	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1707906029/Icon%20Library%20Plugin/ilm-summary-2_c3h8i4.jpg"
 	 width="1920" height="1080"></Figure>
 
 ## Next Steps
 
+To make usage of the imported icons in your designs even easier, you can build a placeholder component. I wrote about best practices for constructing them and how to use icons in design projects in general in my [previous post](https://www.kaimagnus.de/articles/create-robust-figma-icon-components). 
+
 Thank you for your interest in ILM, let me know on [Threads](https://www.threads.net/@ofcoursekai) what you think. I'd be interested in your ideas and suggestions. The source code is available on GitHub https://github.com/KaiMagnusMueller/SVG-Icon-Manager. Feel free to raise issues or use it as a starting point for your own plugin.
 
-[^1]: Even though I'm focusing on icons here, there might be more use cases for this plugin. It can already handle any icon size, so it could be used as a general purpose SVG importer/updater. 
-
-[^2]: Figma uses an internal id for each element to identify overrides, component updates and branches. Because of this, we can't simply delete the component and add it with the updated icon and the same name again. Doing this would cause it to show up during a library update as two separate components, one 'removed' and one 'added'. 
+[^1]: Even though I'm focusing on icons here, there might be more use cases for this plugin. It's already flexible regarding icon sizes, so it could be used as a general purpose SVG importer/updater. 
+[^2]: Using icons in designs directly is a bad idea. As I explained [in my previous post](https://www.kaimagnus.de/articles/create-robust-figma-icon-components), overrides are not carried over if the amount of layers increases while swapping an icons. This can be prevented by using a placeholder component. 
+[^3]: Figma uses an internal id for each element to identify overrides, component updates and branches. Because of this, we can't simply delete the component and add it with the updated icon and the same name again. Doing this would cause it to show up during a library update as two separate components, one 'removed' and one 'added'. 
     
     To make it work, ILM finds the components that were changed and swaps out the icon path, while keeping the component layer itself unchanged. Figma will then show the components as 'changed' during updates.
