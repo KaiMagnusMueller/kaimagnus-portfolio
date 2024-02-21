@@ -13,9 +13,11 @@ import vercel from '@astrojs/vercel/static';
 
 // https://astro.build/config
 export default defineConfig({
-	adapter: vercel({
-		analytics: true,
-	}),
+    adapter: vercel({
+        webAnalytics: {
+          enabled: true,
+        },
+      }),
 	site: 'https://kaimagnus.de/',
 	integrations: [svelte(), mdx()],
 	vite: {
