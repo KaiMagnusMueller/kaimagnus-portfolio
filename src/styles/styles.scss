@@ -1,10 +1,10 @@
 @use '_vars.scss';
 
 :root {
-	--color-background: url(200-20-5-monochrome.png), #fbfbf9;
+	--color-background: url(200-20-5-monochrome.png), hsl(60, 0%, 98%);
 	--color-text: #303030;
 	--color-text-transparent: #3030309e;
-	--color-text-low-contrast: #7c7c7c;
+	--color-text-low-contrast: #828282;
 	--color-highlight: #ffbb0b;
 	--color-link: #0c93ec;
 	--color-link-visited: #840be0;
@@ -32,10 +32,10 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-background: url(200-20-5-monochrome.png), hsl(60, 5%, 4%);
+		--color-background: url(200-20-5-monochrome.png), hsl(0, 0%, 3%);
 		--color-text: #d1d1d1;
 		--color-text-transparent: #e7e7e79e;
-		--color-text-low-contrast: #919191;
+		--color-text-low-contrast: #848484;
 		--color-highlight: #ffbb0b;
 		--color-link: #6bb7f5;
 		--color-link-visited: #c078f7;

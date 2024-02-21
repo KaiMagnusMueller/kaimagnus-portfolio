@@ -15,7 +15,7 @@ const projectEntries = await getCollection('projects', ({ data }) => {
 let allEntries = [...projectEntries, ...articleEntries];
 
 let featured = allEntries.filter((elem) => {
-	return elem.data.tags.includes('featured');
+	return elem.data.featured.includes('noteworthy');
 });
 
 let work = allEntries.filter((elem) => {
@@ -43,7 +43,7 @@ let articles = articleEntries;
 
 				and developed Figma plugins like <a href="https://www.figma.com/community/plugin/1229905434435887252/"
 					>Tree Navigator</a
-				> and <a href="https://www.figma.com/community/plugin/1229905434435887252/">Icon Library Manager</a>.
+				> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>.
 			</p>
 			<p class="">
 				While studying, I wrote a bachelor thesis about <a href="projects/destinations"
@@ -115,10 +115,6 @@ let articles = articleEntries;
 			<!-- POSTS -->
 			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 			<CollectionList title="Writing" entries={articles} />
-			<p class="position--relative">
-				<span class="highlight-star" title="">*</span>If you got limited time, I recommend looking at one of
-				these!
-			</p>
 		</section>
 	</div>
 </Layout>
