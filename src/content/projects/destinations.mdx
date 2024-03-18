@@ -12,12 +12,13 @@ semesterDate: Summer 2020
 course: Bachelor Thesis
 description: Destinations is an application concept that simplifies the design process of wayfinding systems. Users can view a digital representation of a project site, visually plan visitor routes, sign placements and messages.
 ---
+
 import Figure from '@components/Figure.astro';
 import UseCase from '@components/UseCase.svelte';
 
 <div style="padding:62.5% 0 0 0;position:relative;">
 	<iframe
-		src="https://player.vimeo.com/video/802851320?h=672644920c&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+		src="https://player.vimeo.com/video/802851320?h=672644920c&title=0&byline=0&portrait=0"
 		frameborder="0"
 		allow="autoplay; fullscreen; picture-in-picture"
 		allowfullscreen
@@ -25,6 +26,7 @@ import UseCase from '@components/UseCase.svelte';
 		title="Destinations"></iframe>
 </div>
 <script src="https://player.vimeo.com/api/player.js"></script>
+
 ## Introduction
 
 Wayfinding systems are used to help and guide visitors navigating large buildings or places. In cities, we are constantly surrounded by such systems to give us orientation. Wayfinding systems have the difficult task of connecting rooms and floors of buildings or even whole buildings on a strategic level. At the same time, every sign has to be easily understood by first-time-visitors. After entering a building, visitors have many different goals or objectives in mind that they want to complete and they expect to be guided to them without friction.
@@ -64,7 +66,10 @@ Sign positions can then be drawn where they are needed to get an overview of the
 <Figure
 	alt="Signage development in three steps. First, circulation patterns for all types of traffic are created. Second, preliminary sign positions are marked on the floor plan. Finally, signs are marked on the plan with their reference codes to the database."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532242/destinations-circulation-patterns_shenbs.jpg"
-	width="3375" height="1185"></Figure>
+	width="3375"
+	height="1185">
+	{' '}
+</Figure>
 
 ## Signage Databases
 
@@ -106,7 +111,9 @@ export const _srcSet2 = [
 	},
 ];
 
-<UseCase client:visible srcSet={_srcSet2} aspectRatio="16/10"></UseCase>
+<UseCase client:visible srcSet={_srcSet2} aspectRatio="16/10">
+	{' '}
+</UseCase>
 
 ## Data Structure
 
