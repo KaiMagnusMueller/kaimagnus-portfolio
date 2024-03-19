@@ -286,6 +286,7 @@ figcaption {
 @media (max-width: vars.$screen-lg) {
 	figcaption {
 		// font-size: 0.875rem;
+		position: relative;
 		text-wrap: unset;
 		color: var(--color-text-low-contrast);
 	}
