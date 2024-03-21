@@ -31,3 +31,19 @@ export const articleSchema = z
 	.strict();
 
 export type ArticleFrontmatter = z.infer<typeof articleSchema>;
+
+export const workSchema = z
+	.object({
+		author: z.string().optional(),
+		pubDatetime: z.date(),
+		title: z.string(),
+		draft: z.boolean().optional(),
+		featured: z.array(z.string()).default(['']),
+		tags: z.array(z.string()).default(['others']),
+		ogImage: z.string().optional(),
+		description: z.string(),
+		company: z.string().optional(),
+	})
+	.strict();
+
+export type WorkFrontmatter = z.infer<typeof workSchema>;

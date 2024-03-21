@@ -12,20 +12,18 @@ const projectEntries = await getCollection('projects', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
 });
 
-let allEntries = [...projectEntries, ...articleEntries];
+const workEntries = await getCollection('work', ({ data }) => {
+	return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+let allEntries = [...projectEntries, ...articleEntries, ...workEntries];
 
 let featured = allEntries.filter((elem) => {
 	return elem.data.featured.includes('noteworthy');
 });
 
-let work = allEntries.filter((elem) => {
-	return elem.data.tags.includes('work');
-});
-
-let university = projectEntries.filter((elem) => {
-	return elem.data.tags.includes('university project');
-});
-
+let work = workEntries;
+let university = projectEntries;
 let articles = articleEntries;
 ---
 
