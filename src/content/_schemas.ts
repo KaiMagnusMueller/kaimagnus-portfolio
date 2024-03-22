@@ -42,7 +42,8 @@ export const workSchema = z
 		tags: z.array(z.string()).default(['others']),
 		ogImage: z.string().optional(),
 		description: z.string(),
-		company: z.string().optional(),
+		customer: z.string().optional(),
+		employer: z.string().optional(),
 	})
 	.strict();
 
