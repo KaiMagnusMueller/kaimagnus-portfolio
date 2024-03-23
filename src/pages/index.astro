@@ -192,10 +192,11 @@ let articles = articleEntries;
 
 	@media (max-width: $screen-md) {
 		main {
-			height: 100svh;
+			min-height: 100svh;
 			display: flex;
 			flex-direction: column;
 			justify-content: end;
+			padding-bottom: clamp(1rem, 4vw, 10rem);
 		}
 	}
 </style>

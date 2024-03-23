@@ -111,18 +111,15 @@ h4,
 	margin-bottom: 0.5em;
 }
 
+p:last-of-type {
+	margin-bottom: 0;
+}
+
 @media (max-width: vars.$screen-md) {
 	.text-large,
 	.text-large p,
 	.text-large h1 {
 		font-size: 1.375rem;
-	}
-
-	h2,
-	h3,
-	h4,
-	.text-large p {
-		margin-bottom: 1em;
 	}
 }
 
