@@ -1,7 +1,8 @@
 @use '_vars.scss';
 
 :root {
-	--color-background: url(200-20-5-monochrome.png), hsl(60, 0%, 98%);
+	--background-image: url(200-20-5-monochrome.png);
+	--background-color: hsl(0, 0%, 98%);
 	--color-text: #303030;
 	--color-text-transparent: #3030309e;
 	--color-text-low-contrast: #828282;
@@ -32,7 +33,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-background: url(200-20-5-monochrome.png), hsl(0, 0%, 3%);
+		--background-color: hsl(0, 0%, 3%);
 		--color-text: #d1d1d1;
 		--color-text-transparent: #e7e7e79e;
 		--color-text-low-contrast: #848484;
