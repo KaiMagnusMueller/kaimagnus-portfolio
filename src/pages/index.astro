@@ -5,26 +5,21 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import CollectionList from '@components/CollectionList.astro';
 
-const articleEntries = await getCollection('articles', ({ data }) => {
+const articles = await getCollection('articles', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
 });
-const projectEntries = await getCollection('projects', ({ data }) => {
+const universityProjects = await getCollection('projects', ({ data }) => {
+	return import.meta.env.PROD ? data.draft !== true : true;
+});
+const work = await getCollection('work', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
 });
 
-const workEntries = await getCollection('work', ({ data }) => {
-	return import.meta.env.PROD ? data.draft !== true : true;
-});
-
-let allEntries = [...projectEntries, ...articleEntries, ...workEntries];
+let allEntries = [...universityProjects, ...articles, ...work];
 
 let featured = allEntries.filter((elem) => {
 	return elem.data.featured.includes('noteworthy');
 });
-
-let work = workEntries;
-let university = projectEntries;
-let articles = articleEntries;
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
@@ -109,7 +104,7 @@ let articles = articleEntries;
 					>Überseemuseum Bremen</a
 				>.
 			</p> -->
-			<CollectionList title="University Projects" entries={university} />
+			<CollectionList title="University Projects" entries={universityProjects} />
 			<!-- POSTS -->
 			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 			<CollectionList title="Writing" entries={articles} />
