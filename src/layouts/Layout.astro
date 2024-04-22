@@ -7,7 +7,7 @@ import { SITE } from '@config';
 export interface Props {
 	pageTitle: string;
 	pageDescr: string;
-	ogImage: string;
+	ogImage?: string;
 }
 
 const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;

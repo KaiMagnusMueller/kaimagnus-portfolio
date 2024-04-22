@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const date = new Date(entry.data.pubDatetime).toLocaleDateString('en-US', { dateStyle: 'long' });
+const date = new Date(entry.data.pubDatetime).toLocaleDateString('en-US', { dateStyle: 'long' }).toString();
 ---
 
 <Posts
@@ -27,7 +27,7 @@ const date = new Date(entry.data.pubDatetime).toLocaleDateString('en-US', { date
 		{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
 		<span>
 			<span class="sr-only">Published on:</span>
-			<time datetime={entry.data.pubDatetime}>{date}</time>
+			<time datetime={date}>{date}</time>
 		</span>
 	</span>
 	<Content />

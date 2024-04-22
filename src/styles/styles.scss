@@ -354,3 +354,11 @@ figcaption {
 		margin: 2.5em 0;
 	}
 }
+
+
+.insert-text p,
+.insert-text {
+    max-width: 46ch;
+    margin-block-start: 0.5rem;
+    margin-block-end: 0.5rem;
+}

@@ -6,7 +6,7 @@ export interface Props {
 	pageTitle: string;
 	pageDescr: string;
 	entryCollection: string;
-	ogImage: string;
+	ogImage: string | undefined;
 }
 
 const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
@@ -15,7 +15,7 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 <Layout pageTitle={pageTitle + ' • ' + SITE.titleShort} pageDescr={pageDescr} {ogImage}>
 	<nav class="color-text-low-contrast">
 		<a href="/">Home</a> /
-		{entryCollection !== undefined && <span>{entryCollection}</span>}
+		{entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
 	</nav>
 	<article class="post-content">
 		<slot />
