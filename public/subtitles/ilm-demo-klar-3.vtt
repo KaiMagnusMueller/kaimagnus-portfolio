@@ -1,0 +1,58 @@
+WEBVTT
+
+00:01.000 --> 00:05.000
+Hello and welcome to Icon Library manager. In this video I will show you how to create and update icon libraries by importing svg files. 
+
+00:05.000 --> 00:08.000 
+First, let’s import our files.
+
+00:08.000 --> 00:14.000 
+I will use the carbon icon set for this video, which you can get on GitHub or npm.
+
+00:14.000 --> 00:16.000 
+For this demo I’m installing an older version, so we can see the update process later.
+
+00:18.000 --> 00:21.000 
+Navigate to the folder called „svg“ and accept. This will take a second.
+
+00:22.942 --> 00:30.942 
+Now, ILM displays all files in the selected folder and any subfolders and we can create our library.
+
+00:33.000 --> 00:38.000 
+The plugin automatically turned all icons into components. As you can see on the left, the original folder structure is preserved. 
+
+00:39.000 --> 00:45.000 
+Let’s publish the library.
+
+00:49.646 --> 00:53.698 
+In my design file I can now enable the library and insert icons. Great!
+
+01:07.105 --> 01:16.105 
+Time to go back to the library and update it with the latest version of carbon icons. I’ve already downloaded them in to this folder.
+
+01:22.129 --> 01:26.129 
+Make sure to always select the same folder when importing icons, so ILM can track changed icons.
+
+01:27.095 --> 01:35.911 
+Now we get a list of all changes that have occurred between the old version in my file and the one I just imported.
+
+01:36.949 --> 01:41.495 
+Green are new icons and blue changed.
+
+01:41.756 --> 01:44.280 
+Here are some more
+
+01:48.149 --> 01:52.571 
+Let’s apply the changes
+
+01:54.489 --> 02:01.111 
+As you can see the list got a bit larger, because there are about 300 new icons.
+
+02:04.112 --> 02:12.547 
+ILM also undated the changed icons. So in the library update, they are marked correctly as „modified“.
+
+02:27.015 --> 02:35.015 
+So now we can update the Figma library and as you can see, some components were changed.
+
+02:36.688 --> 02:39.808 
+Thank you for watching!
