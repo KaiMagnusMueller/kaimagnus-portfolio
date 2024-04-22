@@ -91,7 +91,17 @@ if (type === 'video') {
 		{
 			type === 'video' && (
 				<>
-					<video title={alt} class="video" width="100%" height="100%" src={_src} muted controls autoplay loop>
+					<video
+						title={alt}
+						class="video"
+						width="100%"
+						height="100%"
+						src={_src}
+						muted
+						controls
+						autoplay
+						loop
+						crossorigin="anonymous">
 						{subtitleFileSrc && (
 							<track default kind="captions" label="English" srclang="en" src={subtitleFileSrc} />
 						)}
