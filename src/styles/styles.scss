@@ -1,10 +1,10 @@
 @use '_vars.scss';
 
 :root {
-	--color-background: url(200-20-5-monochrome.png), #fbfbf9;
+	--color-background: url(200-20-5-monochrome.png), hsl(60, 0%, 98%);
 	--color-text: #303030;
 	--color-text-transparent: #3030309e;
-	--color-text-low-contrast: #7c7c7c;
+	--color-text-low-contrast: #828282;
 	--color-highlight: #ffbb0b;
 	--color-link: #0c93ec;
 	--color-link-visited: #840be0;
@@ -13,7 +13,7 @@
 	--color-text-negative: #e4e4e4;
 
 	/* TYPO */
-	--font-stack: 'Libre Baskerville', 'Charter', 'Cambria', 'Constantia', serif, system-ui;
+	--font-stack: 'Charter', 'Cambria', 'Constantia', serif, system-ui;
 	/* GENERAL STYLES */
 	color: var(--color-text);
 	font-family: var(--font-stack);
@@ -32,10 +32,10 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-background: url(200-20-5-monochrome.png), hsl(60, 5%, 4%);
+		--color-background: url(200-20-5-monochrome.png), hsl(0, 0%, 3%);
 		--color-text: #d1d1d1;
 		--color-text-transparent: #e7e7e79e;
-		--color-text-low-contrast: #919191;
+		--color-text-low-contrast: #848484;
 		--color-highlight: #ffbb0b;
 		--color-link: #6bb7f5;
 		--color-link-visited: #c078f7;
@@ -83,8 +83,6 @@
 	font-style: normal;
 	font-weight: 400;
 	font-size: 1rem;
-	// margin-top: 0.25em;
-	// margin-bottom: 0.25em;
 }
 
 .text-regular h2 {
@@ -102,6 +100,7 @@ h1 {
 	font-style: normal;
 	font-weight: 400;
 	font-size: 1.625rem;
+	line-height: 1.4;
 }
 
 h2,
@@ -112,19 +111,15 @@ h4,
 	margin-bottom: 0.5em;
 }
 
+p:last-of-type {
+	margin-bottom: 0;
+}
+
 @media (max-width: vars.$screen-md) {
 	.text-large,
 	.text-large p,
 	.text-large h1 {
 		font-size: 1.375rem;
-		line-height: 1.6em;
-	}
-
-	h2,
-	h3,
-	h4,
-	.text-large p {
-		margin-bottom: 1em;
 	}
 }
 
@@ -132,8 +127,7 @@ h4,
 	.text-large,
 	.text-large p,
 	.text-large h1 {
-		font-size: 1.125rem;
-		line-height: 1.6em;
+		font-size: 1.25rem;
 	}
 }
 
@@ -161,34 +155,15 @@ sup {
 }
 
 blockquote {
-	border-left: 2.5px solid;
+	border-block: 2.5px solid;
 	margin: 2rem 0;
 	padding: 0.5rem 0.5rem 0.5rem 1rem;
 	position: relative;
 
-	// &::before,
-	// &::after {
-	// 	content: '"';
-	// 	font-size: 3rem;
-	// }
-
-	// &::after {
-	// 	top: 0;
-	// 	left: 0;
-	// }
-
-	// &::before {
-	// 	bottom: 0;
-	// 	right: 0;
-	// }
-
 	* {
 		margin: 0 !important;
 		font-size: 1.625em;
-		// TODO: Check fonts on Windows
-		font-family: 'Charter', 'Cambria', 'Constantia', serif;
 		font-style: italic;
-		line-height: 1.5;
 	}
 }
 
@@ -206,6 +181,7 @@ pre {
 	background-color: unset;
 	border-radius: 2px;
 	margin-bottom: 1rem;
+	font-size: 0.8888888rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -308,6 +284,7 @@ figcaption {
 @media (max-width: vars.$screen-lg) {
 	figcaption {
 		// font-size: 0.875rem;
+		position: relative;
 		text-wrap: unset;
 		color: var(--color-text-low-contrast);
 	}

@@ -2,30 +2,28 @@
 author: Kai Magnus Müller
 pubDatetime: 2020-02-04T15:22:00Z
 title: Halo – Research Browser
-highlight: true
+featured:
+    - noteworthy
+    - starred
 draft: false
 tags:
     - university project
-    - featured
 ogImage: ''
 semesterDate: Winter 2019
 course: Interaction Design
 description: Halo is a tool for web based research. Users can browse the web with a newly designed radial interface using semantic connections. A history lets users review research sessions so they can focus on exploring while not having to worry about losing information.
 ---
 
-import { Image, Picture } from '@astrojs/image/components';
 import Figure from '@components/Figure.astro';
-import Video from '@components/Video.svelte';
 import UseCase from '@components/UseCase.svelte';
 
 <div style="padding:56.25% 0 0 0;position:relative;">
 	<iframe
-		src="https://player.vimeo.com/video/802828920?h=89c131a80b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-		frameborder="0"
-		allow="autoplay; fullscreen; picture-in-picture"
-		allowfullscreen
-		style="position:absolute;top:0;left:0;width:100%;height:100%;"
-		title="Halo"></iframe>
+                src="https://player.vimeo.com/video/802828920?h=89c131a80b&title=0&byline=0&portrait=0"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen></iframe>
 </div>
 <script src="https://player.vimeo.com/api/player.js"></script>
 
@@ -52,10 +50,10 @@ Our interview partners repeatedly mention the fear of losing information. Someti
 Next, we started a design sprint for rapid prototyping and experiments.
 
 <Figure
-	alt="First prototype based on our initial interviews and research. Links are opened in descending order in the background and highlighted content can be saved in the right sidebar."
-	src="/video/halo/halo_browser_prototype.mp4"
-	type="video"
-	aspectRatio="16/10"></Figure>
+            alt="First prototype based on our initial interviews and research. Links are opened in descending order in the background and highlighted content can be saved in the right sidebar."
+            src="/video/halo/halo_browser_prototype.mp4"
+            type="video"
+            aspectRatio="16/10"></Figure>
 
 We then did some user testing with this prototype. While some users were initially irritated by the tab structure, the highlight feature was received positively.
 
@@ -90,31 +88,31 @@ Serendipity can be encouraged by doing repetitive, simple tasks and relaxation t
 Based on our research, we developed an application that is designed to help users while searching information. Additionally, it facilitates diving deeper into related topics as well as analyzing and extracting information.
 
 export const _srcSet2 = [
-	{
-		title: 'Open and Save',
-		src: 'video/halo/halo-1.mp4',
-		alt: 'After searching, the results appear in the main exploration view together with important keywords. Users can select and open results to read or watch. To remember intersting information, they can click the "save" button to highlight that item on the graph.',
-	},
-	{
-		title: 'Navigation',
-		src: 'video/halo/halo-2.mp4',
-		alt: 'By clicking on keywords, users can start new searches and explore related content. New results are displayed in a second layer. An infinite amount of new layers can be opened and a minimap helps to keep track of the overall graph. \nAuthors and other semantic data is highlighted and can be used for navigation as well.',
-	},
-	{
-		title: 'History & Review',
-		src: 'video/halo/halo-3.mp4',
-		alt: 'Following the exploration phase, users can toggle a switch to review the information they found so far and trace their actions step-by-step. This history view uses the same data and color codings as the exploration graph and is updated concurrently.',
-	},
-	{
-		title: 'Save Snippets',
-		src: 'video/halo/halo-4.mp4',
-		alt: 'Saved items are highlighted here as well. After exploring a broad selection of intersting items, users can save smaller quotes of the most important pieces of information.',
-	},
-	{
-		title: 'Save Explorations',
-		src: 'video/halo/halo-5.mp4',
-		alt: 'To make it easier to focus while allowing users to work on multiple topics at the same time, Halo can save and load separate explorations.',
-	},
+    {
+        title: 'Open and Save',
+        src: 'video/halo/halo-1.mp4',
+        alt: 'After searching, the results appear in the main exploration view together with important keywords. Users can select and open results to read or watch. To remember interesting information, they can click the "save" button to highlight that item on the graph.',
+    },
+    {
+        title: 'Navigation',
+        src: 'video/halo/halo-2.mp4',
+        alt: 'By clicking on keywords, users can start new searches and explore related content. New results are displayed in a second layer. An infinite amount of new layers can be opened and a minimap helps to keep track of the overall graph. \nAuthors and other semantic data is highlighted and can be used for navigation as well.',
+    },
+    {
+        title: 'History & Review',
+        src: 'video/halo/halo-3.mp4',
+        alt: 'Following the exploration phase, users can toggle a switch to review the information they found so far and trace their actions step-by-step. This history view uses the same data and color codings as the exploration graph and is updated concurrently.',
+    },
+    {
+        title: 'Save Snippets',
+        src: 'video/halo/halo-4.mp4',
+        alt: 'Saved items are highlighted here as well. After exploring a broad selection of interesting items, users can save smaller quotes of the most important pieces of information.',
+    },
+    {
+        title: 'Save Explorations',
+        src: 'video/halo/halo-5.mp4',
+        alt: 'To make it easier to focus while allowing users to work on multiple topics at the same time, Halo can save and load separate explorations.',
+    },
 ];
 
 <UseCase client:visible srcSet={_srcSet2} aspectRatio="16/9"></UseCase>
@@ -128,10 +126,10 @@ Quotes can be saved right in Halo without the need to copy them into a second do
 ## Navigation
 
 <Figure
-	alt="Users can use the exploration graph to expand keywords and dive deeper into interesting topics."
-	src="/video/halo/halo-navigation.mp4"
-	type="video"
-	aspectRatio="16/10"></Figure>
+            alt="Users can use the exploration graph to expand keywords and dive deeper into interesting topics."
+            src="/video/halo/halo-navigation.mp4"
+            type="video"
+            aspectRatio="16/10"></Figure>
 
 ## Outlook
 

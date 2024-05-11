@@ -1,8 +1,9 @@
 ---
-import { Picture } from '@astrojs/image/components';
+import { Picture } from 'astro:assets';
 
 export interface Props {
 	src?: string;
+	subtitleFileSrc?: string;
 	alt?: string;
 	aspectRatio?: `${number}:${number}`;
 	widths?: string;
@@ -11,22 +12,36 @@ export interface Props {
 	fullWidth?: boolean;
 	loading?: 'eager' | 'lazy';
 	captionHidden?: boolean;
+	width?: number;
+	height?: number;
+	shadow?: boolean;
 }
 
 const {
 	src = 'https://slipsum.com/wp-content/themes/15zine/img/sam.png',
+	subtitleFileSrc = '',
 	alt = '',
 	aspectRatio = '16:10',
 	type = 'picture',
 	fullWidth = false,
 	loading = 'lazy',
 	captionHidden = false,
+	width,
+	height,
+	shadow = true,
 } = Astro.props;
 
 let _src = '';
 
 if (type === 'video') {
-	_src = import.meta.env.PUBLIC_APACHE_URL + src;
+	try {
+		// If valid url, use the provided source as the video url
+		const url = new URL(src);
+		_src = src;
+	} catch (e) {
+		// otherwise use the local file
+		_src = import.meta.env.PUBLIC_APACHE_URL + src;
+	}
 }
 ---
 
@@ -61,10 +76,10 @@ if (type === 'video') {
 						<slot>
 							<Picture
 								src={src}
-								widths={[200, 400, 800, 1768]}
-								aspectRatio={aspectRatio}
-								sizes="(max-width: 884px) 100vw, 884px, 1768px"
+								width={width}
+								height={height}
 								alt={alt}
+								decoding="async"
 								loading={loading}
 							/>
 						</slot>
@@ -76,17 +91,11 @@ if (type === 'video') {
 		{
 			type === 'video' && (
 				<>
-					<video
-						title={alt}
-						class="video"
-						width="100%"
-						height="100%"
-						src={_src}
-						muted
-						controls
-						autoplay
-						loop
-					/>
+					<video title={alt} class="video" width="100%" height="100%" src={_src} muted controls autoplay loop>
+						{subtitleFileSrc && (
+							<track default kind="captions" label="English" srclang="en" src={subtitleFileSrc} />
+						)}
+					</video>
 				</>
 			)
 		}

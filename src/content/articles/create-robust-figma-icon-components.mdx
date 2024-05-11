@@ -2,14 +2,13 @@
 author: Kai Magnus Müller
 pubDatetime: 2024-02-07T09:00:00Z
 title: 'How to Create Robust Figma Icon Components'
-highlight: false
 draft: false
 tags:
     - Tutorial
     - Icons
     - Figma
     # - Placeholder Component
-ogImage: 'https://res.cloudinary.com/dm3a0qioc/image/upload/v1706545309/Figma%20Icons/og-image-icon-components_tqvsnp.jpg'
+ogImage: 'https://res.cloudinary.com/dm3a0qioc/image/upload/v1706518740/Figma%20Icons/icon-button-with-swapped-instance_sunwmp.jpg'
 description: Learn how to create mask based icon placeholder components for use in design systems and components
 ---
 
@@ -21,7 +20,7 @@ This post assumes basic knowledge of components, instances and libraries in Figm
 
 {/* As I [mentioned previously](https://www.kaimagnus.de/articles/icons-in-figma-part-1), c */}
 Community files are a great source of icons. In our team, we either search if there is already a file of the set that we want to use available, or we build our own libraries with Icon Library Manager. I'm currently working on a post on how we do that.
-{/* If you're interested, you can read about how to import SVGs and update your own libraries in [the next post here](https://www.kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager). */} In general, there is always at least one library file that we use to insert icons in our designs.
+If you're interested, you can read about how to import SVGs and update your own libraries in [the next post here](https://www.kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager). In general, there is always at least one library file that we use to insert icons in our designs.
 
 {/* We then publish them as team libraries, so all projects and files have access to the same, always up to date icons. */}
 
@@ -34,7 +33,8 @@ A very simple approach would be to create a label text and insert an icon from y
 <Figure
 	alt="Icon, label and done is the component. Let's publish…"
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090267/Figma%20Icons/sample-icon-button_awx2xd.png"
-	aspectRatio="16:9"></Figure>
+	width="5120"
+	height="2880"></Figure>
 
 Turns out a lot. (relatively speaking)
 
@@ -43,7 +43,8 @@ When we swap the icon out to customize our button, some parts of the icon become
 <Figure
 	alt="Oops, what happened? Seems like some part of the icon reverted back to its original black color."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706518740/Figma%20Icons/icon-button-with-swapped-instance_sunwmp.jpg"
-	aspectRatio="16:9"></Figure>
+	width="2560"
+	height="1440"></Figure>
 
 This issue is sometimes hard to spot. In the [IBM Carbon icon file that I maintain](https://www.figma.com/community/file/1141743458996921050/ibm-carbon-icons) for example, all icons are converted to outline strokes and then joined together into union groups to minimize the chance of this happening. But there are always some icons that can't be completely reduced to one element and the issue will eventually pop up.
 
@@ -58,7 +59,8 @@ Because of these issues I use a mask in my icon placeholder component. To constr
 <Figure
 	alt="How to construct a robust icon component: Get an icon instance from your library and group it. Then place a color helper rectangle on top and mask both. Finally, create the component."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1706090273/Figma%20Icons/icon-placeholder-explosion-steps-3_vhiw4m.jpg"
-	aspectRatio="16:9"></Figure>
+	width="1440"
+	height="810"></Figure>
 
 To make the component a bit more nice to use, I like to create an instance swap property for the icon. So when using it in designs, it is easier to select a different icon without having to dig deep into the mask. Also make sure all layers have their resize constraints set to 'scale' to make the component resizable.
 {/* Like with all components, Figma displays a list with all components in the same file as the selected one. So if you're using a separate file or downloaded one from the community, it will display all icons you have available. Very convenient with icons in team libraries. */}
@@ -80,7 +82,7 @@ I've prepared a [playground file](https://www.figma.com/community/file/133132771
 
 Thank you for reading! Let me know what you think and how you are using icons in your team on [Threads](https://www.threads.net/@ofcoursekai).
 
-{/* Visit [the next post](https://www.kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager) for an introduction to Icon Library Manager to create your own icon library files. */}
+Visit [the next post](https://www.kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager) for an introduction to Icon Library Manager to create your own icon library files.
 
 [^1]:
     See the [Figma documentation on overrides](https://help.figma.com/hc/en-us/articles/360039150733-Apply-overrides-to-instances#Preserve_overrides) for more details. Basically, Figma tries to match layer types, names and the layer structure to restore any values that the user may have changed. That only works for layers that existed before the swap or at least can be matched.

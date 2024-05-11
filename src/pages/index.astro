@@ -15,7 +15,7 @@ const projectEntries = await getCollection('projects', ({ data }) => {
 let allEntries = [...projectEntries, ...articleEntries];
 
 let featured = allEntries.filter((elem) => {
-	return elem.data.tags.includes('featured');
+	return elem.data.featured.includes('noteworthy');
 });
 
 let work = allEntries.filter((elem) => {
@@ -32,35 +32,35 @@ let articles = articleEntries;
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
 	<div class="index-page color-text">
 		<main class="hero--section color-text-low-contrast text text-large">
-			<h1 class="">
-				<span class="color-text">Hi, I'm Kai Magnus Müller.</span>
-			</h1>
-			<p>
-				A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on applications for
-				investment and finance. I teach Interactive Communications Systems at <a
-					href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a
-				>
-
-				and developed Figma plugins like <a href="https://www.figma.com/community/plugin/1229905434435887252/"
-					>Tree Navigator</a
-				> and <a href="https://www.figma.com/community/plugin/1229905434435887252/">Icon Library Manager</a>.
-			</p>
-			<p class="">
-				While studying, I wrote a bachelor thesis about <a href="projects/destinations"
-					>building wayfinding systems</a
-				>, designed a <a href="/projects/halo">browser built for research</a>, went to Japan and developed an <a
-					href="/projects/aralsea">interactive exhibit</a
-				>.
-				<!-- An extended version of it made it to the <a
-				>. An extended version of it made it to the <a
-					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
-					>Überseemuseum Bremen</a
-				>. -->
-			</p>
-			<!-- <p>
-				Right now I am working on <a href="https://www.intersections.de">Intersections</a>, a research lab
-				focusing on tools for reflection, thinking and creativity.
-			</p> -->
+			<div class="hero--section-content-wrapper">
+				<h1 class="">
+					<span class="color-text">Hi, I'm Kai Magnus Müller.</span>
+				</h1>
+				<p>
+					A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on applications
+					for investment and finance. I teach Interactive Communications Systems at <a
+						href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a
+					>
+					and developed Figma plugins like <a
+						href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a
+					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>.
+				</p>
+				<p>
+					While studying, I wrote a bachelor thesis about <a href="projects/destinations"
+						>building wayfinding systems</a
+					>, designed a <a href="/projects/halo">browser built for research</a>, went to Japan and developed
+					an <a href="/projects/aralsea">interactive exhibit</a>.
+					<!-- An extended version of it made it to the <a
+                    >. An extended version of it made it to the <a
+                        href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
+                        >Überseemuseum Bremen</a
+                    >. -->
+				</p>
+				<!-- <p>
+                    Right now I am working on <a href="https://www.intersections.de">Intersections</a>, a research lab
+                    focusing on tools for reflection, thinking and creativity.
+                </p> -->
+			</div>
 		</main>
 
 		<!-- <aside class="quick-links"> -->
@@ -86,7 +86,7 @@ let articles = articleEntries;
 
 		<section>
 			<!-- Featured means noteworthy -->
-			<CollectionList title="Noteworthy" ariaDetails="Noteworthy projects and articles" entries={featured} />
+			<CollectionList title="Highlights" ariaDetails="Noteworthy projects and articles" entries={featured} />
 			<!-- WORK -->
 			<!-- <div class="insert-text color-text-low-contrast">
 				<p class="">
@@ -115,10 +115,6 @@ let articles = articleEntries;
 			<!-- POSTS -->
 			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 			<CollectionList title="Writing" entries={articles} />
-			<p class="position--relative">
-				<span class="highlight-star" title="">*</span>If you got limited time, I recommend looking at one of
-				these!
-			</p>
 		</section>
 	</div>
 </Layout>
@@ -126,8 +122,8 @@ let articles = articleEntries;
 	@import '../styles/_vars.scss';
 
 	main {
-		max-width: 42ch;
-		margin-top: 8rem;
+		max-width: 50ch;
+		padding-top: clamp(4rem, 14vh, 8rem);
 	}
 
 	.insert-text p,
@@ -189,16 +185,19 @@ let articles = articleEntries;
 		}
 	}
 	@media (max-width: $screen-md) {
-		main {
-			margin-top: 4rem;
-		}
-
-		h1 {
-			margin-bottom: 1em;
-		}
-
 		section {
-			margin-top: 3rem;
+			margin-top: 0;
+		}
+	}
+
+	@media (max-width: $screen-sm) {
+		main {
+			min-height: 100vh;
+			min-height: 100svh;
+			display: flex;
+			flex-direction: column;
+			justify-content: end;
+			padding-bottom: clamp(1rem, 4vw, 10rem);
 		}
 	}
 </style>

@@ -2,7 +2,6 @@
 author: Kai Magnus Müller
 pubDatetime: 2017-07-17T10:22:00Z
 title: Library Catalogue
-highlight: false
 draft: false
 tags:
     - university project
@@ -12,21 +11,21 @@ course: Application Design
 description: This project is a redesign of the public library of Stuttgart’s online catalogue. As a redesign, we analyzed the current catalogue and created an improved concept using our findings.
 ---
 
-import { Image, Picture } from '@astrojs/image/components';
 import Figure from '@components/Figure.astro';
-import Video from '@components/Video.svelte';
 import UseCase from '@components/UseCase.svelte';
 
 <div style="padding:56.25% 0 0 0;position:relative;">
 	<iframe
-		src="https://player.vimeo.com/video/802826371?h=d9a58af693&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+		src="https://player.vimeo.com/video/802826371?h=d9a58af693&title=0&byline=0&portrait=0"
 		frameborder="0"
 		allow="autoplay; fullscreen; picture-in-picture"
 		allowfullscreen
 		style="position:absolute;top:0;left:0;width:100%;height:100%;"
-		title="OPAC Stuttgart Redesign"></iframe>
+		title="OPAC Stuttgart Redesign">
+		{' '}
+	</iframe>
 </div>
-<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="https://player.vimeo.com/api/player.js"> </script>
 
 ## Goal
 
@@ -43,7 +42,9 @@ The official catalogue features a functional main page. Users can search by typi
 <Figure
 	alt="An overview of the official catalogue and its features."
 	src="/video/library/library-opac.mp4"
-	type="video"></Figure>
+	type="video">
+	{' '}
+</Figure>
 
 ## Conclusion
 
@@ -91,7 +92,9 @@ export const _srcSet2 = [
 	},
 ];
 
-<UseCase client:visible srcSet={_srcSet2}></UseCase>
+<UseCase client:visible srcSet={_srcSet2}>
+	{' '}
+</UseCase>
 
 ## Redesign
 

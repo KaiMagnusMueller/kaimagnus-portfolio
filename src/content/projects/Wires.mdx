@@ -2,7 +2,6 @@
 author: Kai Magnus Müller
 pubDatetime: 2018-02-04T15:22:00Z
 title: Wires
-highlight: false
 draft: false
 tags:
     - university project
@@ -12,14 +11,12 @@ course: Interface Design
 description: Wires is a prototyping app for macOS. It aims to bridge screen design and hardware prototyping. Patch based programming of inputs and outputs makes combining them with screens or buttons designed in Sketch as easy as possible.
 ---
 
-import { Image, Picture } from '@astrojs/image/components';
 import Figure from '@components/Figure.astro';
-import Video from '@components/Video.svelte';
 import UseCase from '@components/UseCase.svelte';
 
 <div style="padding:56.25% 0 0 0;position:relative;">
 	<iframe
-		src="https://player.vimeo.com/video/802833594?h=9f3982785a&badge=0&autopause=0&player_id=0&app_id=58479/embed"
+		src="https://player.vimeo.com/video/802833594?h=9f3982785a&title=0&byline=0&portrait=0"
 		allow="autoplay; fullscreen; picture-in-picture"
 		allowfullscreen
 		frameborder="0"
@@ -41,7 +38,8 @@ From here on we created a sample project during which a Smart Home App connected
 <Figure
 	alt="Wires Research Framer / Origami comparison"
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1678140784/wires-tools_sw6gyr.png"
-	aspectRatio="2880:460"></Figure>
+	width="2880"
+	height="460"></Figure>
 
 ## Existing Tools
 
@@ -98,7 +96,9 @@ Properties can be added to patches via a plus button. Values can be set manually
 <Figure
 	alt="Patches are grouped to indicate their responsibilities. Grey patches contain logic and other basic functionality, purple patches control properties and animations. Screen elements themselves are blue. Patches that communicate with connected hardware are turquoise, referencing the Arduino board color."
 	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1678140805/wires-patches_tbw5ry.png"
-	aspectRatio="2880:1800"></Figure>
+	width="2880"
+	height="1800"
+	shadow="false"></Figure>
 
 ## Process and Technology
 

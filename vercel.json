@@ -1,7 +1,7 @@
 {
 	"headers": [
 		{
-			"source": "/:all*(png|jpg|woff|woff2)",
+			"source": "/:all*(png|jpg|webp|avif|mp4|woff|woff2)",
 			"headers": [
 				{
 					"key": "Cache-Control",
