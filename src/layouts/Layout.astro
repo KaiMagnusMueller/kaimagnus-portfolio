@@ -44,45 +44,46 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 
 			<span>Kai Magnus Müller – <time>{new Date().getFullYear()}</time></span>
 		</footer>
-		<style lang="scss" is:global>
-			@import '../styles/_vars.scss';
-
-			html {
-				background: var(--background-image), var(--background-color);
-				padding-inline: clamp(1rem, 10vw, 10rem);
-			}
-			body {
-				max-width: $screen-lg;
-				position: relative;
-				margin: auto;
-			}
-
-			footer {
-				display: flex;
-				gap: 0.6rem 2rem;
-				flex-wrap: wrap;
-				align-items: baseline;
-				margin: 8rem 0 2rem;
-			}
-
-			@media (max-width: $screen-md) {
-				html {
-					padding-inline: clamp(1rem, 4vw, 10rem);
-				}
-			}
-
-			@media (max-width: $screen-sm) {
-				footer {
-					margin: 6rem 0 2rem;
-				}
-			}
-
-			@media (pointer: coarse) {
-				footer a {
-					line-height: 1.8em;
-					display: inline-block;
-				}
-			}
-		</style>
 	</body>
 </html>
+
+<style lang="scss" is:global>
+	@import '../styles/_vars.scss';
+
+	html {
+		background: var(--background-image), var(--background-color);
+		padding-inline: clamp(1rem, 10vw, 10rem);
+	}
+	body {
+		max-width: $screen-lg;
+		position: relative;
+		margin: auto;
+	}
+
+	footer {
+		display: flex;
+		gap: 0.6rem 2rem;
+		flex-wrap: wrap;
+		align-items: baseline;
+		margin: 8rem 0 2rem;
+	}
+
+	@media (max-width: $screen-md) {
+		html {
+			padding-inline: clamp(1rem, 4vw, 10rem);
+		}
+	}
+
+	@media (max-width: $screen-sm) {
+		footer {
+			margin: 6rem 0 2rem;
+		}
+	}
+
+	@media (pointer: coarse) {
+		footer a {
+			line-height: 1.8em;
+			display: inline-block;
+		}
+	}
+</style>

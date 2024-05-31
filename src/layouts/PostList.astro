@@ -43,19 +43,8 @@ let entriesSorted = entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data
 </div>
 
 <style lang="scss">
-	nav {
-		margin: 2rem 0 0;
-		display: flex;
-		gap: 1rem;
-
-		a,
-		span {
-			text-transform: capitalize;
-		}
-	}
-
 	h1 {
-		padding-top: clamp(4rem, 14vh, 8rem);
+		padding-top: clamp(4rem, 10vh, 8rem);
 	}
 
 	li {
@@ -79,7 +68,7 @@ let entriesSorted = entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data
 	}
 
 	ul {
-		margin-block: 4rem;
+		margin-block: 2rem;
 		padding: 0;
 	}
 </style>

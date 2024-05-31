@@ -139,6 +139,17 @@ p:last-of-type {
 	}
 }
 
+nav {
+    margin: 2rem 0 0;
+    display: flex;
+    gap: 1rem;
+
+    a,
+    span {
+        text-transform: capitalize;
+    }
+}
+
 sup {
 	line-height: 0;
 
