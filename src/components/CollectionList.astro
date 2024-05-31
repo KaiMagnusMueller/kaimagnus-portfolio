@@ -9,13 +9,25 @@ export interface Props {
 const { title, entries, ariaDetails } = Astro.props;
 
 const _entries = entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data.pubDatetime.getTime());
+
+function allSameValue(keyName, arr) {
+	const values = arr.map((obj) => obj[keyName]);
+	return new Set(values).size === 1;
+}
 ---
 
 {
 	// check if entries is empty, only display list if there are entries
 	_entries && _entries.length > 0 && (
 		<div class="post-list text-regular">
-			{title && <h2 class="color-text-low-contrast">{title}</h2>}
+			{title && allSameValue('collection', _entries) ? (
+				<h2 class="color-text-low-contrast">
+					<a href={`/${_entries[0].collection}`}>{title}</a>
+				</h2>
+			) : (
+				<h2 class="color-text-low-contrast">{title}</h2>
+			)}
+
 			<slot />
 			<ul>
 				{_entries.map((entry) => (

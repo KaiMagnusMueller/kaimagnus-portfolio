@@ -1,0 +1,85 @@
+---
+import { SITE } from '@config';
+import Layout from './Layout.astro';
+import { getCollection } from 'astro:content';
+
+export interface Props {
+	navTitle: string;
+	pageTitle: string;
+	collectionName: 'articles' | 'work' | 'projects';
+}
+
+const { navTitle, pageTitle, collectionName } = Astro.props;
+
+const entries = await getCollection(collectionName, ({ data }) => {
+	return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+let entriesSorted = entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data.pubDatetime.getTime());
+---
+
+<nav class="color-text-low-contrast">
+	<a href="/">Home</a> / <span>{navTitle}</span>
+</nav>
+<div class="list-page color-text">
+	<div class="text-large">
+		<h1>{pageTitle}</h1>
+		<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
+	</div>
+	<ul>
+		{
+			entriesSorted.map((elem) => (
+				<li>
+					<a href={`/${elem.collection}/${elem.slug}`}>
+						{elem.data.title}
+						<span>
+							{elem.data.pubDatetime.toLocaleDateString('en-US', { dateStyle: 'long' }).toString()}
+						</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</div>
+
+<style lang="scss">
+	nav {
+		margin: 2rem 0 0;
+		display: flex;
+		gap: 1rem;
+
+		a,
+		span {
+			text-transform: capitalize;
+		}
+	}
+
+	h1 {
+		padding-top: clamp(4rem, 14vh, 8rem);
+	}
+
+	li {
+		max-width: 48ch;
+		margin-block: 1.25rem;
+		display: block;
+		span {
+			// font-size: 0.875rem;
+			color: var(--color-text-low-contrast);
+		}
+	}
+
+	.list-page a {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: revert;
+		}
+	}
+
+	ul {
+		margin-block: 4rem;
+		padding: 0;
+	}
+</style>

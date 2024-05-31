@@ -1,94 +1,12 @@
 ---
 import { SITE } from '@config';
 
-import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import PostList from '../../layouts/PostList.astro';
 
-let entries = await getCollection('work', ({ data }) => {
-	return import.meta.env.PROD ? data.draft !== true : true;
-});
-
-entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data.pubDatetime.getTime());
-
-let pageTitle = 'Professional Work';
+let pageTitle = 'Projessional Work';
 ---
 
 <Layout pageTitle={pageTitle + ' • ' + SITE.titleShort} pageDescr={SITE.desc}>
-	<nav class="color-text-low-contrast">
-		<a href="/">Home</a> / <span>Work</span>
-	</nav>
-	<div class="list-page color-text">
-		<div>
-			<h1 class="text-large">{pageTitle}</h1>
-			<!-- <div class="insert-text color-text-low-contrast">
-				<p>
-					During my work at Syncier and Kaiser X Labs, I worked on a number of investment management
-					applications for <a href="https://www.idsdata.com/solutions/de/esg/">IDS</a> as designer and design lead
-					and was part of an in-house innovation lab.
-				</p>
-				<p>
-					I also love to tinker, improve my workflow and make my MacBook work for me. Some of the results even
-					made it here:
-				</p>
-			</div> -->
-		</div>
-		<ul>
-			{
-				entries.map((elem) => (
-					<li>
-						<a href={`/${elem.collection}/${elem.slug}`}>
-							<span>
-								{elem.data.pubDatetime.toLocaleDateString('en-US', { dateStyle: 'long' }).toString()}
-							</span>
-							{elem.data.title}
-						</a>
-					</li>
-				))
-			}
-		</ul>
-	</div>
+	<PostList collectionName={'work'} navTitle="Work" pageTitle={pageTitle} />
 </Layout>
-
-<style lang="scss">
-	nav {
-		grid-column: 1/-1;
-		margin: 2rem 0 0;
-		display: flex;
-		gap: 1rem;
-
-		a,
-		span {
-			text-transform: capitalize;
-		}
-	}
-	h1 {
-		padding-top: clamp(4rem, 14vh, 8rem);
-	}
-
-	li {
-		width: fit-content;
-		margin-block: 1.25rem;
-		display: block;
-		span {
-			// font-size: 0.875rem;
-			color: var(--color-text-low-contrast);
-		}
-	}
-
-	ul a {
-		display: flex;
-		flex-direction: column;
-
-		text-decoration: none;
-
-		&:hover {
-			text-decoration: revert;
-		}
-	}
-
-	ul {
-		margin-block: 4rem;
-
-		padding: 0;
-	}
-</style>
