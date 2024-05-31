@@ -5,28 +5,21 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import CollectionList from '@components/CollectionList.astro';
 
-const articleEntries = await getCollection('articles', ({ data }) => {
+const articles = await getCollection('articles', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
 });
-const projectEntries = await getCollection('projects', ({ data }) => {
+const universityProjects = await getCollection('projects', ({ data }) => {
+	return import.meta.env.PROD ? data.draft !== true : true;
+});
+const work = await getCollection('work', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
 });
 
-let allEntries = [...projectEntries, ...articleEntries];
+let allEntries = [...universityProjects, ...articles, ...work];
 
 let featured = allEntries.filter((elem) => {
 	return elem.data.featured.includes('noteworthy');
 });
-
-let work = allEntries.filter((elem) => {
-	return elem.data.tags.includes('work');
-});
-
-let university = projectEntries.filter((elem) => {
-	return elem.data.tags.includes('university project');
-});
-
-let articles = articleEntries;
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
@@ -63,26 +56,26 @@ let articles = articleEntries;
 			</div>
 		</main>
 
-		<!-- <aside class="quick-links"> -->
-		<!-- <a href="/project-timeline">
+		<!-- <aside class="quick-links">
+			<a href="/project-timeline">
 				<div class="link-card text-regular">
 					<h2>Project Timeline Visualization</h2>
 					<p class="color-text-low-contrast">A visual timeline of my past and current projects</p>
 				</div>
-			</a> -->
-		<!-- <a href="https://www.figma.com/community/plugin/1229905434435887252/">
+			</a>
+			<a href="https://www.figma.com/community/plugin/1229905434435887252/">
 				<div class="link-card text-regular">
 					<h2>Tree Navigator</h2>
 					<p class="color-text-low-contrast">Download for Figma</p>
 				</div>
-			</a> -->
-		<!-- <a href="https://www.figma.com/community/plugin/1229905434435887252/">
+			</a>
+			<a href="https://www.figma.com/community/plugin/1229905434435887252/">
 				<div class="link-card text-regular">
 					<h2>Tree Navigator</h2>
 					<p class="color-text-low-contrast">Download for Figma</p>
 				</div>
-			</a> -->
-		<!-- </aside> -->
+			</a>
+		</aside> -->
 
 		<section>
 			<!-- Featured means noteworthy -->
@@ -111,7 +104,7 @@ let articles = articleEntries;
 					>Überseemuseum Bremen</a
 				>.
 			</p>
-			<CollectionList title="University Projects" entries={university} />
+			<CollectionList title="University Projects" entries={universityProjects} />
 			<!-- POSTS -->
 			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 			<CollectionList title="Writing" entries={articles} />

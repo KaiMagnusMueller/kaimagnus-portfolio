@@ -1,7 +1,8 @@
 @use '_vars.scss';
 
 :root {
-	--color-background: url(200-20-5-monochrome.png), hsl(60, 0%, 98%);
+	--background-image: url(200-20-5-monochrome.png);
+	--background-color: hsl(0, 0%, 98%);
 	--color-text: #303030;
 	--color-text-transparent: #3030309e;
 	--color-text-low-contrast: #828282;
@@ -32,7 +33,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-background: url(200-20-5-monochrome.png), hsl(0, 0%, 3%);
+		--background-color: hsl(0, 0%, 3%);
 		--color-text: #d1d1d1;
 		--color-text-transparent: #e7e7e79e;
 		--color-text-low-contrast: #848484;
@@ -121,13 +122,20 @@ p:last-of-type {
 	.text-large h1 {
 		font-size: 1.375rem;
 	}
+
+	h2,
+	h3,
+	h4,
+	.text-large p {
+		margin-bottom: 1em;
+	}
 }
 
 @media (max-width: vars.$screen-sm) {
 	.text-large,
 	.text-large p,
 	.text-large h1 {
-		font-size: 1.25rem;
+		font-size: 1.125rem;
 	}
 }
 
@@ -163,6 +171,8 @@ blockquote {
 	* {
 		margin: 0 !important;
 		font-size: 1.625em;
+		// TODO: Check fonts on Windows
+		font-family: 'Charter', 'Cambria', 'Constantia', serif;
 		font-style: italic;
 	}
 }
@@ -349,4 +359,12 @@ figcaption {
 	.figure {
 		margin: 2.5em 0;
 	}
+}
+
+
+.insert-text p,
+.insert-text {
+    max-width: 46ch;
+    margin-block-start: 0.5rem;
+    margin-block-end: 0.5rem;
 }

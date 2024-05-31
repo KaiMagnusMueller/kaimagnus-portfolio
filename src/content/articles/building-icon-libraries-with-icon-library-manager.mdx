@@ -3,7 +3,6 @@ author: Kai Magnus Müller
 pubDatetime: 2024-05-11T09:00:00Z
 title: 'Building Icon Libraries in Figma with Icon Library Manager'
 featured:
-    - noteworthy
     - starred
 draft: false
 tags:
@@ -11,8 +10,9 @@ tags:
     - Icons
     - Figma Plugin
 ogImage: 'https://res.cloudinary.com/dm3a0qioc/image/upload/v1706632142/Icon%20Library%20Plugin/ism-og-image_dqlgqt.jpg'
-description: Learn how to build icon libraries with Icon Library Manager, a Figma plugin that can import SVGs and 
+description: Learn how to build icon libraries with Icon Library Manager, a Figma plugin that can import SVGs and
 ---
+
 import Figure from '@components/Figure.astro';
 
 One of the biggest pain points when working with Figma Community files is keeping them up to date. There is currently no way to update them like a library or merge changes as if they were on a branch. But especially with icon sets that are in development, there is a need for a robust update process without having to redownload a new file each time.
@@ -34,15 +34,16 @@ If you already have an icon set downloaded, [skip to the usage instructions](#cr
 
 ## Downloading Icons From NPM
 
-To create our first library, we need to get the icon set that we want to use as SVG files. NPM is a great resource for this, for example the [IBM Carbon Icons](https://www.npmjs.com/package/@carbon/icons) or [Heroicons](https://www.npmjs.com/package/heroicons) sets are available to download there. For this post, we are going to use carbon icons as an example, but it works with all other icon sets that are available as SVG files. 
+To create our first library, we need to get the icon set that we want to use as SVG files. NPM is a great resource for this, for example the [IBM Carbon Icons](https://www.npmjs.com/package/@carbon/icons) or [Heroicons](https://www.npmjs.com/package/heroicons) sets are available to download there. For this post, we are going to use carbon icons as an example, but it works with all other icon sets that are available as SVG files.
 
-First, we need to install Node.js and npm from [here](https://nodejs.org/en). Then, we create a new folder 'carbon-icons-current' and open a new Terminal window here. Do this on macOS by right clicking the folder name and selecting 'New Terminal in this folder' from the context menu. 
+First, we need to install Node.js and npm from [here](https://nodejs.org/en). Then, we create a new folder 'carbon-icons-current' and open a new Terminal window here. Do this on macOS by right clicking the folder name and selecting 'New Terminal in this folder' from the context menu.
 
 Enter the following command into the terminal, to download the carbon icons package into the folder you created.
 
 ```zsh
 npm install @carbon/icons
 ```
+
 After npm has finished the download, a few folders and files should appear:
 
 ```
@@ -74,7 +75,7 @@ Create a new file and launch 'Icon Library Manager' if it's not already running.
 
 Click on 'Select Folder' and navigate to the 'svg' folder as mentioned before (or to wherever you keep your icon files) and click 'Upload' to load the SVGs into Figma. Once ILM has finished loading, it shows you a summary of how many icons will be added, changed or marked as deleted with the update.[^1] (Currently the plugin doesn't delete icons)
 
-Click 'Create Library' to apply the changes and insert all the icons into your file. Done! You are now ready to publish this file as a library to your team and use it in your designs. 
+Click 'Create Library' to apply the changes and insert all the icons into your file. Done! You are now ready to publish this file as a library to your team and use it in your designs.
 
 The original folder structure is preserved in the component names for easy filtering. So Carbon icons are named '32/folder-add', '16/chevron-down' and so on.
 
