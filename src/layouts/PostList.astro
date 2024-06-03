@@ -22,8 +22,8 @@ let entriesSorted = entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data
 	<a href="/">Home</a> / <span>{navTitle}</span>
 </nav>
 <div class="list-page color-text">
-	<div class="text-large">
-		<h1>{pageTitle}</h1>
+	<div>
+		<h1 class="text-huge-h1">{pageTitle}</h1>
 		<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 	</div>
 	<ul>
@@ -43,14 +43,11 @@ let entriesSorted = entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data
 </div>
 
 <style lang="scss">
-	h1 {
-		padding-top: clamp(4rem, 10vh, 8rem);
-	}
-
+	@import '../styles/_vars.scss';
 	li {
-		max-width: 48ch;
 		margin-block: 1.25rem;
 		display: block;
+
 		span {
 			// font-size: 0.875rem;
 			color: var(--color-text-low-contrast);
@@ -58,9 +55,14 @@ let entriesSorted = entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data
 	}
 
 	.list-page a {
-		display: flex;
-		flex-direction: column;
 		text-decoration: none;
+		display: flex;
+		justify-content: space-between;
+		flex: 1 1 0;
+
+		@media (max-width: $screen-sm) {
+			flex-direction: column;
+		}
 
 		&:hover {
 			text-decoration: revert;

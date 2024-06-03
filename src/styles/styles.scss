@@ -5,7 +5,7 @@
 	--background-color: hsl(0, 0%, 98%);
 	--color-text: #303030;
 	--color-text-transparent: #3030309e;
-	--color-text-low-contrast: #828282;
+	--color-text-low-contrast: #717171;
 	--color-highlight: #ffbb0b;
 	--color-link: #0c93ec;
 	--color-link-visited: #840be0;
@@ -139,6 +139,19 @@ p:last-of-type {
 	}
 }
 
+.text-huge-h1, .post-content h1 {
+    // padding-top: clamp(4rem, 10vh, 8rem);
+    font-weight: 700;
+    font-size: 3rem;
+    margin-top: 2rem;
+    margin-left: -0.1rem;
+    line-height: 1.2;
+
+    @media (max-width: vars.$screen-md) {
+        font-size: 2rem;
+    }
+}
+
 nav {
     margin: 2rem 0 0;
     display: flex;
@@ -147,6 +160,10 @@ nav {
     a,
     span {
         text-transform: capitalize;
+    }
+
+    @media (max-width: vars.$screen-md) {
+			margin: 1rem 0 0;
     }
 }
 
@@ -182,8 +199,6 @@ blockquote {
 	* {
 		margin: 0 !important;
 		font-size: 1.625em;
-		// TODO: Check fonts on Windows
-		font-family: 'Charter', 'Cambria', 'Constantia', serif;
 		font-style: italic;
 	}
 }

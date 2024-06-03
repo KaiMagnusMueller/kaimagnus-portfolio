@@ -56,17 +56,6 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 			// }
 		}
 
-		// part of the articles and project pages
-		h1 {
-			font-weight: 700;
-			font-size: 3rem;
-			margin-top: 2rem;
-			margin-bottom: 0rem;
-			margin-left: -0.1rem;
-			width: 100%;
-			line-height: 1.2;
-		}
-
 		& > *:not(div, .full-width-reset, h1, iframe),
 		figcaption {
 			max-width: 34rem;
@@ -143,20 +132,6 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		.anchor-link {
 			visibility: hidden;
 			opacity: 0;
-		}
-	}
-
-	@media (max-width: $screen-md) {
-		nav {
-			margin: 1rem 0 0;
-		}
-
-		.post-content {
-			// font-size: 1rem;
-
-			h1 {
-				font-size: 2rem;
-			}
 		}
 	}
 </style>
