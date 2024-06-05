@@ -12,8 +12,8 @@ export async function get(context) {
 	let _blog = [...projects, ...articles];
 	_blog.sort(
 		(a, b) =>
-			Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
-			Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
+			Math.floor(new Date(b.data.datePublished).getTime() / 1000) -
+			Math.floor(new Date(a.data.datePublished).getTime() / 1000)
 	);
 
 	let _items = _blog.map((elem) => ({
@@ -21,7 +21,7 @@ export async function get(context) {
 		title: elem.data.title,
 		author: 'author@example.org (' + elem.data.author + ')',
 		description: elem.data.description,
-		pubDate: new Date(elem.data.pubDatetime),
+		pubDate: new Date(elem.data.datePublished),
 		content:
 			elem.data.description +
 			'<blockquote>Note: This feed is still in beta until I figure out how to properly render .mdx content in Astro.</blockquote>' +

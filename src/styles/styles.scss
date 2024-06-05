@@ -112,7 +112,7 @@ h4,
 	margin-bottom: 0.5em;
 }
 
-p:last-of-type {
+p:last-of-type, .text-large p:last-of-type {
 	margin-bottom: 0;
 }
 
@@ -127,7 +127,7 @@ p:last-of-type {
 	h3,
 	h4,
 	.text-large p {
-		margin-bottom: 1em;
+		margin-bottom: .5em;
 	}
 }
 

@@ -13,7 +13,7 @@ export interface Props {
 const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en-US">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -26,6 +26,7 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 		<meta name="author" content={SITE.author} />
 		<meta name="color-scheme" content="light dark" />
 		<meta name="generator" content={Astro.generator} />
+		<slot name="head" />
 
 		{ogImage !== undefined && ogImage !== '' && <meta property="og:image" content={ogImage} />}
 

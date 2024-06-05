@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const date = new Date(entry.data.pubDatetime).toLocaleDateString('en-US', { dateStyle: 'long' }).toString();
+const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { dateStyle: 'long' }).toString();
 ---
 
 <Posts

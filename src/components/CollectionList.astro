@@ -8,7 +8,7 @@ export interface Props {
 }
 const { title, entries, ariaDetails } = Astro.props;
 
-const _entries = entries.sort((a, b) => b.data.pubDatetime.getTime() - a.data.pubDatetime.getTime());
+const _entries = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
 
 function allSameValue(keyName, arr) {
 	const values = arr.map((obj) => obj[keyName]);

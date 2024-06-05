@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 // 2. When it's time to render, you can get the entry directly from the prop
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const date = new Date(entry.data.pubDatetime).toLocaleDateString('en-US', { dateStyle: 'long' });
+const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { dateStyle: 'long' });
 ---
 
 <Posts
@@ -26,7 +26,7 @@ const date = new Date(entry.data.pubDatetime).toLocaleDateString('en-US', { date
 		{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
 		<span>
 			<span class="sr-only">Published on:</span>
-			<time datetime={entry.data.pubDatetime}>{date}</time>
+			<time datetime={entry.data.datePublished}>{date}</time>
 		</span>
 	</span>
 	<Content />

@@ -23,8 +23,8 @@ let featured = allEntries.filter((elem) => {
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
-	<div class="index-page color-text">
-		<main class="hero--section color-text-low-contrast text text-large">
+	<main class="index-page color-text">
+		<div class="hero--section color-text-low-contrast text text-large">
 			<div class="hero--section-content-wrapper">
 				<h1 class="">
 					<span class="color-text">Hi, I'm Kai Magnus Müller.</span>
@@ -43,7 +43,7 @@ let featured = allEntries.filter((elem) => {
 					experimental platform to explore how computers can help us think and create.
 				</p>
 			</div>
-		</main>
+		</div>
 
 		<!-- <aside class="quick-links">
 			<a href="/project-timeline">
@@ -98,12 +98,12 @@ let featured = allEntries.filter((elem) => {
 			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 			<CollectionList title="Writing" entries={articles} />
 		</section>
-	</div>
+	</main>
 </Layout>
 <style lang="scss">
 	@import '../styles/_vars.scss';
 
-	main {
+	.hero--section {
 		max-width: 50ch;
 		padding-top: clamp(4rem, 14vh, 8rem);
 	}
@@ -162,7 +162,7 @@ let featured = allEntries.filter((elem) => {
 	}
 
 	@media (max-width: $screen-lg) {
-		main {
+		.hero--section {
 			grid-column: 1/-1;
 		}
 	}
@@ -173,13 +173,13 @@ let featured = allEntries.filter((elem) => {
 	}
 
 	@media (max-width: $screen-sm) {
-		main {
+		.hero--section {
 			min-height: 100vh;
 			min-height: 100svh;
-			display: flex;
-			flex-direction: column;
-			justify-content: end;
+			position: relative;
 			padding-bottom: clamp(1rem, 4vw, 10rem);
+			display: flex;
+			align-items: end;
 		}
 	}
 </style>
