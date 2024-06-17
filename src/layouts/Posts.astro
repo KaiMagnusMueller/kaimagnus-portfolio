@@ -26,8 +26,8 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 	@import '../styles/_vars.scss';
 
 	.post-content {
-		width: 100%;
 		margin-top: 2rem;
+		width: 100%;
 		word-break: break-word;
 		// font-size: 1.125rem;
 
@@ -35,17 +35,17 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		h3,
 		h4,
 		h5 {
-			font-weight: 600;
 			width: fit-content;
+			font-weight: 600;
 		}
 
 		// part of the articles and project pages
 		.course-data {
-			margin-bottom: 2rem;
-			margin-top: 0.5rem;
 			display: flex;
-			gap: 0 1rem;
 			flex-wrap: wrap;
+			gap: 0 1rem;
+			margin-top: 0.5rem;
+			margin-bottom: 2rem;
 			// line-height: 1;
 
 			// span {
@@ -78,12 +78,12 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		img,
 		video,
 		iframe {
+			position: relative;
+			box-shadow: 0 2px 8px #0000002b;
 			// outline: 2px solid rgba(0, 0, 0, 0.1);
 			// outline-offset: -2px;
 			border-radius: 2px;
 			overflow: clip;
-			box-shadow: 0 2px 8px #0000002b;
-			position: relative;
 		}
 
 		a {
@@ -96,8 +96,8 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 
 		.footnotes {
 			margin-top: 4rem;
-			padding-top: 1rem;
 			border-top: 1px solid var(--color-text-low-contrast);
+			padding-top: 1rem;
 		}
 	}
 
@@ -128,10 +128,10 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		}
 	}
 	.anchor-link {
+		transition: opacity 0.2s ease;
 		margin-left: 0.5rem;
 		width: 20px;
 		height: 20px;
-		transition: opacity 0.2s ease;
 	}
 
 	@media (hover: hover) {

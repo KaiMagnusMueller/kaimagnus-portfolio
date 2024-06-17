@@ -56,16 +56,16 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 		padding-inline: clamp(1rem, 10vw, 10rem);
 	}
 	body {
-		max-width: $screen-lg;
 		position: relative;
 		margin: auto;
+		max-width: $screen-lg;
 	}
 
 	footer {
 		display: flex;
-		gap: 0.6rem 2rem;
 		flex-wrap: wrap;
 		align-items: baseline;
+		gap: 0.6rem 2rem;
 		margin: 8rem 0 2rem;
 	}
 
@@ -83,8 +83,8 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 
 	@media (pointer: coarse) {
 		footer a {
-			line-height: 1.8em;
 			display: inline-block;
+			line-height: 1.8em;
 		}
 	}
 </style>
