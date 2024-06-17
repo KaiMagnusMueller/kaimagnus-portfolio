@@ -56,13 +56,19 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 			// }
 		}
 
-		& > *:not(div, .full-width-reset, h1, iframe),
+		& > *,
 		figcaption {
 			max-width: 34rem;
 			// margin-left: 0;
 			// margin-right: auto;
 		}
-		// Currently all elements that should be full size are also divs, so this is easy.
+
+		div,
+		.full-width-reset,
+		h1,
+		iframe {
+			max-width: unset;
+		}
 
 		p {
 			margin-top: 0.35em;
@@ -97,9 +103,9 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 
 	@media (max-width: $screen-md) {
 		.post-content {
-			& > *:not(div, .full-width-reset, h1, iframe),
+			& > *,
 			figcaption {
-				max-width: 100%;
+				max-width: unset;
 			}
 		}
 	}

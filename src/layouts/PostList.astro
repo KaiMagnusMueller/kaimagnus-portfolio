@@ -31,7 +31,7 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 			entriesSorted.map((elem) => (
 				<li>
 					<a href={`/${elem.collection}/${elem.slug}`}>
-						{elem.data.title}
+						<p>{elem.data.title}</p>
 						<span>
 							{elem.data.datePublished.toLocaleDateString('en-US', { dateStyle: 'long' }).toString()}
 						</span>
@@ -45,24 +45,23 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 <style lang="scss">
 	@import '../styles/_vars.scss';
 	li {
-		margin-block: 1.25rem;
 		display: block;
+		margin-block: 1.25rem;
+
+		p {
+			font-size: var(--font-size-large);
+		}
 
 		span {
-			// font-size: 0.875rem;
 			color: var(--color-text-low-contrast);
+			// font-size: var(--font-size-small);
 		}
 	}
 
 	.list-page a {
+		display: block;
+		width: fit-content;
 		text-decoration: none;
-		display: flex;
-		justify-content: space-between;
-		flex: 1 1 0;
-
-		@media (max-width: $screen-sm) {
-			flex-direction: column;
-		}
 
 		&:hover {
 			text-decoration: revert;

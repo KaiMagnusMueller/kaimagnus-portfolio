@@ -29,6 +29,8 @@
 	--color-card-border: #b7b7b7;
 	--color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
 	--card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+    --font-size-small: .875rem;
+    --font-size-large: 1.625rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -76,7 +78,15 @@
 }
 
 .m-left--auto {
-	margin-left: auto;
+    margin-left: auto;
+}
+
+
+.text-small,
+.text-small p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--font-size-small);
 }
 
 .text-regular,
@@ -98,10 +108,10 @@ h1 {
 .text-large,
 .text-large p,
 .text-large h1 {
-	font-style: normal;
-	font-weight: 400;
-	font-size: 1.625rem;
-	line-height: 1.4;
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--font-size-large);
+    line-height: 1.4;
 }
 
 h2,
