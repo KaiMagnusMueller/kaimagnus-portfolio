@@ -2,6 +2,7 @@
 import { SITE } from '@config';
 import Layout from './Layout.astro';
 import { getCollection } from 'astro:content';
+import Nav from '@components/Nav.astro';
 
 export interface Props {
 	navTitle: string;
@@ -18,9 +19,7 @@ const entries = await getCollection(collectionName, ({ data }) => {
 let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
 ---
 
-<nav class="color-text-low-contrast">
-	<a href="/">Home</a> / <span>{navTitle}</span>
-</nav>
+<Nav navItems={[{ title: navTitle }]} />
 <main class="list-page color-text">
 	<div>
 		<h1 class="text-huge-h1">{pageTitle}</h1>

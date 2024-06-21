@@ -1,6 +1,7 @@
 ---
 import { SITE } from '@config';
 import Layout from './Layout.astro';
+import Nav from '@components/Nav.astro';
 
 export interface Props {
 	pageTitle: string;
@@ -13,10 +14,8 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 ---
 
 <Layout pageTitle={pageTitle + ' • ' + SITE.titleShort} pageDescr={pageDescr} {ogImage}>
-	<nav class="color-text-low-contrast">
-		<a href="/">Home</a> /
-		{entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
-	</nav>
+	<Nav navItems={[{ url: '/' + entryCollection, title: entryCollection }]} />
+
 	<article class="post-content">
 		<slot />
 	</article>

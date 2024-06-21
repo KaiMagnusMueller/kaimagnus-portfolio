@@ -1,0 +1,54 @@
+---
+const url = Astro.url.pathname;
+
+// the folder we are currently inside, this will be used to determine, if we need to link to this folder in the nav item or not
+// /articles/building-icon-libraries-with-icon-library-manager <- dont link to this if the nav item url is "article"
+// /articles/ <- yes, link to this if the nav item url is "article"
+const currentFolder = url.split('/').at(-1);
+// console.log(currentFolder);
+
+interface NavItem {
+	url?: string;
+	title: string;
+}
+
+export interface Props {
+	navItems: NavItem[];
+}
+
+const { navItems } = Astro.props;
+---
+
+<nav class="color-text-low-contrast">
+	<a href="/">Home</a>
+	{
+		navItems.map((item) =>
+			item.url?.split('/').at(-1) == currentFolder || !item.url ? (
+				<>
+					<span>/</span>
+					<span>{`${item.title}`}</span>
+				</>
+			) : (
+				<>
+					<span>/</span>
+					<a href={'..' + `${item.url}`}>{item.title}</a>
+				</>
+			),
+		)
+	}
+</nav>
+
+{
+	/*
+    
+    
+ {   			item.url != url && ' / ' + <span>{`${item.title}`}</span>;
+			}
+			{
+				item.url == url && ' / ' + <a href={`${item.url}`}>{item.title}</a>;
+			}
+}
+    
+    
+    */
+}
