@@ -6,15 +6,8 @@ export const SITE = {
 	desc: 'Professional projects and other works of Kai Magnus Müller, interaction designer and hobby developer',
 	title: 'Kai Magnus Müller, Interaction Designer',
 	titleShort: 'Kai Magnus',
-	ogImage: 'astropaper-og.jpg',
+	ogImage: '',
 	lightAndDarkMode: true,
-};
-
-export const LOGO_IMAGE = {
-	enable: false,
-	svg: true,
-	width: 216,
-	height: 46,
 };
 
 export const SOCIALS: SocialObjects = [

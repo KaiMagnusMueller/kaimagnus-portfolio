@@ -150,9 +150,9 @@
 	}
 
 	.media--pos-absolute {
-		grid-column: 1 / span 9;
 		position: absolute;
 		top: 0;
+		grid-column: 1 / span 9;
 	}
 
 	figure {
@@ -178,20 +178,20 @@
 		display: flex;
 		flex-direction: row;
 		gap: 20px;
+		margin-left: -0.5rem;
 		padding-bottom: 0.5rem;
 		overflow-x: scroll;
-		margin-left: -0.5rem;
 	}
 
 	button {
+		flex-shrink: 0;
 		appearance: none;
-		font-family: inherit;
 		// border: 2px solid transparent;
 		border: none;
 		// border-radius: 4px;
 		background-color: unset;
 		padding: 0.25rem 0.5rem;
-		flex-shrink: 0;
+		font-family: inherit;
 	}
 
 	button h2 {

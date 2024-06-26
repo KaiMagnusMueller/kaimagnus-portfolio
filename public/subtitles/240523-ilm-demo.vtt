@@ -1,0 +1,77 @@
+WEBVTT - Made with VTT Creator
+
+00:01.595 --> 00:03.835
+Hello and welcome to Icon Library manager or ILM for short
+
+00:04.598 --> 00:09.561
+In this video, I want to show how you can create and update icon libraries by importing SVG files
+
+00:10.480 --> 00:12.825
+As an example icon set, I'm going to use carbon icons for this video which you can get on GitHub or npm. But it works with all icon files that you can download as SVGs.
+
+00:13.070 --> 00:19.226
+To get started, I navigate to the 'svg' folder, that contains all the icon files
+
+00:20.045 --> 00:24.000
+I’m installing an older version right now to demonstrate the update process later
+
+00:25.150 --> 00:31.295
+If there are a lot of icons, the import process can take a few seconds…
+
+00:33.476 --> 00:39.374
+Once its done, ILM displays all files it found in the folder and I can create the library
+
+00:41.870 --> 00:49.669
+The plugin automatically created components for all icons and the original folder structure is preserved in their names 
+
+00:50.440 --> 00:51.800
+Let’s publish the library…
+
+00:58.889 --> 01:02.849
+In my design file, I can now enable the library and insert a few icons
+
+01:14.305 --> 01:14.645
+Great! Let's head back to the library file to show you the update process.
+
+01:16.475 --> 01:22.475
+I've already prepared the currently latest version of carbon icons here and you can learn how to use npm get the latest version in the post below. 
+
+01:22.475 --> 01:28.475
+You can also try this with other sets, like Heroicons and so on. The process is the same.
+
+01:26.373 --> 01:34.269
+It is important to always select the same folder when importing icons, in my case that is the 'svg' folder from earlier. That way ILM can keep track of changed icons. 
+
+01:35.610 --> 01:41.970
+Now here is the magic moment. ILM shows a list of all changes the carbon icons team made since the version I imported. Imagine this could have been a few months ago.
+
+01:43.243 --> 01:47.752
+If I scroll down a bit there are icons highlighted in green if they are new and blue if there were changes.
+
+01:49.381 --> 01:50.043
+Here are some more
+
+01:51.749 --> 01:54.839
+Ok, seems good. Let’s apply the changes…
+
+02:06.232 --> 02:11.505
+Because there are about 300 new icons, the list got a bit larger, but it's still alphabetically sorted.
+
+02:12.500 --> 02:18.960
+What's really handy when working with this long term, is the fact that ILM doesn't replace any components. 
+
+02:16.500 --> 02:24.960
+It only touches the ones that were actually changed, so when I publish this library update to my team, they show up correctly as 'modified' without any removed or duplicate components.
+
+02:30.387 --> 02:32.587
+Now I can update the library…
+
+02:33.067 --> 02:39.698
+If you look closely, you can see some icons changing slightly 
+
+02:41.244 --> 02:51.283
+You can use the same process for whichever icons you are using, be it your internal set or otherwise and all your designs will stay up to date. There is need to manually update icons and there will be no more duplicate files or confusion about what library to use in your team. 
+
+02:49.357 --> 02:51.283
+Thank you for watching!
+

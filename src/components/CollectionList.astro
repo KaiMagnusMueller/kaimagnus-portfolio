@@ -2,29 +2,35 @@
 import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
-	title: string;
-	entries: CollectionEntry<any>[];
+	title?: string;
+	entries: CollectionEntry<'projects' | 'articles' | 'work'>[];
 	ariaDetails?: string;
 }
 const { title, entries, ariaDetails } = Astro.props;
 
-function sort(entries: CollectionEntry<any>[]) {
-	return entries.sort(
-		(a, b) =>
-			Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
-			Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
-	);
+const _entries = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
+
+function allSameValue(keyName, arr) {
+	const values = arr.map((obj) => obj[keyName]);
+	return new Set(values).size === 1;
 }
 ---
 
 {
 	// check if entries is empty, only display list if there are entries
-	entries && entries.length > 0 && (
+	_entries && _entries.length > 0 && (
 		<div class="post-list text-regular">
-			<h2 class="color-text-low-contrast">{title}</h2>
+			{title && allSameValue('collection', _entries) ? (
+				<h2 class="color-text-low-contrast">
+					<a href={`/${_entries[0].collection}`}>{title}</a>
+				</h2>
+			) : (
+				<h2 class="color-text-low-contrast">{title}</h2>
+			)}
+
 			<slot />
 			<ul>
-				{sort(entries).map((entry) => (
+				{_entries.map((entry) => (
 					<li>
 						<a
 							class={
@@ -47,20 +53,24 @@ function sort(entries: CollectionEntry<any>[]) {
 	@import '../styles/_vars.scss';
 
 	.post-list {
-		margin-block-start: 4rem;
+		margin-block-start: 2rem;
 		margin-block-end: 4rem;
 		// line-height: 22px;
 		// line-height: 1.6; //If font is SF Pro
 	}
 
 	ul {
-		list-style: none;
 		margin: 0;
 		padding: 0;
+		list-style: none;
 	}
 
 	h2 {
 		margin: 3px 0;
+
+		a {
+			text-decoration: revert;
+		}
 	}
 
 	li,
@@ -72,8 +82,8 @@ function sort(entries: CollectionEntry<any>[]) {
 	}
 
 	a {
-		text-decoration: none;
 		display: inline-block;
+		text-decoration: none;
 
 		&:hover {
 			text-decoration: revert;

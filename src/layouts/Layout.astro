@@ -7,13 +7,13 @@ import { SITE } from '@config';
 export interface Props {
 	pageTitle: string;
 	pageDescr: string;
-	ogImage: string;
+	ogImage?: string;
 }
 
 const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en-US">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -26,6 +26,7 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 		<meta name="author" content={SITE.author} />
 		<meta name="color-scheme" content="light dark" />
 		<meta name="generator" content={Astro.generator} />
+		<slot name="head" />
 
 		{ogImage !== undefined && ogImage !== '' && <meta property="og:image" content={ogImage} />}
 
@@ -44,45 +45,46 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 
 			<span>Kai Magnus Müller – <time>{new Date().getFullYear()}</time></span>
 		</footer>
-		<style lang="scss" is:global>
-			@import '../styles/_vars.scss';
-
-			html {
-				background: var(--color-background);
-				padding-inline: clamp(1rem, 10vw, 10rem);
-			}
-			body {
-				max-width: $screen-lg;
-				position: relative;
-				margin: auto;
-			}
-
-			footer {
-				display: flex;
-				gap: 0.6rem 2rem;
-				flex-wrap: wrap;
-				align-items: baseline;
-				margin: 8rem 0 2rem;
-			}
-
-			@media (max-width: $screen-md) {
-				html {
-					padding-inline: clamp(1rem, 4vw, 10rem);
-				}
-			}
-
-			@media (max-width: $screen-sm) {
-				footer {
-					margin: 6rem 0 2rem;
-				}
-			}
-
-			@media (pointer: coarse) {
-				footer a {
-					line-height: 1.8em;
-					display: inline-block;
-				}
-			}
-		</style>
 	</body>
 </html>
+
+<style lang="scss" is:global>
+	@import '../styles/_vars.scss';
+
+	html {
+		background: var(--background-image), var(--background-color);
+		padding-inline: clamp(1rem, 10vw, 10rem);
+	}
+	body {
+		position: relative;
+		margin: auto;
+		max-width: $screen-lg;
+	}
+
+	footer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.6rem 2rem;
+		margin: 8rem 0 2rem;
+	}
+
+	@media (max-width: $screen-md) {
+		html {
+			padding-inline: clamp(1rem, 4vw, 10rem);
+		}
+	}
+
+	@media (max-width: $screen-sm) {
+		footer {
+			margin: 6rem 0 2rem;
+		}
+	}
+
+	@media (pointer: coarse) {
+		footer a {
+			display: inline-block;
+			line-height: 1.8em;
+		}
+	}
+</style>

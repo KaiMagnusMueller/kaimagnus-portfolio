@@ -1,71 +1,71 @@
 WEBVTT - Made with VTT Creator
 
-00:01.595 --> 00:03.835 align:middle
+00:01.595 --> 00:03.835
 Hello and welcome to Icon Library manager
 
-00:04.598 --> 00:09.561 position:50% align:middle
+00:04.598 --> 00:09.561
 In this video, I will show you how to create and update icon libraries by importing svg files
 
-00:10.480 --> 00:12.825 align:middle
+00:10.480 --> 00:12.825
 First, let’s import our files.
 
-00:13.070 --> 00:19.226 align:middle
+00:13.070 --> 00:19.226
 I will use the carbon icon set for this video, which you can get on GitHub or npm
 
-00:20.045 --> 00:24.000 align:middle
+00:20.045 --> 00:24.000
 For this demo I’m installing an older version, so we can see the update process later
 
-00:25.150 --> 00:31.295 align:middle
+00:25.150 --> 00:31.295
 Navigate to the folder called „svg“ and accept. This will take a second.
 
-00:33.476 --> 00:39.374 align:middle
+00:33.476 --> 00:39.374
 Now, ILM displays all files in the selected folder and any subfolders and we can create our library
 
-00:41.870 --> 00:49.669 align:middle
+00:41.870 --> 00:49.669
 The plugin automatically turned all icons into components. As you can see on the left, the original folder structure is preserved. 
 
-00:50.440 --> 00:51.800 align:middle
+00:50.440 --> 00:51.800
 Let’s publish the library
 
-00:58.889 --> 01:02.849 position:50% align:middle
+00:58.889 --> 01:02.849
 Now I can enable the library in my design file and start inserting icons
 
-01:14.305 --> 01:14.645 position:50% align:middle
+01:14.305 --> 01:14.645
 Great!
 
-01:16.475 --> 01:22.475 align:middle
+01:16.475 --> 01:22.475
 Time to head back to our library file and update it with the latest version of carbon icons, which I've already prepared here
 
-01:26.373 --> 01:32.269 align:middle
+01:26.373 --> 01:32.269
 Make sure to always select the same folder when importing icons, so ILM can track changed icons
 
-01:35.610 --> 01:41.970 align:middle
+01:35.610 --> 01:41.970
 Now, we get a list of all changes that have occurred between the old version in my file and the one I just imported
 
-01:43.243 --> 01:45.752 align:middle
+01:43.243 --> 01:45.752
 Green are new icons and blue changed
 
-01:49.381 --> 01:50.043 align:middle
+01:49.381 --> 01:50.043
 Here are some more
 
-01:51.749 --> 01:52.839 align:middle
+01:51.749 --> 01:52.839
 Let’s apply the changes
 
-02:06.232 --> 02:11.505 align:middle
+02:06.232 --> 02:11.505
 As you can see the list got a bit larger, because there are about 300 new icons
 
-02:12.500 --> 02:21.960 align:middle
+02:12.500 --> 02:21.960
 Because ILM doesn't replace any icons, but instead updates the ones that are changed, the component update panel markes them correctly as changed
 
-02:30.387 --> 02:32.587 align:middle
+02:30.387 --> 02:32.587
 Now we can update our Figma file
 
-02:33.067 --> 02:43.698 position:50% align:middle
+02:33.067 --> 02:43.698
 Since ILM only applies changes to components where necessary, we get clean library updates and the component update panel only shows icons modified in the source folder.
 
-02:44.244 --> 02:48.125 position:50% align:middle
+02:44.244 --> 02:48.125
 If you look closely, you can see our component update was successful
 
-02:49.357 --> 02:51.283 align:middle
+02:49.357 --> 02:51.283
 Thank you for watching!
 
