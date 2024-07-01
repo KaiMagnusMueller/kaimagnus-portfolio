@@ -364,6 +364,10 @@ figcaption {
     margin-bottom: 0;
 }
 
+.media--elem-wrapper {
+    position: relative;
+}
+
 .media--elem-wrapper * {
     display: block;
 }

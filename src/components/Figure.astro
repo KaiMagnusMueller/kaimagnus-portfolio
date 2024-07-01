@@ -83,6 +83,16 @@ if (type === 'video') {
 								loading={loading}
 							/>
 						</slot>
+						<div class="background">
+							<Picture
+								src={src}
+								width={width}
+								height={height}
+								alt={alt}
+								decoding="async"
+								loading={loading}
+							/>
+						</div>
 					</a>
 				</>
 			)
