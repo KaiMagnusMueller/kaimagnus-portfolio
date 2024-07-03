@@ -1,0 +1,117 @@
+---
+author: Kai Magnus Müller
+datePublished: 2024-06-15T10:24:00Z
+title: EPIC – Designing Internal Applications
+draft: false
+featured:
+    - noteworthy
+tags:
+    - Redesign
+    - Research
+    - Expert User Interfaces
+customer: IDS
+employer: Kaiser X Labs
+ogImage: ''
+description: ''
+---
+
+import Figure from '@components/Figure.astro';
+import UseCase from '@components/UseCase.svelte';
+
+In fall 2023 we were approached for a redesign of an internal application with a few hundred users. For this project, I was in charge of research, user interviews as well as the concept and design phase.
+
+As is the nature of a redesign, priority was to support existing workflows. But, there were some new features planned and, because we found some not used features during research, we had some leeway for adjustments.
+
+## Research 
+
+Almost all our users were experts in their field, so it was important to gather qualitative feedback on the current app. To get a good overview, we conducted many interviews, user tests and shadowed users of different teams. Goal was to see as many perspectives as possible and to find answer to our most important questions:
+
+- What are the users' tasks?
+- How do they do their tasks?
+- How well can they do them?
+- If so, what issues do they encounter?
+
+Many users used this application for a big part of their daily work. When we approached them they were eager to share ideas and suggestions for improvements. Their feedback and hints were very valuable in our research. Next, we mapped out the application, sorted our findings according to where they appear in the App[^1]. Finally, we categorized them into 'ideas', 'problems/opportunities' and 'what works well'.
+
+{/* > The users of this application – a small group of experts – made gathering qualitative feedback especially important. */}
+
+
+<Figure 
+    alt="An overview of one of the mappings we created. We used screenshots of the app as a basis to map out feedback and insights." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719827178/EPIC/epic-mapping-1_lpesck.png" 
+    width="2000" 
+    height="1000">
+</Figure>
+
+## Design
+
+### Spotlight 1: Downloads
+
+<Figure 
+    alt="The old download dropdown was very confusing. Users couldn't tell what they were going to download, or what they would be able to select." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1720004274/Omni/epic-old-dl-issues-1_utlnzt.png" 
+    width="1650" 
+    height="910">
+</Figure>
+
+In this screenshot, users can filter and browse a tree of Allianz' investment funds. Users have to navigate to certain nodes and download them in one of many formats. Depending on what they want to do, this could be Excel to further explore the data, PDF for reports, and so on. The way this was done before felt stitched together because it grew from many small changes over the years. It was inconsistent and confusing.
+
+There were two download options, separated by file type, each with their own drop-down. We found that users had trouble telling what they were about to download. To make matters worse, for some downloads users needed to select a fund from the tree first, or an error would appear. We also spoke to some users responsible for onboarding. Here we found the new users often asked what the individual downloads were for and which data they used.
+
+<Figure 
+    alt="To fix the feedback we received, we moved all downloads behind a single button. (The download location was also standardized by us in the new design system.) Users can now switch between them and get a short description of what each of them is for." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719845623/EPIC/epic-new-dl-1_djtifn.png" 
+    width="1760" 
+    height="990">
+</Figure>
+
+To solve the issues we found, we introduced a unified downloads modal. It allows users to choose between the different downloads, without picking one and hoping for the best. We also added descriptions with the help of domain experts to help new team members. For downloads, where it is necessary to make a selection, we made it possible to trigger them from both directions. Expert users can select a fund first and download it directly like before. New users can use the downloads modal and then select the data they want afterwards with a new select UI.
+
+### Spotlight 2: Templates
+
+Another large section of the app is the templates section, where users can create customized downloads. It is possible to define filters, hierarchies and data sources. Users can save and run the templates to get up to date data and rerun them later.
+
+<Figure 
+    alt="Users can create their own downloads with custom hierarchies, filters and data sources in the templates section." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1720004274/Omni/epic-old-template-issues-1_nl1drj.png" 
+    width="1650" 
+    height="848">
+</Figure>
+
+During template creation, we found many usability issues. For example, users had trouble choosing the correct data set and template type. Filtering drop-downs was not possible and to make matters worse, the lists were not sorted alphabetically. Instead they were sorted according to a net worth value that was not displayed. Reordering hierarchy levels was another issue, when users tried out different configurations. For each change they had to delete the value and switch it with another field manually.
+
+> When the cursor didn't change to a pointer over the download button, they knew the calculation was still ongoing.
+
+We discovered one very surprising workaround that some users found. It was so useful that they even shared it with new users during onboarding. A template run could take a few minutes depending on the settings. When a calculation was still ongoing, the download button would become disabled (without a visual cue, mind you). They then used the fact that the cursor would not become a pointer to check if the calculation was still ongoing or if it was already finished. A perplexing example of how users can find unintended hacks and workarounds for issues. It reminded me a bit of [xkcd #1172](https://xkcd.com/1172/), but it was definitely something we should make explicit[^2].
+
+<Figure 
+    alt="The finished design (pictured with dummy data) with many visual improvements to hierarchy and layout." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719852377/EPIC/epic-new-template-2_rd4cxu.png" 
+    width="1920" 
+    height="1080" fullWidth>
+</Figure>
+
+To solve these and other issues, we once again worked together with the relevant experts to add descriptions where necessary. Luckily, dropdown filtering was already supported by our new component library, which we could then use here. We also introduced a new custom feature to drag and drop hierarchy levels. Here, we had to research libraries and find settings that provided good usability.
+
+{/* Other improvements were for the way the calculation progress is shown in the list, and the 'Check' and 'View' tabs. */}
+
+## Implementation
+
+Towards the end of the project, we started implementation of the new application concurrently with the remaining design tasks. We collaborated with developers in sprints and created handoff documentation for the interactions and behavior.
+
+## Designing for Power Users
+
+The unique constraints of internal apps is a very interesting limitation when designing. Limited design and dev time makes it necessary to get as much as possible out of existing components. Knowledge of the way a component works, like slots and props is essential to create designs that can be implemented fast. Power users and their workflows provide challenges while redesigning apps, since new and existing workflows can clash. Sometimes apps grow organically into unintuitive frankensteins and larger changes are needed. Long time users might be accustomed to it, but easier onboarding for new team members makes it worth it.
+
+This makes [meeting people where they are](https://productatheart.com/blog/teresa-torres-even-you-can-do-continuous-discovery-bringing-the-discovery-habits-to-every-organization#:~:text=The%20golden%20rule%20of%20organizational%20change%3A%20Meet%20people%20where%20they%20are!) so important. Stakeholders need to be on board to provide helpful feedback. Working on a few projects like this has taught me that this is key to a successful project. For this reason I've started doing more rather than less interviews to listen to existing users. Including them in the design process has also been helpful. At the same time, it is important to strike a balance between including feedback, but also providing alternatives if there are other, better fitting patterns. 
+
+A excellent grasp of product design and usability fundamentals is important. Fluently applying small details, like status, empty and loading states, or use of space and elevation comes in handy when designing information dense applications. (And if you need to support everything from ultrawides to older iPads) I even wrote a stylesheet for AG Grid[^3] myself to have control over CSS variables that we could then use in cases with large trees that required denser nesting, and so on. For this project we kept watch of mouse movements and made adjustments to the location of toolbars and controls according to what is likely to be clicked next. It matters, when your users spend most of their work days in the applications you build. 
+
+These and more are the approaches and tactics I learned to use when designing internal applications for power users. 
+
+
+[^1]: I'm not a person that likes to follow guidelines and processes blind. I view the design process as a toolbox, or an emergent process that depends on many variables and is different for each project. To keep it short, think about it as a mix of journey map and service blueprint. (Would be a good topic for a blog post though) https://www.nngroup.com/articles/ux-mapping-cheat-sheet/
+
+[^2]: System status is a very simple – but surprisingly often missing – cue that improves usability of applications a lot. https://www.nngroup.com/articles/visibility-system-status/
+
+[^3]: A very powerful table framework that we made extensive use of.  https://www.ag-grid.com/example/

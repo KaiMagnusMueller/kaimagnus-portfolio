@@ -1,0 +1,105 @@
+---
+author: Kai Magnus Müller
+datePublished: 2023-03-05T15:00:00Z
+title: Omni – AI Powered Comms
+featured:
+    - noteworthy
+draft: false
+tags:
+    - Design
+    - Concept
+    - Web Development
+customer: Internal
+employer: Kaiser X Labs (an Allianz company)
+ogImage: ''
+description: ''
+---
+
+import Figure from '@components/Figure.astro';
+import UseCase from '@components/UseCase.svelte';
+
+<Figure 
+    alt="We researched how insurance agents work, what their challenges and problems are and the current tool landscape. Based on this, we created concepts in three main areas: communication, contact management and campaigns." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719993566/Omni/omni-design-collage-1-3_tm0c6h.jpg" 
+    width="3200" 
+    height="2000" >
+</Figure>
+
+Omni developed out of the Kaiser X Labs internal 'Product Lab' team. In this team, we worked to identify and develop new business ideas for Kaiser X Labs and Allianz. One of our focus areas was the relationship between insurance agents and their customers. Goal of this project was to create a concept to use for pitching to internal and external investors. Based on this concept, we created a stripped down concept to build a working prototype. We began working on concepts for Omni in July 2022, while prototype and landing page development began later that year. The project was finished in March 2023.
+
+
+## My Responsibilities
+
+For this project, I led work on concepts and designs and later collaborated with the prototype development team. Previous web design experience helped me keep up with technical topics. Finally, I worked on concepts for the landing page and developed it.
+
+## Concept
+
+Together with [Sonja Brehm](https://www.sonjabrehm.com/), I conducted desk research, competitor analysis and interviews. Interview partners were people in Allianz and external insurance agents. We found out early that the tooling landscape was very fragmented. Agents were at very different stages of adopting online marketing and communication. Even digitalization as a whole. (some even had a side business coaching other agents).
+
+Soon, we found many pain points with the current situation. Fragmented communications channels and cumbersome internal tools made it hard for agents to reference contracts when talking to customers. Challenging online marketing and a busy schedule made it hard to keep online presences active.
+
+We then started ideation and developed concepts based on this feedback.
+
+
+{/* that tools like [Kustomer](https://www.kustomer.com/) try to solve */}
+
+<Figure 
+    alt="After our first sketches, we developed a powerful but rough design draft. We then streamlined and focused it for the final concept." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719993566/Omni/omni-concept-collage-1-3_lplrnc.jpg" 
+    width="3200" 
+    height="2000">
+</Figure>
+
+## Design and Prototype
+
+
+
+## AI and Omni
+
+During 2022, it became clear that generative AI, like GPT-3, would have an incredible impact on (text) communication. We saw a lot of potential for Omni here and created concepts for tools such as:
+- Message autocomplete
+- Suggesting next steps
+- Detect important topics and sentiment
+- Chatbots
+- Tagging and archival
+
+We paid special attention to feasibility by researching the current model landscape. Open source models on [Huggingface](https://huggingface.co/) for example were especially interesting. To ensure we could prototype what we wanted, we mapped the data that we'd have available and model inputs.
+
+In our prototype, we built a [RAG](https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation) based chat to answer contract questions. We built it with the [Aleph-Alpha](https://aleph-alpha.com/) API, using their unique 'explainability' to provide citations from documents.
+
+## Form Builder
+
+Another tool that evolved from those ideas was Form Builder. It started as a side project in early 2023, to improve the way agents gather data from their customers. We used automatic topic detection to suggest forms to gather data like damages, for example. This, combined with WhatsApp interactive messages, was a promising experiment for interactive forms.
+
+<Figure 
+    alt="Interactive messages allow customers (left) to send predefined answers to questions. Form Builder would then take that data, together with images and more and fill out forms for the agent (right)." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1720019782/Omni/fb-flow-collage-1-2_ualghq.jpg" 
+    width="3200" 
+    height="2000">
+</Figure>
+
+
+## Landing Page
+
+I also led design and development on a landing page that we used to gather feedback and gauge interest in the product. We published it to internal panels of insurance agents and released it to a wider audience to gather feedback for market validation.
+There were three main selling points we wanted to test: unifying an agents' communications channels, campaigning and messaging via WhatsApp and security. To measure this, we built sections for each of them, highlighting advantages and features. We then implemented tracking to find out which links in the header navigation users clicked and where they spent the most time reading.
+
+<Figure 
+    alt="First impressions matter and we spent a few iterations working out wording, layout and content to get our message right."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719941980/Omni/omni-landing-concept-2_phsawc.jpg" 
+    width="3200" 
+    height="2000">
+</Figure>
+
+I developed the page as a simple [SvelteKit](https://kit.svelte.dev/) application using [Tailwind](https://tailwindcss.com/), hosted on our Google Cloud. In total, it took a few weeks to develop the site from concept to launch. I investigated using Framer in the beginning, but dropped it because of challenges with responsive design. Constraints reset often, even after small changes and it became too time consuming.
+
+<Figure 
+    alt="The finished site was responsive and supported light and dark mode." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719941980/Omni/omni-landing-2_w8ewa6.jpg" 
+    width="3200" 
+    height="2000">
+</Figure>
+
+## Learning opportunities
+
+Participating (and leading) this project I was able to strengthen my design and conceptual skills, moving fast from iteration to iteration, including new research findings when they became available. Aside from that, collaborating on the prototype and developing the landing page gave me the chance to hone my Svelte and web dev skills. (I [have](https://kaimagnus.de/aral-sea-at-uebersee-museum) [some](https://kaimagnus.de/articles/using-the-tree-navigator-plugin) [experience](https://kaimagnus.de/articles/building-icon-libraries-with-icon-library-manager) [by now](https://app.intersectionslab.com/))

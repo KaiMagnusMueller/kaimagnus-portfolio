@@ -23,7 +23,7 @@
     --font-size-large: 1.625rem;
 
 
-    // BREAKPOINTS
+    /* BREAKPOINTS */
     --screen-sm: 640px;
     --screen-md: 768px;
     --screen-lg: 1024px;
@@ -56,7 +56,7 @@
     img,
     video,
     iframe {
-        filter: brightness(0.8);
+        filter: brightness(0.9);
     }
 }
 
@@ -123,6 +123,12 @@ h4,
 .text-large p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+}
+
+h1+h2,
+h2+h3 {
+    margin-block-start: 1rem;
+
 }
 
 p:last-of-type,
@@ -318,7 +324,8 @@ details {
     border-width: 0;
 }
 
-//MEDIA
+/* MEDIA */
+
 .media--container {
     position: relative;
     margin: 2rem 0;
@@ -362,6 +369,10 @@ figcaption {
     transform: translateY(100%);
     padding-top: 1rem;
     margin-bottom: 0;
+}
+
+.media--elem-wrapper {
+    position: relative;
 }
 
 .media--elem-wrapper * {

@@ -105,7 +105,7 @@
 		{#if _srcSet.length > 0}
 			<figure class="media--grid-container">
 				{#key activeIndex}
-					<span class="media--pos-absolute" transition:fade|local={{ duration: 500 }}>
+					<span class="media--pos-absolute main-content" transition:fade|local={{ duration: 500 }}>
 						<video
 							bind:this={videoElem}
 							on:ended={() => handleChangeVideo(activeIndex)}
