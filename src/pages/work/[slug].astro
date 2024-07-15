@@ -13,6 +13,8 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { dateStyle: 'long' });
+const startDate = new Date(entry.data.projectStartDate).getFullYear().toString()
+const endDate = new Date(entry.data.projectEndDate).getFullYear().toString();
 ---
 
 <Posts
@@ -24,10 +26,22 @@ const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { da
 	<span class="course-data color-text-low-contrast">
 		<span class="sr-only">Tags:</span>
 		{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
-		<span>
-			<span class="sr-only">Published on:</span>
-			<time datetime={entry.data.datePublished}>{date}</time>
-		</span>
+		{
+			entry.data.projectStartDate && (
+				<span>
+					<span class="sr-only">Project start:</span>
+					<time datetime={startDate}>{startDate}</time>{entry.data.projectEndDate && 
+                    <span> – </span>
+                    <span class="sr-only">Project end:</span>
+                    <time datetime={endDate}>{endDate}</time>|| 
+                    <span class="sr-only">Project end:</span><span> – </span><span>ongoing</span>
+                    }
+				</span>
+			) || (
+            <span class="sr-only">Date published:</span>
+            <time datetime={new Date(entry.data.datePublished).toISOString()}>{date}</time>
+            )
+		}
 	</span>
 	<Content />
 </Posts>

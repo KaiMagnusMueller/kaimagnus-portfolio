@@ -193,7 +193,8 @@ nav {
 sup {
     line-height: 0;
 
-    a {
+    // Make links to footnotes in posts easier to click
+    a[data-footnote-ref] {
         padding: 0.25rem;
         text-decoration: none;
         border-bottom: 1px solid;
@@ -217,7 +218,7 @@ sup {
 blockquote {
     border-block: 2.5px solid;
     margin: 2rem 0;
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    padding: 0.6rem 0rem 0.75rem 0rem;
     position: relative;
 
     * {

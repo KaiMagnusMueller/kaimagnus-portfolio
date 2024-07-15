@@ -18,20 +18,24 @@ description: ''
 import Figure from '@components/Figure.astro';
 import UseCase from '@components/UseCase.svelte';
 
-In fall 2023 we were approached for a redesign of an internal application with a few hundred users. For this project, I was in charge of research, user interviews as well as the concept and design phase.
+EPIC is a web application for investment managers to track changes in portfolios and do reporting. It is maintained by [IDS (Investment Data Services)](https://www.idsdata.com/solutions/) and used by many internal Allianz investment management companies, in total a few hundred people. We were approached by IDS in fall 2023 to do a thorough analysis and create a redesign of this application. 
 
-As is the nature of a redesign, priority was to support existing workflows. But, there were some new features planned and, because we found some not used features during research, we had some leeway for adjustments.
+The app is separated into three main sections: The first is a general overview of all Allianz portfolios, where users can download various types of reports. The second area is a powerful editor for custom reports, that allows to filter and preprocess data. Users will most likely process the data further in Excel, but since the amounts of data can be very large, it is a good idea to filter the data in advance. And lastly, an editor for investment decisions, which are automatically exported as PowerPoint slides together with investment data.
+
+> This project was part of IDS' ongoing effort to modernize their service portfolio and to improve utility and usability of their tools. 
+
+For this project, I was in charge of research, user interviews as well as the concept and design phase. Since this was a redesign, our priority was to support and improve existing workflows, but we had some leeway for adjustments.
 
 ## Research 
 
-Almost all our users were experts in their field, so it was important to gather qualitative feedback on the current app. To get a good overview, we conducted many interviews, user tests and shadowed users of different teams. Goal was to see as many perspectives as possible and to find answer to our most important questions:
+Almost all our users are experts in their field, so it was important to gather qualitative feedback on the current app. To get a good overview, we conducted many interviews, user tests and shadowed users of different teams. Goal was to see as many perspectives as possible and to find answers to our main questions:
 
 - What are the users' tasks?
 - How do they do their tasks?
 - How well can they do them?
 - If so, what issues do they encounter?
 
-Many users used this application for a big part of their daily work. When we approached them they were eager to share ideas and suggestions for improvements. Their feedback and hints were very valuable in our research. Next, we mapped out the application, sorted our findings according to where they appear in the App[^1]. Finally, we categorized them into 'ideas', 'problems/opportunities' and 'what works well'.
+Many users of this application work with it daily. When we approached them they were eager to share ideas and suggestions for improvements. Their feedback and hints were very valuable in our research. Next, we mapped out the application, sorted our findings according to where they appear in the App[^1]. Finally, we categorized them into 'ideas', 'problems/opportunities' and 'what works well'.
 
 {/* > The users of this application – a small group of experts – made gathering qualitative feedback especially important. */}
 
@@ -44,6 +48,8 @@ Many users used this application for a big part of their daily work. When we app
 </Figure>
 
 ## Design
+
+I want to highlight two areas we worked on to show our process and impact in more detail. 
 
 ### Spotlight 1: Downloads
 
@@ -69,7 +75,7 @@ To solve the issues we found, we introduced a unified downloads modal. It allows
 
 ### Spotlight 2: Templates
 
-Another large section of the app is the templates section, where users can create customized downloads. It is possible to define filters, hierarchies and data sources. Users can save and run the templates to get up to date data and rerun them later.
+Another large area of the app is the templates section, where users can create customized downloads. It is possible to define filters, hierarchies and data sources. Users can save and run the templates to get up to date data and rerun them later.
 
 <Figure 
     alt="Users can create their own downloads with custom hierarchies, filters and data sources in the templates section." 
