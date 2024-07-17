@@ -1,0 +1,77 @@
+---
+author: Kai Magnus Müller
+datePublished: 2022-04-10T10:00:00Z
+title: Designing a Grid System With Great Designer Experience
+tags:
+    - Design System
+    - Components
+    - Figma
+customer: IDS
+employer: Kaiser X Labs
+ogImage: ''
+description: ''
+---
+
+import Figure from '@components/Figure.astro';
+import UseCase from '@components/UseCase.svelte';
+
+As mentioned in a few other posts, my team and I have been working on data-heavy applications for IDS (Investment Data Services) for a few years. Because many applications have one or more tables on their main screens, we needed a grid component system that was not only performant but also flexible, easy to use and fast to work with. 
+
+We decided to build our own component system based on [AG Grid](https://www.ag-grid.com/example/), which was the framework chosen for the live applications. 
+
+## Designer Experience
+
+In the development world, a good ['developer experience' as explained here by GitHub](https://github.blog/2023-06-08-developer-experience-what-is-it-and-why-should-you-care/) aims to increase 'developer productivity, satisfaction, and operational impact' and an overall enjoyable experience when using certain products or services.
+
+Similarly, 'designer experience' in the context of component libraries stands for ergonomic components that follow a designers mental model. Whey should not get in the way or need detaching, slot components should be used for flexibility and a good balance between properties and nested components is important. 
+
+<Figure 
+    alt="A few applications we designed feature a large and complex grid as their main view. AG Grid provides many menu, editor and filter components that we redesigned to fit the requirements of expert applications." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721213416/Design%20System/ag-example-3-1_qalsly.png" 
+    width="3200" 
+    height="2000">
+</Figure>
+
+## Component Design
+
+On a high level, cells are made out of three parts, the cell component, an absolute positioned background and a content component in an auto layout. This gives designers high flexibility to change paddings, should some custom cell content require the full cell area for example, but provides a standard size for the default content types. 
+
+Different content can be easily swapped via the instance property and thanks to nested properties, things like the state of checkboxes can be set from the main component. This creates a flexible and extensible setup, since AG Grid is also highly customizable and applications display all kinds of data, from simple text, to grouping and spark-lines. 
+
+
+<Figure 
+    alt="Instance swap properties are used for all the different cell content components and thanks to nested properties their properties are still easy to swap." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721230258/Design%20System/ag-cell-4_qago2u.png" 
+    width="2846" 
+    height="1744">
+</Figure>
+
+### Slots
+
+All components are built with content slots, a term from UI development describing a placeholder where content can be inserted and exchanged. In Figma, components can normally not be changed much. You can change text, apply overrides, but if you want to add another item in a sidebar for example, that is not possible. Content slots in the form of sub components bring more flexibility. They are the only elements that can be completely swapped out inside a component. 
+
+In the screenshot below, the main content of the 'Choose Columns' popup is one big component instance, as well as the different sections in the sidebar to the right. They are each broken down into small components, that also have their own properties. 
+
+<Figure 
+    alt="The content components give our grid system flexibility." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721232175/Design%20System/ag-slots-1_bshcss.png" 
+    width="2846" 
+    height="1744">
+</Figure>
+
+## Tree Navigator
+
+To make my work with tables and other repeating elements, I created the [Tree Navigator plugin](https://www.figma.com/community/plugin/1229905434435887252). In the plugin, you select an element and then search for all elements with the same name simply by choosing one of the levels in the layer hierarchy above. As shown below, this also works with multiple columns, giving you the ability to quickly edit many cells at once.
+
+<Figure 
+    alt="I developed Tree Navigator partly because working with grids like this is pretty painful." 
+    src="/video/tree-navigator/110423_intro_video.mp4" 
+    width="3120" 
+    height="1950"
+    type="video">
+</Figure>
+
+## Personal Learnings
+
+Developing this component library has been a great learning experience. Starting with no experience developing production grade component libraries, it has allowed me to become fluent in being able to plan, develop and maintain a library that is now being used by many designers. Resources like [Into Design Systems](www.youtube.com/@IntoDesignSystems) have been very helpful, as well as trial and error and experimentation. 
+
