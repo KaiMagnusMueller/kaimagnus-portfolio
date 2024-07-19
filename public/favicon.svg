@@ -13,8 +13,8 @@
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --highlight-color: white;
-                --bg-color: #1c1c1c;
+                --highlight-color: #1c1c1c;
+                --bg-color: white;
             }
         }
     </style>

@@ -86,7 +86,7 @@ if (type === 'video') {
 								/>
 							</div>
 						</slot>
-						<span class="background">
+						<span class="background" aria-hidden="true">
 							<Picture
 								src={src}
 								width={width}
@@ -115,7 +115,8 @@ if (type === 'video') {
 							muted
 							controls
 							autoplay
-							loop>
+							loop
+							playsinline>
 							{subtitleFileSrc && (
 								<track default kind="captions" label="English" srclang="en" src={subtitleFileSrc} />
 							)}
