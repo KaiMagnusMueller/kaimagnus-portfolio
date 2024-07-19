@@ -23,7 +23,7 @@ We decided to build our own component system based on [AG Grid](https://www.ag-g
 
 In the development world, a good ['developer experience' as explained here by GitHub](https://github.blog/2023-06-08-developer-experience-what-is-it-and-why-should-you-care/) aims to increase 'developer productivity, satisfaction, and operational impact' and an overall enjoyable experience when using certain products or services.
 
-Similarly, 'designer experience' – or DX – in the context of component libraries stands for ergonomic components that follow a designer's mental model. Whey should not get in the way or need detaching, slot components should be used for flexibility and a good balance between properties and nested components is important. 
+Similarly, 'designer experience' – or DX – in the context of component libraries stands for ergonomic components that follow a designer's mental model. They should not get in the way when designing or need detaching. For good DX, a balance between helpful presets in the form of component properties and flexibility via slot components and nested components is important. 
 
 <Figure 
     alt="A few applications we designed feature a large and complex grid as their main view. AG Grid provides many menu, editor and filter components that we redesigned to fit the requirements of expert applications." 
@@ -36,7 +36,7 @@ Similarly, 'designer experience' – or DX – in the context of component libra
 
 On a high level, cells are made out of three parts, the cell component, an absolute positioned background and a content component in an auto layout. This gives designers high flexibility to change paddings, should some custom cell content require the full cell area for example, but provides a standard size for the default content types. 
 
-Different content can be easily swapped via the instance property and thanks to nested properties, things like the state of checkboxes can be set from the main component. This creates a flexible and extensible setup, since AG Grid is also highly customizable and applications display all kinds of data, from simple text, to grouping and spark-lines. 
+Content can be easily swapped via the instance property and thanks to nested properties, things like the state of checkboxes can be set from the main component. Consistent layer names help Figma apply overrides, even when swapping for example from plain text content to a dropdown. This creates a flexible and extensible setup. Which is needed, since AG Grid is also highly customizable and applications display all kinds of data. Designers can use the included content components, but custom spark-lines and other content is very easy to build. 
 
 
 <Figure 
@@ -48,7 +48,7 @@ Different content can be easily swapped via the instance property and thanks to 
 
 ### Slots
 
-All components are built with content slots, a term from UI development describing a placeholder where content can be inserted and exchanged. In Figma, components can normally not be changed much. You can change text, apply overrides, but if you want to add another item in a sidebar for example, that is not possible. Content slots in the form of sub components bring more flexibility. They are the only elements that can be completely swapped out inside a component. 
+All components are built with content slots, a term from UI development describing a placeholder where content can be inserted and exchanged. In Figma, components are very rigid and normally can not be changed much. It is possible to change text, or apply overrides. However, adding another item in a sidebar for example would not be possible. Content slots in the form of sub components bring more flexibility, since they are the only elements that can be completely swapped out inside a component. 
 
 In the screenshot below, the main content of the 'Choose Columns' popup is one big component instance, as well as the different sections in the sidebar to the right. They are each broken down into small components that also have their own properties. 
 
@@ -61,7 +61,7 @@ In the screenshot below, the main content of the 'Choose Columns' popup is one b
 
 ## Tree Navigator
 
-To make my work with tables and other repeating elements, I created the [Tree Navigator plugin](https://www.figma.com/community/plugin/1229905434435887252). In the plugin, you select an element and then search for all elements with the same name simply by choosing one of the levels in the layer hierarchy above. As shown below, this also works with multiple columns, giving you the ability to quickly edit many cells at once.
+To make my work with tables and other repeating elements easier, I created the [Tree Navigator plugin](https://www.figma.com/community/plugin/1229905434435887252). In the plugin, you select an element and then search for all elements with the same name simply by choosing one of the levels in the layer hierarchy above. As shown below, this also works with multiple columns, giving you the ability to quickly edit many cells at once.
 
 <Figure 
     alt="I developed Tree Navigator partly because working with grids like this is pretty painful." 
