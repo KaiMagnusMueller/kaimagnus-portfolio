@@ -6,38 +6,32 @@ export interface Props {
 	entries: CollectionEntry<'projects' | 'articles' | 'work'>[];
 	ariaDetails?: string;
 }
+
 const { title, entries, ariaDetails } = Astro.props;
 
-const _entries = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
+const sortedEntries = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
 
-function allSameValue(keyName, arr) {
+function allSameValue(keyName: string, arr: any[]): boolean {
 	const values = arr.map((obj) => obj[keyName]);
 	return new Set(values).size === 1;
 }
+
+const shouldLinkTitle = title && allSameValue('collection', sortedEntries);
+const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 ---
 
 {
-	// check if entries is empty, only display list if there are entries
-	_entries && _entries.length > 0 && (
+	sortedEntries.length > 0 && (
 		<div class="post-list text-regular">
-			{title && allSameValue('collection', _entries) ? (
-				<h2 class="color-text-low-contrast">
-					<a href={`/${_entries[0].collection}`}>{title}</a>
-				</h2>
-			) : (
-				<h2 class="color-text-low-contrast">{title}</h2>
-			)}
+			{title && <h2 class="color-text-low-contrast">{titleLink ? <a href={titleLink}>{title}</a> : title}</h2>}
 
 			<slot />
+
 			<ul>
-				{_entries.map((entry) => (
+				{sortedEntries.map((entry) => (
 					<li>
 						<a
-							class={
-								entry.data.highlight
-									? 'highlight text-regular position--relative'
-									: 'text-regular position--relative'
-							}
+							class={`text-regular position--relative ${entry.data.highlight ? 'highlight' : ''}`}
 							href={`/${entry.collection}/${entry.slug}`}
 							aria-label={entry.data.description}>
 							{entry.data.title}
@@ -56,7 +50,8 @@ function allSameValue(keyName, arr) {
 		margin-block-start: 2rem;
 		margin-block-end: 4rem;
 		// line-height: 22px;
-		// line-height: 1.6; //If font is SF Pro
+		// line-height: 1.6;
+		// If font is SF Pro
 	}
 
 	ul {
