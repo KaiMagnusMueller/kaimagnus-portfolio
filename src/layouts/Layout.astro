@@ -10,7 +10,13 @@ export interface Props {
 	ogImage?: string;
 }
 
-const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
+const {
+	pageTitle = SITE.title,
+	pageDescr = SITE.desc,
+	ogImage = 'https://res.cloudinary.com/dm3a0qioc/image/upload/v1723483893/240812_og_image_kaimagnus_tdj3d5.jpg',
+} = Astro.props;
+
+const currentPath = 'https://kaimagnus.de' + Astro.url.pathname;
 ---
 
 <html lang="en-US">
@@ -18,7 +24,7 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 
-		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
@@ -28,7 +34,11 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<slot name="head" />
 
-		{ogImage !== undefined && ogImage !== '' && <meta property="og:image" content={ogImage} />}
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:type" content="video.movie" />
+		<meta property="og:url" content={currentPath} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:description" content={pageDescr} />
 
 		<title>{pageTitle}</title>
 	</head>
@@ -40,7 +50,8 @@ const { pageTitle = SITE.title, pageDescr = SITE.desc, ogImage } = Astro.props;
 				<li><a href="https://github.com/kaimagnusmueller">GitHub</a></li>
 				<li>
 					<a href="./rss.xml">RSS</a><sup
-						><a href="https://github.com/withastro/roadmap/discussions/419">beta</a></sup>
+						><a href="https://github.com/withastro/roadmap/discussions/419">beta</a></sup
+					>
 				</li>
 				<li><a href="https://www.threads.net/@ofcoursekai">Threads</a></li>
 				<li><a href="https://www.linkedin.com/in/kai-magnus-m%C3%BCller-25a176207/">LinkedIn</a></li>

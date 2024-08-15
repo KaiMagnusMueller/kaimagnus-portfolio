@@ -12,7 +12,7 @@ export interface Props {
 const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 ---
 
-<Layout pageTitle={pageTitle + ' • ' + SITE.titleShort} pageDescr={pageDescr} {ogImage}>
+<Layout pageTitle={pageTitle} pageDescr={pageDescr} {ogImage}>
 	<nav class="color-text-low-contrast">
 		<a href="/">Home</a> /
 		{entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
