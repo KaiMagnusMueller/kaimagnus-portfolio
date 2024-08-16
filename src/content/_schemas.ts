@@ -3,15 +3,16 @@ import { z } from 'astro:content';
 export const projectSchema = z
     .object({
         author: z.string().optional(),
+        course: z.string().optional(),
         datePublished: z.date(),
-        title: z.string(),
+        description: z.string(),
         draft: z.boolean().optional(),
         featured: z.array(z.string()).default(['']),
-        tags: z.array(z.string()).default(['others']),
+        hoverImages: z.array(z.string()).optional(),
         ogImage: z.string().optional(),
-        description: z.string(),
         semesterDate: z.string().optional(),
-        course: z.string().optional(),
+        tags: z.array(z.string()).default(['others']),
+        title: z.string(),
     })
     .strict();
 
@@ -21,12 +22,13 @@ export const articleSchema = z
     .object({
         author: z.string().optional(),
         datePublished: z.date(),
-        title: z.string(),
+        description: z.string(),
         draft: z.boolean().optional(),
         featured: z.array(z.string()).default(['']),
-        tags: z.array(z.string()).default(['others']),
+        hoverImages: z.array(z.string()).optional(),
         ogImage: z.string().optional(),
-        description: z.string(),
+        tags: z.array(z.string()).default(['others']),
+        title: z.string(),
     })
     .strict();
 
@@ -41,6 +43,7 @@ export const workSchema = z
         draft: z.boolean().optional(),
         employer: z.string().optional(),
         featured: z.array(z.string()).default(['']),
+        hoverImages: z.array(z.string()).optional(),
         ogImage: z.string().optional(),
         projectEndDate: z.date().optional(),
         projectStartDate: z.date().optional(),

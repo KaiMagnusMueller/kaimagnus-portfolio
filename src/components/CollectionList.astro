@@ -31,11 +31,21 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 				{sortedEntries.map((entry) => (
 					<li>
 						<a
-							class={`text-regular position--relative ${entry.data.highlight ? 'highlight' : ''}`}
+							class={`text-regular position--relative`}
 							href={`/${entry.collection}/${entry.slug}`}
 							aria-label={entry.data.description}>
 							{entry.data.title}
-							{entry.data.ogImage && <img src={entry.data.ogImage} alt="" />}
+							{entry.data.hoverImages && (
+								<div class="hover-images">
+									{entry.data.hoverImages.map((elem, i, array) => (
+										<img
+											src={`/images/hover-images/${elem}`}
+											alt=""
+											class={i === array.length - 1 ? 'main-image' : ''}
+										/>
+									))}
+								</div>
+							)}
 						</a>
 					</li>
 				))}
@@ -63,26 +73,100 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 
 	img {
 		position: absolute;
-		top: 0;
+		top: 50%;
 		right: 0;
-		transform: translate(80%, -50%) scale(0.6);
+		transform: translate(100%, 0%);
 		transform-origin: left center;
 		visibility: hidden;
 		opacity: 0;
 		z-index: 9999;
-		filter: blur(12px);
 		transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-		outline: 2px solid rgba(0, 0, 0, 0.25);
-		outline-offset: -2px;
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 		border: none;
-		border-radius: 4px;
 		padding: 0;
-		aspect-ratio: 5/3;
-		width: 380px;
 		overflow: clip;
 		object-fit: cover;
+	}
+
+	.hover-images {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		visibility: hidden;
+		transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+		// background: rgba(255, 0, 0, 0.131);
 		pointer-events: none;
+
+		@media (pointer: coarse) {
+			display: none;
+		}
+
+		// img:not(.main-image) {
+		// 	&:nth-of-type(1) {
+		// 		transform: translate(80%, -50%) scale(0.6);
+		// 	}
+		// 	&:nth-of-type(2) {
+		// 		transform: translate(100%, -50%) scale(0.6);
+		// 		transition-delay: 0.0125s;
+		// 	}
+		// 	&:nth-of-type(3) {
+		// 		transform: translate(110%, -50%) scale(0.6);
+		// 		transition-delay: 0.025s;
+		// 	}
+		// 	&:nth-of-type(4) {
+		// 		transform: translate(120%, -50%) scale(0.6);
+		// 		transition-delay: 0.025s;
+		// 	}
+		// }
+
+		.main-image {
+			transform: translate(130%, -50%) scale(0.8);
+			filter: blur(12px);
+			// transition-delay: 0.08s;
+			outline: 2px solid rgba(0, 0, 0, 0.25);
+			outline-offset: -2px;
+			box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+			aspect-ratio: 5/3;
+			width: 380px;
+		}
+	}
+
+	a {
+		@media (pointer: fine) {
+			&:hover {
+				.hover-images {
+					visibility: visible;
+
+					img {
+						visibility: visible;
+						opacity: 1;
+					}
+
+					.main-image {
+						filter: none;
+					}
+
+					// img:not(.main-image) {
+					// 	&:nth-of-type(1) {
+					// 		transform: translate(150%, -50%) scale(1);
+					// 	}
+					// 	&:nth-of-type(2) {
+					// 		transform: translate(100%, -50%) scale(1);
+					// 	}
+					// 	&:nth-of-type(3) {
+					// 		transform: translate(110%, -50%) scale(1);
+					// 	}
+					// 	&:nth-of-type(4) {
+					// 		transform: translate(120%, -50%) scale(1);
+					// 	}
+					// }
+
+					.main-image {
+						transform: translate(140%, -50%) scale(1);
+					}
+				}
+			}
+		}
 	}
 
 	h2 {
@@ -108,15 +192,6 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 
 		&:hover {
 			text-decoration: revert;
-		}
-
-		&:hover {
-			img {
-				transform: translate(110%, -50%) scale(1);
-				visibility: visible;
-				opacity: 1;
-				filter: none;
-			}
 		}
 	}
 
