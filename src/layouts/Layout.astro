@@ -16,7 +16,7 @@ const {
 	ogImage = 'https://res.cloudinary.com/dm3a0qioc/image/upload/v1723483893/240812_og_image_kaimagnus_tdj3d5.jpg',
 } = Astro.props;
 
-const currentPath = 'https://kaimagnus.de' + Astro.url.pathname;
+const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 ---
 
 <html lang="en-US">
