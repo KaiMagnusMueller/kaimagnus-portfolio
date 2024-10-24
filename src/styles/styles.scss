@@ -2,17 +2,19 @@
 
 :root {
     --background-image: url(200-20-5-monochrome.png);
-    --background-color: hsl(0, 0%, 98%);
-    --color-text: #151515;
-
-    --color-text-transparent: #3030309e;
-    --color-text-low-contrast: #717171;
+    --background-color: hsl(0, 0%, 100%);
+    --color-text: #000;
+    --color-text-low-contrast: #666;
     --color-highlight: #ffbb0b;
     --color-link: #0c93ec;
     --color-link-visited: #840be0;
     --color-bg-negative: #242424;
     --color-border-negative-secondary: #424242;
     --color-text-negative: #e4e4e4;
+
+    --color-card-border: #b7b7b7;
+    --color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
+    --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
 
     /* TYPO */
     --font-stack: 'Charter', 'Cambria', 'Constantia', serif, system-ui;
@@ -22,25 +24,19 @@
     --font-size-small: .875rem;
     --font-size-large: 1.625rem;
 
-
     /* BREAKPOINTS */
     --screen-sm: 640px;
     --screen-md: 768px;
     --screen-lg: 1024px;
     --screen-xl: 1280px;
     --screen-2xl: 1536px;
-
-    --color-card-border: #b7b7b7;
-    --color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
-    --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: hsl(0, 0%, 3%);
-        --color-text: #d1d1d1;
-        --color-text-transparent: #e7e7e79e;
-        --color-text-low-contrast: #848484;
+        --color-text: #f2f2f2;
+        --color-text-low-contrast: #aaa;
         --color-highlight: #ffbb0b;
         --color-link: #6bb7f5;
         --color-link-visited: #c078f7;
@@ -56,7 +52,7 @@
     img,
     video,
     iframe {
-        filter: brightness(0.9);
+        filter: brightness(0.95);
     }
 }
 
