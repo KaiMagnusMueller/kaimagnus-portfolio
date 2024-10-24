@@ -20,7 +20,7 @@
     --font-stack: 'Charter', 'Cambria', 'Constantia', serif, system-ui;
     /* GENERAL STYLES */
     color: var(--color-text);
-    font-family: var(--font-stack);
+    font-family: var(--font-stack), serif;
     --font-size-small: .875rem;
     --font-size-large: 1.625rem;
 
@@ -121,8 +121,8 @@ h4,
     margin-bottom: 0.5em;
 }
 
-h1+h2,
-h2+h3 {
+h1 + h2,
+h2 + h3 {
     margin-block-start: 1rem;
 
 }
@@ -224,7 +224,7 @@ blockquote {
     }
 }
 
-p>code {
+p > code {
     border-radius: 2px;
     background-color: #24292e;
     color: #e1e4e8;
@@ -358,7 +358,7 @@ figcaption {
     grid-column: 1 / span 9;
 }
 
-.grid--full+figcaption {
+.grid--full + figcaption {
     grid-column: 10/-1;
     position: absolute;
     bottom: 0;
@@ -388,7 +388,7 @@ figcaption {
         gap: 0.5rem;
     }
 
-    .grid--full+figcaption {
+    .grid--full + figcaption {
         width: 100%;
         position: relative;
         transform: none;
