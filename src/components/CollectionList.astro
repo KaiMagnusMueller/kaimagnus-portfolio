@@ -49,9 +49,6 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	.post-list {
 		margin-block-start: 2rem;
 		margin-block-end: 4rem;
-		// line-height: 22px;
-		// line-height: 1.6;
-		// If font is SF Pro
 	}
 
 	ul {
@@ -62,6 +59,7 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 
 	h2 {
 		margin: 3px 0;
+		font-size: inherit;
 
 		a {
 			text-decoration: revert;
@@ -71,9 +69,6 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	li,
 	h2 {
 		margin: 0.3rem 0;
-	}
-
-	span:hover {
 	}
 
 	a {
@@ -86,14 +81,8 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	}
 
 	@media (pointer: coarse) {
-		// 	li,
-		// 	h2 {
-		// 		line-height: 1.6;
-		// 	}
-
 		a {
 			padding-block: 0.125rem;
-			// line-height: 1.6;
 		}
 	}
 

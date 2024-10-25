@@ -60,18 +60,14 @@
 
 .color-text {
     color: var(--color-text);
-
-    a {
-        color: var(--color-text);
-    }
 }
 
 .color-text-low-contrast {
     color: var(--color-text-low-contrast);
+}
 
-    a {
-        color: var(--color-text-low-contrast);
-    }
+a {
+    color: inherit;
 }
 
 .position--relative {
@@ -134,8 +130,8 @@ h4,
     margin-bottom: 0.5em;
 }
 
-h1 + h2,
-h2 + h3 {
+h1+h2,
+h2+h3 {
     margin-block-start: 1rem;
 
 }
@@ -146,6 +142,7 @@ p:last-of-type,
 }
 
 @media (max-width: vars.$screen-md) {
+
     .text-large,
     .text-large p,
     .text-large h1 {
@@ -236,7 +233,7 @@ blockquote {
     }
 }
 
-p > code {
+p>code {
     border-radius: 2px;
     background-color: #24292e;
     color: #e1e4e8;
@@ -254,6 +251,7 @@ pre {
 }
 
 @media (prefers-color-scheme: dark) {
+
     .shiki,
     .shiki span {
         color: var(--shiki-dark) !important;
@@ -369,7 +367,7 @@ figcaption {
     grid-column: 1 / span 9;
 }
 
-.grid--full + figcaption {
+.grid--full+figcaption {
     grid-column: 10/-1;
     position: absolute;
     bottom: 0;
@@ -399,7 +397,7 @@ figcaption {
         gap: 0.5rem;
     }
 
-    .grid--full + figcaption {
+    .grid--full+figcaption {
         width: 100%;
         position: relative;
         transform: none;
@@ -425,5 +423,3 @@ figcaption {
         margin: 2.5em 0;
     }
 }
-
-

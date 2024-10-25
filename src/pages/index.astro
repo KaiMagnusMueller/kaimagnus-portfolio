@@ -34,18 +34,17 @@ let featured = allEntries.filter((elem) => {
 						alt="Kai Magnus Müller profile picture">Kai Magnus Müller</InlineIcon
 					>,
 				</h1>
-
 				<p>
-					a designer who likes building things. After developing a few Figma plugins, like <a
-						href="https://www.figma.com/community/plugin/1229905434435887252/">
-						Tree Navigator
-					</a> and <a href="https://www.figma.com/community/plugin/1289313190495880345">
-						Icon Library Manager
-					</a>, I am currently exploring how we can design with real data.
+					a designer with many interests ranging from product to design systems, productivity, AI and code.
+					After developing a few Figma plugins, like <a
+						href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a
+					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>,
+					I am currently working on how we can create better designs with real data.
 				</p>
 				<p>
-					In my spare time, I am working on <a href="https://app.intersectionslab.com">Collections</a>, an
-					experimental platform to explore how computers can help us think and create.
+					Whenever I get that creative itch, I am working on <a href="https://app.intersectionslab.com"
+						>Collections</a
+					>, an experimental platform to explore how computers can help us think and create.
 				</p>
 			</div>
 		</div>
@@ -90,13 +89,20 @@ let featured = allEntries.filter((elem) => {
                 </p>
                 
             </div> -->
-			<p class="insert-text color-text-low-contrast">
-				Previously I spent some time as UI/UX Designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>,
-				working on applications for <a href="/work/epic-designing-internal-applications">
-					insurance and investment
-				</a> and our <a href="/work/omni-comms-tool-for-insurance-agents">product lab</a>. I also teach
-				Interactive Communications Systems at <a href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a>.
-			</p>
+			<span class="insert-text">
+				<p>
+					Previously I spent some time as UI/UX Designer at <a href="https://www.kaiser-x.com"
+						>Kaiser X Labs</a
+					>, working on applications for <a href="/work/epic-designing-internal-applications"
+						>insurance and investment</a
+					> and our <a href="/work/omni-comms-tool-for-insurance-agents">product lab</a>.</p
+				><p
+					>Before that I spent some time at <a href="https://www.intuity.de/">Intuity</a> and <a
+						href="https://web.archive.org/web/20181229164945/http://precious-forever.com/">Precious</a
+					> where I worked on fleet management applications and point of sale terminals. Currently, I also teach
+					Interactive Communications Systems at <a href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a>.
+				</p>
+			</span>
 
 			<!--<p>Previously I spent some time as UI/UX Designer at
     <InlineIcon src="/kaiser-x-labs-logo.svg"><a
@@ -109,18 +115,21 @@ let featured = allEntries.filter((elem) => {
 		</section>
 		<section>
 			<!-- UNIVERSITY -->
-			<p class="insert-text color-text-low-contrast">
-				While studying, I wrote a bachelor thesis about <a href="projects/destinations">
-					building wayfinding systems
-				</a>, designed a <a href="/projects/halo">browser built for research</a> and went to Japan.
-			</p>
-			<p class="insert-text color-text-low-contrast">
-				I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student and
-				we later developed an extended version for the exhibition <a
-					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/">
-					100 Prozent Baumwolle
-				</a> at Übersee-Museum Bremen.
-			</p>
+			<span class="insert-text">
+				<p>
+					While studying, I wrote a bachelor thesis about <a href="projects/destinations"
+						>building wayfinding systems</a
+					>, designed a <a href="/projects/halo">browser built for research</a> and went to Japan.
+				</p>
+				<p>
+					I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student
+					and we later developed an extended version for the exhibition
+					<a
+						href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
+						>100 Prozent Baumwolle</a
+					> at Übersee-Museum Bremen.
+				</p>
+			</span>
 			<!-- https://archive.is/3R3EH -->
 			<CollectionList title="University Projects" entries={universityProjects} />
 		</section>
@@ -130,79 +139,78 @@ let featured = allEntries.filter((elem) => {
 			<CollectionList title="Writing" entries={articles} />
 		</section>
 	</main>
-</Layout>
-<style lang="scss">
-	@import '../styles/_vars.scss';
 
-	.hero--section {
-		padding-top: clamp(4rem, 14vh, 8rem);
-		max-width: 50ch;
+	<style lang="scss">
+		@import '../styles/_vars.scss';
 
-		a {
-			color: var(--color-text);
-		}
-	}
+		.hero--section {
+			padding-top: clamp(4rem, 14vh, 8rem);
+			max-width: 50ch;
 
-	.insert-text p,
-	.insert-text {
-		margin-block-start: 0.5rem;
-		margin-block-end: 0.5rem;
-		max-width: 46ch;
-	}
-
-	section {
-		margin-block-start: 4rem;
-		max-width: 48ch;
-
-		&:first-of-type {
-			margin-block-start: 6rem;
-		}
-	}
-
-	h1 {
-		margin-bottom: 0.5em;
-	}
-
-	span.highlight-star {
-		position: absolute;
-		transform: translate(-110%, -20%);
-	}
-
-	.quick-links {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-		gap: 2rem;
-		margin-block: 6rem;
-
-		a {
-			text-decoration: none;
-
-			&:hover {
-				text-decoration: revert;
+			a {
+				color: var(--color-text);
 			}
 		}
-	}
 
-	.link-card {
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		box-shadow: var(--card-shadow);
-		// justify-content: space-between;
-
-		border: 1px solid var(--color-card-border);
-		background: var(--color-card-background);
-		padding: 1rem;
-		height: 100%;
-
-		h2 {
-			margin: 0;
-		}
-	}
-
-	@media (max-width: $screen-md) {
 		section {
-			margin-top: 0;
+			margin-block-start: 4rem;
+			max-width: 48ch;
+
+			&:first-of-type {
+				margin-block-start: 6rem;
+			}
+
+			.insert-text p {
+				margin-block-start: 0.5rem;
+				margin-block-end: 0.5rem;
+				max-width: 46ch;
+				color: var(--color-text-low-contrast);
+			}
 		}
-	}
-</style>
+
+		h1 {
+			margin-bottom: 0.5em;
+		}
+
+		span.highlight-star {
+			position: absolute;
+			transform: translate(-110%, -20%);
+		}
+
+		.quick-links {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 2rem;
+			margin-block: 6rem;
+
+			a {
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: revert;
+				}
+			}
+		}
+
+		.link-card {
+			display: flex;
+			flex-direction: column;
+			gap: 0.2rem;
+			box-shadow: var(--card-shadow);
+			border: 1px solid var(--color-card-border);
+			background: var(--color-card-background);
+			padding: 1rem;
+			height: 100%;
+
+			h2 {
+				margin: 0;
+			}
+		}
+
+		@media (max-width: $screen-md) {
+			section {
+				margin-top: 0;
+			}
+		}
+	</style>
+</Layout>

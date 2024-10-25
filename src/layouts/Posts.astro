@@ -3,177 +3,174 @@ import { SITE } from '@config';
 import Layout from './Layout.astro';
 
 export interface Props {
-    pageTitle: string;
-    pageDescr: string;
-    entryCollection: string;
-    ogImage: string | undefined;
+	pageTitle: string;
+	pageDescr: string;
+	entryCollection: string;
+	ogImage: string | undefined;
 }
 
 const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 ---
 
 <Layout pageTitle={pageTitle} pageDescr={pageDescr} {ogImage}>
-    <nav class="color-text-low-contrast">
-        <a href="/">Home</a> /
-        {entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
-    </nav>
-    <article class="post-content">
-        <slot />
-    </article>
+	<nav class="color-text-low-contrast">
+		<a href="/">Home</a> /
+		{entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
+	</nav>
+	<article class="post-content">
+		<slot />
+	</article>
 </Layout>
 
 <style lang="scss" is:global>
-    @import '../styles/_vars.scss';
+	@import '../styles/_vars.scss';
 
-    .post-content {
-        margin-top: 2rem;
-        width: 100%;
-        word-break: break-word;
-        // font-size: 1.125rem;
+	.post-content {
+		margin-top: 2rem;
+		width: 100%;
+		word-break: break-word;
 
-        h2,
-        h3,
-        h4,
-        h5 {
-            width: fit-content;
-            font-weight: 600;
-        }
+		h2,
+		h3,
+		h4,
+		h5 {
+			width: fit-content;
+			font-weight: 600;
+		}
 
-        // part of the articles and project pages
-        .course-data {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.25rem 1rem;
-            margin-top: 0.5rem;
-            margin-bottom: 2rem;
-            // line-height: 1;
+		// part of the articles and project pages
+		.course-data {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.25rem 1rem;
+			margin-top: 0.5rem;
+			margin-bottom: 2rem;
+			// line-height: 1;
 
-            // span {
-            // 	padding: 0.125rem 0.625rem;
-            // 	border-radius: 2px;
-            // 	background-color: #7f7f7f19;
-            // 	// border: 1px solid #7f7f7f53;
-            // }
-        }
+			// span {
+			// 	padding: 0.125rem 0.625rem;
+			// 	border-radius: 2px;
+			// 	background-color: #7f7f7f19;
+			// 	// border: 1px solid #7f7f7f53;
+			// }
+		}
 
-        & > *,
-        figcaption {
-            max-width: 34rem;
-            // margin-left: 0;
-            // margin-right: auto;
-        }
+		& > *,
+		figcaption {
+			max-width: 34rem;
+		}
 
-        div,
-        .full-width-reset,
-        h1,
-        iframe {
-            max-width: unset;
-        }
+		div,
+		.full-width-reset,
+		h1,
+		iframe {
+			max-width: unset;
+		}
 
-        p {
-            margin-top: 0.35em;
-            margin-bottom: 1em;
-        }
+		p {
+			margin-top: 0.35em;
+			margin-bottom: 1em;
+		}
 
-        iframe,
-        .main-content img,
-        .main-content video {
-            position: relative;
-            outline: 1px solid var(--color-border-transparent);
-            outline-offset: -1px;
-            // box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-            overflow: clip;
-        }
+		iframe,
+		.main-content img,
+		.main-content video {
+			position: relative;
+			outline: 1px solid var(--color-border-transparent);
+			outline-offset: -1px;
+			// box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+			overflow: clip;
+		}
 
-        .background {
-            position: absolute;
-            top: calc(-1 * var(--overflow));
-            left: calc(-1 * var(--overflow));
-            transform: scale(1);
-            opacity: 0.25;
-            z-index: -1;
-            -webkit-backdrop-filter: blur(32px);
-            filter: blur(32px);
-            border-radius: 4rem;
-            aspect-ratio: 1;
-            width: calc(100% + var(--overflow) * 2);
-            height: calc(100% + var(--overflow) * 2);
-            --overflow: 30px;
-            overflow: hidden;
-            pointer-events: none;
+		.background {
+			position: absolute;
+			top: calc(-1 * var(--overflow));
+			left: calc(-1 * var(--overflow));
+			transform: scale(1);
+			opacity: 0.25;
+			z-index: -1;
+			-webkit-backdrop-filter: blur(32px);
+			filter: blur(32px);
+			border-radius: 4rem;
+			aspect-ratio: 1;
+			width: calc(100% + var(--overflow) * 2);
+			height: calc(100% + var(--overflow) * 2);
+			--overflow: 30px;
+			overflow: hidden;
+			pointer-events: none;
 
-            img,
-            picture {
-                width: 100%;
-                height: 100%;
-            }
+			img,
+			picture {
+				width: 100%;
+				height: 100%;
+			}
 
-            @media (max-width: $screen-md) {
-                & {
-                    display: none;
-                }
-            }
-        }
+			@media (max-width: $screen-md) {
+				& {
+					display: none;
+				}
+			}
+		}
 
-        a {
-            color: var(--color-link);
+		a {
+			color: var(--color-link);
 
-            &:visited {
-                color: var(--color-link-visited);
-            }
-        }
+			&:visited {
+				color: var(--color-link-visited);
+			}
+		}
 
-        & > ul,
-        & > ol {
-            margin-block: 1rem;
-        }
+		& > ul,
+		& > ol {
+			margin-block: 1rem;
+		}
 
-        .footnotes {
-            margin-top: 4rem;
-            border-top: 1px solid var(--color-border-transparent);
-            padding-top: 1rem;
-        }
-    }
+		.footnotes {
+			margin-top: 4rem;
+			border-top: 1px solid var(--color-border-transparent);
+			padding-top: 1rem;
+		}
+	}
 
-    @media (max-width: $screen-md) {
-        .post-content {
-            & > *,
-            figcaption {
-                max-width: unset;
-            }
-        }
-    }
+	@media (max-width: $screen-md) {
+		.post-content {
+			& > *,
+			figcaption {
+				max-width: unset;
+			}
+		}
+	}
 
-    h1,
-    h2,
-    h3,
-    h4 {
-        margin-top: 2.25rem;
-        margin-bottom: 0.75rem;
-    }
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin-top: 2.25rem;
+		margin-bottom: 0.75rem;
+	}
 
-    h1:hover,
-    h2:hover,
-    h3:hover,
-    h4:hover {
-        .anchor-link {
-            visibility: visible;
-            opacity: 1;
-        }
-    }
+	h1:hover,
+	h2:hover,
+	h3:hover,
+	h4:hover {
+		.anchor-link {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
 
-    .anchor-link {
-        transition: opacity 0.2s ease;
-        margin-left: 0.5rem;
-        width: 20px;
-        height: 20px;
-    }
+	.anchor-link {
+		transition: opacity 0.2s ease;
+		margin-left: 0.5rem;
+		width: 20px;
+		height: 20px;
+	}
 
-    @media (hover: hover) {
-        .anchor-link {
-            visibility: hidden;
-            opacity: 0;
-        }
-    }
+	@media (hover: hover) {
+		.anchor-link {
+			visibility: hidden;
+			opacity: 0;
+		}
+	}
 </style>
