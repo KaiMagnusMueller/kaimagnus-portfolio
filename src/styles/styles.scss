@@ -1,27 +1,28 @@
 @use '_vars.scss';
 
 :root {
+    --background-color: hsl(0, 0%, 100%);
     --background-image: url(200-20-5-monochrome.png);
-    --background-color: hsl(0, 0%, 98%);
-    --color-text: #151515;
-
-    --color-text-transparent: #3030309e;
-    --color-text-low-contrast: #717171;
-    --color-highlight: #ffbb0b;
-    --color-link: #0c93ec;
-    --color-link-visited: #840be0;
+    --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
     --color-bg-negative: #242424;
     --color-border-negative-secondary: #424242;
+    --color-border: rgba(0, 0, 0, 0.15); // Color for borders of images, etc.
+    --color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
+    --color-card-border: #b7b7b7;
+    --color-highlight: #ffbb0b;
+    --color-link-visited: #840be0;
+    --color-link: #0c93ec;
+    --color-text-low-contrast: #666;
     --color-text-negative: #e4e4e4;
+    --color-text: #000;
 
     /* TYPO */
     --font-stack: 'Charter', 'Cambria', 'Constantia', serif, system-ui;
     /* GENERAL STYLES */
     color: var(--color-text);
-    font-family: var(--font-stack);
+    font-family: var(--font-stack), serif;
     --font-size-small: .875rem;
     --font-size-large: 1.625rem;
-
 
     /* BREAKPOINTS */
     --screen-sm: 640px;
@@ -29,34 +30,29 @@
     --screen-lg: 1024px;
     --screen-xl: 1280px;
     --screen-2xl: 1536px;
-
-    --color-card-border: #b7b7b7;
-    --color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
-    --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: hsl(0, 0%, 3%);
-        --color-text: #d1d1d1;
-        --color-text-transparent: #e7e7e79e;
-        --color-text-low-contrast: #848484;
-        --color-highlight: #ffbb0b;
-        --color-link: #6bb7f5;
-        --color-link-visited: #c078f7;
-        --color-bg-negative: #fbfbf9;
-        --color-text-negative: #030303;
-        --color-border-negative-secondary: #5e5e5e;
-
-        --color-card-border: #424242;
-        --color-card-background: url(200-20-5-monochrome.png), #222220;
         --card-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.55);
+        --color-bg-negative: #fbfbf9;
+        --color-border-negative-secondary: #5e5e5e;
+        --color-border: rgba(255, 255, 255, 0.2); // Color for borders of images, etc.
+        --color-card-background: url(200-20-5-monochrome.png), #222220;
+        --color-card-border: #424242;
+        --color-highlight: #ffbb0b;
+        --color-link-visited: #c078f7;
+        --color-link: #6bb7f5;
+        --color-text-low-contrast: #aaa;
+        --color-text-negative: #030303;
+        --color-text: #f2f2f2;
     }
 
     img,
     video,
     iframe {
-        filter: brightness(0.9);
+        filter: brightness(0.95);
     }
 }
 
@@ -125,8 +121,8 @@ h4,
     margin-bottom: 0.5em;
 }
 
-h1+h2,
-h2+h3 {
+h1 + h2,
+h2 + h3 {
     margin-block-start: 1rem;
 
 }
@@ -218,7 +214,7 @@ sup {
 blockquote {
     border-block: 2.5px solid;
     margin: 2rem 0;
-    padding: 0.6rem 0rem 0.75rem 0rem;
+    padding: 0.6rem 0 0.75rem 0;
     position: relative;
 
     * {
@@ -228,7 +224,7 @@ blockquote {
     }
 }
 
-p>code {
+p > code {
     border-radius: 2px;
     background-color: #24292e;
     color: #e1e4e8;
@@ -362,7 +358,7 @@ figcaption {
     grid-column: 1 / span 9;
 }
 
-.grid--full+figcaption {
+.grid--full + figcaption {
     grid-column: 10/-1;
     position: absolute;
     bottom: 0;
@@ -392,7 +388,7 @@ figcaption {
         gap: 0.5rem;
     }
 
-    .grid--full+figcaption {
+    .grid--full + figcaption {
         width: 100%;
         position: relative;
         transform: none;

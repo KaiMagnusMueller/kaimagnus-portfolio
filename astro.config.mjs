@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 import svelte from '@astrojs/svelte';
 
+
 // https://astro.build/config
 import mdx from '@astrojs/mdx';
 
@@ -13,31 +14,31 @@ import vercel from '@astrojs/vercel/static';
 
 // https://astro.build/config
 export default defineConfig({
-	adapter: vercel({
-		webAnalytics: {
-			enabled: true,
-		},
-	}),
-	site: 'https://kaimagnus.de/',
-	integrations: [svelte(), mdx()],
-	vite: {
-		plugins: [],
-	},
+    adapter: vercel({
+        webAnalytics: {
+            enabled: true
+        }
+    }),
+    site: 'https://kaimagnus.de/',
+    integrations: [svelte(), mdx()],
+    vite: {
+        plugins: []
+    },
 
-	devToolbar: {
-		enabled: false,
-	},
+    devToolbar: {
+        enabled: false
+    },
 
-	image: {
-		remotePatterns: [{ protocol: 'https' }],
-	},
+    image: {
+        remotePatterns: [{ protocol: 'https' }]
+    },
 
-	markdown: {
-		shikiConfig: {
-			wrap: false,
-			theme: 'github-dark',
-			defaultColor: false,
-		},
-		rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, autolinkConfig]],
-	},
+    markdown: {
+        shikiConfig: {
+            wrap: false,
+            theme: 'github-dark',
+            defaultColor: false
+        },
+        rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, autolinkConfig]]
+    }
 });
