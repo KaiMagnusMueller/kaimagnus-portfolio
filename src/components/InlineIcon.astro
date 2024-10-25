@@ -1,0 +1,32 @@
+---
+export interface Props {
+	classList?: string;
+	src: string;
+	alt: string;
+}
+
+const { classList = 'company-logo', src = '', alt = '' } = Astro.props;
+---
+
+<span><img {src} class={classList} {alt} /><slot /></span>
+
+<style lang="scss">
+	img {
+		margin-right: 0.375rem;
+		margin-bottom: -0.375rem;
+		aspect-ratio: 1;
+		width: 1.25em;
+		object-fit: contain;
+	}
+
+	span {
+		color: var(--color-text);
+		text-wrap: nowrap;
+	}
+
+	.company-logo {
+		/*background-color: var(--color-text);*/
+		border-radius: 4px;
+		padding: 0.25rem;
+	}
+</style>

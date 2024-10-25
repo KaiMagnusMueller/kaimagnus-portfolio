@@ -6,7 +6,8 @@
     --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
     --color-bg-negative: #242424;
     --color-border-negative-secondary: #424242;
-    --color-border: rgba(0, 0, 0, 0.15); // Color for borders of images, etc.
+    --color-border-transparent: rgba(0, 0, 0, 0.15); // Color for borders of images, etc.
+    --color-border-strong: var(--color-text);
     --color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
     --color-card-border: #b7b7b7;
     --color-highlight: #ffbb0b;
@@ -38,7 +39,8 @@
         --card-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.55);
         --color-bg-negative: #fbfbf9;
         --color-border-negative-secondary: #5e5e5e;
-        --color-border: rgba(255, 255, 255, 0.2); // Color for borders of images, etc.
+        --color-border-transparent: rgba(255, 255, 255, 0.2); // Color for borders of images, etc.
+        --color-border-strong: var(--color-text);
         --color-card-background: url(200-20-5-monochrome.png), #222220;
         --color-card-border: #424242;
         --color-highlight: #ffbb0b;
@@ -80,6 +82,15 @@
     margin-left: auto;
 }
 
+.circle {
+    border-radius: 100%;
+}
+
+.avatar {
+    border-radius: 100%;
+    outline: 2px solid var(--color-border-strong);
+    outline-offset: -2px;
+}
 
 .text-small,
 .text-small p {
@@ -87,6 +98,8 @@
     font-weight: 400;
     font-size: var(--font-size-small);
 }
+
+
 
 .text-regular,
 .text-regular h2 {
@@ -117,7 +130,7 @@ h2,
 h3,
 h4,
 .text-large p {
-    margin-top: 0.5em;
+    margin-block-start: 0.5em;
     margin-bottom: 0.5em;
 }
 
@@ -133,7 +146,6 @@ p:last-of-type,
 }
 
 @media (max-width: vars.$screen-md) {
-
     .text-large,
     .text-large p,
     .text-large h1 {
@@ -242,7 +254,6 @@ pre {
 }
 
 @media (prefers-color-scheme: dark) {
-
     .shiki,
     .shiki span {
         color: var(--shiki-dark) !important;
@@ -416,9 +427,3 @@ figcaption {
 }
 
 
-.insert-text p,
-.insert-text {
-    max-width: 46ch;
-    margin-block-start: 0.5rem;
-    margin-block-end: 0.5rem;
-}

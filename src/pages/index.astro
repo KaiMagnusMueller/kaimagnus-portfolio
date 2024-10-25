@@ -4,6 +4,7 @@ import { SITE } from '@config';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import CollectionList from '@components/CollectionList.astro';
+import InlineIcon from '../components/InlineIcon.astro';
 
 const articles = await getCollection('articles', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
@@ -26,16 +27,21 @@ let featured = allEntries.filter((elem) => {
 	<main class="index-page color-text">
 		<div class="hero--section color-text-low-contrast text text-large">
 			<div class="hero--section-content-wrapper">
-				<h1 class="">
-					<span class="color-text">Hi, I'm Kai Magnus Müller.</span>
+				<h1>
+					Hi, I'm <InlineIcon
+						src="/kaimagnus-profile.jpeg"
+						classList="avatar"
+						alt="Kai Magnus Müller profile picture">Kai Magnus Müller</InlineIcon
+					>,
 				</h1>
+
 				<p>
-					A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on applications
-					for <a href="/work/epic-designing-internal-applications"> investment and finance</a>. I teach
-					Interactive Communications Systems at <a href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a>
-					and developed Figma plugins like <a
-						href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a
-					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>.
+					a designer who likes building things. After developing a few Figma plugins, like <a
+						href="https://www.figma.com/community/plugin/1229905434435887252/">
+						Tree Navigator
+					</a> and <a href="https://www.figma.com/community/plugin/1289313190495880345">
+						Icon Library Manager
+					</a>, I am currently exploring how we can design with real data.
 				</p>
 				<p>
 					In my spare time, I am working on <a href="https://app.intersectionslab.com">Collections</a>, an
@@ -45,25 +51,25 @@ let featured = allEntries.filter((elem) => {
 		</div>
 
 		<!-- <aside class="quick-links">
-			<a href="/project-timeline">
-				<div class="link-card text-regular">
-					<h2>Project Timeline Visualization</h2>
-					<p class="color-text-low-contrast">A visual timeline of my past and current projects</p>
-				</div>
-			</a>
-			<a href="https://www.figma.com/community/plugin/1229905434435887252/">
-				<div class="link-card text-regular">
-					<h2>Tree Navigator</h2>
-					<p class="color-text-low-contrast">Download for Figma</p>
-				</div>
-			</a>
-			<a href="https://www.figma.com/community/plugin/1229905434435887252/">
-				<div class="link-card text-regular">
-					<h2>Tree Navigator</h2>
-					<p class="color-text-low-contrast">Download for Figma</p>
-				</div>
-			</a>
-		</aside> -->
+            <a href="/project-timeline">
+                <div class="link-card text-regular">
+                    <h2>Project Timeline Visualization</h2>
+                    <p class="color-text-low-contrast">A visual timeline of my past and current projects</p>
+                </div>
+            </a>
+            <a href="https://www.figma.com/community/plugin/1229905434435887252/">
+                <div class="link-card text-regular">
+                    <h2>Tree Navigator</h2>
+                    <p class="color-text-low-contrast">Download for Figma</p>
+                </div>
+            </a>
+            <a href="https://www.figma.com/community/plugin/1229905434435887252/">
+                <div class="link-card text-regular">
+                    <h2>Tree Navigator</h2>
+                    <p class="color-text-low-contrast">Download for Figma</p>
+                </div>
+            </a>
+        </aside> -->
 
 		<section>
 			<!-- Featured means noteworthy -->
@@ -73,31 +79,47 @@ let featured = allEntries.filter((elem) => {
 		<section>
 			<!-- WORK -->
 			<!-- <div class="insert-text color-text-low-contrast">
-				<p class="">
-					During my work at Syncier and Kaiser X Labs, I worked on a number of investment management
-					applications for <a href="https://www.idsdata.com/solutions/de/esg/">IDS</a> as designer and design lead
-					and was part of an in-house innovation lab.
-				</p>
-				<p>
-					I also love to tinker, improve my workflow and make my MacBook work for me. Some of the results even
-					made it here:
-				</p>
-			</div> -->
+                <p class="">
+                    During my work at Syncier and Kaiser X Labs, I worked on a number of investment management
+                    applications for <a href="https://www.idsdata.com/solutions/de/esg/">IDS</a> as designer and design lead
+                    and was part of an in-house innovation lab.
+                </p>
+                <p>
+                    I also love to tinker, improve my workflow and make my MacBook work for me. Some of the results even
+                    made it here:
+                </p>
+                
+            </div> -->
+			<p class="insert-text color-text-low-contrast">
+				Previously I spent some time as UI/UX Designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>,
+				working on applications for <a href="/work/epic-designing-internal-applications">
+					insurance and investment
+				</a> and our <a href="/work/omni-comms-tool-for-insurance-agents">product lab</a>. I also teach
+				Interactive Communications Systems at <a href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a>.
+			</p>
+
+			<!--<p>Previously I spent some time as UI/UX Designer at
+    <InlineIcon src="/kaiser-x-labs-logo.svg"><a
+        href="https://www.kaiser-x.com">Kaiser X Labs</a></InlineIcon>, working on applications
+    for <a href="/work/epic-designing-internal-applications">insurance and investment</a> and our <a href="/work/omni-comms-tool-for-insurance-agents">product lab</a>. I also teach Interactive Communications Systems at <InlineIcon src="/hfg-logo.svg"><a
+        href="https://www.kaiser-x.com">HfG Schwäbisch
+        Gmünd</a></InlineIcon>.
+</p>-->
 			<CollectionList title="Professional Work" ariaDetails="Professional projects" entries={work} />
 		</section>
 		<section>
 			<!-- UNIVERSITY -->
 			<p class="insert-text color-text-low-contrast">
-				While studying, I wrote a bachelor thesis about <a href="projects/destinations"
-					>building wayfinding systems</a
-				>, designed a <a href="/projects/halo">browser built for research</a> and went to Japan.
+				While studying, I wrote a bachelor thesis about <a href="projects/destinations">
+					building wayfinding systems
+				</a>, designed a <a href="/projects/halo">browser built for research</a> and went to Japan.
 			</p>
 			<p class="insert-text color-text-low-contrast">
 				I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student and
-				an extended version of it became part of the exhibition <a
-					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
-					>100 Prozent Baumwolle</a
-				> at Übersee-Museum Bremen.
+				we later developed an extended version for the exhibition <a
+					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/">
+					100 Prozent Baumwolle
+				</a> at Übersee-Museum Bremen.
 			</p>
 			<!-- https://archive.is/3R3EH -->
 			<CollectionList title="University Projects" entries={universityProjects} />
@@ -115,12 +137,17 @@ let featured = allEntries.filter((elem) => {
 	.hero--section {
 		padding-top: clamp(4rem, 14vh, 8rem);
 		max-width: 50ch;
+
+		a {
+			color: var(--color-text);
+		}
 	}
 
 	.insert-text p,
 	.insert-text {
 		margin-block-start: 0.5rem;
 		margin-block-end: 0.5rem;
+		max-width: 46ch;
 	}
 
 	section {
@@ -167,6 +194,7 @@ let featured = allEntries.filter((elem) => {
 		background: var(--color-card-background);
 		padding: 1rem;
 		height: 100%;
+
 		h2 {
 			margin: 0;
 		}
@@ -175,17 +203,6 @@ let featured = allEntries.filter((elem) => {
 	@media (max-width: $screen-md) {
 		section {
 			margin-top: 0;
-		}
-	}
-
-	@media (max-width: $screen-sm) {
-		.hero--section {
-			display: flex;
-			position: relative;
-			align-items: end;
-			padding-bottom: clamp(1rem, 4vw, 10rem);
-			min-height: 100vh;
-			min-height: 100svh;
 		}
 	}
 </style>
