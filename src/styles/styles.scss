@@ -1,20 +1,20 @@
 @use '_vars.scss';
 
 :root {
-    --background-image: url(200-20-5-monochrome.png);
     --background-color: hsl(0, 0%, 100%);
-    --color-text: #000;
-    --color-text-low-contrast: #666;
-    --color-highlight: #ffbb0b;
-    --color-link: #0c93ec;
-    --color-link-visited: #840be0;
+    --background-image: url(200-20-5-monochrome.png);
+    --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
     --color-bg-negative: #242424;
     --color-border-negative-secondary: #424242;
-    --color-text-negative: #e4e4e4;
-
-    --color-card-border: #b7b7b7;
+    --color-border: rgba(0, 0, 0, 0.15); // Color for borders of images, etc.
     --color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
-    --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+    --color-card-border: #b7b7b7;
+    --color-highlight: #ffbb0b;
+    --color-link-visited: #840be0;
+    --color-link: #0c93ec;
+    --color-text-low-contrast: #666;
+    --color-text-negative: #e4e4e4;
+    --color-text: #000;
 
     /* TYPO */
     --font-stack: 'Charter', 'Cambria', 'Constantia', serif, system-ui;
@@ -35,18 +35,18 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: hsl(0, 0%, 3%);
-        --color-text: #f2f2f2;
-        --color-text-low-contrast: #aaa;
-        --color-highlight: #ffbb0b;
-        --color-link: #6bb7f5;
-        --color-link-visited: #c078f7;
-        --color-bg-negative: #fbfbf9;
-        --color-text-negative: #030303;
-        --color-border-negative-secondary: #5e5e5e;
-
-        --color-card-border: #424242;
-        --color-card-background: url(200-20-5-monochrome.png), #222220;
         --card-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.55);
+        --color-bg-negative: #fbfbf9;
+        --color-border-negative-secondary: #5e5e5e;
+        --color-border: rgba(255, 255, 255, 0.2); // Color for borders of images, etc.
+        --color-card-background: url(200-20-5-monochrome.png), #222220;
+        --color-card-border: #424242;
+        --color-highlight: #ffbb0b;
+        --color-link-visited: #c078f7;
+        --color-link: #6bb7f5;
+        --color-text-low-contrast: #aaa;
+        --color-text-negative: #030303;
+        --color-text: #f2f2f2;
     }
 
     img,
@@ -214,7 +214,7 @@ sup {
 blockquote {
     border-block: 2.5px solid;
     margin: 2rem 0;
-    padding: 0.6rem 0rem 0.75rem 0rem;
+    padding: 0.6rem 0 0.75rem 0;
     position: relative;
 
     * {
