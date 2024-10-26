@@ -198,12 +198,12 @@
     button h2 {
         margin: 0;
         width: unset;
-        color: var(--color-text-low-contrast);
+        color: var(--text-color-low-contrast);
     }
 
     button.active h2,
     button:hover h2 {
-        color: var(--color-text);
+        color: var(--text-color);
     }
 
     @media (max-width: $screen-lg) {

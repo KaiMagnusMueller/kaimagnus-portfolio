@@ -76,7 +76,7 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		.main-content img,
 		.main-content video {
 			position: relative;
-			outline: 1px solid var(--color-border-transparent);
+			outline: 1px solid var(--border-color-transparent);
 			outline-offset: -1px;
 			// box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 			border-radius: 4px;
@@ -114,10 +114,10 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		}
 
 		a {
-			color: var(--color-link);
+			color: var(--link-color);
 
 			&:visited {
-				color: var(--color-link-visited);
+				color: var(--link-color-visited);
 			}
 		}
 
@@ -128,7 +128,7 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 
 		.footnotes {
 			margin-top: 4rem;
-			border-top: 1px solid var(--color-border-transparent);
+			border-top: 1px solid var(--border-color-transparent);
 			padding-top: 1rem;
 		}
 	}
