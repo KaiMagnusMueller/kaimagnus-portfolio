@@ -2,13 +2,13 @@
 
 :root {
     --background-color: hsl(0, 0%, 100%);
-    --background-image: url(200-20-5-monochrome.png);
+    --background-image: url(/200-20-5-monochrome.png);
     --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
     --color-bg-negative: #242424;
     --color-border-negative-secondary: #424242;
     --color-border-transparent: rgba(0, 0, 0, 0.15); // Color for borders of images, etc.
     --color-border-strong: var(--color-text);
-    --color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
+    --color-card-background: url(/200-20-5-monochrome.png), #fbfbf9;
     --color-card-border: #b7b7b7;
     --color-highlight: #ffbb0b;
     --color-link-visited: #840be0;
@@ -41,7 +41,7 @@
         --color-border-negative-secondary: #5e5e5e;
         --color-border-transparent: rgba(255, 255, 255, 0.2); // Color for borders of images, etc.
         --color-border-strong: var(--color-text);
-        --color-card-background: url(200-20-5-monochrome.png), #222220;
+        --color-card-background: url(/200-20-5-monochrome.png), #222220;
         --color-card-border: #424242;
         --color-highlight: #ffbb0b;
         --color-link-visited: #c078f7;

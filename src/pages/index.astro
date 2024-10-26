@@ -24,6 +24,13 @@ let featured = allEntries.filter((elem) => {
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
+	<Fragment slot="head">
+		<link rel="preload" href="/kaimagnus-profile.jpeg" as="image" />
+		<link rel="preload" href="/200-20-5-monochrome.png" as="image" />
+		<link rel="dns-prefetch" href="https://cdn.kaimagnus.de" />
+		<link rel="dns-prefetch" href="https://res.cloudinary.com" />
+	</Fragment>
+
 	<main class="index-page color-text">
 		<div class="hero--section color-text-low-contrast text text-large">
 			<div class="hero--section-content-wrapper">
@@ -35,17 +42,28 @@ let featured = allEntries.filter((elem) => {
 					>,
 				</h1>
 				<p>
-					a designer with many interests ranging from product to design systems, productivity, AI and code.
-					After developing a few Figma plugins, like <a
+					a Product Designer and developer. After building a few Figma plugins, like <a
 						href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a
 					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>,
-					I am currently working on how we can create better designs with real data.
+					I am currently working on how we can use real data to create better designs and prototypes.
 				</p>
 				<p>
 					Whenever I get that creative itch, I am working on <a href="https://app.intersectionslab.com"
 						>Collections</a
-					>, an experimental platform to explore how computers can help us think and create.
+					>. An experimental platform for knowledge management to explore how computers can help us think and
+					create.
 				</p>
+				<!-- <p>
+					a Product Designer and developer. After developing a few Figma plugins, like <a
+						href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a
+					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>,
+					I am currently working on how we can use real data to create better designs and prototypes.
+				</p> -->
+				<!-- <p>
+					I'm fascinated by knoweledge management. But instead of writing yet another todo list app, I am
+					working on <a href="https://app.intersectionslab.com">Collections</a>, an experimental platform to
+					explore how computers can help us think and create, whenever I get that creative itch.
+				</p> -->
 			</div>
 		</div>
 
@@ -144,7 +162,7 @@ let featured = allEntries.filter((elem) => {
 		@import '../styles/_vars.scss';
 
 		.hero--section {
-			padding-top: clamp(4rem, 14vh, 8rem);
+			padding-top: clamp(4rem, 12vh, 8rem);
 			max-width: 50ch;
 
 			a {
@@ -170,11 +188,6 @@ let featured = allEntries.filter((elem) => {
 
 		h1 {
 			margin-bottom: 0.5em;
-		}
-
-		span.highlight-star {
-			position: absolute;
-			transform: translate(-110%, -20%);
 		}
 
 		.quick-links {
@@ -210,6 +223,10 @@ let featured = allEntries.filter((elem) => {
 		@media (max-width: $screen-md) {
 			section {
 				margin-top: 0;
+
+				&:first-of-type {
+					margin-block-start: 4rem;
+				}
 			}
 		}
 	</style>
