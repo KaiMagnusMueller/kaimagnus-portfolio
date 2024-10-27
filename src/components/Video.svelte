@@ -12,7 +12,7 @@
 </figure>
 
 <style lang="scss">
-    @import '../styles/_vars.scss';
+    @use '../styles/vars.scss';
 
     figure {
         display: grid;
@@ -31,7 +31,7 @@
         font-style: italic;
     }
 
-    @media (max-width: $screen-md) {
+    @media (max-width: vars.$screen-md) {
         figure {
             display: flex;
             flex-direction: column;

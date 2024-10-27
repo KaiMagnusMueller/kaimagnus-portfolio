@@ -144,7 +144,7 @@ let featured = allEntries.filter((elem) => {
 	</main>
 
 	<style lang="scss">
-		@import '../styles/_vars.scss';
+		@use '../styles/vars.scss';
 
 		.hero--section {
 			padding-top: clamp(4rem, 12vh, 8rem);
@@ -210,7 +210,7 @@ let featured = allEntries.filter((elem) => {
 			}
 		}
 
-		@media (max-width: $screen-md) {
+		@media (max-width: vars.$screen-md) {
 			section {
 				&,
 				&:first-of-type {
