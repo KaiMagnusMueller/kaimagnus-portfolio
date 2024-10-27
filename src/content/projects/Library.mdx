@@ -22,7 +22,6 @@ import UseCase from '@components/UseCase.svelte';
 		allowfullscreen
 		style="position:absolute;top:0;left:0;width:100%;height:100%;"
 		title="OPAC Stuttgart Redesign">
-		{' '}
 	</iframe>
 </div>
 <script src="https://player.vimeo.com/api/player.js"> </script>
@@ -43,7 +42,6 @@ The official catalogue features a functional main page. Users can search by typi
 	alt="An overview of the official catalogue and its features."
 	src="/video/library/library-opac.mp4"
 	type="video">
-	{' '}
 </Figure>
 
 ## Conclusion
@@ -92,9 +90,7 @@ export const _srcSet2 = [
 	},
 ];
 
-<UseCase client:visible srcSet={_srcSet2}>
-	{' '}
-</UseCase>
+<UseCase client:visible srcSet={_srcSet2}></UseCase>
 
 ## Redesign
 
