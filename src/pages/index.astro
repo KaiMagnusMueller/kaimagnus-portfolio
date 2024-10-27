@@ -4,6 +4,7 @@ import { SITE } from '@config';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import CollectionList from '@components/CollectionList.astro';
+import InlineIcon from '../components/InlineIcon.astro';
 
 const articles = await getCollection('articles', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
@@ -23,23 +24,34 @@ let featured = allEntries.filter((elem) => {
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
+	<Fragment slot="head">
+		<link rel="preload" href="/kaimagnus-profile.jpeg" as="image" />
+		<link rel="preload" href="/200-20-5-monochrome.png" as="image" />
+		<link rel="dns-prefetch" href="https://cdn.kaimagnus.de" />
+		<link rel="dns-prefetch" href="https://res.cloudinary.com" />
+	</Fragment>
+
 	<main class="index-page color-text">
 		<div class="hero--section color-text-low-contrast text text-large">
 			<div class="hero--section-content-wrapper">
-				<h1 class="">
-					<span class="color-text">Hi, I'm Kai Magnus Müller.</span>
+				<h1>
+					Hi, I'm <InlineIcon
+						src="/kaimagnus-profile.jpeg"
+						classList="avatar"
+						alt="Kai Magnus Müller profile picture">Kai Magnus Müller</InlineIcon
+					>,
 				</h1>
 				<p>
-					A UX/UI designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, working on applications
-					for <a href="/work/epic-designing-internal-applications"> investment and finance</a>. I teach
-					Interactive Communications Systems at <a href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a>
-					and developed Figma plugins like <a
+					a designer and hobby developer. After building a few Figma plugins, like <a
 						href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a
-					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>.
+					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>,
+					I am currently working on how we can use real data to create better designs and prototypes.
 				</p>
 				<p>
-					In my spare time, I am working on <a href="https://app.intersectionslab.com">Collections</a>, an
-					experimental platform to explore how computers can help us think and create.
+					Whenever I get that creative itch, I am working on <a href="https://app.intersectionslab.com"
+						>Collections</a
+					>. An experimental platform for knowledge management to explore how computers can help us think and
+					create.
 				</p>
 			</div>
 		</div>
@@ -73,32 +85,54 @@ let featured = allEntries.filter((elem) => {
 		<section>
 			<!-- WORK -->
 			<!-- <div class="insert-text color-text-low-contrast">
-				<p class="">
-					During my work at Syncier and Kaiser X Labs, I worked on a number of investment management
-					applications for <a href="https://www.idsdata.com/solutions/de/esg/">IDS</a> as designer and design lead
-					and was part of an in-house innovation lab.
-				</p>
+                <p class="">
+                    During my work at Syncier and Kaiser X Labs, I worked on a number of investment management
+                    applications for <a href="https://www.idsdata.com/solutions/de/esg/">IDS</a> as designer and design lead
+                    and was part of an in-house innovation lab.
+                </p>
+                <p>
+                    I also love to tinker, improve my workflow and make my MacBook work for me. Some of the results even
+                    made it here:
+                </p>
+            </div> -->
+			<span class="insert-text">
 				<p>
-					I also love to tinker, improve my workflow and make my MacBook work for me. Some of the results even
-					made it here:
+					As UI/UX Designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, I was leading design for <a
+						href="/work/epic-designing-internal-applications">insurance and investment</a
+					> applications and <a href="/work/grid-component-system">design systems</a>, and was part of our <a
+						href="/work/omni-comms-tool-for-insurance-agents">in-house innovation lab</a
+					>.</p
+				>
+				<p
+					>Before that I spent some time at <a href="https://www.intuity.de/">Intuity</a> and <a
+						href="https://web.archive.org/web/20181229164945/http://precious-forever.com/">Precious</a
+					>, where I worked on fleet management applications and point of sale terminals. Currently, I also
+					teach Interactive Communications Systems at <a href="https://www.hfg-gmuend.de"
+						>HfG Schwäbisch Gmünd</a
+					>.
 				</p>
-			</div> -->
+			</span>
 			<CollectionList title="Professional Work" ariaDetails="Professional projects" entries={work} />
 		</section>
 		<section>
 			<!-- UNIVERSITY -->
-			<p class="insert-text color-text-low-contrast">
-				While studying, I wrote a bachelor thesis about <a href="projects/destinations"
-					>building wayfinding systems</a
-				>, designed a <a href="/projects/halo">browser built for research</a> and went to Japan.
-			</p>
-			<p class="insert-text color-text-low-contrast">
-				I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student and
-				an extended version of it became part of the exhibition <a
-					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
-					>100 Prozent Baumwolle</a
-				> at Übersee-Museum Bremen.
-			</p>
+			<span class="insert-text">
+				<p>
+					While studying, I wrote a bachelor thesis about <a href="projects/destinations"
+						>building wayfinding systems</a
+					>, designed a <a href="/projects/halo">browser built for research</a> (which inspired <a
+						href="https://app.intersectionslab.com">Collections</a
+					>), and went to Japan.
+				</p>
+				<p>
+					I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student,
+					and we later developed an extended version for the exhibition
+					<a
+						href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
+						>100 Prozent Baumwolle</a
+					> at Übersee-Museum Bremen.
+				</p>
+			</span>
 			<!-- https://archive.is/3R3EH -->
 			<CollectionList title="University Projects" entries={universityProjects} />
 		</section>
@@ -108,84 +142,81 @@ let featured = allEntries.filter((elem) => {
 			<CollectionList title="Writing" entries={articles} />
 		</section>
 	</main>
-</Layout>
-<style lang="scss">
-	@import '../styles/_vars.scss';
 
-	.hero--section {
-		padding-top: clamp(4rem, 14vh, 8rem);
-		max-width: 50ch;
-	}
+	<style lang="scss">
+		@import '../styles/_vars.scss';
 
-	.insert-text p,
-	.insert-text {
-		margin-block-start: 0.5rem;
-		margin-block-end: 0.5rem;
-	}
+		.hero--section {
+			padding-top: clamp(4rem, 12vh, 8rem);
+			max-width: 50ch;
 
-	section {
-		margin-block-start: 4rem;
-		max-width: 48ch;
-
-		&:first-of-type {
-			margin-block-start: 6rem;
-		}
-	}
-
-	h1 {
-		margin-bottom: 0.5em;
-	}
-
-	span.highlight-star {
-		position: absolute;
-		transform: translate(-110%, -20%);
-	}
-
-	.quick-links {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-		gap: 2rem;
-		margin-block: 6rem;
-
-		a {
-			text-decoration: none;
-
-			&:hover {
-				text-decoration: revert;
+			a {
+				color: var(--text-color);
 			}
 		}
-	}
 
-	.link-card {
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		box-shadow: var(--card-shadow);
-		// justify-content: space-between;
-
-		border: 1px solid var(--color-card-border);
-		background: var(--color-card-background);
-		padding: 1rem;
-		height: 100%;
-		h2 {
-			margin: 0;
-		}
-	}
-
-	@media (max-width: $screen-md) {
 		section {
-			margin-top: 0;
-		}
-	}
+			margin-block-start: 4rem;
+			max-width: 48ch;
 
-	@media (max-width: $screen-sm) {
-		.hero--section {
-			display: flex;
-			position: relative;
-			align-items: end;
-			padding-bottom: clamp(1rem, 4vw, 10rem);
-			min-height: 100vh;
-			min-height: 100svh;
+			&:first-of-type {
+				margin-block-start: 6rem;
+			}
+
+			.insert-text p {
+				margin-block-start: 0.5rem;
+				margin-block-end: 0.5rem;
+				max-width: 46ch;
+				color: var(--text-color-low-contrast);
+			}
 		}
-	}
-</style>
+
+		h1 {
+			margin-bottom: 0.5em;
+		}
+
+		.quick-links {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 2rem;
+			margin-block: 6rem;
+
+			a {
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: revert;
+				}
+			}
+		}
+
+		.link-card {
+			display: flex;
+			flex-direction: column;
+			gap: 0.2rem;
+			box-shadow: var(--card-shadow);
+			border: 1px solid var(--card-border-color);
+			border-radius: var(--border-radius-medium);
+			background: var(--card-bg-color);
+			padding: 1rem;
+			height: 100%;
+
+			h2 {
+				margin: 0;
+			}
+
+			&:hover {
+				background-color: var(--bg-color-elev-1-hover);
+			}
+		}
+
+		@media (max-width: $screen-md) {
+			section {
+				&,
+				&:first-of-type {
+					margin-block-start: 4rem;
+				}
+			}
+		}
+	</style>
+</Layout>

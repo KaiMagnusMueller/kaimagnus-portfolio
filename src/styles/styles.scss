@@ -1,28 +1,38 @@
 @use '_vars.scss';
 
 :root {
-    --background-color: hsl(0, 0%, 100%);
-    --background-image: url(200-20-5-monochrome.png);
+    --bg-color-elev-0: hsl(0, 0%, 100%);
+    --bg-color-elev-1: hsl(0, 0%, 98%);
+    --bg-color-elev-1-hover: hsl(0, 0%, 96%);
+    --bg-image: url(/200-20-5-monochrome.png);
+
+    --text-color: #000;
+    --text-color-low-contrast: #666;
+    --text-color-negative: #e4e4e4;
+    --link-color: #0c93ec;
+    --link-color-visited: #840be0;
+
+    --bg-color-elev-0-negative: #242424;
+
+    --border-color-strong: var(--text-color);
+    --border-color-transparent: rgba(0, 0, 0, 0.15); // Color for borders of images, etc.
+    --border-color-negative-secondary: #424242;
+
+    --card-border-color: var(--border-color-transparent);
+    --card-bg-color: var(--bg-image), var(--bg-color-elev-1);
     --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
-    --color-bg-negative: #242424;
-    --color-border-negative-secondary: #424242;
-    --color-border: rgba(0, 0, 0, 0.15); // Color for borders of images, etc.
-    --color-card-background: url(200-20-5-monochrome.png), #fbfbf9;
-    --color-card-border: #b7b7b7;
+
     --color-highlight: #ffbb0b;
-    --color-link-visited: #840be0;
-    --color-link: #0c93ec;
-    --color-text-low-contrast: #666;
-    --color-text-negative: #e4e4e4;
-    --color-text: #000;
+
+    --border-radius-medium: 4px;
 
     /* TYPO */
     --font-stack: 'Charter', 'Cambria', 'Constantia', serif, system-ui;
     /* GENERAL STYLES */
-    color: var(--color-text);
+    color: var(--text-color);
     font-family: var(--font-stack), serif;
     --font-size-small: .875rem;
-    --font-size-large: 1.625rem;
+    --font-size-large: 1.75rem;
 
     /* BREAKPOINTS */
     --screen-sm: 640px;
@@ -34,19 +44,25 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: hsl(0, 0%, 3%);
+        --bg-color-elev-0: hsl(0, 0%, 3%);
+        --bg-color-elev-1: hsl(0, 0%, 10%);
+        --bg-color-elev-1-hover: hsl(0, 0%, 12%);
+
+        --text-color: #f2f2f2;
+        --text-color-low-contrast: #aaa;
+        --text-color-negative: #030303;
+        --link-color: #6bb7f5;
+        --link-color-visited: #c078f7;
+
+        --bg-color-elev-0-negative: #fbfbf9;
+
+        --border-color-strong: var(--text-color);
+        --border-color-transparent: rgba(255, 255, 255, 0.2); // Color for borders of images, etc.
+        --border-color-negative-secondary: #5e5e5e;
+
         --card-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.55);
-        --color-bg-negative: #fbfbf9;
-        --color-border-negative-secondary: #5e5e5e;
-        --color-border: rgba(255, 255, 255, 0.2); // Color for borders of images, etc.
-        --color-card-background: url(200-20-5-monochrome.png), #222220;
-        --color-card-border: #424242;
+
         --color-highlight: #ffbb0b;
-        --color-link-visited: #c078f7;
-        --color-link: #6bb7f5;
-        --color-text-low-contrast: #aaa;
-        --color-text-negative: #030303;
-        --color-text: #f2f2f2;
     }
 
     img,
@@ -57,19 +73,15 @@
 }
 
 .color-text {
-    color: var(--color-text);
-
-    a {
-        color: var(--color-text);
-    }
+    color: var(--text-color);
 }
 
 .color-text-low-contrast {
-    color: var(--color-text-low-contrast);
+    color: var(--text-color-low-contrast);
+}
 
-    a {
-        color: var(--color-text-low-contrast);
-    }
+a {
+    color: inherit;
 }
 
 .position--relative {
@@ -80,6 +92,15 @@
     margin-left: auto;
 }
 
+.circle {
+    border-radius: 100%;
+}
+
+.avatar {
+    border-radius: 100%;
+    outline: 2px solid var(--border-color-strong);
+    outline-offset: -2px;
+}
 
 .text-small,
 .text-small p {
@@ -87,6 +108,8 @@
     font-weight: 400;
     font-size: var(--font-size-small);
 }
+
+
 
 .text-regular,
 .text-regular h2 {
@@ -117,12 +140,12 @@ h2,
 h3,
 h4,
 .text-large p {
-    margin-top: 0.5em;
+    margin-block-start: 0.5em;
     margin-bottom: 0.5em;
 }
 
-h1 + h2,
-h2 + h3 {
+h1+h2,
+h2+h3 {
     margin-block-start: 1rem;
 
 }
@@ -224,16 +247,16 @@ blockquote {
     }
 }
 
-p > code {
+p>code {
     border-radius: 2px;
     background-color: #24292e;
     color: #e1e4e8;
     padding: 0.125rem 0.25rem;
-    border: 1px solid var(--color-bg-negative);
+    border: 1px solid var(--bg-color-elev-0-negative);
 }
 
 pre {
-    border: 1px solid var(--color-border-negative-secondary);
+    border: 1px solid var(--border-color-negative-secondary);
     padding: 0.5rem 0.75rem;
     background-color: unset;
     border-radius: 2px;
@@ -257,9 +280,9 @@ pre {
 kbd {
     background-color: var(--color-background);
     border-radius: 3px;
-    border: 1px solid var(--color-text);
+    border: 1px solid var(--text-color);
     // box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
-    color: var(--color-text);
+    color: var(--text-color);
     display: inline-block;
     font-family: system-ui;
     font-weight: 600;
@@ -346,7 +369,7 @@ figcaption {
         // font-size: 0.875rem;
         position: relative;
         text-wrap: unset;
-        color: var(--color-text-low-contrast);
+        color: var(--text-color-low-contrast);
     }
 }
 
@@ -358,7 +381,7 @@ figcaption {
     grid-column: 1 / span 9;
 }
 
-.grid--full + figcaption {
+.grid--full+figcaption {
     grid-column: 10/-1;
     position: absolute;
     bottom: 0;
@@ -388,7 +411,7 @@ figcaption {
         gap: 0.5rem;
     }
 
-    .grid--full + figcaption {
+    .grid--full+figcaption {
         width: 100%;
         position: relative;
         transform: none;
@@ -404,7 +427,7 @@ figcaption {
         // 	padding: 0.5em;
         // 	border-width: 0 0 2px 2px;
         // 	border-style: solid;
-        // 	border-color: var(--color-text-low-contrast);
+        // 	border-color: var(--text-color-low-contrast);
         // 	border-bottom-left-radius: 4px;
     }
 }
@@ -413,12 +436,4 @@ figcaption {
     .figure {
         margin: 2.5em 0;
     }
-}
-
-
-.insert-text p,
-.insert-text {
-    max-width: 46ch;
-    margin-block-start: 0.5rem;
-    margin-block-end: 0.5rem;
 }

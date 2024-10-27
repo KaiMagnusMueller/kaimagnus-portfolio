@@ -49,9 +49,9 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 				<li><a href="https://www.figma.com/@kaimagnus">Figma</a></li>
 				<li><a href="https://github.com/kaimagnusmueller">GitHub</a></li>
 				<li>
-					<a href="./rss.xml">RSS</a><sup
-						><a href="https://github.com/withastro/roadmap/discussions/419">beta</a></sup
-					>
+					<a href="./rss.xml">RSS</a><sup>
+						<a href="https://github.com/withastro/roadmap/discussions/419">beta</a>
+					</sup>
 				</li>
 				<li><a href="https://www.threads.net/@ofcoursekai">Threads</a></li>
 				<li><a href="https://www.linkedin.com/in/kai-magnus-m%C3%BCller-25a176207/">LinkedIn</a></li>
@@ -66,13 +66,14 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 	@import '../styles/_vars.scss';
 
 	html {
-		background: var(--background-image), var(--background-color);
+		background: var(--bg-image), var(--bg-color-elev-0);
 		padding-inline: clamp(1rem, 10vw, 10rem);
 	}
 	body {
 		position: relative;
 		margin: auto;
 		max-width: $screen-lg;
+		font-size: 1.125rem; //default font size is 18px
 	}
 
 	footer {
