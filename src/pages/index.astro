@@ -106,8 +106,10 @@ let featured = allEntries.filter((elem) => {
 				<p
 					>Before that I spent some time at <a href="https://www.intuity.de/">Intuity</a> and <a
 						href="https://web.archive.org/web/20181229164945/http://precious-forever.com/">Precious</a
-					> where I worked on fleet management applications and point of sale terminals. Currently, I also teach
-					Interactive Communications Systems at <a href="https://www.hfg-gmuend.de">HfG Schwäbisch Gmünd</a>.
+					>, where I worked on fleet management applications and point of sale terminals. Currently, I also
+					teach Interactive Communications Systems at <a href="https://www.hfg-gmuend.de"
+						>HfG Schwäbisch Gmünd</a
+					>.
 				</p>
 			</span>
 			<CollectionList title="Professional Work" ariaDetails="Professional projects" entries={work} />
@@ -120,10 +122,10 @@ let featured = allEntries.filter((elem) => {
 						>building wayfinding systems</a
 					>, designed a <a href="/projects/halo">browser built for research</a> (which inspired <a
 						href="https://app.intersectionslab.com">Collections</a
-					>) and went to Japan.
+					>), and went to Japan.
 				</p>
 				<p>
-					I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student
+					I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student,
 					and we later developed an extended version for the exhibition
 					<a
 						href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
@@ -210,8 +212,7 @@ let featured = allEntries.filter((elem) => {
 
 		@media (max-width: $screen-md) {
 			section {
-				margin-top: 0;
-
+				&,
 				&:first-of-type {
 					margin-block-start: 4rem;
 				}
