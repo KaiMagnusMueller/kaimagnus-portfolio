@@ -44,12 +44,7 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 }
 
 <style lang="scss">
-	@import '../styles/_vars.scss';
-
-	.post-list {
-		margin-block-start: 2rem;
-		margin-block-end: 4rem;
-	}
+	@use '../styles/vars.scss';
 
 	ul {
 		margin: 0;
@@ -58,7 +53,6 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	}
 
 	h2 {
-		margin: 3px 0;
 		font-size: inherit;
 
 		a {
@@ -83,12 +77,6 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	@media (pointer: coarse) {
 		a {
 			padding-block: 0.125rem;
-		}
-	}
-
-	@media (max-width: $screen-md) {
-		.post-list {
-			margin-bottom: 3rem;
 		}
 	}
 </style>

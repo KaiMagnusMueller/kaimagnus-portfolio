@@ -1,4 +1,4 @@
-@import '../styles/_vars.scss';
+@use '../styles/vars.scss';
 
 html {
     font-style: normal;
@@ -10,7 +10,7 @@ html {
     scroll-behavior: smooth;
 }
 
-// @media (max-width: $screen-md) and (pointer: coarse) {
+// @media (max-width: vars.$screen-md) and (pointer: coarse) {
 // 	html {
 // 		font-size: 18px;
 // 	}
