@@ -148,6 +148,11 @@ let featured = allEntries.filter((elem) => {
 
 		.hero--section {
 			padding-top: clamp(4rem, 12vh, 8rem);
+
+			@media screen and (max-width: vars.$screen-lg) {
+				padding-top: clamp(2rem, 8vh, 6rem);
+			}
+
 			max-width: 50ch;
 
 			a {
