@@ -1,9 +1,9 @@
 @use '_vars.scss';
 
 :root {
-    --bg-color-elev-0: hsl(0, 0%, 100%);
-    --bg-color-elev-1: hsl(0, 0%, 98%);
-    --bg-color-elev-1-hover: hsl(0, 0%, 96%);
+    --bg-color-elev-0: hsl(0, 0%, 99%);
+    --bg-color-elev-1: hsl(0, 0%, 96%);
+    --bg-color-elev-1-hover: hsl(0, 0%, 94%);
     --bg-image: url(/200-20-5-monochrome.png);
 
     --text-color: #000;
@@ -100,6 +100,11 @@ a {
     border-radius: 100%;
     outline: 2px solid var(--border-color-strong);
     outline-offset: -2px;
+
+    @media (max-width: vars.$screen-sm) {
+        outline-width: 1px;
+        outline-offset: -1px;
+    }
 }
 
 .text-small,
