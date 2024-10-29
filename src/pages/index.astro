@@ -34,7 +34,7 @@ let featured = allEntries.filter((elem) => {
 	<main class="index-page color-text">
 		<div class="hero--section color-text-low-contrast text text-large">
 			<div class="hero--section-content-wrapper">
-				<h1>
+				<h1 class="color-text">
 					Hi, I'm <InlineIcon
 						src="/kaimagnus-profile.jpeg"
 						classList="avatar"
@@ -42,16 +42,17 @@ let featured = allEntries.filter((elem) => {
 					>,
 				</h1>
 				<p>
-					a designer and hobby developer. After building a few Figma plugins, like <a
+					a product designer and developer. At <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, I was
+					leading design for <a href="/work/epic-designing-internal-applications">insurance and investment</a>
+					applications and <a href="/work/grid-component-system">design systems</a>, and was part of our <a
+						href="/work/omni-comms-tool-for-insurance-agents">in-house innovation lab</a
+					>.</p
+				>
+				<p
+					>After building a few Figma plugins, like <a
 						href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a
 					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>,
 					I am currently working on how we can use real data to create better designs and prototypes.
-				</p>
-				<p>
-					Whenever I get that creative itch, I am working on <a href="https://app.intersectionslab.com"
-						>Collections</a
-					>. An experimental platform for knowledge management to explore how computers can help us think and
-					create.
 				</p>
 			</div>
 		</div>
@@ -96,20 +97,19 @@ let featured = allEntries.filter((elem) => {
                 </p>
             </div> -->
 			<span class="insert-text">
-				<p>
-					As UI/UX Designer at <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, I was leading design for <a
-						href="/work/epic-designing-internal-applications">insurance and investment</a
-					> applications and <a href="/work/grid-component-system">design systems</a>, and was part of our <a
-						href="/work/omni-comms-tool-for-insurance-agents">in-house innovation lab</a
-					>.</p
-				>
 				<p
-					>Before that I spent some time at <a href="https://www.intuity.de/">Intuity</a> and <a
+					>Before Kaiser X Labs, I spent some time at <a href="https://www.intuity.de/">Intuity</a> and <a
 						href="https://web.archive.org/web/20181229164945/http://precious-forever.com/">Precious</a
 					>, where I worked on fleet management applications and point of sale terminals. Currently, I also
 					teach Interactive Communications Systems at <a href="https://www.hfg-gmuend.de"
 						>HfG Schwäbisch Gmünd</a
 					>.
+				</p>
+				<p>
+					Whenever I get that creative itch, I am working on <a href="https://app.intersectionslab.com"
+						>Collections</a
+					>. An experimental platform for knowledge management to explore how computers can help us think and
+					create.
 				</p>
 			</span>
 			<CollectionList title="Professional Work" ariaDetails="Professional projects" entries={work} />
@@ -150,18 +150,14 @@ let featured = allEntries.filter((elem) => {
 			padding-top: clamp(4rem, 12vh, 8rem);
 
 			@media screen and (max-width: vars.$screen-lg) {
-				padding-top: clamp(2rem, 8vh, 6rem);
+				padding-top: clamp(2rem, 10vh, 6rem);
 			}
 
 			max-width: 50ch;
-
-			a {
-				color: var(--text-color);
-			}
 		}
 
 		section {
-			margin-block-start: 4rem;
+			margin-block-start: 6rem;
 			max-width: 48ch;
 
 			&:first-of-type {

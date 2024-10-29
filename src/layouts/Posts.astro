@@ -107,9 +107,11 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 			}
 
 			@media (max-width: vars.$screen-md) {
-				& {
-					display: none;
-				}
+				display: none;
+			}
+
+			@media (prefers-color-scheme: dark) {
+				opacity: 0.16;
 			}
 		}
 
@@ -165,10 +167,8 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		margin-left: 0.5rem;
 		width: 20px;
 		height: 20px;
-	}
 
-	@media (hover: hover) {
-		.anchor-link {
+		@media (hover: hover) {
 			visibility: hidden;
 			opacity: 0;
 		}
