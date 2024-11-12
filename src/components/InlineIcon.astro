@@ -8,16 +8,17 @@ export interface Props {
 const { classList = 'company-logo', src = '', alt = '' } = Astro.props;
 ---
 
-<span><div><img {src} class={classList} {alt} /></div><slot /></span>
+<span><img {src} class={classList} {alt} /><slot /></span>
 
 <style lang="scss">
 	@use '../styles/vars.scss';
 
 	img {
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		margin-inline-start: -1.5em;
+		// top: 50%;
+		// left: 50%;
+		// transform: translate(-50%, -50%);
 		background-color: var(--bg-color-elev-0);
 		aspect-ratio: 1;
 		height: 1.25em;
@@ -28,19 +29,9 @@ const { classList = 'company-logo', src = '', alt = '' } = Astro.props;
 		}
 	}
 
-	div {
-		display: inline-block;
-		position: relative;
-		margin-bottom: -0.2lh;
-		margin-inline-end: 0.125em;
-		aspect-ratio: 1;
-		height: 1lh;
-		@media (max-width: vars.$screen-sm) {
-			margin-inline-end: 0.25em;
-		}
-	}
-
 	span {
+		position: relative;
+		margin-inline-start: 1.6em;
 		// color: var(--text-color);
 		text-wrap: nowrap;
 	}
