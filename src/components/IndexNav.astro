@@ -40,75 +40,90 @@
 <nav id="navigation"> </nav>
 
 <script>
-	const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-
-	// console.log(Array.from(headings).map((elem) => elem.innerText));
-	// console.log(headings);
-
-	const navigation = document.getElementById('navigation');
-
-	navigation?.appendChild(document.createElement('ul'));
-
-	headings.forEach((heading) => {
-		// console.log(heading);
-
-		let text = '';
-
-		if (heading.dataset.tocText) {
-			text = heading.dataset.tocText;
-		} else {
-			text = heading.innerText;
+	// This IIFE (Immediately Invoked Function Expression) ensures that the code runs immediately after it is defined.
+	(() => {
+		if (window.innerWidth < 768) {
+			console.log('IndexNav.astro: window.innerWidth < 768, cancelling…');
+			return;
 		}
 
-		// console.log(text);
+		const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
-		const listItem = document.createElement('li');
-		const anchor = document.createElement('a');
+		// console.log(Array.from(headings).map((elem) => elem.innerText));
+		// console.log(headings);
 
-		const div1 = document.createElement('div');
-		const div2 = document.createElement('div');
-		const span = document.createElement('span');
+		const navigation = document.getElementById('navigation');
 
-		anchor.href = `#${heading.id}`;
-		div1.innerText = text;
-		div2.innerText = text;
-		span.innerText = text;
+		if (navigation) {
+			navigation.appendChild(document.createElement('ul'));
+		}
 
-		div1.appendChild(span);
+		headings.forEach((heading) => {
+			// console.log(heading);
 
-		anchor.appendChild(div1);
-		anchor.appendChild(div2);
+			let text = '';
 
-		listItem.appendChild(anchor);
-		navigation.querySelector('ul').appendChild(listItem);
-	});
+			if (heading.dataset.tocText) {
+				text = heading.dataset.tocText;
+			} else {
+				text = heading.innerText;
+			}
 
-	const observerOptions = {
-		root: null,
-		rootMargin: '0px',
-		threshold: 0.5,
-	};
+			// console.log(text);
 
-	const observerCallback = (entries) => {
-		entries.forEach((entry) => {
-			const navItem = document.querySelector(`a[href="#${entry.target.id}"]`);
-			// console.log(entry); // Removed for production
+			const listItem = document.createElement('li');
+			const anchor = document.createElement('a');
 
-			if (navItem) {
-				if (entry.isIntersecting) {
-					navItem.classList.add('active');
-				} else {
-					navItem.classList.remove('active');
-				}
+			const div1 = document.createElement('div');
+			const div2 = document.createElement('div');
+			const span = document.createElement('span');
+
+			anchor.href = `#${heading.id}`;
+			div1.innerText = text;
+			div2.innerText = text;
+			span.innerText = text;
+
+			div1.appendChild(span);
+
+			anchor.appendChild(div1);
+			anchor.setAttribute('aria-label', text);
+
+			anchor.ariaLabel = text;
+
+			listItem.appendChild(anchor);
+			const ulElement = navigation.querySelector('ul');
+			if (ulElement) {
+				ulElement.appendChild(listItem);
 			}
 		});
-	};
 
-	const observer = new IntersectionObserver(observerCallback, observerOptions);
+		const observerOptions = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.5,
+		};
 
-	document.querySelectorAll('[id]').forEach((section) => {
-		observer.observe(section);
-	});
+		const observerCallback = (entries) => {
+			entries.forEach((entry) => {
+				const navItem = document.querySelector(`a[href="#${entry.target.id}"]`);
+				// console.log(entry); // Removed for production
+
+				if (navItem) {
+					if (entry.isIntersecting) {
+						navItem.classList.add('active');
+					} else {
+						navItem.classList.remove('active');
+					}
+				}
+			});
+		};
+
+		const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+		headings.forEach((section) => {
+			observer.observe(section);
+		});
+	})();
 </script>
 
 <style lang="scss" is:global>
@@ -122,6 +137,7 @@
 		justify-content: center;
 		align-items: center;
 		transform: translateY(-50%);
+		z-index: 999;
 		width: clamp(1rem, 10vw, 10rem);
 	}
 
@@ -220,7 +236,7 @@
 	}
 
 	@media (max-width: vars.$screen-md) {
-		nav {
+		#navigation {
 			display: none;
 			top: 0;
 			left: 50%;
@@ -231,11 +247,11 @@
 			width: 100%;
 		}
 
-		ul {
+		#navigation ul {
 			flex-direction: row;
 		}
 
-		a {
+		#navigation a {
 			width: 1.5rem;
 			height: 2.5rem;
 
