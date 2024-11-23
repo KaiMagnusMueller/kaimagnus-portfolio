@@ -80,6 +80,7 @@ iframe {
 
 :target {
     scroll-margin-block: 10rem;
-    outline: 2px solid var(--color-highlight);
+    outline: 2px solid var(--border-color-strong);
     border-radius: 2px;
+    outline-offset: 3px;
 }

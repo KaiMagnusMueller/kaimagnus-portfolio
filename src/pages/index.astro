@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import CollectionList from '@components/CollectionList.astro';
 import InlineIcon from '../components/InlineIcon.astro';
+import IndexNav from '@components/IndexNav.astro';
 
 const articles = await getCollection('articles', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
@@ -31,10 +32,12 @@ let featured = allEntries.filter((elem) => {
 		<link rel="dns-prefetch" href="https://res.cloudinary.com" />
 	</Fragment>
 
+	<IndexNav />
+
 	<main class="index-page color-text">
 		<div class="hero--section color-text-low-contrast text text-large">
 			<div class="hero--section-content-wrapper">
-				<h1 class="color-text">
+				<h1 class="color-text" id="start">
 					Hi, I'm <InlineIcon
 						src="/kaimagnus-profile.jpeg"
 						classList="avatar"
@@ -80,7 +83,12 @@ let featured = allEntries.filter((elem) => {
 
 		<section>
 			<!-- Featured means noteworthy -->
-			<CollectionList title="Highlights" ariaDetails="Noteworthy projects and articles" entries={featured} />
+			<CollectionList
+				id="highlights"
+				title="Highlights"
+				ariaDetails="Noteworthy projects and articles"
+				entries={featured}
+			/>
 		</section>
 
 		<section>
@@ -112,7 +120,7 @@ let featured = allEntries.filter((elem) => {
 					create.
 				</p>
 			</span>
-			<CollectionList title="Professional Work" ariaDetails="Professional projects" entries={work} />
+			<CollectionList id="work" title="Professional Work" ariaDetails="Professional projects" entries={work} />
 		</section>
 		<section>
 			<!-- UNIVERSITY -->
@@ -134,12 +142,12 @@ let featured = allEntries.filter((elem) => {
 				</p>
 			</span>
 			<!-- https://archive.is/3R3EH -->
-			<CollectionList title="University Projects" entries={universityProjects} />
+			<CollectionList id="projects" title="University Projects" entries={universityProjects} />
 		</section>
 		<section>
 			<!-- POSTS -->
 			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
-			<CollectionList title="Writing" entries={articles} />
+			<CollectionList id="writing" title="Writing" entries={articles} />
 		</section>
 	</main>
 
@@ -147,21 +155,24 @@ let featured = allEntries.filter((elem) => {
 		@use '../styles/vars.scss';
 
 		.hero--section {
-			padding-top: clamp(4rem, 12vh, 8rem);
-
-			@media screen and (max-width: vars.$screen-lg) {
-				padding-top: clamp(2rem, 10vh, 6rem);
-			}
+			display: flex;
+			align-items: center;
+			margin-block-end: -5rem;
 
 			max-width: 50ch;
+			min-height: 100vh;
+		}
+
+		.hero--section-content-wrapper {
+			padding-block: clamp(4rem, 12vh, 8rem);
 		}
 
 		section {
-			margin-block-start: 6rem;
+			margin-block-start: 8rem;
 			max-width: 48ch;
 
 			&:first-of-type {
-				margin-block-start: 6rem;
+				margin-block-start: 0;
 			}
 
 			.insert-text p {
@@ -213,9 +224,10 @@ let featured = allEntries.filter((elem) => {
 
 		@media (max-width: vars.$screen-md) {
 			section {
-				&,
+				margin-block-start: 6rem;
+
 				&:first-of-type {
-					margin-block-start: 4rem;
+					margin-block-start: 0rem;
 				}
 			}
 		}
