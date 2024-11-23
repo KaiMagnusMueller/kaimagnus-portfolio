@@ -22,6 +22,25 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 	</article>
 </Layout>
 
+<style lang="scss">
+	@use '../styles/vars.scss';
+
+	nav {
+		display: flex;
+		gap: 1rem;
+		margin: 2rem 0 0;
+
+		a,
+		span {
+			text-transform: capitalize;
+		}
+
+		@media (max-width: vars.$screen-md) {
+			margin: 1rem 0 0;
+		}
+	}
+</style>
+
 <style lang="scss" is:global>
 	@use '../styles/vars.scss';
 

@@ -199,20 +199,7 @@ p:last-of-type,
     }
 }
 
-nav {
-    margin: 2rem 0 0;
-    display: flex;
-    gap: 1rem;
 
-    a,
-    span {
-        text-transform: capitalize;
-    }
-
-    @media (max-width: vars.$screen-md) {
-        margin: 1rem 0 0;
-    }
-}
 
 sup {
     line-height: 0;
