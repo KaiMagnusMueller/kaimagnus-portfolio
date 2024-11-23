@@ -19,7 +19,7 @@ const { Content } = await entry.render();
 	pageTitle={entry.data.title}
 	pageDescr={entry.data.description}
 	ogImage={entry.data.ogImage}>
-	<h1>{entry.data.title}</h1>
+	<h1 id={entry.slug}>{entry.data.title}</h1>
 	<span class="course-data color-text-low-contrast">
 		<span class="sr-only">Course:</span>
 		<span>{entry.data.course}</span>

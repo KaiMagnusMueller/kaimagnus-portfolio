@@ -40,6 +40,8 @@
 <nav id="navigation"> </nav>
 
 <script>
+	let navItems: Array<HTMLAnchorElement>;
+
 	// This IIFE (Immediately Invoked Function Expression) ensures that the code runs immediately after it is defined.
 	(() => {
 		if (window.innerWidth < 768) {
@@ -59,8 +61,6 @@
 		}
 
 		headings.forEach((heading) => {
-			// console.log(heading);
-
 			let text = '';
 
 			if (heading.dataset.tocText) {
@@ -97,6 +97,8 @@
 			}
 		});
 
+		navItems = Array.from(document.querySelectorAll('#navigation a'));
+
 		const observerOptions = {
 			root: null,
 			rootMargin: '0px',
@@ -105,8 +107,11 @@
 
 		const observerCallback = (entries) => {
 			entries.forEach((entry) => {
-				const navItem = document.querySelector(`a[href="#${entry.target.id}"]`);
-				// console.log(entry); // Removed for production
+				const navItem = navItems.find((item) => {
+					const itemId = item.href.split('#').pop();
+					const targetId = entry.target.id;
+					return itemId === targetId;
+				});
 
 				if (navItem) {
 					if (entry.isIntersecting) {
