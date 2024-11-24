@@ -141,7 +141,6 @@
 		top: 0;
 		bottom: 0;
 		left: 0;
-
 		align-items: center;
 		z-index: 999;
 		width: clamp(1rem, 10vw, 10rem);
@@ -154,7 +153,7 @@
 			visibility: hidden;
 			opacity: 0;
 			transition: 0.2s all ease-in-out;
-			background: linear-gradient(to right, #fff 20%, transparent);
+			background: linear-gradient(to right, var(--bg-color-elev-0) 20%, transparent);
 			width: 600%;
 			height: 100%;
 			pointer-events: none;
@@ -169,18 +168,15 @@
 		flex-direction: column;
 		justify-content: center;
 		transform: translateX(-50%);
-		// padding: 10rem 32rem 10rem 1rem;
 		padding: 1rem;
 		list-style: none;
-
-		// &:hover {
-		// 	a {
-		// 		height: 2rem;
-		// 	}
-		// }
 	}
 
 	#page-toc-container:has(ul:hover) {
+		div {
+			transform: translate(-1px, -1px);
+		}
+
 		div,
 		span {
 			visibility: visible;
@@ -198,14 +194,11 @@
 		}
 	}
 
-	/* In Webseite enthaltenes Stil-Dokument #2 | https://kaimagnus-portfolio-git-main-kaimagnusmuellers-projects.vercel.app/ */
-
 	#page-toc-container a {
 		display: grid;
 		position: relative;
 		grid-template-columns: 1fr;
 		align-content: center;
-
 		transition: 0.1s all ease-out;
 		border-radius: 999px;
 		width: 1.75rem;
@@ -216,7 +209,6 @@
 			display: block;
 			position: absolute;
 			top: 50%;
-
 			left: 50%;
 			transform: translate(-50%, -50%);
 			opacity: 0.4;
@@ -229,7 +221,9 @@
 		}
 
 		div {
-			transform: translate(-1px, -1px); //Compenstate for border
+			transform: translate(-0.5rem, -1px);
+			opacity: 0;
+			transition: 0.5s all cubic-bezier(0.165, 0.84, 0.44, 1);
 			margin-inline-start: -0.5rem;
 			border: 1px solid transparent;
 			color: transparent;
@@ -255,8 +249,7 @@
 			transform: translate(-3px, 0%);
 			transform-origin: left center;
 			opacity: 0;
-			transition: 0.1s all ease-in-out;
-			// box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294);
+			transition: 0.1s all ease-out;
 			border: 1px solid transparent;
 			border-radius: 999px;
 			background: none;
@@ -264,48 +257,18 @@
 			color: var(--text-color);
 		}
 
-		// &:hover + a,
-		// a + &:hover {
-		// 	border-radius: 999px;
-		// 	background: var(--bg-color-elev-0);
-		// 	color: red;
-
-		// 	span {
-		// 		transform: translate(0, 0%);
-		// 		visibility: visible;
-		// 		opacity: 1;
-		// 		transition-delay: 0;
-		// 	}
-
-		// 	div {
-		// 		visibility: visible;
-		// 	}
-		// }
-
 		&:hover {
-			opacity: 1;
-			border-radius: 999px;
-			// background: var(--bg-color-elev-0);
-
 			span {
-				transform: translate(0, 0%);
-				visibility: visible;
+				transform: translate(0, 0);
 				opacity: 1;
-				transition-delay: 0;
 				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294);
 				border: 1px solid var(--card-border-color);
-				border-radius: 999px;
 				background: var(--bg-color-elev-1);
 			}
 
 			div {
-				visibility: visible;
 				opacity: 1;
 			}
-
-			// &::after {
-			// 	opacity: 1;
-			// }
 		}
 	}
 

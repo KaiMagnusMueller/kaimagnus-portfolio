@@ -29,8 +29,7 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 
 	nav {
 		display: flex;
-		position: absolute;
-		top: 0;
+
 		gap: 1rem;
 		margin: 2rem 0 0;
 
@@ -55,7 +54,13 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		header {
 			// margin-block-end: -3.5rem;
 			// min-height: 100vh;
-			padding-block: 12rem 4rem;
+			padding-block: 12rem 3rem;
+		}
+
+		@media (max-width: vars.$screen-md) {
+			header {
+				padding-block: 8rem 2rem;
+			}
 		}
 
 		.header-inner-wrapper {

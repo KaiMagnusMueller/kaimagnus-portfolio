@@ -64,7 +64,15 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 	@use '../styles/vars.scss';
 
 	h1 {
-		margin-top: 2rem;
+		margin-top: 12rem;
+		margin-bottom: 3rem;
+	}
+
+	@media (max-width: vars.$screen-md) {
+		h1 {
+			margin-top: 8rem;
+			margin-bottom: 2rem;
+		}
 	}
 
 	li {
