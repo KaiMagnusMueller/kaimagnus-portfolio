@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import CollectionList from '@components/CollectionList.astro';
 import InlineIcon from '../components/InlineIcon.astro';
-import IndexNav from '@components/IndexNav.astro';
+import PageContentNav from '@components/PageContentNav.astro';
 
 const articles = await getCollection('articles', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
@@ -32,7 +32,7 @@ let featured = allEntries.filter((elem) => {
 		<link rel="dns-prefetch" href="https://res.cloudinary.com" />
 	</Fragment>
 
-	<IndexNav />
+	<PageContentNav />
 
 	<main class="index-page color-text">
 		<div class="hero--section color-text-low-contrast text text-large">

@@ -1,7 +1,7 @@
 ---
 import { SITE } from '@config';
 import Layout from './Layout.astro';
-import IndexNav from '@components/IndexNav.astro';
+import PageContentNav from '@components/PageContentNav.astro';
 
 export interface Props {
 	pageTitle: string;
@@ -13,14 +13,13 @@ export interface Props {
 const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 ---
 
-<IndexNav />
-
 <Layout pageTitle={pageTitle} pageDescr={pageDescr} {ogImage}>
 	<nav class="color-text-low-contrast">
 		<a href="/">Home</a> /
 		{entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
 	</nav>
 	<article class="post-content">
+		<PageContentNav />
 		<slot />
 	</article>
 </Layout>
