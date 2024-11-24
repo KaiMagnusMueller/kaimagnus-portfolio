@@ -6,6 +6,9 @@ draft: false
 tags:
     - university project
 ogImage: ''
+team:
+    - Martin Wehl
+    - Kai Magnus Müller
 semesterDate: Summer 2020
 course: Bachelor Thesis
 description: Destinations is an application concept that simplifies the design process of wayfinding systems. Users can view a digital representation of a project site, visually plan visitor routes, sign placements and messages.
@@ -15,13 +18,13 @@ import Figure from '@components/Figure.astro';
 import UseCase from '@components/UseCase.svelte';
 
 <div style="padding:62.5% 0 0 0;position:relative;">
-	<iframe
-		src="https://player.vimeo.com/video/802851320?h=672644920c&title=0&byline=0&portrait=0"
-		frameborder="0"
-		allow="autoplay; fullscreen; picture-in-picture"
-		allowfullscreen
-		style="position:absolute;top:0;left:0;width:100%;height:100%;"
-		title="Destinations"></iframe>
+    <iframe
+        src="https://player.vimeo.com/video/802851320?h=672644920c&title=0&byline=0&portrait=0"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;top:0;left:0;width:100%;height:100%;"
+        title="Destinations"></iframe>
 </div>
 <script src="https://player.vimeo.com/api/player.js"></script>
 
@@ -48,10 +51,10 @@ During programming, designers determine where visitors have to make decisions an
 Finally, in the design phase different variants of signs are created. Prototypes are manufactured to test different materials, colors and the signs themselves in their intended size. Sometimes walls or even rooms are created from cardboard to test how signs have to be positioned in their environment.
 
 <Figure
-	alt="During our research phase we compared the design process how it is described in 'Wayshowing > Wayfinding' and 'The Wayfinding Handbook'."
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532227/destinations-system-design-process_r98cbc.jpg"
-	width="3185"
-	height="1255"></Figure>
+    alt="During our research phase we compared the design process how it is described in 'Wayshowing > Wayfinding' and 'The Wayfinding Handbook'."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532227/destinations-system-design-process_r98cbc.jpg"
+    width="3185"
+    height="1255"></Figure>
 
 ## Circulation Patterns
 
@@ -62,11 +65,10 @@ Designers commonly receive documents detailing current or predicted traffic flow
 Sign positions can then be drawn where they are needed to get an overview of the decisions visitors have to make.
 
 <Figure
-	alt="Signage development in three steps. First, circulation patterns for all types of traffic are created. Second, preliminary sign positions are marked on the floor plan. Finally, signs are marked on the plan with their reference codes to the database."
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532242/destinations-circulation-patterns_shenbs.jpg"
-	width="3375"
-	height="1185">
-</Figure>
+    alt="Signage development in three steps. First, circulation patterns for all types of traffic are created. Second, preliminary sign positions are marked on the floor plan. Finally, signs are marked on the plan with their reference codes to the database."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1677532242/destinations-circulation-patterns_shenbs.jpg"
+    width="3375"
+    height="1185"></Figure>
 
 ## Signage Databases
 
@@ -81,31 +83,31 @@ All of this data must be kept up-to-date in an ongoing project. Inevitably, chan
 3. How can we use simulation to preview sign concepts before production?
 
 export const _srcSet2 = [
-	{
-		title: 'Route Creation',
-		src: 'video/destinations/destinations-1.mp4',
-		alt: 'After selecting a location, visitor routes from and to it can be created. A simulation of visitor paths is displayed on the floor plan.',
-	},
-	{
-		title: 'Decision Points',
-		src: 'video/destinations/destinations-2.mp4',
-		alt: 'After switching to the information path tab, users can view the shortest possible connection between start and end point. Along that path decision points, identified by the system, are displayed. Multiple paths can run through the same points as well. \nAfter toggling the placement analysis mode the system displays possible sign locations depending on visibility and other factors. ',
-	},
-	{
-		title: 'Sign Locations',
-		src: 'video/destinations/destinations-3.mp4',
-		alt: 'Now, designers can place estimated sign positions on the plan. Destinations does not automate the creation of wayfinding systems, instead the goal is to simplify and assist in design process. \nSign locations are tied to decision points and once created, they are available to other paths as well.',
-	},
-	{
-		title: 'Dynamic Messages',
-		src: 'video/destinations/destinations-4.mp4',
-		alt: 'In the next tab, users can view all paths and their connected signs. After creating templates in graphic design software, certain text areas can be filled with variables like room numbers. Here, signs are displayed including data connected to other paths. ',
-	},
-	{
-		title: '3D Simulation',
-		src: 'video/destinations/destinations-5.mp4',
-		alt: 'Finally signs can be accurately placed on surfaces and simulated. Designers can now better judge how signs interact with their surroundings.',
-	},
+    {
+        title: 'Route Creation',
+        src: 'video/destinations/destinations-1.mp4',
+        alt: 'After selecting a location, visitor routes from and to it can be created. A simulation of visitor paths is displayed on the floor plan.',
+    },
+    {
+        title: 'Decision Points',
+        src: 'video/destinations/destinations-2.mp4',
+        alt: 'After switching to the information path tab, users can view the shortest possible connection between start and end point. Along that path decision points, identified by the system, are displayed. Multiple paths can run through the same points as well. \nAfter toggling the placement analysis mode the system displays possible sign locations depending on visibility and other factors. ',
+    },
+    {
+        title: 'Sign Locations',
+        src: 'video/destinations/destinations-3.mp4',
+        alt: 'Now, designers can place estimated sign positions on the plan. Destinations does not automate the creation of wayfinding systems, instead the goal is to simplify and assist in design process. \nSign locations are tied to decision points and once created, they are available to other paths as well.',
+    },
+    {
+        title: 'Dynamic Messages',
+        src: 'video/destinations/destinations-4.mp4',
+        alt: 'In the next tab, users can view all paths and their connected signs. After creating templates in graphic design software, certain text areas can be filled with variables like room numbers. Here, signs are displayed including data connected to other paths. ',
+    },
+    {
+        title: '3D Simulation',
+        src: 'video/destinations/destinations-5.mp4',
+        alt: 'Finally signs can be accurately placed on surfaces and simulated. Designers can now better judge how signs interact with their surroundings.',
+    },
 ];
 
 <UseCase client:visible srcSet={_srcSet2} aspectRatio="16/10"></UseCase>

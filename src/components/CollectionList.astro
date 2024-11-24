@@ -45,12 +45,14 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	)
 }
 
-<style lang="scss">
-	@use '../styles/vars.scss';
-
-	.post-list {
+<style is:global>
+	.insert-text + .post-list {
 		margin-block-start: 2rem;
 	}
+</style>
+
+<style lang="scss">
+	@use '../styles/vars.scss';
 
 	ul {
 		margin: 0;

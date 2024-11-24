@@ -37,7 +37,7 @@
         ))
     }
 </ul> -->
-<nav id="navigation"> </nav>
+<nav id="pf-navigation-container"> </nav>
 
 <script>
 	let navItems: Array<HTMLAnchorElement>;
@@ -54,7 +54,7 @@
 		// console.log(Array.from(headings).map((elem) => elem.innerText));
 		// console.log(headings);
 
-		const navigation = document.getElementById('navigation');
+		const navigation = document.getElementById('pf-navigation-container');
 
 		if (navigation) {
 			navigation.appendChild(document.createElement('ul'));
@@ -97,7 +97,7 @@
 			}
 		});
 
-		navItems = Array.from(document.querySelectorAll('#navigation a'));
+		navItems = Array.from(document.querySelectorAll('#pf-navigation-container a'));
 
 		const observerOptions = {
 			root: null,
@@ -134,7 +134,7 @@
 <style lang="scss" is:global>
 	@use '../styles/vars.scss';
 
-	#navigation {
+	#pf-navigation-container {
 		display: flex;
 		position: fixed;
 		top: 50%;
@@ -146,7 +146,7 @@
 		width: clamp(1rem, 10vw, 10rem);
 	}
 
-	#navigation ul {
+	#pf-navigation-container ul {
 		display: flex;
 		position: relative;
 		flex-direction: column;
@@ -156,7 +156,7 @@
 
 	/* In Webseite enthaltenes Stil-Dokument #2 | https://kaimagnus-portfolio-git-main-kaimagnusmuellers-projects.vercel.app/ */
 
-	#navigation a {
+	#pf-navigation-container a {
 		display: grid;
 		position: relative;
 		grid-template-columns: 1fr;
@@ -233,7 +233,7 @@
 		}
 	}
 
-	#navigation .active {
+	#pf-navigation-container .active {
 		&::after {
 			opacity: 1;
 			background: var(--text-color);
@@ -241,7 +241,7 @@
 	}
 
 	@media (max-width: vars.$screen-md) {
-		#navigation {
+		#pf-navigation-container {
 			display: none;
 			top: 0;
 			left: 50%;
@@ -252,11 +252,11 @@
 			width: 100%;
 		}
 
-		#navigation ul {
+		#pf-navigation-container ul {
 			flex-direction: row;
 		}
 
-		#navigation a {
+		#pf-navigation-container a {
 			width: 1.5rem;
 			height: 2.5rem;
 
