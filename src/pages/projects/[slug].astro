@@ -20,23 +20,25 @@ const { Content } = await entry.render();
 	pageDescr={entry.data.description}
 	ogImage={entry.data.ogImage}>
 	<header>
-		<h1 id={entry.slug}>{entry.data.title}</h1>
-		{
-			entry.data.team && (
-				<span class="course-data color-text-low-contrast">
-					<span class="sr-only">Team:</span>
-					{entry.data.team.map((tag: string) => (
-						<span>{tag}</span>
-					))}
-				</span>
-			)
-		}
-		<span class="course-data color-text-low-contrast">
-			<span class="sr-only">Course:</span>
-			<span>{entry.data.course}</span>
-			<span class="sr-only">Project date:</span>
-			<span>{entry.data.semesterDate}</span>
-		</span>
+		<div class="header-inner-wrapper">
+			<h1 id={entry.slug}>{entry.data.title}</h1>
+			{
+				entry.data.team && (
+					<span class="course-data color-text-low-contrast">
+						<span class="sr-only">Team:</span>
+						{entry.data.team.map((tag: string) => (
+							<span>{tag}</span>
+						))}
+					</span>
+				)
+			}
+			<span class="course-data color-text-low-contrast">
+				<span class="sr-only">Course:</span>
+				<span>{entry.data.course}</span>
+				<span class="sr-only">Project date:</span>
+				<span>{entry.data.semesterDate}</span>
+			</span>
+		</div>
 	</header>
 	<Content />
 

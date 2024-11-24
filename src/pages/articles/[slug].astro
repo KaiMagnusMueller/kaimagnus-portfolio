@@ -22,15 +22,17 @@ const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { da
 	pageDescr={entry.data.description}
 	ogImage={entry.data.ogImage}>
 	<header>
-		<h1 id={entry.slug}>{entry.data.title}</h1>
-		<span hidden class="course-data color-text-low-contrast">
-			<span class="sr-only">Tags:</span>
-			{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
-			<span>
-				<span class="sr-only">Published on:</span>
-				<time datetime={date}>{date}</time>
-			</span>
-		</span>
+		<div class="header-inner-wrapper">
+			<h1 id={entry.slug}>{entry.data.title}</h1>
+			<span hidden class="course-data color-text-low-contrast">
+				<span class="sr-only">Tags:</span>
+				{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
+				<span>
+					<span class="sr-only">Published on:</span>
+					<time datetime={date}>{date}</time>
+				</span>
+			</span></div
+		>
 	</header>
 	<Content />
 </Posts>

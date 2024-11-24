@@ -54,14 +54,18 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		word-break: break-word;
 
 		header {
-			display: flex;
+			// margin-block-end: -3.5rem;
+			// min-height: 100vh;
+			padding-block: 12rem 4rem;
+		}
 
+		.header-inner-wrapper {
+			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
 			justify-content: center;
 			gap: 1rem 1rem;
-			margin-block-end: -3.5rem;
-			min-height: 100vh;
+			// transform: translateY(-50%);
 		}
 
 		h1 {
@@ -86,7 +90,7 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 			line-height: 1;
 
 			span {
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294);
+				// box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294);
 				border: 1px solid var(--card-border-color);
 				border-radius: 999px;
 				background: var(--bg-color-elev-1);
