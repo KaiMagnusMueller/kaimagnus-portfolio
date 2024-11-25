@@ -6,6 +6,9 @@ draft: false
 tags:
     - university project
 ogImage: ''
+team:
+    - David Glock
+    - Kai Magnus Müller
 semesterDate: Winter 2017
 course: Interface Design
 description: Wires is a prototyping app for macOS. It aims to bridge screen design and hardware prototyping. Patch based programming of inputs and outputs makes combining them with screens or buttons designed in Sketch as easy as possible.
@@ -15,12 +18,12 @@ import Figure from '@components/Figure.astro';
 import UseCase from '@components/UseCase.svelte';
 
 <div style="padding:56.25% 0 0 0;position:relative;">
-	<iframe
-		src="https://player.vimeo.com/video/802833594?h=9f3982785a&title=0&byline=0&portrait=0"
-		allow="autoplay; fullscreen; picture-in-picture"
-		allowfullscreen
-		frameborder="0"
-		style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    <iframe
+        src="https://player.vimeo.com/video/802833594?h=9f3982785a&title=0&byline=0&portrait=0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        frameborder="0"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
 </div>
 
 ## Introduction
@@ -36,10 +39,10 @@ To kick off our project we collected and analyzed a selection of existing protot
 From here on we created a sample project during which a Smart Home App connected to various weather sensors got ready for prototyping. We went through each step it took to create a working prototype only using tools that are currently available collected difficulties and problems that arise in the process.
 
 <Figure
-	alt="Wires Research Framer / Origami comparison"
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1678140784/wires-tools_sw6gyr.png"
-	width="2880"
-	height="460"></Figure>
+    alt="Wires Research Framer / Origami comparison"
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1678140784/wires-tools_sw6gyr.png"
+    width="2880"
+    height="460"></Figure>
 
 ## Existing Tools
 
@@ -60,31 +63,31 @@ Often times, the screen design is developed further than the hardware. To let us
 As a tool for productive use Wires is a native Mac App and uses standard macOS components. Main view is a canvas in the middle where patches are arranged and connected. In the left sidebar all imported screen designs are listed and available for use. The right sidebar includes output of selected elements and the prototype live preview.
 
 export const _srcSet2 = [
-	{
-		title: 'Working with Patches',
-		src: 'video/wires/wires-1.mp4',
-		alt: "Patches can be placed by searching and clicking the '+' button that appears. Layer patches can also be created by clicking the 'add' button next to a layer in the sidebar. The search gives a preview of the patches' in- and outputs and a brief description. Patches can have many different elements from simple text fields to checkboxes.",
-	},
-	{
-		title: 'Patch Grouping',
-		src: 'video/wires/wires-2.mp4',
-		alt: 'Patches can be grouped together to simplify the prototype. Groups can be shared as prefabs with other community members to include in their prototypes. Inputs and outputs can be set just as easily as the connections between patches and named for clarification.',
-	},
-	{
-		title: 'Arduino Panel',
-		src: 'video/wires/wires-3.mp4',
-		alt: 'All patches with Arduino connections can have their pins set in a dedicated panel. (Alternatively, they can be set on each patch individually) A board preview makes it easy to recognize the correct pins on the Arduino side. Warnings indicate unset pins.',
-	},
-	{
-		title: 'Debugging',
-		src: 'video/wires/wires-4.mp4',
-		alt: 'Because the prototype is a live preview users can always see its output, whether it fails or runs as intended. Especially in large prototypes however, it is not obvious where it breaks. Running in debug mode, small pearls move along the connections to give a visual representation of the data flow. Patches can be marked as breakpoints to stop the prototype.',
-	},
-	{
-		title: 'Export',
-		src: 'video/wires/wires-5.mp4',
-		alt: 'The finished prototype can be exported as a standalone app. Users can decide if they want to include the necessary packages to run with hardware or set new pins for another Arduino. This can also be done in the standalone app itself.',
-	},
+    {
+        title: 'Working with Patches',
+        src: 'video/wires/wires-1.mp4',
+        alt: "Patches can be placed by searching and clicking the '+' button that appears. Layer patches can also be created by clicking the 'add' button next to a layer in the sidebar. The search gives a preview of the patches' in- and outputs and a brief description. Patches can have many different elements from simple text fields to checkboxes.",
+    },
+    {
+        title: 'Patch Grouping',
+        src: 'video/wires/wires-2.mp4',
+        alt: 'Patches can be grouped together to simplify the prototype. Groups can be shared as prefabs with other community members to include in their prototypes. Inputs and outputs can be set just as easily as the connections between patches and named for clarification.',
+    },
+    {
+        title: 'Arduino Panel',
+        src: 'video/wires/wires-3.mp4',
+        alt: 'All patches with Arduino connections can have their pins set in a dedicated panel. (Alternatively, they can be set on each patch individually) A board preview makes it easy to recognize the correct pins on the Arduino side. Warnings indicate unset pins.',
+    },
+    {
+        title: 'Debugging',
+        src: 'video/wires/wires-4.mp4',
+        alt: 'Because the prototype is a live preview users can always see its output, whether it fails or runs as intended. Especially in large prototypes however, it is not obvious where it breaks. Running in debug mode, small pearls move along the connections to give a visual representation of the data flow. Patches can be marked as breakpoints to stop the prototype.',
+    },
+    {
+        title: 'Export',
+        src: 'video/wires/wires-5.mp4',
+        alt: 'The finished prototype can be exported as a standalone app. Users can decide if they want to include the necessary packages to run with hardware or set new pins for another Arduino. This can also be done in the standalone app itself.',
+    },
 ];
 
 <UseCase client:visible srcSet={_srcSet2} aspectRatio="16/9"></UseCase>
@@ -94,11 +97,11 @@ export const _srcSet2 = [
 Properties can be added to patches via a plus button. Values can be set manually or are variable via their text field or with a connected input source respectively. When the placeholder pin is set on Arduino patches, the patch itself will generate random values between the set bounds and the current signal rate. This approach combines multiple patches in one to simplify the development process while leaving it open to custom solutions.
 
 <Figure
-	alt="Patches are grouped to indicate their responsibilities. Grey patches contain logic and other basic functionality, purple patches control properties and animations. Screen elements themselves are blue. Patches that communicate with connected hardware are turquoise, referencing the Arduino board color."
-	src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1678140805/wires-patches_tbw5ry.png"
-	width="2880"
-	height="1800"
-	shadow="false"></Figure>
+    alt="Patches are grouped to indicate their responsibilities. Grey patches contain logic and other basic functionality, purple patches control properties and animations. Screen elements themselves are blue. Patches that communicate with connected hardware are turquoise, referencing the Arduino board color."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1678140805/wires-patches_tbw5ry.png"
+    width="2880"
+    height="1800"
+    shadow="false"></Figure>
 
 ## Process and Technology
 

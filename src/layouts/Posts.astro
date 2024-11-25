@@ -1,6 +1,7 @@
 ---
 import { SITE } from '@config';
 import Layout from './Layout.astro';
+import PageContentNav from '@components/PageContentNav.astro';
 
 export interface Props {
 	pageTitle: string;
@@ -18,17 +19,62 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		{entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
 	</nav>
 	<article class="post-content">
+		<PageContentNav />
 		<slot />
 	</article>
 </Layout>
+
+<style lang="scss">
+	@use '../styles/vars.scss';
+
+	nav {
+		display: flex;
+
+		gap: 1rem;
+		margin: 2rem 0 0;
+
+		a,
+		span {
+			text-transform: capitalize;
+		}
+
+		@media (max-width: vars.$screen-md) {
+			margin: 1rem 0 0;
+		}
+	}
+</style>
 
 <style lang="scss" is:global>
 	@use '../styles/vars.scss';
 
 	.post-content {
-		margin-top: 2rem;
 		width: 100%;
 		word-break: break-word;
+
+		header {
+			// margin-block-end: -3.5rem;
+			// min-height: 100vh;
+			padding-block: 12rem 3rem;
+		}
+
+		@media (max-width: vars.$screen-md) {
+			header {
+				padding-block: 8rem 2rem;
+			}
+		}
+
+		.header-inner-wrapper {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 1rem 1rem;
+			// transform: translateY(-50%);
+		}
+
+		h1 {
+			margin-block: 0;
+		}
 
 		h2,
 		h3,
@@ -40,19 +86,20 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 
 		// part of the articles and project pages
 		.course-data {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 0.25rem 1rem;
-			margin-top: 0.5rem;
-			margin-bottom: 2rem;
-			// line-height: 1;
+			display: inherit;
+			flex-wrap: inherit;
+			gap: inherit;
 
-			// span {
-			// 	padding: 0.125rem 0.625rem;
-			// 	border-radius: 2px;
-			// 	background-color: #7f7f7f19;
-			// 	// border: 1px solid #7f7f7f53;
-			// }
+			margin-inline-start: -0.2rem;
+			line-height: 1;
+
+			span {
+				// box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294);
+				border: 1px solid var(--card-border-color);
+				border-radius: 999px;
+				background: var(--bg-color-elev-1);
+				padding: 0.5rem 1rem;
+			}
 		}
 
 		& > *,
@@ -62,7 +109,7 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 
 		div,
 		.full-width-reset,
-		h1,
+		header,
 		iframe {
 			max-width: unset;
 		}

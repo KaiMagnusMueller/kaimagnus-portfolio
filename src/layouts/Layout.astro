@@ -32,7 +32,6 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 		<meta name="author" content={SITE.author} />
 		<meta name="color-scheme" content="light dark" />
 		<meta name="generator" content={Astro.generator} />
-		<slot name="head" />
 
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:type" content="website" />
@@ -41,6 +40,7 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 		<meta property="og:description" content={pageDescr} />
 
 		<title>{pageTitle}</title>
+		<slot name="head" />
 	</head>
 	<body>
 		<slot />
