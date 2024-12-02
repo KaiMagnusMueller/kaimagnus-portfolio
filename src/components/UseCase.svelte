@@ -21,6 +21,7 @@
     let localUseCaseParts: UseCase[] = $state([]);
     let previousIndex = $state(0);
     let activeIndex = $state(0);
+    let moveDistance = $derived(10 + 15 * Math.abs(Math.abs(activeIndex) - Math.abs(previousIndex)));
 
     let videoElem: HTMLVideoElement | undefined = $state();
     let captionText: HTMLElement | undefined = $state();
@@ -118,14 +119,22 @@
                             controls></video>
                     </span>
                 {/key}
-                <div class="media--1-9col" style="aspect-ratio: {aspectRatio};"></div>
+                <div class="media--1-9col" style="aspect-ratio: {aspectRatio};"> </div>
 
                 <figcaption bind:this={figCaptionElem}>
                     {#key activeIndex}
                         <span
                             class="caption-helper figcaption--style"
-                            in:fly|local={{ duration: 1000, x: activeIndex > previousIndex ? 25 : -25, delay: 200 }}
-                            out:fly={{ duration: 1000, x: activeIndex > previousIndex ? -25 : 25, delay: 100 }}
+                            in:fly|local={{
+                                duration: 1000,
+                                x: activeIndex > previousIndex ? moveDistance : -moveDistance,
+                                delay: 200,
+                            }}
+                            out:fly={{
+                                duration: 1000,
+                                x: activeIndex > previousIndex ? -moveDistance : moveDistance,
+                                delay: 100,
+                            }}
                             bind:this={captionText}>
                             {#each splitJSONStringIntoArray(localUseCaseParts[activeIndex].alt) as paragraph}
                                 <p>{paragraph}</p>
