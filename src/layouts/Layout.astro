@@ -32,7 +32,6 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 		<meta name="author" content={SITE.author} />
 		<meta name="color-scheme" content="light dark" />
 		<meta name="generator" content={Astro.generator} />
-		<slot name="head" />
 
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:type" content="website" />
@@ -41,6 +40,7 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 		<meta property="og:description" content={pageDescr} />
 
 		<title>{pageTitle}</title>
+		<slot name="head" />
 	</head>
 	<body>
 		<slot />
@@ -63,7 +63,7 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 </html>
 
 <style lang="scss" is:global>
-	@import '../styles/_vars.scss';
+	@use '../styles/vars.scss';
 
 	html {
 		background: var(--bg-image), var(--bg-color-elev-0);
@@ -72,7 +72,7 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 	body {
 		position: relative;
 		margin: auto;
-		max-width: $screen-lg;
+		max-width: vars.$screen-lg;
 		font-size: 1.125rem; //default font size is 18px
 	}
 
@@ -84,13 +84,13 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 		margin: 8rem 0 2rem;
 	}
 
-	@media (max-width: $screen-md) {
+	@media (max-width: vars.$screen-md) {
 		html {
 			padding-inline: clamp(1rem, 4vw, 10rem);
 		}
 	}
 
-	@media (max-width: $screen-sm) {
+	@media (max-width: vars.$screen-sm) {
 		footer {
 			margin: 6rem 0 2rem;
 		}

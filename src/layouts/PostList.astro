@@ -41,9 +41,40 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 		}
 	</ul>
 </main>
+<style lang="scss">
+	@use '../styles/vars.scss';
+
+	nav {
+		display: flex;
+		gap: 1rem;
+		margin: 2rem 0 0;
+
+		a,
+		span {
+			text-transform: capitalize;
+		}
+
+		@media (max-width: vars.$screen-md) {
+			margin: 1rem 0 0;
+		}
+	}
+</style>
 
 <style lang="scss">
-	@import '../styles/_vars.scss';
+	@use '../styles/vars.scss';
+
+	h1 {
+		margin-top: 12rem;
+		margin-bottom: 3rem;
+	}
+
+	@media (max-width: vars.$screen-md) {
+		h1 {
+			margin-top: 8rem;
+			margin-bottom: 2rem;
+		}
+	}
+
 	li {
 		display: block;
 		margin-block: 1.25rem;

@@ -1,4 +1,4 @@
-@import '../styles/_vars.scss';
+@use '../styles/vars.scss';
 
 html {
     font-style: normal;
@@ -10,7 +10,7 @@ html {
     scroll-behavior: smooth;
 }
 
-// @media (max-width: $screen-md) and (pointer: coarse) {
+// @media (max-width: vars.$screen-md) and (pointer: coarse) {
 // 	html {
 // 		font-size: 18px;
 // 	}
@@ -80,6 +80,36 @@ iframe {
 
 :target {
     scroll-margin-block: 10rem;
-    outline: 2px solid var(--color-highlight);
-    border-radius: 2px;
+    position: relative;
+
+    &::before {
+        content: '';
+        display: block;
+        height: .5rem;
+        width: .5rem;
+        left: -1rem;
+        top: 50%;
+        translate: -50% -50%;
+        background-color: var(--text-color);
+        border-radius: 999px;
+        position: absolute;
+        animation-duration: .6s;
+        animation-name: expand;
+        animation-fill-mode: backwards;
+        animation-delay: .3s;
+        animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+}
+
+
+@keyframes expand {
+    from {
+        translate: -50% -50%;
+        scale: 0;
+    }
+
+    to {
+        translate: -50% -50%;
+        scale: 1;
+    }
 }

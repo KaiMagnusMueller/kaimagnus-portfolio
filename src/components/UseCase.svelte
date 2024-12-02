@@ -148,7 +148,7 @@
 </div>
 
 <style lang="scss">
-    @import '../styles/_vars.scss';
+    @use '../styles/vars.scss';
 
     .useCase--container {
         margin: 3em 0;
@@ -216,7 +216,7 @@
         color: var(--text-color);
     }
 
-    @media (max-width: $screen-lg) {
+    @media (max-width: vars.$screen-lg) {
         .caption-helper {
             position: absolute;
             top: 0;

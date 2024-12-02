@@ -6,6 +6,10 @@ draft: false
 tags:
     - university project
 ogImage: ''
+team:
+    - David Glock
+    - Kai Wanschura
+    - Kai Magnus Müller
 semesterDate: Summer 2017
 course: Application Design
 description: This project is a redesign of the public library of Stuttgart’s online catalogue. As a redesign, we analyzed the current catalogue and created an improved concept using our findings.
@@ -15,14 +19,13 @@ import Figure from '@components/Figure.astro';
 import UseCase from '@components/UseCase.svelte';
 
 <div style="padding:56.25% 0 0 0;position:relative;">
-	<iframe
-		src="https://player.vimeo.com/video/802826371?h=d9a58af693&title=0&byline=0&portrait=0"
-		frameborder="0"
-		allow="autoplay; fullscreen; picture-in-picture"
-		allowfullscreen
-		style="position:absolute;top:0;left:0;width:100%;height:100%;"
-		title="OPAC Stuttgart Redesign">
-	</iframe>
+    <iframe
+        src="https://player.vimeo.com/video/802826371?h=d9a58af693&title=0&byline=0&portrait=0"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;top:0;left:0;width:100%;height:100%;"
+        title="OPAC Stuttgart Redesign"></iframe>
 </div>
 <script src="https://player.vimeo.com/api/player.js"> </script>
 
@@ -39,10 +42,9 @@ Stuttgart's library has moved to a new building. Its online catalogue runs on nu
 The official catalogue features a functional main page. Users can search by typing into multiple text fields, depending on how they want to search. They can for example decide to search for a title or an author. After searching the results are presented on the left side of the screen. Results are ordered by relevance and are marked with an icon representing their form of media. They are labeled with title, author and date of release in on average three lines. The user can select an element and a detailed view opens to the right of the results. Here, users can view additional details of an element and see a list of all branches and the element's availability. They can make a reservation or click on the authors name for example and get a new list with all things published by that author.
 
 <Figure
-	alt="An overview of the official catalogue and its features."
-	src="/video/library/library-opac.mp4"
-	type="video">
-</Figure>
+    alt="An overview of the official catalogue and its features."
+    src="/video/library/library-opac.mp4"
+    type="video"></Figure>
 
 ## Conclusion
 
@@ -53,41 +55,41 @@ The current catalogue functions only if the user already knows what they want to
 Additionally, we wanted to add to the overall experience by introducing many small quality of life changes. A more readable layout, easier login and reserving, a more useful search and better results among others.
 
 export const _srcSet2 = [
-	{
-		title: 'Search',
-		src: 'video/library/library-1.mp4',
-		alt: 'Users can search the catalogue at any point. When a list of relevant results appears the most relevant matches are highlighted. By clicking on the magnifier icon or hitting the enter key the user can get the full list of results.',
-	},
-	{
-		title: 'Results',
-		src: 'video/library/library-2.mp4',
-		alt: 'The list of results can be filtered. The user can select a branch of the library and see which elements are available there. When the card view is active, more results fit on the screen but a part of the information is hidden and appears on hover.',
-	},
-	{
-		title: 'Filter',
-		src: 'video/library/library-3.mp4',
-		alt: 'The list of results can be filtered. The user can select a branch of the library and see which elements are available there. When the card view is active, more results fit on the screen but a part of the information is hidden and appears on hover.',
-	},
-	{
-		title: 'Bookmarks',
-		src: 'video/library/library-4.mp4',
-		alt: 'When an element is bookmarked it is added to the bookmarked list. This list is available from anywhere on the catalogue. And the user can jump directly to the detail view of an element. Note how a grey dot appears in the top right corner when an element is added.',
-	},
-	{
-		title: 'Detail Page',
-		src: 'video/library/library-5.mp4',
-		alt: 'The detail page lists more information about a book for example and displays its availability in any branch. To the right is a list of suggestions of the same or other relevant topics. The goal is to give users more ways to find information other than simply offering a search.',
-	},
-	{
-		title: 'Reserve',
-		src: 'video/library/library-6.mp4',
-		alt: 'Because money is involved in the process of reserving a medium a popup appears when the button is clicked to guide the user through the process. In three steps the user logs in, selects their desired branch and confirms the reservation. A success animation plays after it is confirmed.',
-	},
-	{
-		title: 'Detail Page',
-		src: 'video/library/library-7.mp4',
-		alt: 'Our redesign also introduces a main page. It consists of curated lists that are horizontally scrollable. They showcase the most borrowed media, recommendations or bestseller lists from other publications.',
-	},
+    {
+        title: 'Search',
+        src: 'video/library/library-1.mp4',
+        alt: 'Users can search the catalogue at any point. When a list of relevant results appears the most relevant matches are highlighted. By clicking on the magnifier icon or hitting the enter key the user can get the full list of results.',
+    },
+    {
+        title: 'Results',
+        src: 'video/library/library-2.mp4',
+        alt: 'The list of results can be filtered. The user can select a branch of the library and see which elements are available there. When the card view is active, more results fit on the screen but a part of the information is hidden and appears on hover.',
+    },
+    {
+        title: 'Filter',
+        src: 'video/library/library-3.mp4',
+        alt: 'The list of results can be filtered. The user can select a branch of the library and see which elements are available there. When the card view is active, more results fit on the screen but a part of the information is hidden and appears on hover.',
+    },
+    {
+        title: 'Bookmarks',
+        src: 'video/library/library-4.mp4',
+        alt: 'When an element is bookmarked it is added to the bookmarked list. This list is available from anywhere on the catalogue. And the user can jump directly to the detail view of an element. Note how a grey dot appears in the top right corner when an element is added.',
+    },
+    {
+        title: 'Detail Page',
+        src: 'video/library/library-5.mp4',
+        alt: 'The detail page lists more information about a book for example and displays its availability in any branch. To the right is a list of suggestions of the same or other relevant topics. The goal is to give users more ways to find information other than simply offering a search.',
+    },
+    {
+        title: 'Reserve',
+        src: 'video/library/library-6.mp4',
+        alt: 'Because money is involved in the process of reserving a medium a popup appears when the button is clicked to guide the user through the process. In three steps the user logs in, selects their desired branch and confirms the reservation. A success animation plays after it is confirmed.',
+    },
+    {
+        title: 'Detail Page',
+        src: 'video/library/library-7.mp4',
+        alt: 'Our redesign also introduces a main page. It consists of curated lists that are horizontally scrollable. They showcase the most borrowed media, recommendations or bestseller lists from other publications.',
+    },
 ];
 
 <UseCase client:visible srcSet={_srcSet2}></UseCase>

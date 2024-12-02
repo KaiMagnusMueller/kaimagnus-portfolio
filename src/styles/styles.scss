@@ -1,9 +1,9 @@
 @use '_vars.scss';
 
 :root {
-    --bg-color-elev-0: hsl(0, 0%, 100%);
-    --bg-color-elev-1: hsl(0, 0%, 98%);
-    --bg-color-elev-1-hover: hsl(0, 0%, 96%);
+    --bg-color-elev-0: hsl(0, 0%, 99%);
+    --bg-color-elev-1: hsl(0, 0%, 96%);
+    --bg-color-elev-1-hover: hsl(0, 0%, 94%);
     --bg-image: url(/200-20-5-monochrome.png);
 
     --text-color: #000;
@@ -44,7 +44,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color-elev-0: hsl(0, 0%, 3%);
+        --bg-color-elev-0: hsl(0, 0%, 6%);
         --bg-color-elev-1: hsl(0, 0%, 10%);
         --bg-color-elev-1-hover: hsl(0, 0%, 12%);
 
@@ -100,6 +100,11 @@ a {
     border-radius: 100%;
     outline: 2px solid var(--border-color-strong);
     outline-offset: -2px;
+
+    @media (max-width: vars.$screen-sm) {
+        outline-width: 1px;
+        outline-offset: -1px;
+    }
 }
 
 .text-small,
@@ -176,7 +181,7 @@ p:last-of-type,
     .text-large,
     .text-large p,
     .text-large h1 {
-        font-size: 1.125rem;
+        font-size: 1.25rem;
     }
 }
 
@@ -185,8 +190,8 @@ p:last-of-type,
     // padding-top: clamp(4rem, 10vh, 8rem);
     font-weight: 700;
     font-size: 3rem;
-    margin-top: 2rem;
-    margin-left: -0.1rem;
+    // margin-top: 1rem;
+    // margin-left: -0.1rem;
     line-height: 1.2;
 
     @media (max-width: vars.$screen-md) {
@@ -194,20 +199,7 @@ p:last-of-type,
     }
 }
 
-nav {
-    margin: 2rem 0 0;
-    display: flex;
-    gap: 1rem;
 
-    a,
-    span {
-        text-transform: capitalize;
-    }
-
-    @media (max-width: vars.$screen-md) {
-        margin: 1rem 0 0;
-    }
-}
 
 sup {
     line-height: 0;

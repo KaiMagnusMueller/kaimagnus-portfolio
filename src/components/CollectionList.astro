@@ -5,9 +5,10 @@ export interface Props {
 	title?: string;
 	entries: CollectionEntry<'projects' | 'articles' | 'work'>[];
 	ariaDetails?: string;
+	id?: string;
 }
 
-const { title, entries, ariaDetails } = Astro.props;
+const { title, entries, ariaDetails, id } = Astro.props;
 
 const sortedEntries = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
 
@@ -23,17 +24,18 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 {
 	sortedEntries.length > 0 && (
 		<div class="post-list">
-			{title && <h2 class="color-text-low-contrast">{titleLink ? <a href={titleLink}>{title}</a> : title}</h2>}
+			{title && (
+				<h2 class="color-text-low-contrast" id={id}>
+					{titleLink ? <a href={titleLink}>{title}</a> : title}
+				</h2>
+			)}
 
 			<slot />
 
 			<ul>
 				{sortedEntries.map((entry) => (
 					<li>
-						<a
-							class={`position--relative`}
-							href={`/${entry.collection}/${entry.slug}`}
-							aria-label={entry.data.description}>
+						<a href={`/${entry.collection}/${entry.slug}`} aria-label={entry.data.description}>
 							{entry.data.title}
 						</a>
 					</li>
@@ -43,13 +45,14 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	)
 }
 
-<style lang="scss">
-	@import '../styles/_vars.scss';
-
-	.post-list {
+<style is:global>
+	.insert-text + .post-list {
 		margin-block-start: 2rem;
-		margin-block-end: 4rem;
 	}
+</style>
+
+<style lang="scss">
+	@use '../styles/vars.scss';
 
 	ul {
 		margin: 0;
@@ -58,7 +61,6 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	}
 
 	h2 {
-		margin: 3px 0;
 		font-size: inherit;
 
 		a {
@@ -83,12 +85,6 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 	@media (pointer: coarse) {
 		a {
 			padding-block: 0.125rem;
-		}
-	}
-
-	@media (max-width: $screen-md) {
-		.post-list {
-			margin-bottom: 3rem;
 		}
 	}
 </style>

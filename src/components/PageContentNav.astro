@@ -1,0 +1,330 @@
+---
+// const navItems = [
+// 	{
+// 		title: 'Start',
+// 		link: '#start',
+// 	},
+// 	{
+// 		title: 'Highlights',
+// 		link: '#highlights',
+// 	},
+// 	{
+// 		title: 'Work',
+// 		link: '#work',
+// 	},
+// 	{
+// 		title: 'University Projects',
+// 		link: '#projects',
+// 	},
+// 	{
+// 		title: 'Writing',
+// 		link: '#writing',
+// 	},
+// ];
+---
+
+<!-- <ul>
+    {
+        navItems.map((item, index) => (
+            <li>
+                <a href={item.link} aria-label={item.title}>
+                    <div class="position-wrapper">
+                        <span>{item.title}</span>
+                    </div>
+                    <div class="position-wrapper">{item.title}</div>
+                </a>
+            </li>
+        ))
+    }
+</ul> -->
+<nav id="page-toc-container" aria-label="Table of contents"> </nav>
+
+<script>
+	let navItems: Array<HTMLAnchorElement>;
+
+	// This IIFE (Immediately Invoked Function Expression) ensures that the code runs immediately after it is defined.
+	(() => {
+		if (window.innerWidth < 768) {
+			console.log('PageContentNav.astro: window.innerWidth < 768, cancelling…');
+			return;
+		}
+
+		const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+		// console.log(Array.from(headings).map((elem) => elem.innerText));
+		// console.log(headings);
+
+		const navigation = document.getElementById('page-toc-container');
+
+		if (navigation) {
+			navigation.appendChild(document.createElement('ul'));
+		}
+
+		headings.forEach((heading) => {
+			let text = '';
+
+			if (heading.dataset.tocText) {
+				text = heading.dataset.tocText;
+			} else {
+				text = heading.innerText;
+			}
+
+			// console.log(text);
+
+			const listItem = document.createElement('li');
+			const anchor = document.createElement('a');
+
+			const div1 = document.createElement('div');
+			// const div2 = document.createElement('div');
+			const span = document.createElement('span');
+
+			anchor.href = `#${heading.id}`;
+			div1.innerText = text;
+			// div2.innerText = text;
+			span.innerText = text;
+
+			div1.appendChild(span);
+
+			anchor.appendChild(div1);
+			// anchor.appendChild(div2);
+			anchor.setAttribute('aria-label', text);
+
+			anchor.ariaLabel = text;
+
+			listItem.appendChild(anchor);
+			const ulElement = navigation.querySelector('ul');
+			if (ulElement) {
+				ulElement.appendChild(listItem);
+			}
+		});
+
+		navItems = Array.from(document.querySelectorAll('#page-toc-container a'));
+
+		const observerOptions = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.5,
+		};
+
+		const observerCallback = (entries) => {
+			entries.forEach((entry) => {
+				const navItem = navItems.find((item) => {
+					const itemId = item.href.split('#').pop();
+					const targetId = entry.target.id;
+					return itemId === targetId;
+				});
+
+				if (navItem) {
+					if (entry.isIntersecting) {
+						navItem.classList.add('active');
+					} else {
+						navItem.classList.remove('active');
+					}
+				}
+			});
+		};
+
+		const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+		headings.forEach((section) => {
+			observer.observe(section);
+		});
+	})();
+</script>
+
+<style lang="scss" is:global>
+	@use '../styles/vars.scss';
+
+	#page-toc-container {
+		display: flex;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		align-items: center;
+		z-index: 999;
+		width: clamp(1rem, 10vw, 10rem);
+
+		&::before {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			visibility: hidden;
+			opacity: 0;
+			transition: 0.2s all ease-in-out;
+			background: linear-gradient(to left, var(--bg-color-elev-0) 35%, transparent);
+			width: 500%;
+			// max-width: 500px;
+			height: 100%;
+			pointer-events: none;
+			content: '';
+		}
+	}
+
+	#page-toc-container ul {
+		display: flex;
+		position: relative;
+		left: 50%;
+		flex-direction: column;
+		justify-content: center;
+		transform: translateX(-50%);
+		padding: 1rem;
+		list-style: none;
+	}
+
+	#page-toc-container a.active::after {
+		opacity: 1;
+	}
+
+	#page-toc-container:has(ul:hover) {
+		div {
+			transform: translate(0);
+		}
+
+		div,
+		span {
+			visibility: visible;
+		}
+
+		span {
+			opacity: 0.4;
+		}
+
+		li {
+			position: relative;
+			left: 0;
+		}
+
+		&::before {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		a::after {
+			opacity: 0.4;
+		}
+
+		a.active::after {
+			opacity: 1;
+		}
+	}
+
+	#page-toc-container a {
+		display: grid;
+		position: relative;
+		grid-template-columns: 1fr;
+		justify-content: end;
+		align-items: center;
+		transition: 0.1s all ease-out;
+		border-radius: 999px;
+		width: 1.75rem;
+		height: 2rem;
+		text-decoration: none;
+
+		&::after {
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			opacity: 0.2;
+			z-index: 999;
+			transition: 0.2s all ease-in-out;
+			background: var(--text-color);
+			width: 1rem;
+			height: 2px;
+			content: ' ';
+		}
+
+		div {
+			transform: translate(0.5rem, 0);
+			transition: 0.5s all cubic-bezier(0.165, 0.84, 0.44, 1);
+			margin-inline-end: -0.5rem;
+			color: transparent;
+		}
+
+		div,
+		span {
+			position: absolute;
+			right: 0;
+			grid-row: 1;
+			grid-column: 1;
+			visibility: hidden;
+			padding-block: 0.5rem;
+			padding: 0.5rem 1rem;
+			padding-inline-end: 2.75rem;
+			min-width: max-content;
+			line-height: 1;
+		}
+
+		span {
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: translate(3px, 0);
+			transform-origin: left center;
+			opacity: 0;
+			transition: 0.1s all ease-out;
+			outline: 1px solid transparent;
+			outline-offset: -1px;
+			border-radius: 999px;
+			background: none;
+			pointer-events: none;
+			color: var(--text-color);
+		}
+
+		&:hover {
+			span {
+				transform: translate(0, 0);
+				opacity: 1;
+				outline: 1px solid var(--card-border-color);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294);
+				background: var(--bg-color-elev-1);
+			}
+
+			div {
+				opacity: 1;
+			}
+		}
+	}
+
+	@media (max-width: vars.$screen-md) {
+		#page-toc-container {
+			display: none;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 999;
+			background: linear-gradient(180deg, var(--bg-color-elev-0) 40%, transparent);
+			padding: 1rem 1rem 3rem;
+			width: 100%;
+		}
+
+		#page-toc-container ul {
+			flex-direction: row;
+		}
+
+		#page-toc-container a {
+			width: 1.5rem;
+			height: 2.5rem;
+
+			&::after {
+				width: 2px;
+				height: 1rem;
+			}
+
+			& span {
+				top: 100%;
+				left: 50%;
+				transform: scale(1) translateX(-50%);
+				margin-inline-start: 0;
+				margin-block-start: 0.5rem;
+			}
+
+			&:hover span {
+				transform: scale(1) translateX(-50%);
+			}
+		}
+	}
+</style>

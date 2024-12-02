@@ -12,6 +12,7 @@ export const projectSchema = z
         description: z.string(),
         semesterDate: z.string().optional(),
         course: z.string().optional(),
+        team: z.array(z.string()).optional(),
     })
     .strict();
 
