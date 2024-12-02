@@ -173,6 +173,7 @@
     .caption-helper {
         position: absolute;
         bottom: -4px;
+        z-index: -999;
     }
 
     p:first-child {
