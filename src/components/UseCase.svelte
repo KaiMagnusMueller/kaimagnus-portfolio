@@ -19,6 +19,7 @@
     } = $props();
 
     let localUseCaseParts: UseCase[] = $state([]);
+    let previousIndex = $state(0);
     let activeIndex = $state(0);
 
     let videoElem: HTMLVideoElement | undefined = $state();
@@ -53,6 +54,7 @@
         // console.table(_srcSet, ['title', 'active', 'alt']);
         localUseCaseParts[currentIndex].active = false;
         localUseCaseParts[targetIndex].active = true;
+        previousIndex = currentIndex;
         activeIndex = targetIndex;
     }
 
@@ -122,8 +124,8 @@
                     {#key activeIndex}
                         <span
                             class="caption-helper figcaption--style"
-                            in:fly|local={{ duration: 1000, x: 25, delay: 200 }}
-                            out:fly={{ duration: 1000, x: -25, delay: 100 }}
+                            in:fly|local={{ duration: 1000, x: activeIndex > previousIndex ? 25 : -25, delay: 200 }}
+                            out:fly={{ duration: 1000, x: activeIndex > previousIndex ? -25 : 25, delay: 100 }}
                             bind:this={captionText}>
                             {#each splitJSONStringIntoArray(localUseCaseParts[activeIndex].alt) as paragraph}
                                 <p>{paragraph}</p>
@@ -151,6 +153,8 @@
         position: absolute;
         top: 0;
         grid-column: 1 / span 9;
+        width: 100%;
+        height: 100%;
     }
 
     figure {
