@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
     import { fly, fade } from 'svelte/transition';
 
     let apacheUrl = import.meta.env.PUBLIC_APACHE_URL;
@@ -11,50 +10,55 @@
         active: boolean;
     }
 
-    export let aspectRatio: `${number}/${number}` = '16/9';
-    export let srcSet: UseCase[] = [];
+    let {
+        srcSet: useCaseParts = [],
+        aspectRatio = '16/9',
+    }: {
+        srcSet: UseCase[];
+        aspectRatio: `${number}/${number}`;
+    } = $props();
 
-    let _srcSet: UseCase[] = [];
+    let localUseCaseParts: UseCase[] = [];
+    let activeIndex = $state(0);
 
     function handleClick(index: number) {
-        const currentIndex = _srcSet.findIndex((elem) => elem.active === true);
+        const currentIndex = localUseCaseParts.findIndex((part) => part.active === true);
         updateActiveVideo(currentIndex, index);
     }
 
     function handleChangeVideo(index: number) {
-        const targetIndex = (index + 1) % _srcSet.length;
+        const targetIndex = (index + 1) % localUseCaseParts.length;
         updateActiveVideo(index, targetIndex);
     }
 
     function updateActiveVideo(currentIndex: number, targetIndex: number) {
         // console.table(_srcSet, ['title', 'active', 'alt']);
-        _srcSet[currentIndex].active = false;
-        _srcSet[targetIndex].active = true;
-
+        localUseCaseParts[currentIndex].active = false;
+        localUseCaseParts[targetIndex].active = true;
         activeIndex = targetIndex;
     }
 
-    let activeIndex = 0;
+    function splitJSONStringIntoArray(string: string) {
+        return string.split('\n');
+    }
 
-    onMount(() => {
-        srcSet.forEach((element, i) => {
-            _srcSet.push(element);
-            const src = apacheUrl + element.src;
-            _srcSet[i].src = src;
-            _srcSet[i].active = false;
-        });
-
-        _srcSet[0].active = true;
+    // Setup on load
+    useCaseParts.forEach((part, i) => {
+        localUseCaseParts.push(part);
+        const src = apacheUrl + part.src;
+        localUseCaseParts[i].src = src;
+        localUseCaseParts[i].active = false;
     });
+    localUseCaseParts[0].active = true;
 
-    // ADD INTERSECTION OBSERVERS
-    let videoElem: HTMLVideoElement;
+    // Add Intersection Observer
+    let videoElem: HTMLVideoElement | undefined = $state();
 
-    $: {
+    $effect(() => {
         if (videoElem) {
             createIntersectionObservers([videoElem], callback);
         }
-    }
+    });
 
     let callback = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
@@ -78,48 +82,44 @@
         elems.forEach((elem) => observer.observe(elem));
     }
 
-    // SET FIGCAPTION HEIGHT
-    let captionText: HTMLElement;
-    let figCaptionElem: HTMLElement;
+    // Set figcaption height
+    let captionText: HTMLElement | undefined = $state();
+    let figCaptionElem: HTMLElement | undefined = $state();
 
-    $: {
+    $effect(() => {
         if (captionText && figCaptionElem) {
             figCaptionElem.style.height = captionText.clientHeight + 'px';
         }
-    }
-
-    function splitJSONStringIntoArray(string: string) {
-        return string.split('\n');
-    }
+    });
 </script>
 
 <div class="useCase--container">
     <div class="useCase--navigation">
-        {#each _srcSet as item, i}
-            <button class="useCase--navItem" class:active={item.active} on:click={() => handleClick(i)}>
+        {#each localUseCaseParts as item, i}
+            <button class="useCase--navItem" class:active={item.active} onclick={() => handleClick(i)}>
                 <h2>{item.title}</h2>
             </button>
         {/each}
     </div>
 
     <div class="useCase-media--container" data-index={activeIndex}>
-        {#if _srcSet.length > 0}
+        {#if localUseCaseParts.length > 0}
             <figure class="media--grid-container">
                 {#key activeIndex}
                     <span class="media--pos-absolute main-content" transition:fade|local={{ duration: 500 }}>
                         <video
                             bind:this={videoElem}
-                            on:ended={() => handleChangeVideo(activeIndex)}
+                            onended={() => handleChangeVideo(activeIndex)}
                             class="useCase--media"
                             width="100%"
                             height="100%"
-                            src={_srcSet[activeIndex].src}
+                            src={localUseCaseParts[activeIndex].src}
                             muted
                             autoplay
-                            controls />
+                            controls></video>
                     </span>
                 {/key}
-                <div class="media--1-9col" style="aspect-ratio: {aspectRatio};" />
+                <div class="media--1-9col" style="aspect-ratio: {aspectRatio};"></div>
 
                 <figcaption bind:this={figCaptionElem}>
                     {#key activeIndex}
@@ -128,7 +128,7 @@
                             in:fly|local={{ duration: 1000, x: 25, delay: 200 }}
                             out:fly={{ duration: 1000, x: -25, delay: 100 }}
                             bind:this={captionText}>
-                            {#each splitJSONStringIntoArray(_srcSet[activeIndex].alt) as paragraph}
+                            {#each splitJSONStringIntoArray(localUseCaseParts[activeIndex].alt) as paragraph}
                                 <p>{paragraph}</p>
                             {/each}
                         </span>
