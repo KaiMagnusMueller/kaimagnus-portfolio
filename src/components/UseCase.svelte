@@ -18,8 +18,26 @@
         aspectRatio: `${number}/${number}`;
     } = $props();
 
-    let localUseCaseParts: UseCase[] = [];
+    let localUseCaseParts: UseCase[] = $state([]);
     let activeIndex = $state(0);
+
+    let videoElem: HTMLVideoElement | undefined = $state();
+    let captionText: HTMLElement | undefined = $state();
+    let figCaptionElem: HTMLElement | undefined = $state();
+
+    // Setup on load
+    localUseCaseParts = useCaseParts.map((part) => {
+        const src = apacheUrl + part.src;
+        return { ...part, src, active: false };
+    });
+    localUseCaseParts[0].active = true;
+
+    // Set figcaption height on video change
+    $effect(() => {
+        if (captionText && figCaptionElem) {
+            figCaptionElem.style.height = captionText.clientHeight + 'px';
+        }
+    });
 
     function handleClick(index: number) {
         const currentIndex = localUseCaseParts.findIndex((part) => part.active === true);
@@ -42,18 +60,7 @@
         return string.split('\n');
     }
 
-    // Setup on load
-    useCaseParts.forEach((part, i) => {
-        localUseCaseParts.push(part);
-        const src = apacheUrl + part.src;
-        localUseCaseParts[i].src = src;
-        localUseCaseParts[i].active = false;
-    });
-    localUseCaseParts[0].active = true;
-
     // Add Intersection Observer
-    let videoElem: HTMLVideoElement | undefined = $state();
-
     $effect(() => {
         if (videoElem) {
             createIntersectionObservers([videoElem], callback);
@@ -81,16 +88,6 @@
         let observer = new IntersectionObserver(callback, options);
         elems.forEach((elem) => observer.observe(elem));
     }
-
-    // Set figcaption height
-    let captionText: HTMLElement | undefined = $state();
-    let figCaptionElem: HTMLElement | undefined = $state();
-
-    $effect(() => {
-        if (captionText && figCaptionElem) {
-            figCaptionElem.style.height = captionText.clientHeight + 'px';
-        }
-    });
 </script>
 
 <div class="useCase--container">
