@@ -1,138 +1,83 @@
 ---
-// const navItems = [
-// 	{
-// 		title: 'Start',
-// 		link: '#start',
-// 	},
-// 	{
-// 		title: 'Highlights',
-// 		link: '#highlights',
-// 	},
-// 	{
-// 		title: 'Work',
-// 		link: '#work',
-// 	},
-// 	{
-// 		title: 'University Projects',
-// 		link: '#projects',
-// 	},
-// 	{
-// 		title: 'Writing',
-// 		link: '#writing',
-// 	},
-// ];
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+	headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
 ---
 
-<!-- <ul>
-    {
-        navItems.map((item, index) => (
-            <li>
-                <a href={item.link} aria-label={item.title}>
-                    <div class="position-wrapper">
-                        <span>{item.title}</span>
-                    </div>
-                    <div class="position-wrapper">{item.title}</div>
-                </a>
-            </li>
-        ))
-    }
-</ul> -->
-<nav id="page-toc-container" aria-label="Table of contents"> </nav>
+<nav id="page-toc-container" aria-label="Table of contents">
+	<ul>
+		{
+			headings.map((heading, index) => (
+				<li>
+					<a href={`#${heading.slug}`}>
+						<div>
+							{heading.text}
+							<span>{heading.text}</span>
+						</div>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>
 
 <script>
-	let navItems: Array<HTMLAnchorElement>;
+	// Only run TOC logic if screen is wide enough
 
-	// This IIFE (Immediately Invoked Function Expression) ensures that the code runs immediately after it is defined.
-	(() => {
-		if (window.innerWidth < 768) {
-			console.log('PageContentNav.astro: window.innerWidth < 768, cancelling…');
-			return;
-		}
+	if (window.innerWidth >= 768) {
+		let activeHeadings: string[] = [];
 
-		const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					const id = entry.target.getAttribute('id');
+					const tocLink = document.querySelector(`#page-toc-container a[href="#${id}"]`);
 
-		// console.log(Array.from(headings).map((elem) => elem.innerText));
-		// console.log(headings);
-
-		const navigation = document.getElementById('page-toc-container');
-
-		if (navigation) {
-			navigation.appendChild(document.createElement('ul'));
-		}
-
-		headings.forEach((heading) => {
-			let text = '';
-
-			if (heading.dataset.tocText) {
-				text = heading.dataset.tocText;
-			} else {
-				text = heading.innerText;
-			}
-
-			// console.log(text);
-
-			const listItem = document.createElement('li');
-			const anchor = document.createElement('a');
-
-			const div1 = document.createElement('div');
-			// const div2 = document.createElement('div');
-			const span = document.createElement('span');
-
-			anchor.href = `#${heading.id}`;
-			div1.innerText = text;
-			// div2.innerText = text;
-			span.innerText = text;
-
-			div1.appendChild(span);
-
-			anchor.appendChild(div1);
-			// anchor.appendChild(div2);
-			anchor.setAttribute('aria-label', text);
-
-			anchor.ariaLabel = text;
-
-			listItem.appendChild(anchor);
-			const ulElement = navigation.querySelector('ul');
-			if (ulElement) {
-				ulElement.appendChild(listItem);
-			}
-		});
-
-		navItems = Array.from(document.querySelectorAll('#page-toc-container a'));
-
-		const observerOptions = {
-			root: null,
-			rootMargin: '0px',
-			threshold: 0.5,
-		};
-
-		const observerCallback = (entries) => {
-			entries.forEach((entry) => {
-				const navItem = navItems.find((item) => {
-					const itemId = item.href.split('#').pop();
-					const targetId = entry.target.id;
-					return itemId === targetId;
-				});
-
-				if (navItem) {
 					if (entry.isIntersecting) {
-						navItem.classList.add('active');
+						// Clear headings that are now above viewport
+						activeHeadings = activeHeadings.filter((headingId) => {
+							const element = document.getElementById(headingId);
+							const isAbove = element?.getBoundingClientRect().top < 0;
+							if (isAbove) {
+								document
+									.querySelector(`#page-toc-container a[href="#${headingId}"]`)
+									?.classList.remove('active');
+							}
+							return !isAbove;
+						});
+
+						// Add new heading
+						if (!activeHeadings.includes(id)) {
+							activeHeadings.push(id);
+						}
+						tocLink?.classList.add('active');
 					} else {
-						navItem.classList.remove('active');
+						activeHeadings = activeHeadings.filter((h) => h !== id);
+						tocLink?.classList.remove('active');
+
+						// If no headings are active, reactivate the last visible one
+						if (activeHeadings.length === 0 && entry.target.getBoundingClientRect().top < 0) {
+							activeHeadings.push(id);
+							tocLink?.classList.add('active');
+						}
 					}
-				}
-			});
-		};
+				});
+			},
+			{ root: null, rootMargin: '0px', threshold: 0.5 }
+		);
 
-		const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-		headings.forEach((section) => {
-			observer.observe(section);
+		document.querySelectorAll('h1[id], h2[id], h3[id], h4[id]').forEach((heading) => {
+			observer.observe(heading);
 		});
-	})();
+	}
 </script>
 
 <style lang="scss" is:global>
+	/* Keep your existing styles unchanged */
 	@use '../styles/vars.scss';
 
 	#page-toc-container {

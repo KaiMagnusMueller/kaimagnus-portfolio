@@ -14,6 +14,7 @@ const {
 	pageTitle = SITE.title,
 	pageDescr = SITE.desc,
 	ogImage = 'https://res.cloudinary.com/dm3a0qioc/image/upload/v1723483893/240812_og_image_kaimagnus_tdj3d5.jpg',
+	...props
 } = Astro.props;
 
 const currentPath = new URL(Astro.url.pathname, Astro.site?.href);

@@ -22,6 +22,14 @@ let allEntries = [...universityProjects, ...articles, ...work];
 let featured = allEntries.filter((elem) => {
 	return elem.data.featured.includes('noteworthy');
 });
+
+const headings = [
+	{ text: 'Start', depth: 1, slug: 'start' },
+	{ text: 'Highlights', depth: 2, slug: 'highlights' },
+	{ text: 'Professional Work', depth: 2, slug: 'work' },
+	{ text: 'University Projects', depth: 2, slug: 'projects' },
+	{ text: 'Writing', depth: 2, slug: 'writing' },
+];
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
@@ -32,7 +40,7 @@ let featured = allEntries.filter((elem) => {
 		<link rel="dns-prefetch" href="https://res.cloudinary.com" />
 	</Fragment>
 
-	<PageContentNav />
+	<PageContentNav {headings} />
 
 	<main class="index-page color-text">
 		<div class="hero--section color-text-low-contrast text text-large">

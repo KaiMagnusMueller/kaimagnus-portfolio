@@ -1,20 +1,32 @@
 ---
 import Posts from '@layouts/Posts.astro';
+import { getHeadingsRender } from '@utils/getHeadingsRender';
 import { getCollection } from 'astro:content';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-	const blogEntries = await getCollection('work');
-	return blogEntries.map((entry) => ({
+	const entries = await getCollection('work');
+
+	const headings = await getHeadingsRender(entries);
+
+	return entries.map((entry, index) => ({
 		params: { slug: entry.slug },
-		props: { entry },
+		props: { entry, headings: headings[index] },
+
 	}));
 }
 // 2. When it's time to render, you can get the entry directly from the prop
-const { entry } = Astro.props;
+const { entry, headings } = Astro.props;
 const { Content } = await entry.render();
+
 const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { dateStyle: 'long' });
-const startDate = new Date(entry.data.projectStartDate).getFullYear().toString()
-const endDate = new Date(entry.data.projectEndDate).getFullYear().toString();
+
+
+const startDate = entry.data.projectStartDate 
+  ? new Date(entry.data.projectStartDate).getFullYear().toString()
+  : '';
+const endDate = entry.data.projectEndDate 
+  ? new Date(entry.data.projectEndDate).getFullYear().toString()
+  : '';
 
 
 ---
@@ -22,9 +34,7 @@ const endDate = new Date(entry.data.projectEndDate).getFullYear().toString();
 
 <Posts
 	entryCollection={entry.collection}
-	pageTitle={entry.data.title}
-	pageDescr={entry.data.description}
-	ogImage={entry.data.ogImage}>
+	{...entry.data} {headings}>
 	<header>
 		<div class="header-inner-wrapper">
 			<h1 id={entry.slug}>{entry.data.title}</h1>

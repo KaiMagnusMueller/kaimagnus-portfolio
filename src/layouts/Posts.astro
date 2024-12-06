@@ -1,25 +1,24 @@
 ---
-import { SITE } from '@config';
 import Layout from './Layout.astro';
 import PageContentNav from '@components/PageContentNav.astro';
+import type { MarkdownHeading } from 'astro';
 
 export interface Props {
-	pageTitle: string;
-	pageDescr: string;
 	entryCollection: string;
-	ogImage: string | undefined;
+	headings: MarkdownHeading[];
+	[key: string]: any;
 }
 
-const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
+const { entryCollection, headings, ...props } = Astro.props;
 ---
 
-<Layout pageTitle={pageTitle} pageDescr={pageDescr} {ogImage}>
+<Layout pageTitle={props.title} pageDescr={props.description} ogImage={props.ogImage} {...props}>
 	<nav class="color-text-low-contrast">
 		<a href="/">Home</a> /
 		{entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
 	</nav>
 	<article class="post-content">
-		<PageContentNav />
+		<PageContentNav {headings} />
 		<slot />
 	</article>
 </Layout>
@@ -200,19 +199,14 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 		margin-bottom: 0.75rem;
 	}
 
-	h1:hover,
-	h2:hover,
-	h3:hover,
-	h4:hover {
-		.anchor-link {
-			visibility: visible;
-			opacity: 1;
-		}
+	.heading-wrapper {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 1em;
 	}
 
 	.anchor-link {
 		transition: opacity 0.2s ease;
-		margin-left: 0.5rem;
 		width: 20px;
 		height: 20px;
 
@@ -220,5 +214,10 @@ const { pageTitle, pageDescr, entryCollection, ogImage } = Astro.props;
 			visibility: hidden;
 			opacity: 0;
 		}
+	}
+
+	.heading-wrapper:hover .anchor-link {
+		visibility: visible;
+		opacity: 1;
 	}
 </style>
