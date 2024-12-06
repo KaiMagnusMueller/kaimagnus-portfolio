@@ -13,7 +13,7 @@ const { headings } = Astro.props;
 		{
 			headings.map((heading, index) => (
 				<li>
-					<a href={`#${heading.slug}`} class={index == 0 ? 'active' : ''}>
+					<a href={`#${heading.slug}`}>
 						<div>
 							{heading.text}
 							<span>{heading.text}</span>
@@ -27,7 +27,10 @@ const { headings } = Astro.props;
 
 <script>
 	// Only run TOC logic if screen is wide enough
+
 	if (window.innerWidth >= 768) {
+		let activeHeadings: string[] = [];
+
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
@@ -35,17 +38,38 @@ const { headings } = Astro.props;
 					const tocLink = document.querySelector(`#page-toc-container a[href="#${id}"]`);
 
 					if (entry.isIntersecting) {
-						document.querySelectorAll('#page-toc-container a').forEach((link) => {
-							link.classList.remove('active');
+						// Clear headings that are now above viewport
+						activeHeadings = activeHeadings.filter((headingId) => {
+							const element = document.getElementById(headingId);
+							const isAbove = element?.getBoundingClientRect().top < 0;
+							if (isAbove) {
+								document
+									.querySelector(`#page-toc-container a[href="#${headingId}"]`)
+									?.classList.remove('active');
+							}
+							return !isAbove;
 						});
+
+						// Add new heading
+						if (!activeHeadings.includes(id)) {
+							activeHeadings.push(id);
+						}
 						tocLink?.classList.add('active');
+					} else {
+						activeHeadings = activeHeadings.filter((h) => h !== id);
+						tocLink?.classList.remove('active');
+
+						// If no headings are active, reactivate the last visible one
+						if (activeHeadings.length === 0 && entry.target.getBoundingClientRect().top < 0) {
+							activeHeadings.push(id);
+							tocLink?.classList.add('active');
+						}
 					}
 				});
 			},
-			{ rootMargin: '0px 0px -80% 0px' }
+			{ root: null, rootMargin: '0px', threshold: 0.5 }
 		);
 
-		// Track all section headings
 		document.querySelectorAll('h1[id], h2[id], h3[id], h4[id]').forEach((heading) => {
 			observer.observe(heading);
 		});
