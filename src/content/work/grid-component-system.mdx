@@ -1,7 +1,7 @@
 ---
 author: Kai Magnus Müller
 datePublished: 2022-04-10T10:00:00Z
-title: A Grid Component System with DX in Mind
+title: Ergonomic Grid Component System
 tags:
     - Design System
     - Components
@@ -15,15 +15,15 @@ description: ''
 import Figure from '@components/Figure.astro';
 import UseCase from '@components/UseCase.svelte';
 
-As mentioned in a few other posts, my team and I have been working on data-heavy applications for IDS (Investment Data Services) for a few years. Because many applications have one or more tables on their main screens, we needed a grid component system that was not only performant but also flexible, easy to use and fast to work with. 
+As mentioned in a few other posts, my team and I have been working on data-heavy applications for IDS (Investment Data Services) for a few years. Because many applications have one or more tables more or less permanently on screen, we needed a grid component system that was not only performant but also flexible, easy to use and fast to work with. 
 
-We decided to build our own component system based on [AG Grid](https://www.ag-grid.com/example/), which was the framework chosen for the live applications. 
+We decided to build our own component system based on [AG Grid](https://www.ag-grid.com/example/), which was also the framework chosen for the live applications. 
 
 ## Designer Experience (DX)
 
 In the development world, a good ['developer experience' as explained here by GitHub](https://github.blog/2023-06-08-developer-experience-what-is-it-and-why-should-you-care/) aims to increase 'developer productivity, satisfaction, and operational impact' and an overall enjoyable experience when using certain products or services.
 
-Similarly, 'designer experience' – or DX – in the context of component libraries stands for ergonomic components that follow a designer's mental model. They should not get in the way when designing or need detaching. For good DX, a balance between helpful presets in the form of component properties and flexibility via slot components and nested components is important. 
+Similarly, 'designer experience' – unfortunately also DX for short – in the context of component libraries stands for ergonomic components that follow a designer's mental model. They should not get in the way when designing or need regular detaching. For good DX, a balance between helpful presets in the form of component properties and flexibility via slot components is important. Well thought out nested components and resize constraints are equally important so that designers find their way around the library and can use them without friction. 
 
 <Figure 
     alt="A few applications we designed feature a large and complex grid as their main view. AG Grid provides many menu, editor and filter components that we redesigned to fit the requirements of expert applications." 
@@ -34,9 +34,9 @@ Similarly, 'designer experience' – or DX – in the context of component libra
 
 ## Component Design
 
-On a high level, cells are made out of three parts, the cell component, an absolute positioned background and a content component in an auto layout. This gives designers high flexibility to change paddings, should some custom cell content require the full cell area for example, but provides a standard size for the default content types. 
+On a high level, cells are made out of three parts in our system: the cell component, an absolute positioned background and a content component in an auto layout. This gives designers high flexibility to change paddings, should some custom cell content require the full cell area for example, but provides a standard size for the default content types. 
 
-Content can be easily swapped via the instance property and thanks to nested properties, things like the state of checkboxes can be set from the main component. Consistent layer names help Figma apply overrides, even when swapping for example from plain text content to a dropdown. This creates a flexible and extensible setup. Which is needed, since AG Grid is also highly customizable and applications display all kinds of data. Designers can use the included content components, but custom spark-lines and other content is very easy to build. 
+Content can be easily swapped via the instance property and thanks to nested properties, things like the state of checkboxes can be set from the main component. Consistent layer names help Figma apply overrides, even when swapping for example from plain text cell to a dropdown cell. This creates a flexible and extensible setup. Which is needed, since AG Grid is also highly customizable and our applications display all kinds of data. Designers can use the included content components, but custom spark-lines and other content is very easy to build. 
 
 
 <Figure 

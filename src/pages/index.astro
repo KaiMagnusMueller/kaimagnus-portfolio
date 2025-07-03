@@ -27,8 +27,8 @@ const headings = [
 	{ text: 'Start', depth: 1, slug: 'start' },
 	{ text: 'Highlights', depth: 2, slug: 'highlights' },
 	{ text: 'Professional Work', depth: 2, slug: 'work' },
-	{ text: 'University Projects', depth: 2, slug: 'projects' },
 	{ text: 'Writing', depth: 2, slug: 'writing' },
+	{ text: 'University Projects', depth: 2, slug: 'projects' },
 ];
 ---
 
@@ -57,7 +57,7 @@ const headings = [
 					I was leading design for <a href="/work/epic-designing-internal-applications"
 						>insurance and investment</a
 					>
-					applications and <a href="/work/grid-component-system">design systems</a>, and was part of our <a
+					applications, <a href="/work/grid-component-system">design systems</a>, and was part of our <a
 						href="/work/omni-comms-tool-for-insurance-agents">in-house innovation lab</a
 					>.</p
 				>
@@ -134,6 +134,11 @@ const headings = [
 			<CollectionList id="work" title="Professional Work" ariaDetails="Professional projects" entries={work} />
 		</section>
 		<section>
+			<!-- POSTS -->
+			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
+			<CollectionList id="writing" title="Writing" entries={articles} />
+		</section>
+		<section>
 			<!-- UNIVERSITY -->
 			<span class="insert-text">
 				<p>
@@ -154,11 +159,6 @@ const headings = [
 			</span>
 			<!-- https://archive.is/3R3EH -->
 			<CollectionList id="projects" title="University Projects" entries={universityProjects} />
-		</section>
-		<section>
-			<!-- POSTS -->
-			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
-			<CollectionList id="writing" title="Writing" entries={articles} />
 		</section>
 	</main>
 
