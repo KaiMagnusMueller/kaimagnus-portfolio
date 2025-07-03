@@ -17,24 +17,24 @@ description: ''
 import Figure from '@components/Figure.astro';
 import UseCase from '@components/UseCase.svelte';
 
-EPIC is a web application for investment managers to track changes in portfolios and do reporting. It is maintained by [IDS (Investment Data Services)](https://www.idsdata.com/solutions/) and used by many internal Allianz investment management companies, in total a few hundred people. We were approached by IDS in fall 2023 to do a thorough analysis and create a redesign of this application. 
+EPIC is a web application for investment managers to track changes in portfolios and generate reports. It is maintained by [IDS (Investment Data Services)](https://www.idsdata.com/solutions/) and used by many internal Allianz investment management companies, a few hundred people in total. We were approached by IDS in fall 2023 to conduct a thorough analysis and create a redesign of this application. 
 
-The app is separated into three main sections: The first is a general overview of all Allianz portfolios, where users can download various types of reports. The second area is a powerful editor for custom reports, that allows to filter and preprocess data. Users will most likely process the data further in Excel, but since the amounts of data can be very large, it is a good idea to filter the data in advance. And lastly, an editor for investment decisions, which are automatically exported as PowerPoint slides together with investment data.
+The app is divided into three main sections: The first is a general overview of all Allianz portfolios, where users can download various types of reports. The second area is a powerful editor for custom reports, which allows users to filter and preprocess data. Users will most likely process the data further in Excel, but since the data volumes can be very large, it is a good idea to filter the data in advance. Lastly, there is an editor for investment decisions, which are automatically exported as PowerPoint slides along with investment data.
 
-> This project was part of IDS' ongoing effort to modernize their service portfolio and to improve utility and usability of their tools. 
+> This project was part of IDS' ongoing effort to modernize their service portfolio and improve the utility and usability of their tools. 
 
-For this project, I was in charge of research, user interviews as well as the concept and design phase. Since this was a redesign, our priority was to support and improve existing workflows, but we had some leeway for adjustments.
+For this project, I was in charge of research, user interviews, as well as the concept and design phase. Since this was a redesign, our priority was to support and improve existing workflows, though we had some leeway for adjustments.
 
 ## Research 
 
-Almost all our users are experts in their field, so it was important to gather qualitative feedback on the current app. To get a good overview, we conducted many interviews, user tests and shadowed users of different teams. Goal was to see as many perspectives as possible and to find answers to our main questions:
+Almost all our users are experts in their field, so it was important to gather qualitative feedback on the current app. To get a good overview, we conducted numerous interviews, usability testing, and shadowed users from different teams. Our goal was to see as many perspectives as possible and to find answers to our main questions:
 
 - What are the users' tasks?
-- How do they do their tasks?
-- How well can they do them?
-- If so, what issues do they encounter?
+- How do they accomplish their tasks?
+- How effectively can they accomplish them?
+- And what issues do they encounter?
 
-Many users of this application work with it daily. When we approached them they were eager to share ideas and suggestions for improvements. Their feedback and hints were very valuable in our research. Next, we mapped out the application, sorted our findings according to where they appear in the App[^1]. Finally, we categorized them into 'ideas', 'problems/opportunities' and 'what works well'.
+Many users of this application work with it daily. When we approached them, they were eager to share ideas and suggestions for improvements and their feedback and hints were very valuable in our research. Next, we conducted task analysis of the application and sorted our findings according to where they appear in the app[^1]. Finally, we performed affinity mapping and categorized them into 'insights', 'pain points', and 'strengths'.
 
 {/* > The users of this application – a small group of experts – made gathering qualitative feedback especially important. */}
 
@@ -59,7 +59,7 @@ I want to highlight two areas we worked on to show our process and impact in mor
     height="910">
 </Figure>
 
-In this screenshot, users can filter and browse a tree of Allianz' investment funds. Users have to navigate to certain nodes and download them in one of many formats. Depending on what they want to do, this could be Excel to further explore the data, PDF for reports, and so on. The way this was done before felt stitched together because it grew from many small changes over the years. It was inconsistent and confusing.
+In this screenshot, users can filter and browse a tree of Allianz' investment funds. Users have to navigate to certain nodes and download data in one of many formats. Depending on what they want to do, this could be Excel to further explore the data, PDF for reports, and so on. This feature went through many small changes and additions over the years, eventually becoming inconsistent and confusing.
 
 There were two download options, separated by file type, each with their own drop-down. We found that users had trouble telling what they were about to download. To make matters worse, for some downloads users needed to select a fund from the tree first, or an error would appear. We also spoke to some users responsible for onboarding. Here we found the new users often asked what the individual downloads were for and which data they used.
 
@@ -96,7 +96,7 @@ We discovered one very surprising workaround that some users found. It was so us
     height="1080" fullWidth>
 </Figure>
 
-To solve these and other issues, we once again worked together with the relevant experts to add descriptions where necessary. Luckily, dropdown filtering was already supported by our new component library, which we could then use here. We also introduced a new custom feature to drag and drop hierarchy levels. Here, we had to research libraries and find settings that provided good usability.
+To solve these and other issues, we once again worked together with the relevant experts to add descriptions where necessary. Luckily, dropdown filtering was already supported by our new component library, which we could then use here. We also introduced a new custom feature to drag-and-drop hierarchy levels. Here, we had to research libraries and find settings that provided good usability.
 
 {/* Other improvements were for the way the calculation progress is shown in the list, and the 'Check' and 'View' tabs. */}
 
@@ -106,11 +106,11 @@ Towards the end of the project, we started implementation of the new application
 
 ## Designing for Power Users
 
-The unique constraints of internal apps is a very interesting limitation when designing. Limited design and dev time makes it necessary to get as much as possible out of existing components. Knowledge of the way a component works, like slots and props is essential to create designs that can be implemented fast. Power users and their workflows provide challenges while redesigning apps, since new and existing workflows can clash. Sometimes apps grow organically into unintuitive frankensteins and larger changes are needed. Long time users might be accustomed to it, but easier onboarding for new team members makes it worth it.
+The unique constraints of internal apps is a very interesting limitation when designing. Limited design and dev time makes it necessary to get as much as possible out of existing components. Knowledge of the way a component works, like slots and props is essential to create designs that can be implemented fast. Power users and their workflows provide challenges while redesigning apps, since new and existing workflows can clash. Sometimes apps grow organically and become unintuitive and confusing and larger changes are needed. Long time users might be accustomed to it, but easier onboarding for new team members makes it worth it.
 
 This makes [meeting people where they are](https://productatheart.com/blog/teresa-torres-even-you-can-do-continuous-discovery-bringing-the-discovery-habits-to-every-organization#:~:text=The%20golden%20rule%20of%20organizational%20change%3A%20Meet%20people%20where%20they%20are!) so important. Stakeholders need to be on board to provide helpful feedback. Working on a few projects like this has taught me that this is key to a successful project. For this reason I've started doing more rather than less interviews to listen to existing users. Including them in the design process has also been helpful to make them feel heard. At the same time, it is important to strike a balance between including feedback, but also providing alternatives if there are other, better fitting patterns. 
 
-An excellent grasp of product design and usability fundamentals is important. Fluently applying small details, like status, empty and loading states, or use of space and elevation comes in handy when designing information dense applications. (And if you need to support everything from ultrawides to older iPads) I even wrote a custom stylesheet for AG Grid[^3] to have tight control over CSS variables that we could then use with large trees for example that required denser nesting, and so on. For this project we kept watch of mouse movements and made adjustments to the location of toolbars and controls according to what is likely to be clicked next. When your users spend most of their work days in the applications you build, it matters. 
+An excellent grasp of product design and usability fundamentals is important. Fluently applying small details, like status, empty and loading states, or use of space and elevation comes in handy when designing information-dense user interfaces. (And if you need to support everything from ultrawide screens to older iPads) I even wrote a custom stylesheet for AG Grid[^3] to have tight control over CSS variables that we could then use with large trees for example that required denser nesting, and so on. For this project we kept watch of mouse movements and made adjustments to the location of toolbars and controls according to what is likely to be clicked next. When your users spend most of their work days in the applications you build, it matters. 
 
 These and more are the approaches and tactics I learned to use when designing internal applications for power users. 
 

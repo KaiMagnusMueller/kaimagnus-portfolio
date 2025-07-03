@@ -1,0 +1,42 @@
+---
+author: Kai Magnus Müller
+datePublished: 2025-06-28T10:24:00Z
+title: ContentKit – Automating Content in Designs
+featured:
+    - noteworthy
+tags:
+    - Product Design
+    - Development
+customer: ""
+employer: Independent
+ogImage: ''
+description: ''
+---
+
+import Figure from '@components/Figure.astro';
+
+Leaving Kaiser X Labs and the Allianz world at the end of 2024, I started working on a new product called ContentKit. I've long been using plugins all the way back to Data Populator in Sketch since 2018 or Google Sheet Sync in Figma. However there were a few pain points that I wanted to solve. First, the long standing issue of knowing which data source was currently up to date. Second, reliability of how data is inserted into designs. Third, finding or writing the data in the first place and finally, collaboration with stakeholders who might have their own opinion on the content of prototypes. 
+
+I've spent many hours in my career designing prototypes, some for quick tests, but also many longer lasting during and even beyond the duration of a project. Here, updating them while designs, components and the content itself changed over time was tedious and prone to errors. 
+
+## First steps
+
+I started by analyzing the current tool landscape and the design process to see what other tools do right, how they fit into the design process and what they've been missing. 
+
+<Figure 
+    alt="Early sketches of possible interfaces and user flows. I experimented with a playful way of importing existing data and schemas from designs. A sidebar of the current selection was also a constant for a long time." 
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1751544469/contentkit-sketches_uz2iyd.jpg" 
+    width="2172" 
+    height="1448">
+</Figure>
+
+There are many tools that provide all kinds of data types to choose from. Names, cities, dates, album titles or even ISBN numbers. Some provide user generated data and of course the new Figma AI content tools. While they're very fast, they lack the ability to reliably insert the same data repeatedly, leading to inconsistent designs in prototypes, where screens are often similar or even repeat. 
+
+Aside from realistic data, a big part of prototypes are component properties. From simple button states to variants of cards and list elements, I don't need to tell you they are an essential part of modern UI design. Here however 
+
+{/* While tools like Google Sheet Sync provide the ability to import data and even collaboration via Google Sheets, creating public links is often a no-go for security reasons and  */}
+
+## Prototypes
+
+The plugin and web app is built in Svelte, where I could draw from my experience working on Collections, which is also Svelte based. This allowed me to share some components like the table or dropdown positioning logic between the two parts. 
+
