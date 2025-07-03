@@ -147,9 +147,7 @@
     </div>
 </div>
 
-<style lang="scss">
-    @use '../styles/vars.scss';
-
+<style lang="css">
     .useCase--container {
         margin: 3em 0;
     }
@@ -184,7 +182,7 @@
         margin-bottom: 0;
     }
 
-    // USE CASE
+    /* USE CASE */
 
     .useCase--navigation {
         display: flex;
@@ -198,9 +196,9 @@
     button {
         flex-shrink: 0;
         appearance: none;
-        // border: 2px solid transparent;
+        /* border: 2px solid transparent; */
         border: none;
-        // border-radius: 4px;
+        /* border-radius: 4px; */
         background-color: unset;
         padding: 0.25rem 0.5rem;
         font-family: inherit;
@@ -217,7 +215,7 @@
         color: var(--text-color);
     }
 
-    @media (max-width: vars.$screen-lg) {
+    @media (max-width: 1024px) {
         .caption-helper {
             position: absolute;
             top: 0;

@@ -41,9 +41,7 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 		}
 	</ul>
 </main>
-<style lang="scss">
-	@use '../styles/vars.scss';
-
+<style lang="css">
 	nav {
 		display: flex;
 		gap: 1rem;
@@ -54,21 +52,19 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 			text-transform: capitalize;
 		}
 
-		@media (max-width: vars.$screen-md) {
+		@media (max-width: 768px) {
 			margin: 1rem 0 0;
 		}
 	}
 </style>
 
-<style lang="scss">
-	@use '../styles/vars.scss';
-
+<style lang="css">
 	h1 {
 		margin-top: 12rem;
 		margin-bottom: 3rem;
 	}
 
-	@media (max-width: vars.$screen-md) {
+	@media (max-width: 768px) {
 		h1 {
 			margin-top: 8rem;
 			margin-bottom: 2rem;
@@ -82,11 +78,11 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 		p {
 			font-size: var(--font-size-large);
 		}
-		// Potentially add class="text-large" to the p in list item. Makes the title a bit smaller for small screens.
+		/* Potentially add class="text-large" to the p in list item. Makes the title a bit smaller for small screens. */
 
 		span {
 			color: var(--text-color-low-contrast);
-			// font-size: var(--font-size-small);
+			/* font-size: var(--font-size-small); */
 		}
 	}
 

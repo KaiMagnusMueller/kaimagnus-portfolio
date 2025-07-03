@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
-import '@styles/resets.scss';
-import '@styles/styles.scss';
+import '@styles/resets.css';
+import '@styles/styles.css';
 
 import { SITE } from '@config';
 export interface Props {
@@ -63,9 +63,7 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 	</body>
 </html>
 
-<style lang="scss" is:global>
-	@use '../styles/vars.scss';
-
+<style lang="css" is:global>
 	html {
 		background: var(--bg-image), var(--bg-color-elev-0);
 		padding-inline: clamp(1rem, 10vw, 10rem);
@@ -73,8 +71,8 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 	body {
 		position: relative;
 		margin: auto;
-		max-width: vars.$screen-lg;
-		font-size: 1.125rem; //default font size is 18px
+		max-width: 1184px;
+		font-size: 1.125rem; /* default font size is 18px */
 	}
 
 	footer {
@@ -85,13 +83,13 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 		margin: 8rem 0 2rem;
 	}
 
-	@media (max-width: vars.$screen-md) {
+	@media (max-width: 768px) {
 		html {
 			padding-inline: clamp(1rem, 4vw, 10rem);
 		}
 	}
 
-	@media (max-width: vars.$screen-sm) {
+	@media (max-width: 640px) {
 		footer {
 			margin: 6rem 0 2rem;
 		}

@@ -27,8 +27,8 @@ const headings = [
 	{ text: 'Start', depth: 1, slug: 'start' },
 	{ text: 'Highlights', depth: 2, slug: 'highlights' },
 	{ text: 'Professional Work', depth: 2, slug: 'work' },
-	{ text: 'University Projects', depth: 2, slug: 'projects' },
 	{ text: 'Writing', depth: 2, slug: 'writing' },
+	{ text: 'University Projects', depth: 2, slug: 'projects' },
 ];
 ---
 
@@ -53,9 +53,11 @@ const headings = [
 					>,
 				</h1>
 				<p>
-					a product designer and developer. At <a href="https://www.kaiser-x.com">Kaiser X Labs</a>, I was
-					leading design for <a href="/work/epic-designing-internal-applications">insurance and investment</a>
-					applications and <a href="/work/grid-component-system">design systems</a>, and was part of our <a
+					a product designer and developer. At <a href="https://www.kaiser-x.com">Kaiser X Labs (Allianz)</a>,
+					I was leading design for <a href="/work/epic-designing-internal-applications"
+						>insurance and investment</a
+					>
+					applications, <a href="/work/grid-component-system">design systems</a>, and was part of our <a
 						href="/work/omni-comms-tool-for-insurance-agents">in-house innovation lab</a
 					>.</p
 				>
@@ -63,7 +65,8 @@ const headings = [
 					>After building a few Figma plugins, like <a
 						href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a
 					> and <a href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a>,
-					I am currently working on how we can use real data to create better designs and prototypes.
+					I just released <a href="https://intersectionslab.com/contentkit">ContentKit</a>, a new plugin to
+					insert content and automate prototypes.
 				</p>
 			</div>
 		</div>
@@ -122,13 +125,18 @@ const headings = [
 					>.
 				</p>
 				<p>
-					Whenever I get that creative itch, I am working on <a href="https://app.intersectionslab.com"
-						>Collections</a
+					Whenever I get that creative itch, I am working on <a
+						href="https://collections.intersectionslab.com/">Collections</a
 					>. An experimental platform for knowledge management to explore how computers can help us think and
 					create.
 				</p>
 			</span>
 			<CollectionList id="work" title="Professional Work" ariaDetails="Professional projects" entries={work} />
+		</section>
+		<section>
+			<!-- POSTS -->
+			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
+			<CollectionList id="writing" title="Writing" entries={articles} />
 		</section>
 		<section>
 			<!-- UNIVERSITY -->
@@ -152,16 +160,9 @@ const headings = [
 			<!-- https://archive.is/3R3EH -->
 			<CollectionList id="projects" title="University Projects" entries={universityProjects} />
 		</section>
-		<section>
-			<!-- POSTS -->
-			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
-			<CollectionList id="writing" title="Writing" entries={articles} />
-		</section>
 	</main>
 
-	<style lang="scss">
-		@use '../styles/vars.scss';
-
+	<style lang="css">
 		.hero--section {
 			display: flex;
 			align-items: center;
@@ -177,7 +178,7 @@ const headings = [
 
 		section {
 			margin-block-start: 8rem;
-			max-width: 48ch;
+			max-width: 50ch;
 
 			&:first-of-type {
 				margin-block-start: 0;
@@ -186,7 +187,6 @@ const headings = [
 			.insert-text p {
 				margin-block-start: 0.5rem;
 				margin-block-end: 0.5rem;
-				max-width: 46ch;
 				color: var(--text-color-low-contrast);
 			}
 		}
@@ -230,7 +230,7 @@ const headings = [
 			}
 		}
 
-		@media (max-width: vars.$screen-md) {
+		@media (max-width: 768px) {
 			section {
 				margin-block-start: 6rem;
 
