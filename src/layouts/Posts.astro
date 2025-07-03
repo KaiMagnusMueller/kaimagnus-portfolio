@@ -23,12 +23,9 @@ const { entryCollection, headings, ...props } = Astro.props;
 	</article>
 </Layout>
 
-<style lang="scss">
-	@use '../styles/vars.scss';
-
+<style lang="css">
 	nav {
 		display: flex;
-
 		gap: 1rem;
 		margin: 2rem 0 0;
 
@@ -37,27 +34,25 @@ const { entryCollection, headings, ...props } = Astro.props;
 			text-transform: capitalize;
 		}
 
-		@media (max-width: vars.$screen-md) {
+		@media (max-width: 768px) {
 			margin: 1rem 0 0;
 		}
 	}
 </style>
 
-<style lang="scss" is:global>
-	@use '../styles/vars.scss';
-
+<style lang="css" is:global>
 	.post-content {
 		width: 100%;
 		hyphens: auto;
 		word-break: break-word;
 
 		header {
-			// margin-block-end: -3.5rem;
-			// min-height: 100vh;
+			/* margin-block-end: -3.5rem; */
+			/* min-height: 100vh; */
 			padding-block: 12rem 3rem;
 		}
 
-		@media (max-width: vars.$screen-md) {
+		@media (max-width: 768px) {
 			header {
 				padding-block: 8rem 2rem;
 			}
@@ -69,7 +64,7 @@ const { entryCollection, headings, ...props } = Astro.props;
 			flex-wrap: wrap;
 			justify-content: center;
 			gap: 1rem 1rem;
-			// transform: translateY(-50%);
+			/* transform: translateY(-50%); */
 		}
 
 		h1 {
@@ -84,7 +79,7 @@ const { entryCollection, headings, ...props } = Astro.props;
 			font-weight: 600;
 		}
 
-		// part of the articles and project pages
+		/* part of the articles and project pages */
 		.course-data {
 			display: inherit;
 			flex-wrap: inherit;
@@ -94,7 +89,7 @@ const { entryCollection, headings, ...props } = Astro.props;
 			line-height: 1;
 
 			span {
-				// box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294);
+				/* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294); */
 				border: 1px solid var(--card-border-color);
 				border-radius: 999px;
 				background: var(--bg-color-elev-1);
@@ -125,7 +120,7 @@ const { entryCollection, headings, ...props } = Astro.props;
 			position: relative;
 			outline: 1px solid var(--border-color-transparent);
 			outline-offset: -1px;
-			// box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+			/* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1); */
 			border-radius: 4px;
 			overflow: clip;
 		}
@@ -153,7 +148,7 @@ const { entryCollection, headings, ...props } = Astro.props;
 				height: 100%;
 			}
 
-			@media (max-width: vars.$screen-md) {
+			@media (max-width: 768px) {
 				display: none;
 			}
 
@@ -182,7 +177,7 @@ const { entryCollection, headings, ...props } = Astro.props;
 		}
 	}
 
-	@media (max-width: vars.$screen-md) {
+	@media (max-width: 768px) {
 		.post-content {
 			& > *,
 			figcaption {

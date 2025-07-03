@@ -10,21 +10,19 @@ const { classList = 'company-logo', src = '', alt = '' } = Astro.props;
 
 <span><img {src} class={classList} {alt} /><slot /></span>
 
-<style lang="scss">
-	@use '../styles/vars.scss';
-
+<style lang="css">
 	img {
 		position: absolute;
 		margin-inline-start: -1.5em;
-		// top: 50%;
-		// left: 50%;
-		// transform: translate(-50%, -50%);
+		/* top: 50%; */
+		/* left: 50%; */
+		/* transform: translate(-50%, -50%); */
 		background-color: var(--bg-color-elev-0);
 		aspect-ratio: 1;
 		height: 1.25em;
 		object-fit: contain;
 
-		@media (max-width: vars.$screen-sm) {
+		@media (max-width: 640px) {
 			height: 1.5em;
 		}
 	}
@@ -32,7 +30,7 @@ const { classList = 'company-logo', src = '', alt = '' } = Astro.props;
 	span {
 		position: relative;
 		margin-inline-start: 1.6em;
-		// color: var(--text-color);
+		/* color: var(--text-color); */
 		text-wrap: nowrap;
 	}
 
