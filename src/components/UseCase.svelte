@@ -221,5 +221,9 @@
             top: 0;
             bottom: unset;
         }
+
+        .media--pos-absolute {
+            height: unset;
+        }
     }
 </style>

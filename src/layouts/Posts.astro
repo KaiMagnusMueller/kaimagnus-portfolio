@@ -184,6 +184,12 @@ const { entryCollection, headings, ...props } = Astro.props;
 				max-width: unset;
 			}
 		}
+
+		.footnotes {
+			.heading-wrapper {
+				display: none;
+			}
+		}
 	}
 
 	h1,
@@ -197,7 +203,7 @@ const { entryCollection, headings, ...props } = Astro.props;
 	.heading-wrapper {
 		display: inline-flex;
 		align-items: baseline;
-		gap: 1em;
+		gap: 0.5em;
 	}
 
 	.anchor-link {

@@ -26,6 +26,7 @@ const { headings } = Astro.props;
 </nav>
 
 <script>
+	// @ts-nocheck
 	// Only run TOC logic if screen is wide enough
 
 	if (window.innerWidth >= 768) {
@@ -233,7 +234,7 @@ const { headings } = Astro.props;
 		}
 	}
 
-	@media (max-width: vars.$screen-md) {
+	@media (max-width: 768px) {
 		#page-toc-container {
 			display: none;
 			top: 0;

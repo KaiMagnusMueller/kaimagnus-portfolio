@@ -38,4 +38,14 @@ const { classList = 'company-logo', src = '', alt = '' } = Astro.props;
 		border-radius: 4px;
 		padding: 0.25rem;
 	}
+
+	@media screen and (max-width: 640px) {
+		img {
+			margin-inline-start: -1.75em;
+		}
+
+		span {
+			margin-inline-start: 1.8em;
+		}
+	}
 </style>
