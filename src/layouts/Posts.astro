@@ -192,6 +192,10 @@ const { entryCollection, headings, ...props } = Astro.props;
 			margin-top: 4rem;
 			border-top: 1px solid var(--border-color-transparent);
 			padding-top: 1rem;
+
+			.heading-wrapper {
+				display: none;
+			}
 		}
 	}
 
@@ -200,12 +204,6 @@ const { entryCollection, headings, ...props } = Astro.props;
 			& > *,
 			figcaption {
 				max-width: unset;
-			}
-		}
-
-		.footnotes {
-			.heading-wrapper {
-				display: none;
 			}
 		}
 
