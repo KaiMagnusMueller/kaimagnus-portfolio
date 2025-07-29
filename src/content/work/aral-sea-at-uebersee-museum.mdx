@@ -11,46 +11,34 @@ customer: Übersee-Museum Bremen
 employer: Freelance
 ogImage: ''
 description: 'Based on the first Aral Sea exhibit prototype, this exhibit was developed for a special temporary exhibition at Übersee-Museum Bremen.'
-
 ---
 
 import Figure from '@components/Figure.astro';
 import UseCase from '@components/UseCase.svelte';
 
-
-<Figure 
-    alt="The assembled exhibit after delivery in the Übersee-Museum (excuse the bad footage, after eight hours in the train and no sleep, I wasn't exactly awake…)" 
-    src="/video/aral-sea-2/aral-sea-2-video-2.mp4" 
-    width="1920" 
+<Figure
+    alt="The assembled exhibit after delivery in the Übersee-Museum (excuse the bad footage, after eight hours in the train and no sleep, I wasn't exactly awake…)"
+    src="/video/aral-sea-2/aral-sea-2-video-2.mp4"
+    width="1920"
     height="1080"
     type="video"
-    fullWidth>
-</Figure>
-
-
+    fullWidth></Figure>
 
 In late 2021, my former team members and I were contacted by the curator of an upcoming exhibition at Übersee-Museum Bremen. They were currently planning an exhibition about cotton and became aware of our [Aral Sea project from 2017](/projects/aralsea), a topic that would fit perfectly in the upcoming exhibition.
 
-The exhibit's structure should largely stay as it was in our first version, but with more and diverse content (written by an expert this time) focusing on cotton. 
+The exhibit's structure should largely stay as it was in our first version, but with more and diverse content (written by an expert this time) focusing on cotton.
 
-We developed structure and content alongside our design content, exchanging ideas and iterating over the first half of 2022 until we went into production of our new physical interface and the digital UI. 
+We developed structure and content alongside our design content, exchanging ideas and iterating over the first half of 2022 until we went into production of our new physical interface and the digital UI.
 
 ## Design and Concept
 
 A request from the curator was to have three main topics, and their development throughout the decades from 1960 to 2020, that could be viewed chronologically. The topics were Aral Sea, cotton, and politics.
 
-{/* <Figure
-            alt="Early concepts of a 'lane' layout. Users could expand one of the three topics to access more detailed information."
-            src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719421037/Aral%20Sea%202/aral-sea-2-concepts-2_ib5n32.jpg"
-            width="1920"
-            height="1200"></Figure> */}
-
-<Figure 
-    alt="Early concepts of a 'lane' layout. Users could expand one of the three topics to access more detailed information." 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719752051/Aral%20Sea%202/aral-sea-2-concept-1_dnnlsk.jpg" 
-    width="1920" 
-    height="678">
-</Figure>
+<Figure
+    alt="Early concepts of a 'lane' layout. Users could expand one of the three topics to access more detailed information."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719752051/Aral%20Sea%202/aral-sea-2-concept-1_dnnlsk.jpg"
+    width="1920"
+    height="678"></Figure>
 
 We started playing around with different concepts, like the lane layout pictured above. The goal here was to make it obvious and easy to visitors passing by, where they could get information, so that nothing would be hidden.
 
@@ -58,36 +46,24 @@ First screen designs were based on that concept, but because test users were fru
 
 ## Iterating Screen Designs
 
-<Figure 
-    alt="One of the first designs with prototype styling. It introduced the possibility to switch topics at the bottom of the screen." 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719751645/Aral%20Sea%202/aral-sea-2-wip-2_aupeym.jpg" 
-    width="1920" 
-    height="1080">
-</Figure>
+<Figure
+    alt="One of the first designs with prototype styling. It introduced the possibility to switch topics at the bottom of the screen."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719751645/Aral%20Sea%202/aral-sea-2-wip-2_aupeym.jpg"
+    width="1920"
+    height="1080"></Figure>
 
 ## Development
 
-Using my experience with Svelte, I started building the front-end for this exhibit. 
+Using my experience with Svelte, I started building the front-end for this exhibit.
 
-I had started playing around with small toy projects in Svelte and SvelteKit since around 2021. This project was the first big project where I could apply my new front-end development skills in a not overly complicated environment, since we could package all information on-device, without a database and server. 
-
-{/* ## Assembly
-
-
-<Figure 
-    alt="The final version included a number of " 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719752800/Aral%20Sea%202/aral-sea-2-hardware-1_llztxj.jpg" 
-    width="4032" 
-    height="3024">
-</Figure> */}
+I had started playing around with small toy projects in Svelte and SvelteKit since around 2021. This project was the first big project where I could apply my new front-end development skills in a not overly complicated environment, since we could package all information on-device, without a database and server.
 
 ## Final version
 
-The version that eventually shipped with the device. Design direction was locked in early, so we spent more time focusing on usability improvements and clarity. We included support for German and English and moved the lake itself into the middle to better show the changing surface. 
+The version that eventually shipped with the device. Design direction was locked in early, so we spent more time focusing on usability improvements and clarity. We included support for German and English and moved the lake itself into the middle to better show the changing surface.
 
-<Figure 
-    alt="Users can view different media scattered around the lake like photographs on a table." 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719751646/Aral%20Sea%202/aral-sea-2-final-1990_gnna1g.jpg" 
-    width="1920" 
-    height="1080">
-</Figure>
+<Figure
+    alt="Users can view different media scattered around the lake like photographs on a table."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1719751646/Aral%20Sea%202/aral-sea-2-final-1990_gnna1g.jpg"
+    width="1920"
+    height="1080"></Figure>

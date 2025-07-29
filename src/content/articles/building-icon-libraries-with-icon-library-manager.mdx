@@ -116,7 +116,6 @@ Thank you for your interest in ILM. Let me know on [Threads](https://www.threads
 
 To make usage of the imported icons in your designs even easier, you can build a placeholder component. I wrote about best practices for constructing them and how to use icons in design projects in general in my [previous post](/articles/create-robust-figma-icon-components).
 
-
 The source code is available on GitHub: https://github.com/KaiMagnusMueller/SVG-Icon-Manager. Feel free to raise issues or use it as a starting point for your own plugin.
 
 [^1]: Even though I'm focusing on icons here, there might be more use cases for this plugin. It's already flexible regarding icon sizes, so it could be used as a general purpose SVG importer/updater.
@@ -125,5 +124,5 @@ The source code is available on GitHub: https://github.com/KaiMagnusMueller/SVG-
 
 [^3]:
     Figma uses an internal ID for each element to identify overrides, component updates and branches. Because of this, we can't simply delete the component and add it with the updated icon and the same name again. Doing this would cause it to show up during a library update as two separate components, one 'removed' and one 'added'.
-    
+
     To make it work, ILM finds the components that were changed and swaps out the icon path, while keeping the component layer itself unchanged. Figma will then show the components as 'changed' during updates.

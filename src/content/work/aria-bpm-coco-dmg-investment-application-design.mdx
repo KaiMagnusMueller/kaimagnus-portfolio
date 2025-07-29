@@ -21,60 +21,54 @@ import UseCase from '@components/UseCase.svelte';
 
 ## Introduction
 
-[IDS](https://www.idsdata.com/solutions/) (Investment Data Services) is an Allianz internal company that helps other internal companies manage and work with investment data. They collect data from various sources, like Refinitiv or MSCI and internal data, and standardize, store, analyze it and do quality checks. They then make it available to their clients in a suite of web applications, which they develop together with their clients. 
+[IDS](https://www.idsdata.com/solutions/) (Investment Data Services) is an Allianz internal company that helps other internal companies manage and work with investment data. They collect data from various sources, like Refinitiv or MSCI and internal data, and standardize, store, analyze it and do quality checks. They then make it available to their clients in a suite of web applications, which they develop together with their clients.
 
 In 2019 IDS started an initiative to modernize their suite of tools and processes. IDS also launched a new corporate design and wanted to bring the new look and feel to their applications as well. In late 2020, my team was brought on to help with redesigning of tools and services, which I joined in 2021.
 
-<Figure 
-    alt="IDS supports a large set of applications that were built using different frameworks and component libraries." 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721376353/Design%20System/ids-apps-collage-1_y7lknc.jpg" 
-    width="3200" 
-    height="2000">
-</Figure>
-
-
+<Figure
+    alt="IDS supports a large set of applications that were built using different frameworks and component libraries."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721376353/Design%20System/ids-apps-collage-1_y7lknc.jpg"
+    width="3200"
+    height="2000"></Figure>
 
 ## IDS Design System
 
-In total, there are over 30 different applications currently in use. Some of them were over ten years old, and many of them used different component libraries and design patterns, which made them all look and feel differently. This status quo was frustrating for users, especially the ones working with multiple tools. Different development stacks were also increasing costs and complicated planning. 
+In total, there are over 30 different applications currently in use. Some of them were over ten years old, and many of them used different component libraries and design patterns, which made them all look and feel differently. This status quo was frustrating for users, especially the ones working with multiple tools. Different development stacks were also increasing costs and complicated planning.
 
-The solution was to develop a new design system to unify UI and development across apps. We used [Aquila](https://allianz.github.io/ng-aquila/documentation), an open-source component library from Allianz, and adapted it to the needs of IDS. We optimized typography, particularly numbers in dense tables, spacing in components to better fit data-heavy applications ([see the EPIC case study here](/work/epic-designing-internal-applications)), and included the new IDS corporate identity as well. 
+The solution was to develop a new design system to unify UI and development across apps. We used [Aquila](https://allianz.github.io/ng-aquila/documentation), an open-source component library from Allianz, and adapted it to the needs of IDS. We optimized typography, particularly numbers in dense tables, spacing in components to better fit data-heavy applications ([see the EPIC case study here](/work/epic-designing-internal-applications)), and included the new IDS corporate identity as well.
 
-<Figure 
-    alt="" 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721051593/DMG/ds-collage-1_j70aa2.jpg" 
-    width="3200" 
-    height="2000">
-</Figure>
+<Figure
+    alt=""
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721051593/DMG/ds-collage-1_j70aa2.jpg"
+    width="3200"
+    height="2000"></Figure>
 
 I want to highlight my work on a new [table component system](/work/grid-component-system), based on AG Grid, the new framework used in many IDS applications from now on. I optimized the components from the beginning for 'designer experience', making sure we had high performance and flexibility.
 
-With this design system, we could reduce development time and raise and standardize UX across the entire product suite. It is constantly being improved and, together with a pattern library of often used functionality like lists, downloads and detail views, will be a central asset of IDS' frontend development efforts in the future. 
+With this design system, we could reduce development time and raise and standardize UX across the entire product suite. It is constantly being improved and, together with a pattern library of often used functionality like lists, downloads and detail views, will be a central asset of IDS' frontend development efforts in the future.
 
 ## ESG Hub
 
-ESG Hub is a new tool for investment managers to measure and keep track of their portfolios' sustainability metrics. Together with experts from IDS, AIM (Allianz Investment Management) and ARE (Allianz Real Estate), we developed an application concept and data visualizations to help investment managers keep an overview and make decisions. 
+ESG Hub is a new tool for investment managers to measure and keep track of their portfolios' sustainability metrics. Together with experts from IDS, AIM (Allianz Investment Management) and ARE (Allianz Real Estate), we developed an application concept and data visualizations to help investment managers keep an overview and make decisions.
 
-<Figure 
-    alt="We sifted through thousands of available data points to create visualization concepts that tell investment managers exactly how their portfolio companies are performing." 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721042564/DMG/esg-company-view-collage-1_tqsju3.jpg" 
-    width="3200" 
-    height="2000">
-</Figure>
+<Figure
+    alt="We sifted through thousands of available data points to create visualization concepts that tell investment managers exactly how their portfolio companies are performing."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721042564/DMG/esg-company-view-collage-1_tqsju3.jpg"
+    width="3200"
+    height="2000"></Figure>
 
-Even though the interface seems simple, we spent a lot of time getting to know the processes that lead to investment decisions and what data is most important to the users. We interviewed potential users for this application from AIM and ARE and created several interaction mappings. During research, we gathered a long list of potential features and defined a MVP (minimum viable product) that included the most important ones. 
+Even though the interface seems simple, we spent a lot of time getting to know the processes that lead to investment decisions and what data is most important to the users. We interviewed potential users for this application from AIM and ARE and created several interaction mappings. During research, we gathered a long list of potential features and defined a MVP (minimum viable product) that included the most important ones.
 
-A first version of the MVP was then built by IDS, which we then used for testing with the customers and IDS internal colleagues. The application has been in continuous development since, and more sustainability areas, such as physical risks for real estate, have also been designed and developed. 
+A first version of the MVP was then built by IDS, which we then used for testing with the customers and IDS internal colleagues. The application has been in continuous development since, and more sustainability areas, such as physical risks for real estate, have also been designed and developed.
 
 ## DMG 2.0
 
 DMG (Digital Master Guidelines) is an existing IDS tool for managing and versioning investment guidelines. It was created on an older JavaScript frontend framework, with many changes and additions over the years that introduced technical debt and UX inconsistencies. We were asked to develop a redesign for it in summer 2023.
 
-<Figure 
-    alt="From first research insights, we created interaction mappings and concepts. The final screen on the right includes many quality of life and UX improvements, while being careful not to disrupt existing workflows." 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721040533/DMG/dmg-process-collage-1_sf23fd.jpg" 
-    width="3200" 
-    height="2000">
-</Figure>
+<Figure
+    alt="From first research insights, we created interaction mappings and concepts. The final screen on the right includes many quality of life and UX improvements, while being careful not to disrupt existing workflows."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1721040533/DMG/dmg-process-collage-1_sf23fd.jpg"
+    width="3200"
+    height="2000"></Figure>
 
-We started the project with an assessment of the current version and processes behind it via usability tests, interaction mappings and feedback gathered from expert interviews. We then sorted the findings into positive items, negative items, ideas and prioritized them. We were careful to keep the overall processes similar and limit disruption of the existing users' workflow. It helped that it worked reasonably well. However, we introduced many quality of life adjustments, like popover detail views and a clearer editing and versioning flow and navigation structure. 
+We started the project with an assessment of the current version and processes behind it via usability tests, interaction mappings and feedback gathered from expert interviews. We then sorted the findings into positive items, negative items, ideas and prioritized them. We were careful to keep the overall processes similar and limit disruption of the existing users' workflow. It helped that it worked reasonably well. However, we introduced many quality of life adjustments, like popover detail views and a clearer editing and versioning flow and navigation structure.

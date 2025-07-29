@@ -39,8 +39,6 @@ const endDate = entry.data.projectEndDate
 		<div class="header-inner-wrapper">
 			<h1 id={entry.slug}>{entry.data.title}</h1>
 			<span class="course-data color-text-low-contrast">
-				<span class="sr-only">Tags:</span>
-				{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
 				{
 					entry.data.projectStartDate && (
 						<span>
@@ -57,6 +55,9 @@ const endDate = entry.data.projectEndDate
 						<span><time datetime={new Date(entry.data.datePublished).toISOString()}>{date}</time></span>
 						)
 				}
+								<span class="sr-only">Tags:</span>
+				{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
+
 			</span>
 		</div>
 	</header>
