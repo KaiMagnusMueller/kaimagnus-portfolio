@@ -24,9 +24,9 @@ import Figure from '@components/Figure.astro';
 
 Learn more about it on the [ContentKit landing page](https://intersectionslab.com/contentkit/) and [register an account in the web app](https://app.intersectionslab.com). You can test the plugin without account in the playground file here: [Figma Community](https://www.figma.com/community/file/1500498135891868616/contentkit-playground).
 
-Leaving Kaiser X Labs and the Allianz world at the end of 2024, I started working on a new product called ContentKit. I've long been using plugins all the way back to Data Populator in Sketch since 2018 or Google Sheet Sync in Figma. However there were a few pain points that I wanted to solve. First, the long standing issue of knowing which data source was currently up to date. Second, reliability of how data is inserted into designs. Third, finding or writing the data in the first place and finally, collaboration with stakeholders who might have their own opinion on the content of prototypes. 
+Leaving Kaiser X Labs and the Allianz world at the end of 2024, I started working on a new product called ContentKit. I've long been using plugins all the way back to Data Populator in Sketch since 2018 or Google Sheets Sync in Figma. However, there were a few pain points that I wanted to solve. First, the long-standing issue of knowing which data source was currently up to date. Second, reliability of how data is inserted into designs. Third, finding or writing the data in the first place, and finally, collaboration with stakeholders who might have their own opinion on the content of prototypes. 
 
-I've spent many hours in my career designing prototypes, some for quick tests, but also many longer lasting during and even beyond the duration of a project. Here, updating them while designs, components and the content itself changed over time was tedious and prone to errors. 
+I've spent many hours in my career designing prototypes, some for quick tests, but also many longer-lasting ones during and even beyond the duration of a project. Here, updating them while designs, components and the content itself changed over time was tedious and prone to errors. 
 
 
 ## First steps
@@ -65,7 +65,7 @@ To handle permissions, billing, and to let users edit and share data outside Fig
 
 The plugin and web app are built in Svelte, allowing me to draw from my experience working on [Collections](https://collections.intersectionslab.com/), which is also Svelte-based. This allowed me to share some components like the table or dropdown positioning logic between the two parts. 
 
-The SvelteKit backend is connected to a database, where all user data is stored. Here, I also use the same tech stack as Collections and continued to use Pocketbase, which is from my experience the perfect fit to easily prototype web applications. It is extremely easy to set up and use, but at the same time, powerful. Besides acting as a database, it supports authentication, user management and basic transactional emails. The whole setup and development would probably warrant its own blog post series. 
+The SvelteKit backend is connected to a database where all user data is stored. Here, I also use the same tech stack as Collections and continued to use Pocketbase, which is, from my experience, the perfect fit to easily prototype web applications. It is extremely easy to set up and use, but at the same time, powerful. Besides acting as a database, it supports authentication, user management and basic transactional emails. The whole setup and development would probably warrant its own blog post series. 
 
 <Figure
 	alt="Using ContentKit to update many screens at once can be a substantial time saver."

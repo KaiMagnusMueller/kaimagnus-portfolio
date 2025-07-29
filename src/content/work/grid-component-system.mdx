@@ -36,7 +36,7 @@ Similarly, 'designer experience' – unfortunately also DX for short – in the 
 
 On a high level, cells are made out of three parts in our system: the cell component, an absolute positioned background and a content component in an auto layout. This gives designers high flexibility to change paddings, should some custom cell content require the full cell area for example, but provides a standard size for the default content types. 
 
-Content can be easily swapped via the instance property and thanks to nested properties, things like the state of checkboxes can be set from the main component. Consistent layer names help Figma apply overrides, even when swapping for example from plain text cell to a dropdown cell. This creates a flexible and extensible setup. Which is needed, since AG Grid is also highly customizable and our applications display all kinds of data. Designers can use the included content components, but custom spark-lines and other content is very easy to build. 
+Content can be easily swapped via the instance property and, thanks to nested properties, things like the state of checkboxes can be set from the main component. Consistent layer names help Figma apply overrides, even when swapping, for example, from a plain text cell to a dropdown cell. This creates a flexible and extensible setup, which is needed since AG Grid is also highly customizable and our applications display all kinds of data. Designers can use the included content components, but custom spark-lines and other content is very easy to build. 
 
 
 <Figure 
@@ -48,7 +48,7 @@ Content can be easily swapped via the instance property and thanks to nested pro
 
 ### Slots
 
-All components are built with content slots, a term from UI development describing a placeholder where content can be inserted and exchanged. In Figma, components are very rigid and normally can not be changed much. It is possible to change text, or apply overrides. However, adding another item in a sidebar for example would not be possible. Content slots in the form of sub components bring more flexibility, since they are the only elements that can be completely swapped out inside a component. 
+All components are built with content slots, a term from UI development describing a placeholder where content can be inserted and exchanged. In Figma, components are very rigid and normally cannot be changed much. It is possible to change text or apply overrides. However, adding another item in a sidebar, for example, would not be possible. Content slots in the form of sub-components bring more flexibility, since they are the only elements that can be completely swapped out inside a component. 
 
 In the screenshot below, the main content of the 'Choose Columns' popup is one big component instance, as well as the different sections in the sidebar to the right. They are each broken down into small components that also have their own properties. 
 
