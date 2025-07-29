@@ -7,7 +7,7 @@ featured:
 tags:
     - Product Design
     - Development
-customer: ""
+customer: ''
 employer: Independent
 ogImage: ''
 description: ''
@@ -16,62 +16,56 @@ description: ''
 import Figure from '@components/Figure.astro';
 
 <Figure
-	alt="Overview of the main ContentKit features. Generate content with AI, assign data to designs and populate them."
-	src="/video/contentkit/hero_video_2.mp4"
-	type="video"
-	aspectRatio="16/9"
-	fullWidth></Figure>
+    alt="Overview of the main ContentKit features. Generate content with AI, assign data to designs and populate them."
+    src="/video/contentkit/hero_video_2.mp4"
+    type="video"
+    aspectRatio="16/9"
+    fullWidth></Figure>
 
 Learn more about it on the [ContentKit landing page](https://intersectionslab.com/contentkit/) and [register an account in the web app](https://app.intersectionslab.com). You can test the plugin without account in the playground file here: [Figma Community](https://www.figma.com/community/file/1500498135891868616/contentkit-playground).
 
-Leaving Kaiser X Labs and the Allianz world at the end of 2024, I started working on a new product called ContentKit. I've long been using plugins all the way back to Data Populator in Sketch since 2018 or Google Sheet Sync in Figma. However there were a few pain points that I wanted to solve. First, the long standing issue of knowing which data source was currently up to date. Second, reliability of how data is inserted into designs. Third, finding or writing the data in the first place and finally, collaboration with stakeholders who might have their own opinion on the content of prototypes. 
+Leaving Kaiser X Labs and the Allianz world at the end of 2024, I started working on a new product called ContentKit. I've long been using plugins all the way back to Data Populator in Sketch since 2018 or Google Sheets Sync in Figma. However, there were a few pain points that I wanted to solve. First, the long-standing issue of knowing which data source was currently up to date. Second, reliability of how data is inserted into designs. Third, finding or writing the data in the first place, and finally, collaboration with stakeholders who might have their own opinion on the content of prototypes.
 
-I've spent many hours in my career designing prototypes, some for quick tests, but also many longer lasting during and even beyond the duration of a project. Here, updating them while designs, components and the content itself changed over time was tedious and prone to errors. 
-
+I've spent many hours in my career designing prototypes, some for quick tests, but also many longer-lasting ones during and even beyond the duration of a project. Here, updating them while designs, components and the content itself changed over time was tedious and prone to errors.
 
 ## First steps
 
-I started by analyzing the current tool landscape and the design process to see what other tools do right, how they fit into the design process, and what they've been missing. 
+I started by analyzing the current tool landscape and the design process to see what other tools do right, how they fit into the design process, and what they've been missing.
 
-<Figure 
-    alt="Early sketches of possible interfaces and user flows. I experimented with a playful way of importing existing data and schemas from designs. A sidebar of the current selection was also a constant for a long time." 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1751544469/contentkit-sketches_uz2iyd.jpg" 
-    width="2172" 
-    height="1448">
-</Figure>
+<Figure
+    alt="Early sketches of possible interfaces and user flows. I experimented with a playful way of importing existing data and schemas from designs. A sidebar of the current selection was also a constant for a long time."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1751544469/contentkit-sketches_uz2iyd.jpg"
+    width="2172"
+    height="1448"></Figure>
 
-There are many tools that provide all kinds of data types to choose from: names, cities, dates, album titles, or even ISBN numbers. Some provide user-generated data, and of course the new Figma AI content tools. While they're very fast, they lack the ability to reliably insert the same data repeatedly, leading to inconsistent designs in prototypes, where screens are often similar or even repeat. 
+There are many tools that provide all kinds of data types to choose from: names, cities, dates, album titles, or even ISBN numbers. Some provide user-generated data, and of course the new Figma AI content tools. While they're very fast, they lack the ability to reliably insert the same data repeatedly, leading to inconsistent designs in prototypes, where screens are often similar or even repeat.
 
-Aside from realistic data, a big part of prototypes are component properties. From simple button states to variants of cards and list element notifications, they are an essential part of modern UI design. Here, however, I saw significant room for improvement. Most content plugins focus on text, and few support properties. Even fewer handle the many edge cases when trying to update both.[^1] 
+Aside from realistic data, a big part of prototypes are component properties. From simple button states to variants of cards and list element notifications, they are an essential part of modern UI design. Here, however, I saw significant room for improvement. Most content plugins focus on text, and few support properties. Even fewer handle the many edge cases when trying to update both.[^1]
 
 Additionally, many screens have deeply nested layers, and I wanted to make sure the plugin would be able to deal with any kind of structure without sudden index resets.
 
-{/* While tools like Google Sheet Sync provide the ability to import data and even collaboration via Google Sheets, creating public links is often a no-go for security reasons and  */}
+{/* While tools like Google Sheet Sync provide the ability to import data and even collaboration via Google Sheets, creating public links is often a no-go for security reasons and */}
 
 ## The Ecosystem
 
-To handle permissions, billing, and to let users edit and share data outside Figma, I created a web app as a companion with almost complete feature parity. Here, users can also create and manage teams, and I plan to use it as a platform for future design tools and projects. 
+To handle permissions, billing, and to let users edit and share data outside Figma, I created a web app as a companion with almost complete feature parity. Here, users can also create and manage teams, and I plan to use it as a platform for future design tools and projects.
 
-<Figure 
-    alt="Plugin and web app share most features. Components like the table use separate stylesheets, while sharing the same code." 
-    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1751574979/release_screenshot_1_mjcgxf.jpg" 
-    width="1920" 
-    height="1273">
-</Figure>
-
-
+<Figure
+    alt="Plugin and web app share most features. Components like the table use separate stylesheets, while sharing the same code."
+    src="https://res.cloudinary.com/dm3a0qioc/image/upload/v1751574979/release_screenshot_1_mjcgxf.jpg"
+    width="1920"
+    height="1273"></Figure>
 
 ## Implementation
 
-The plugin and web app are built in Svelte, allowing me to draw from my experience working on [Collections](https://collections.intersectionslab.com/), which is also Svelte-based. This allowed me to share some components like the table or dropdown positioning logic between the two parts. 
+The plugin and web app are built in Svelte, allowing me to draw from my experience working on [Collections](https://collections.intersectionslab.com/), which is also Svelte-based. This allowed me to share some components like the table or dropdown positioning logic between the two parts.
 
-The SvelteKit backend is connected to a database, where all user data is stored. Here, I also use the same tech stack as Collections and continued to use Pocketbase, which is from my experience the perfect fit to easily prototype web applications. It is extremely easy to set up and use, but at the same time, powerful. Besides acting as a database, it supports authentication, user management and basic transactional emails. The whole setup and development would probably warrant its own blog post series. 
+The SvelteKit backend is connected to a database where all user data is stored. Here, I also use the same tech stack as Collections and continued to use Pocketbase, which is, from my experience, the perfect fit to easily prototype web applications. It is extremely easy to set up and use, but at the same time, powerful. Besides acting as a database, it supports authentication, user management and basic transactional emails. The whole setup and development would probably warrant its own blog post series.
 
 <Figure
-	alt="Using ContentKit to update many screens at once can be a substantial time saver."
-	src="/video/contentkit/blog_post_social_screens.mp4"
-	type="video"
-	aspectRatio="16/9"
-	></Figure>
+    alt="Using ContentKit to update many screens at once can be a substantial time saver."
+    src="/video/contentkit/blog_post_social_screens.mp4"
+    type="video"
+    aspectRatio="16/9"></Figure>
 
 [^1]: Imagine two data assignments, one at the variant level to switch from variant A to B and a text layer inside the component. What if the text layer only exists in variant B, but not in A? In that case the update might fail if the plugin attempts to update the text layer in the current variant A, even though it doesn't exist. So we need to update the variant first.

@@ -42,62 +42,63 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 	</ul>
 </main>
 <style lang="css">
+	/* Navigation */
 	nav {
 		display: flex;
 		gap: 1rem;
 		margin: 2rem 0 0;
-
-		a,
-		span {
-			text-transform: capitalize;
-		}
-
-		@media (max-width: 768px) {
-			margin: 1rem 0 0;
-		}
 	}
-</style>
 
-<style lang="css">
+	nav a,
+	nav span {
+		text-transform: capitalize;
+	}
+
+	/* Page Layout */
 	h1 {
-		margin-top: 12rem;
+		margin-top: 8rem;
 		margin-bottom: 3rem;
-	}
-
-	@media (max-width: 768px) {
-		h1 {
-			margin-top: 8rem;
-			margin-bottom: 2rem;
-		}
-	}
-
-	li {
-		display: block;
-		margin-block: 1.25rem;
-
-		p {
-			font-size: var(--font-size-large);
-		}
-		/* Potentially add class="text-large" to the p in list item. Makes the title a bit smaller for small screens. */
-
-		span {
-			color: var(--text-color-low-contrast);
-			/* font-size: var(--font-size-small); */
-		}
-	}
-
-	.list-page a {
-		display: block;
-		width: fit-content;
-		text-decoration: none;
-
-		&:hover {
-			text-decoration: revert;
-		}
 	}
 
 	ul {
 		margin-block: 2rem;
 		padding: 0;
+	}
+
+	/* List Items */
+	li {
+		display: block;
+		margin-block: 1.25rem;
+	}
+
+	li p {
+		font-size: var(--font-size-large);
+	}
+
+	li span {
+		color: var(--text-color-low-contrast);
+	}
+
+	/* Links */
+	.list-page a {
+		display: block;
+		width: fit-content;
+		text-decoration: none;
+	}
+
+	.list-page a:hover {
+		text-decoration: revert;
+	}
+
+	/* Mobile Responsive */
+	@media (max-width: 768px) {
+		nav {
+			margin: 1rem 0 0;
+		}
+
+		h1 {
+			margin-top: 4rem;
+			margin-bottom: 2rem;
+		}
 	}
 </style>

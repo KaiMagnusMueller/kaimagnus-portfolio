@@ -46,15 +46,54 @@ const { entryCollection, headings, ...props } = Astro.props;
 		hyphens: auto;
 		word-break: break-word;
 
+		h1,
+		.heading-wrapper.level-h2,
+		.heading-wrapper.level-h3,
+		.heading-wrapper.level-h4 {
+			margin-block: 2.25rem 0.75rem;
+			font-weight: 600;
+		}
+
+		h2,
+		h3,
+		h4 {
+			font-weight: inherit;
+		}
+
+		.heading-wrapper {
+			display: flex;
+			align-items: center;
+			gap: 0.5em;
+		}
+
+		.anchor-link {
+			transition: opacity 0.2s ease;
+			width: 20px;
+			height: 20px;
+
+			@media (hover: hover) {
+				visibility: hidden;
+				opacity: 0;
+			}
+		}
+
+		.heading-wrapper:hover .anchor-link {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		h1 {
+			margin-block: 0;
+			font-weight: 700;
+		}
+
 		header {
-			/* margin-block-end: -3.5rem; */
-			/* min-height: 100vh; */
-			padding-block: 12rem 3rem;
+			margin-block: 8rem 3rem;
 		}
 
 		@media (max-width: 768px) {
 			header {
-				padding-block: 8rem 2rem;
+				margin-block: 4rem 2rem;
 			}
 		}
 
@@ -64,37 +103,13 @@ const { entryCollection, headings, ...props } = Astro.props;
 			flex-wrap: wrap;
 			justify-content: center;
 			gap: 1rem 1rem;
-			/* transform: translateY(-50%); */
 		}
 
-		h1 {
-			margin-block: 0;
-		}
-
-		h2,
-		h3,
-		h4,
-		h5 {
-			width: fit-content;
-			font-weight: 600;
-		}
-
-		/* part of the articles and project pages */
 		.course-data {
 			display: inherit;
 			flex-wrap: inherit;
 			gap: inherit;
-
-			margin-inline-start: -0.2rem;
 			line-height: 1;
-
-			span {
-				/* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.0588235294); */
-				border: 1px solid var(--card-border-color);
-				border-radius: 999px;
-				background: var(--bg-color-elev-1);
-				padding: 0.5rem 1rem;
-			}
 		}
 
 		& > *,
@@ -120,7 +135,6 @@ const { entryCollection, headings, ...props } = Astro.props;
 			position: relative;
 			outline: 1px solid var(--border-color-transparent);
 			outline-offset: -1px;
-			/* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1); */
 			border-radius: 4px;
 			overflow: clip;
 		}
@@ -165,6 +179,10 @@ const { entryCollection, headings, ...props } = Astro.props;
 			}
 		}
 
+		.anchor-link {
+			color: var(--text-color-low-contrast);
+		}
+
 		& > ul,
 		& > ol {
 			margin-block: 1rem;
@@ -190,35 +208,9 @@ const { entryCollection, headings, ...props } = Astro.props;
 				display: none;
 			}
 		}
-	}
 
-	h1,
-	h2,
-	h3,
-	h4 {
-		margin-top: 2.25rem;
-		margin-bottom: 0.75rem;
-	}
-
-	.heading-wrapper {
-		display: inline-flex;
-		align-items: baseline;
-		gap: 0.5em;
-	}
-
-	.anchor-link {
-		transition: opacity 0.2s ease;
-		width: 20px;
-		height: 20px;
-
-		@media (hover: hover) {
-			visibility: hidden;
-			opacity: 0;
+		.course-data {
+			font-size: 1rem;
 		}
-	}
-
-	.heading-wrapper:hover .anchor-link {
-		visibility: visible;
-		opacity: 1;
 	}
 </style>
