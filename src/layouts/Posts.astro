@@ -34,7 +34,13 @@ if (entryCollection !== undefined) {
 		hyphens: auto;
 		word-break: break-word;
 
-		h1,
+		h1 {
+			margin-block: 0;
+			font-weight: 400;
+			font-size: var(--font-size-huge);
+			line-height: 1.4;
+		}
+
 		.heading-wrapper.level-h2,
 		.heading-wrapper.level-h3,
 		.heading-wrapper.level-h4 {
@@ -68,11 +74,6 @@ if (entryCollection !== undefined) {
 		.heading-wrapper:hover .anchor-link {
 			visibility: visible;
 			opacity: 1;
-		}
-
-		h1 {
-			margin-block: 0;
-			font-weight: 400;
 		}
 
 		header {
