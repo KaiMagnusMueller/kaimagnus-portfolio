@@ -55,6 +55,7 @@ const endDate = entry.data.projectEndDate
 						<span><time datetime={new Date(entry.data.datePublished).toISOString()}>{date}</time></span>
 						)
 				}
+				
 								<span class="sr-only">Tags:</span>
 				{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
 

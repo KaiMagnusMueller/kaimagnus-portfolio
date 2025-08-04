@@ -30,6 +30,7 @@ const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { da
 					<span class="sr-only">Published on:</span>
 					<time datetime={date}>{date}</time>
 				</span>
+
 				<span class="sr-only">Tags:</span>
 				{entry.data.tags.map((tag: string) => <span>{tag}</span>)}
 			</span></div
