@@ -15,7 +15,7 @@ description: Learn how I built FigmaKit, a comprehensive Svelte component librar
 
 import Figure from '@components/Figure.astro';
 
-While building [ContentKit](/work/contentkit-a-platform-for-design-automation) over the past year, I also built a Svelte 5-based component library alongside it. It is a modernized and extended version of [figma-plugin-ds-svelte](https://github.com/thomas-lowry/figma-plugin-ds-svelte), a library created by Thomas Lowry (designer advocate at Figma), which I've used in plugins like [Tree Navigator](using-the-tree-navigator-plugin) before. Today I want to share why I built it, how it works, and what I learned while building it.
+While building [ContentKit](/work/contentkit-a-platform-for-design-automation) over the past year, I also built a component library alongside it. It is a modernized and extended version of [figma-plugin-ds-svelte](https://github.com/thomas-lowry/figma-plugin-ds-svelte), a library created by Thomas Lowry (designer advocate at Figma), which I've used in plugins like [Tree Navigator](using-the-tree-navigator-plugin) before.
 
 You can find the library on npm as [figmakit-plugin-ui-svelte](https://www.npmjs.com/package/figmakit-plugin-ui-svelte) and on GitHub at [KaiMagnusMueller/figmakit-plugin-ui](https://www.github.com/KaiMagnusMueller/figmakit-plugin-ui). A demo page is available at [https://kaimagnusmueller.github.io/figmakit-plugin-ui/](https://kaimagnusmueller.github.io/figmakit-plugin-ui/), where you can see all components in action.
 
@@ -23,17 +23,19 @@ You can find the library on npm as [figmakit-plugin-ui-svelte](https://www.npmjs
 
 If you've used Figma plugins extensively, you've probably noticed how inconsistent their interfaces can be. Some plugins feel native and integrated, some look decent with minor inconsistencies, while others feel like they were built with random components and dropped into Figma. This creates aesthetic inconsistency, but sometimes basic functionality is broken as well, leading to a poor user experience.
 
-So for this library, a look and feel that is as close to Figma's native UI as possible was especially important.
+When I started building ContentKit, I initially used basic HTML elements and a small stylesheet to make them look like Figma's new UI. While that worked in the beginning for testing basic functionality, ContentKit quickly required more complex UI elements that weren't possible with CSS alone.
 
-When I started building ContentKit, people started using UI3 more often, so I initially used basic HTML elements and a small stylesheet to make it look like Figma's new UI. While that worked in the beginning for testing basic functionality, ContentKit quickly became too complex and required more sophisticated UI elements that weren't possible with CSS alone. This, combined with the fact that I wanted to build two things—a web app and plugin—on top of the same Svelte 5 base, led me to take this library and use it as a starting point for my own library based on Svelte 5 and UI3.
+Additionally, I actually wanted to build two things: a web app and a plugin. From that perspective, it was only logical for them to share the same Svelte 5 base, which led me to take figma-plugin-ds-svelte and use it as a starting point for my own library based on Svelte 5 and UI3.
+
+So my goals for this library were: a look and feel close to Figma's native UI3 and lightweight but complete components, using modern Svelte 5.
 
 ## Building FigmaKit
 
 FigmaKit uses a very similar prop structure as the original library, so many components are drop-in replacements. However, some components have been extended or modified for consistency.
 
-The `SelectMenu` has been replaced with the more powerful `MultiMenu`, which now supports grouping and nesting of options. And there are a few new components, like the `ToggleButton` and `Dialog`.
+The `SelectMenu` has been replaced with the more powerful `MultiMenu`, which now supports grouping and nesting of options. There are also new components, like the `ToggleButton` and `Dialog`.
 
-The library was built with the help of Claude Sonnet 3.5, which didn't fully support Svelte 5 at the time but did an excellent job with a rough port of the components.
+The library was built with the help of Claude Sonnet 3.5, which didn't fully support Svelte 5 at the time but did a good job with rough ports of the components that I then polished.
 
 ### Button
 
@@ -66,11 +68,11 @@ Form components like `Input`, `Checkbox`, and `Switch` maintain Figma's look and
 <Switch checked>Dark mode</Switch>
 ```
 
-They support the standard HTML events like `oninput` and `onchange`. Internally they stay as close to semantic HTML as possible—they are simply an `<input/>` element wrapped in a `<label>`. You can also hide the label and border; go to the [overview page](https://kaimagnusmueller.github.io/figmakit-plugin-ui/) for reference.
+They support the standard HTML events like `oninput` and `onchange`. Internally they stay as close to semantic HTML as possible – they are simply an `<input/>` element wrapped in a `<label/>`. You can also hide the label and border, see the [overview page](https://kaimagnusmueller.github.io/figmakit-plugin-ui/) for reference.
 
 ### MultiMenu
 
-The new `MultiMenu` is FigmaKit's most complex component. It is an improved version of the `SelectMenu` from the original library that can act as a select menu, dropdown, and context menu. It can be paired with the `ToggleButton` mentioned earlier to create common Figma dropdown menus or used as a select menu that displays the currently selected option.
+The new `MultiMenu` is FigmaKit's most complex component. It is an improved version of the `SelectMenu` from the original library that can act as a select menu, dropdown, and context menu. It can be paired with the `ToggleButton` mentioned earlier to create common Figma dropdown menus or used as a select menu that displays the currently selected option. It supports on click actions, as well as single and multi-select.
 
 ```svelte
 <MultiMenu groups={menuGroups} showSelectedValues/>
@@ -108,16 +110,16 @@ I researched other libraries to see how similar components are usually structure
 
 ```swift
 Menu("Text Options") {
-    Button("Left Align") { /* action */ }
-    Button("Center Align") { /* action */ }
+    Button("Left Align")
+    Button("Center Align")
     Menu("Advanced Options") {
-        Button("Letter Spacing") { /* action */ }
-        Button("Line Height") { /* action */ }
+        Button("Letter Spacing")
+        Button("Line Height")
     }
 }
 ```
 
-Of course, SwiftUI works very differently, but the nested menu structure is similar to the types that I ended up with.
+Of course SwiftUI works very differently, but the nested menu structure is similar to the types that I ended up with.
 
 Along the way, I also had to wrap my head around recursion. The `MultiMenu` consists of multiple `Snippets` that are organized like this: `popoverContainer` → `menuGroup` → `menuElement`. The recursive magic happens in the `menuElement`: Based on whether the `menuElement` has children or not, it decides to either render the final menu option or render a new `popoverContainer`, which makes the whole process start again in a new popover.
 
@@ -153,7 +155,7 @@ This will make all the required properties available to the plugin:
 ...
 ```
 
-Each component is designed to be lightweight and performant, important considerations for plugin environments where bundle size and runtime performance matter.
+This also makes them ready for both light and dark mode, as Figma automatically switches the colors based on the user's settings.
 
 ## Icons
 
@@ -172,6 +174,6 @@ You can get started using FigmaKit in your own plugins by installing it from npm
 npm install figmakit-plugin-ui-svelte
 ```
 
-Now with the release of version 2.0, it has become a stable foundation for multiple of my plugin projects. It is modern, lightweight, and consistent. Whether you're building your first Figma plugin or want to integrate it into an existing one, FigmaKit provides all the components you need to create complex interfaces that feel truly native to Figma.
+Now with the release of version 2.0, it has become a stable foundation for multiple of my own plugin projects. It is modern, lightweight, and consistent. Whether you're building your first Figma plugin or want to integrate it into an existing one, FigmaKit provides all the components you need to create complex interfaces that feel like extensions to Figma.
 
 Visit the [FigmaKit repository](https://github.com/KaiMagnusMueller/figmakit-plugin-ui) to learn more, and let me know what you think on [Threads](https://www.threads.net/@ofcoursekai). I'm excited to see what you build with it!
