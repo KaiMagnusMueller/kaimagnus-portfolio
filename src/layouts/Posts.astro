@@ -1,6 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import PageContentNav from '@components/PageContentNav.astro';
+import Navigation from '@components/Navigation.astro';
 import type { MarkdownHeading } from 'astro';
 
 export interface Props {
@@ -10,35 +11,22 @@ export interface Props {
 }
 
 const { entryCollection, headings, ...props } = Astro.props;
+
+// Build breadcrumbs array
+const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }];
+
+if (entryCollection !== undefined) {
+	breadcrumbs.push({ href: `/${entryCollection}`, label: entryCollection });
+}
 ---
 
 <Layout pageTitle={props.title} pageDescr={props.description} ogImage={props.ogImage} {...props}>
-	<nav class="color-text-low-contrast">
-		<a href="/">Home</a> /
-		{entryCollection !== undefined && <a href={`/${entryCollection}`}>{entryCollection}</a>}
-	</nav>
+	<Navigation {breadcrumbs} />
 	<article class="post-content">
 		<PageContentNav {headings} />
 		<slot />
 	</article>
 </Layout>
-
-<style lang="css">
-	nav {
-		display: flex;
-		gap: 1rem;
-		margin: 2rem 0 0;
-
-		a,
-		span {
-			text-transform: capitalize;
-		}
-
-		@media (max-width: 768px) {
-			margin: 1rem 0 0;
-		}
-	}
-</style>
 
 <style lang="css" is:global>
 	.post-content {
@@ -46,12 +34,18 @@ const { entryCollection, headings, ...props } = Astro.props;
 		hyphens: auto;
 		word-break: break-word;
 
-		h1,
+		h1 {
+			margin-block: 0;
+			font-weight: 400;
+			font-size: var(--font-size-huge);
+			line-height: 1.4;
+		}
+
 		.heading-wrapper.level-h2,
 		.heading-wrapper.level-h3,
 		.heading-wrapper.level-h4 {
 			margin-block: 2.25rem 0.75rem;
-			font-weight: 600;
+			font-weight: 400;
 		}
 
 		h2,
@@ -82,11 +76,6 @@ const { entryCollection, headings, ...props } = Astro.props;
 			opacity: 1;
 		}
 
-		h1 {
-			margin-block: 0;
-			font-weight: 700;
-		}
-
 		header {
 			margin-block: 8rem 3rem;
 		}
@@ -114,12 +103,11 @@ const { entryCollection, headings, ...props } = Astro.props;
 
 		& > *,
 		figcaption {
-			max-width: 34rem;
+			max-width: 40rem;
 		}
 
 		div,
 		.full-width-reset,
-		header,
 		iframe {
 			max-width: unset;
 		}

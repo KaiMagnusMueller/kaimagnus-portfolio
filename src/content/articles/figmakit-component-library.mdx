@@ -1,0 +1,179 @@
+---
+author: Kai Magnus Müller
+datePublished: 2025-07-30T09:00:00Z
+title: 'FigmaKit: A Component Library for Plugin UIs'
+draft: false
+tags:
+    - Svelte
+    - Library
+    - Figma
+    - Component Library
+    - Plugin Development
+ogImage: ''
+description: Learn how I built FigmaKit, a comprehensive Svelte component library that replicates Figma's native UI, and how it powers ContentKit and other plugin projects.
+---
+
+import Figure from '@components/Figure.astro';
+
+While building [ContentKit](/work/contentkit-a-platform-for-design-automation) over the past year, I also built a component library alongside it. It is a modernized and extended version of [figma-plugin-ds-svelte](https://github.com/thomas-lowry/figma-plugin-ds-svelte), a library created by Thomas Lowry (designer advocate at Figma), which I've used in plugins like [Tree Navigator](using-the-tree-navigator-plugin) before.
+
+You can find the library on npm as [figmakit-plugin-ui-svelte](https://www.npmjs.com/package/figmakit-plugin-ui-svelte) and on GitHub at [KaiMagnusMueller/figmakit-plugin-ui](https://www.github.com/KaiMagnusMueller/figmakit-plugin-ui). A demo page is available at [https://kaimagnusmueller.github.io/figmakit-plugin-ui/](https://kaimagnusmueller.github.io/figmakit-plugin-ui/), where you can see all components in action.
+
+## Introduction
+
+If you've used Figma plugins extensively, you've probably noticed how inconsistent their interfaces can be. Some plugins feel native and integrated, some look decent with minor inconsistencies, while others feel like they were built with random components and dropped into Figma. This creates aesthetic inconsistency, but sometimes basic functionality is broken as well, leading to a poor user experience.
+
+When I started building ContentKit, I initially used basic HTML elements and a small stylesheet to make them look like Figma's new UI. While that worked in the beginning for testing basic functionality, ContentKit quickly required more complex UI elements that weren't possible with CSS alone.
+
+Additionally, I actually wanted to build two things: a web app and a plugin. From that perspective, it was only logical for them to share the same Svelte 5 base, which led me to take figma-plugin-ds-svelte and use it as a starting point for my own library based on Svelte 5 and UI3.
+
+So my goals for this library were: a look and feel close to Figma's native UI3 and lightweight but complete components, using modern Svelte 5.
+
+## Building FigmaKit
+
+FigmaKit uses a very similar prop structure as the original library, so many components are drop-in replacements. However, some components have been extended or modified for consistency.
+
+The `SelectMenu` has been replaced with the more powerful `MultiMenu`, which now supports grouping and nesting of options. There are also new components, like the `ToggleButton` and `Dialog`.
+
+The library was built with the help of Claude Sonnet 3.5, which didn't fully support Svelte 5 at the time but did a good job with rough ports of the components that I then polished.
+
+### Button
+
+A simple example is the `Button` component. Figma's buttons have specific variants (primary, secondary, tertiary) and come in default and large sizes. The default size is used for the actual Figma interface, while the large size appears in very rare situations, mostly in the Figma community, I believe.
+
+```svelte
+<Button variant="primary" onclick={() => console.log('Primary clicked')}>
+  Primary Action
+</Button>
+<Button variant="secondary" size="large" icon={IconAdjust}>
+  Secondary
+</Button>
+<Button variant="tertiary" destructive>
+  Delete
+</Button>
+```
+
+The component also supports destructive styling, icons are provided as SVG strings, and events are handled in the typical Svelte 5 fashion.
+
+### Input, Checkbox, and Switch
+
+Form components like `Input`, `Checkbox`, and `Switch` maintain Figma's look and feel (and even improve it, if you zoom into the checkboxes very closely):
+
+```svelte
+<Input label="Email" placeholder="Enter your email" />
+<Input label="Search" icon={IconSearch} />
+<Input label="Name" invalid errorMessage="Name is required" />
+
+<Checkbox checked>Enable notifications</Checkbox>
+<Switch checked>Dark mode</Switch>
+```
+
+They support the standard HTML events like `oninput` and `onchange`. Internally they stay as close to semantic HTML as possible – they are simply an `<input/>` element wrapped in a `<label/>`. You can also hide the label and border, see the [overview page](https://kaimagnusmueller.github.io/figmakit-plugin-ui/) for reference.
+
+### MultiMenu
+
+The new `MultiMenu` is FigmaKit's most complex component. It is an improved version of the `SelectMenu` from the original library that can act as a select menu, dropdown, and context menu. It can be paired with the `ToggleButton` mentioned earlier to create common Figma dropdown menus or used as a select menu that displays the currently selected option. It supports on click actions, as well as single and multi-select.
+
+```svelte
+<MultiMenu groups={menuGroups} showSelectedValues/>
+```
+
+While building ContentKit, I needed dropdown menus that could handle complex hierarchies with nested groups, which turned out to be quite a challenge. In the end, I settled on an architecture of `menuGroup` objects that contain `menuOption` or nested `menuGroup` objects. Nested `menuGroups` create their own nested popovers that are positioned next to the parent menu, just like how context menus behave in other apps.
+
+```javascript
+const menuGroups = [
+    {
+        name: 'text-options',
+        mode: 'single',
+        children: [
+            { label: 'Left Align', value: 'left', selected: true },
+            { label: 'Center Align', value: 'center' },
+            {
+                label: 'Advanced Options',
+                children: [
+                    {
+                        name: 'spacing',
+                        mode: 'multi',
+                        children: [
+                            { label: 'Letter Spacing', value: 'letter', selected: true },
+                            { label: 'Line Height', value: 'line' },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+];
+```
+
+I researched other libraries to see how similar components are usually structured and liked SwiftUI's declarative approach, where menus look something like this:
+
+```swift
+Menu("Text Options") {
+    Button("Left Align")
+    Button("Center Align")
+    Menu("Advanced Options") {
+        Button("Letter Spacing")
+        Button("Line Height")
+    }
+}
+```
+
+Of course SwiftUI works very differently, but the nested menu structure is similar to the types that I ended up with.
+
+Along the way, I also had to wrap my head around recursion. The `MultiMenu` consists of multiple `Snippets` that are organized like this: `popoverContainer` → `menuGroup` → `menuElement`. The recursive magic happens in the `menuElement`: Based on whether the `menuElement` has children or not, it decides to either render the final menu option or render a new `popoverContainer`, which makes the whole process start again in a new popover.
+
+Now this looks deceivingly simple, but handling the positioning, visibility, and interaction between multiple open popovers was quite a challenge.
+
+### Dialog
+
+Lastly, I included a new `Dialog` component for modal functionality that is a thin wrapper around the standard HTML Dialog element and provides the expected focus and navigation behavior, events, and a customizable header via the `headerControls` prop.
+
+```svelte
+<Dialog bind:dialog={myDialog} title="Confirmation">
+  <p>Are you sure you want to continue?</p>
+  <Button onclick={() => myDialog?.close()}>Close</Button>
+</Dialog>
+```
+
+## Styling
+
+FigmaKit relies on the CSS properties that Figma provides in its plugin environment. To enable them, you have to set the `themeColors` option to true when showing the UI:
+
+```js
+figma.showUI(__html__, { width: 780, height: 424, themeColors: true });
+```
+
+This will make all the required properties available to the plugin:
+
+```css
+/* CSS properties provided by Figma */
+--figma-color-bg: #ffffff;
+--figma-color-bg-secondary: #f9f9f9;
+--figma-color-text: #000000;
+--figma-color-text-secondary: #888888;
+...
+```
+
+This also makes them ready for both light and dark mode, as Figma automatically switches the colors based on the user's settings.
+
+## Icons
+
+You can use Figma's own icons relatively easily in your plugins. Simply open the developer tools in Figma and select the icon you want to use with the element selector. Then copy the outer HTML, save it as an SVG file, and you can use it in the button or icon components.
+
+```svelte
+<Icon icon={copiedSvgString} size={16} />
+<Icon icon={IconCheck} color="--figma-color-icon-success" />
+```
+
+## Try FigmaKit
+
+You can get started using FigmaKit in your own plugins by installing it from npm:
+
+```bash
+npm install figmakit-plugin-ui-svelte
+```
+
+Now with the release of version 2.0, it has become a stable foundation for my own plugin projects ([Icon Library Manager](https://www.figma.com/community/plugin/1289313190495880345) uses it now as well). It is modern, lightweight, and consistent. Whether you're building your first Figma plugin or want to integrate it into an existing one, FigmaKit provides all the components you need to create complex interfaces that feel like actual extensions of Figma.
+
+Visit the [FigmaKit repository](https://github.com/KaiMagnusMueller/figmakit-plugin-ui) to learn more, and let me know what you think on [Threads](https://www.threads.net/@ofcoursekai). I'm excited to see what you build with it!

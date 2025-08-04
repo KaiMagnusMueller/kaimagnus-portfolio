@@ -166,13 +166,11 @@ const headings = [
 		.hero--section {
 			display: flex;
 			align-items: center;
-			margin-block-end: -3.5rem;
 			max-width: 50ch;
-			min-height: 100vh;
 		}
 
 		.hero--section-content-wrapper {
-			padding-block: clamp(4rem, 12vh, 8rem);
+			padding-block: clamp(4rem, 13vh, 8rem);
 		}
 
 		section {
@@ -195,6 +193,10 @@ const headings = [
 		}
 
 		@media (max-width: 768px) {
+			.hero--section-content-wrapper {
+				padding-block: clamp(4rem, 10vh, 8rem);
+			}
+
 			section {
 				margin-block-start: 6rem;
 			}

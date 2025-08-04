@@ -1,13 +1,14 @@
 :root {
     /* Colors - Light Theme */
-    --bg-color-elev-0: hsl(0, 0%, 99%);
-    --bg-color-elev-1: hsl(0, 0%, 96%);
+    --bg-color-elev-0: hsl(40, 27%, 98%);
+    --bg-color-elev-1: hsl(40, 20%, 96%);
     --bg-color-elev-1-hover: hsl(0, 0%, 94%);
     --bg-color-elev-0-negative: #242424;
     --bg-image: url(/200-20-5-monochrome.png);
 
-    --text-color: #000;
+    --text-color: #100f0f;
     --text-color-low-contrast: #666;
+    --text-color-lowest-contrast: #b3b3b3;
     --text-color-negative: #e4e4e4;
 
     --link-color: #0c93ec;
@@ -29,6 +30,7 @@
     --font-stack: 'Charter', 'Cambria', 'Constantia', serif, system-ui;
     --font-size-small: 0.875rem;
     --font-size-large: 1.75rem;
+    --font-size-huge: 2.25rem;
 
     /* Applied defaults */
     color: var(--text-color);
@@ -45,6 +47,8 @@
 
         --text-color: #f2f2f2;
         --text-color-low-contrast: #aaa;
+        --text-color-lowest-contrast: #6b6b6b;
+
         --text-color-negative: #030303;
 
         --link-color: #6bb7f5;
@@ -127,16 +131,21 @@
     line-height: 1.4;
 }
 
-.text-huge-h1,
-.post-content h1 {
-    font-weight: 700;
-    font-size: 3rem;
+.text-huge,
+.text-huge h1 {
+    font-weight: 400;
+    font-size: var(--font-size-huge);
     line-height: 1.2;
 }
 
 /* BASE ELEMENT STYLES */
 a {
     color: inherit;
+
+    &:hover {
+        color: var(--text-color);
+        text-decoration: underline;
+    }
 }
 
 h1 {
@@ -213,16 +222,17 @@ details {
 /* CODE & PRE-FORMATTED TEXT */
 p > code {
     border: 1px solid var(--bg-color-elev-0-negative);
-    border-radius: 2px;
-    background-color: #24292e;
-    padding: 0.125rem 0.25rem;
-    color: #e1e4e8;
+    border-radius: 4px;
+    background-color: var(--bg-color-elev-1);
+    padding: 0.05rem 0.25rem;
+    font-size: 0.8888888rem;
+    font-family: monospace;
 }
 
 pre {
     margin-bottom: 1rem;
     border: 1px solid var(--border-color-negative-secondary);
-    border-radius: 2px;
+    border-radius: 4px;
     background-color: unset;
     padding: 0.5rem 0.75rem;
     font-size: 0.8888888rem;
@@ -231,7 +241,7 @@ pre {
 kbd {
     display: inline-block;
     border: 1px solid var(--text-color);
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: var(--color-background);
     padding: 2px 4px;
     color: var(--text-color);
@@ -335,15 +345,10 @@ figcaption {
 }
 
 @media (max-width: 768px) {
-    .text-large,
-    .text-large p,
-    .text-large h1 {
-        font-size: 1.375rem;
-    }
-
-    .text-huge-h1,
-    .post-content h1 {
-        font-size: 2rem;
+    :root {
+        --font-size-small: 0.875rem;
+        --font-size-large: 1.375rem;
+        --font-size-huge: 2rem;
     }
 
     .heading-wrapper.level-h2,
@@ -371,10 +376,10 @@ figcaption {
 }
 
 @media (max-width: 640px) {
-    .text-large,
-    .text-large p,
-    .text-large h1 {
-        font-size: 1.25rem;
+    :root {
+        --font-size-small: 0.875rem;
+        --font-size-large: 1.25rem;
+        --font-size-huge: 1.75rem;
     }
 
     .avatar {

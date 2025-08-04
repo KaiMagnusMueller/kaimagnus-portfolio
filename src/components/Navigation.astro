@@ -1,0 +1,50 @@
+---
+export interface Props {
+	breadcrumbs: Array<{
+		href?: string;
+		label: string;
+	}>;
+}
+
+const { breadcrumbs } = Astro.props;
+---
+
+<nav class="">
+	{
+		breadcrumbs.map((breadcrumb, index) => (
+			<>
+				{breadcrumb.href ? <a href={breadcrumb.href}>{breadcrumb.label}</a> : <span>{breadcrumb.label}</span>}
+				{index < breadcrumbs.length - 1 && <span class="divider">/</span>}
+			</>
+		))
+	}
+</nav>
+
+<style lang="css">
+	nav {
+		display: flex;
+		gap: 0.4rem;
+		margin: 2rem 0 0;
+
+		a,
+		span {
+			text-transform: capitalize;
+		}
+
+		a {
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.divider {
+			color: var(--text-color-lowest-contrast);
+		}
+
+		@media (max-width: 768px) {
+			margin: 2rem 0 0;
+		}
+	}
+</style>

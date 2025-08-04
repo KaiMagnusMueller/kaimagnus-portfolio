@@ -1,6 +1,7 @@
 ---
 import { SITE } from '@config';
 import Layout from './Layout.astro';
+import Navigation from '@components/Navigation.astro';
 import { getCollection } from 'astro:content';
 
 export interface Props {
@@ -16,14 +17,15 @@ const entries = await getCollection(collectionName, ({ data }) => {
 });
 
 let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
+
+// Build breadcrumbs array
+const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: navTitle }];
 ---
 
-<nav class="color-text-low-contrast">
-	<a href="/">Home</a> / <span>{navTitle}</span>
-</nav>
+<Navigation {breadcrumbs} />
 <main class="list-page color-text">
 	<div>
-		<h1 class="text-huge-h1">{pageTitle}</h1>
+		<h1 class="text-huge">{pageTitle}</h1>
 		<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 	</div>
 	<ul>
@@ -42,18 +44,6 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 	</ul>
 </main>
 <style lang="css">
-	/* Navigation */
-	nav {
-		display: flex;
-		gap: 1rem;
-		margin: 2rem 0 0;
-	}
-
-	nav a,
-	nav span {
-		text-transform: capitalize;
-	}
-
 	/* Page Layout */
 	h1 {
 		margin-top: 8rem;
@@ -92,10 +82,6 @@ let entriesSorted = entries.sort((a, b) => b.data.datePublished.getTime() - a.da
 
 	/* Mobile Responsive */
 	@media (max-width: 768px) {
-		nav {
-			margin: 1rem 0 0;
-		}
-
 		h1 {
 			margin-top: 4rem;
 			margin-bottom: 2rem;
