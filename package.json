@@ -15,6 +15,7 @@
         "@astrojs/svelte": "^7.1.0",
         "@astrojs/vercel": "^8.2.0",
         "astro": "^5.10.2",
+        "colorjs.io": "^0.5.2",
         "hast-util-to-string": "^3.0.0",
         "hastscript": "^9.0.0",
         "markdown-it": "^14.0.0",
@@ -25,6 +26,5 @@
         "satori": "^0.15.2",
         "sharp": "^0.34.2",
         "svelte": "^5.3.1"
-    },
-    "devDependencies": {}
+    }
 }

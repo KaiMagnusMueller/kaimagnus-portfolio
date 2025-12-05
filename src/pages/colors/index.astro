@@ -2,10 +2,89 @@
 import { SITE } from '@config';
 import Navigation from '@components/Navigation.astro';
 import FullScreenLayout from '../../layouts/FullScreenLayout.astro';
+import PlaygroundViewer from '@components/PlaygroundViewer.astro';
+import {
+	createSimpleLinearScale,
+	createCurvedScale,
+	createReactiveScale,
+	createMultipleScalesFromSharedSource,
+	demonstrateCaching,
+	createMixedInterpolationScale,
+} from '@utils/colorExamples';
+import { createBasicPlayground, createCurvedPlayground } from '@utils/ColorPlayground';
 
 let pageTitle = 'Colors';
 
 const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: pageTitle }];
+
+// Example 1: Simple linear scale
+const example1 = createSimpleLinearScale();
+console.log('Example 1 - Simple Linear Scale:', {
+	colorCount: example1.colors.length,
+	firstColor: example1.colors[0]?.toString({ format: 'hex' }),
+	lastColor: example1.colors[example1.colors.length - 1]?.toString({ format: 'hex' }),
+});
+
+// Example 2: Curved scale
+const example2 = createCurvedScale();
+console.log('Example 2 - Curved Scale:', {
+	colorCount: example2.colors.length,
+	steps: example2.nodes.steps.getValue(),
+	hueRange: example2.nodes.hue.getRange(),
+});
+
+// Example 3: Reactive updates
+const example3 = createReactiveScale();
+console.log('Example 3 - Reactive Updates:', {
+	totalUpdates: example3.updateCount,
+	updates: example3.updates,
+	finalColorCount: example3.currentColors.length,
+});
+
+// Example 4: Shared sources
+const example4 = createMultipleScalesFromSharedSource();
+console.log('Example 4 - Shared Sources:', {
+	blueScaleColors: example4.blueColors.length,
+	redScaleColors: example4.redColors.length,
+	sharedSteps: example4.nodes.steps.getValue(),
+});
+
+// Example 5: Caching performance
+const example5 = demonstrateCaching();
+console.log('Example 5 - Caching Performance:', {
+	firstCallMs: example5.firstCallTime.toFixed(3),
+	cachedCallMs: example5.cachedCallTime.toFixed(3),
+	speedup: `${example5.speedupFactor.toFixed(0)}x faster`,
+	cacheWorks: example5.areSame,
+});
+
+// Example 6: Mixed interpolation
+const example6 = createMixedInterpolationScale();
+console.log('Example 6 - Mixed Interpolation:', {
+	colorCount: example6.colors.length,
+	colors: example6.colors.map((c) => c.toString({ format: 'hex' })),
+});
+
+// Format colors for display
+const formatColorScale = (colors: any[]) => {
+	return colors.map((color, i) => ({
+		index: i,
+		hex: color.toString({ format: 'hex' }),
+		oklch: `L:${(color.oklch.l * 100).toFixed(1)} C:${color.oklch.c.toFixed(3)} H:${color.oklch.h.toFixed(1)}`,
+	}));
+};
+
+const displayScales = {
+	simple: formatColorScale(example1.colors),
+	curved: formatColorScale(example2.colors),
+	reactive: formatColorScale(example3.currentColors),
+	blue: formatColorScale(example4.blueColors),
+	red: formatColorScale(example4.redColors),
+	mixed: formatColorScale(example6.colors),
+};
+
+// Create an interactive playground
+const playground = createBasicPlayground();
 ---
 
 <FullScreenLayout
@@ -16,11 +95,174 @@ const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: pageTitle }];
 
 		<div class="fullscreen-header">
 			<h1 class="text-huge color-text">{pageTitle}</h1>
+			<p>Node-based color scale generator using OKLCH color space</p>
 		</div>
 	</div>
 	<div class="fullscreen-content">
-		<p> This is an experiment with parametric color scales generated with </p>
+		<section class="playground-section">
+			<h2>Interactive Node Playground</h2>
+			<PlaygroundViewer playground={playground} />
+		</section>
+
+		<!-- <div class="examples-grid">
+			<section class="example">
+				<h2>1. Simple Linear Scale</h2>
+				<div class="color-strip">
+					{
+						displayScales.simple.map((color) => (
+							<div class="color-swatch" style={`background-color: ${color.hex}`} title={color.oklch} />
+						))
+					}
+				</div>
+				<p class="example-info">
+					{example1.colors.length} colors from {example1.colors[0]?.toString({ format: 'hex' })} to {
+						example1.colors[example1.colors.length - 1]?.toString({ format: 'hex' })
+					}
+				</p>
+			</section>
+
+			<section class="example">
+				<h2>2. Curved Scale</h2>
+				<div class="color-strip">
+					{
+						displayScales.curved.map((color) => (
+							<div class="color-swatch" style={`background-color: ${color.hex}`} title={color.oklch} />
+						))
+					}
+				</div>
+				<p class="example-info"> Using bezier curve interpolation for smooth transitions </p>
+			</section>
+
+			<section class="example">
+				<h2>3. Reactive Updates</h2>
+				<div class="color-strip">
+					{
+						displayScales.reactive.map((color) => (
+							<div class="color-swatch" style={`background-color: ${color.hex}`} title={color.oklch} />
+						))
+					}
+				</div>
+				<p class="example-info">
+					Generated after {example3.updateCount} updates via change listeners
+				</p>
+			</section>
+
+			<section class="example">
+				<h2>4. Shared Sources - Blue Scale</h2>
+				<div class="color-strip">
+					{
+						displayScales.blue.map((color) => (
+							<div class="color-swatch" style={`background-color: ${color.hex}`} title={color.oklch} />
+						))
+					}
+				</div>
+			</section>
+
+			<section class="example">
+				<h2>4. Shared Sources - Red Scale</h2>
+				<div class="color-strip">
+					{
+						displayScales.red.map((color) => (
+							<div class="color-swatch" style={`background-color: ${color.hex}`} title={color.oklch} />
+						))
+					}
+				</div>
+				<p class="example-info"> Both scales share the same step count and luminance curve </p>
+			</section>
+
+			<section class="example">
+				<h2>5. Caching Performance</h2>
+				<p class="performance-info">
+					First computation: {example5.firstCallTime.toFixed(3)}ms<br />
+					Cached retrieval: {example5.cachedCallTime.toFixed(3)}ms<br />
+					Speedup: {example5.speedupFactor.toFixed(0)}× faster<br />
+					After change: {example5.afterChangeTime.toFixed(3)}ms
+				</p>
+			</section>
+
+			<section class="example">
+				<h2>6. Mixed Interpolation</h2>
+				<div class="color-strip">
+					{
+						displayScales.mixed.map((color) => (
+							<div class="color-swatch" style={`background-color: ${color.hex}`} title={color.oklch} />
+						))
+					}
+				</div>
+				<p class="example-info"> Linear hue + curved chroma + direct luminance connection </p>
+			</section>
+		</div> -->
 	</div>
 </FullScreenLayout>
 
-<style lang="css"></style>
+<style lang="css">
+	.playground-section {
+		margin-bottom: 2rem;
+		border-bottom: 2px solid var(--color-border);
+		padding: 2rem;
+		min-height: 600px;
+	}
+
+	.playground-section h2 {
+		margin: 0 0 1.5rem;
+		font-weight: 600;
+		font-size: 1.5rem;
+	}
+
+	.examples-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		padding: 2rem;
+	}
+
+	.example {
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		background: var(--color-background);
+		padding: 1.5rem;
+	}
+
+	.example h2 {
+		margin: 0 0 1rem;
+		font-weight: 600;
+		font-size: 1.25rem;
+	}
+
+	.color-strip {
+		display: flex;
+		gap: 4px;
+		margin-bottom: 1rem;
+		height: 60px;
+	}
+
+	.color-swatch {
+		flex: 1;
+		transition: transform 0.2s;
+		cursor: pointer;
+		border-radius: 4px;
+	}
+
+	.color-swatch:hover {
+		transform: scale(1.05);
+	}
+
+	.example-info,
+	.performance-info {
+		margin: 0;
+		color: var(--color-text-secondary);
+		font-size: 0.9rem;
+		line-height: 1.6;
+	}
+</style>
+
+<script>
+	import { createBasicPlayground } from '@utils/ColorPlayground';
+
+	// Create playground on client-side to preserve methods
+	const playground = createBasicPlayground();
+	(window as any).__playground = playground;
+
+	// Trigger initial render
+	window.dispatchEvent(new CustomEvent('playground-ready'));
+</script>
