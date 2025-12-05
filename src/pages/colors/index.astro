@@ -1,0 +1,26 @@
+---
+import { SITE } from '@config';
+import Navigation from '@components/Navigation.astro';
+import FullScreenLayout from '../../layouts/FullScreenLayout.astro';
+
+let pageTitle = 'Colors';
+
+const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: pageTitle }];
+---
+
+<FullScreenLayout
+	pageTitle={'Parametric color scales' + ' from ' + SITE.titleShort}
+	pageDescr={'Interactive color scale experiment'}>
+	<div slot="navigation">
+		<Navigation {breadcrumbs} />
+
+		<div class="fullscreen-header">
+			<h1 class="text-huge color-text">{pageTitle}</h1>
+		</div>
+	</div>
+	<div class="fullscreen-content">
+		<p> This is an experiment with parametric color scales generated with </p>
+	</div>
+</FullScreenLayout>
+
+<style lang="css"></style>

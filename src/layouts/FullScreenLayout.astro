@@ -1,0 +1,139 @@
+---
+export const prerender = true;
+import '@styles/resets.css';
+import '@styles/styles.css';
+
+import { SITE } from '@config';
+export interface Props {
+	pageTitle: string;
+	pageDescr: string;
+	ogImage?: string;
+}
+
+const {
+	pageTitle = SITE.title,
+	pageDescr = SITE.desc,
+	ogImage = 'https://res.cloudinary.com/dm3a0qioc/image/upload/v1723483893/240812_og_image_kaimagnus_tdj3d5.jpg',
+	...props
+} = Astro.props;
+
+const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
+---
+
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+
+		<link rel="icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+		<meta name="description" content={pageDescr} />
+		<meta name="author" content={SITE.author} />
+		<meta name="color-scheme" content="light dark" />
+		<meta name="generator" content={Astro.generator} />
+
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={currentPath} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:description" content={pageDescr} />
+
+		<title>{pageTitle}</title>
+		<slot name="head" />
+	</head>
+	<body>
+		<div class="nav-wrapper">
+			<div class="navigation">
+				<slot name="navigation" />
+				<footer class="color-text-low-contrast">
+					<ul class="list--horizontal">
+						<li><a href="https://www.figma.com/@kaimagnus">Figma</a></li>
+						<li><a href="https://github.com/kaimagnusmueller">GitHub</a></li>
+						<li>
+							<a href="./rss.xml">RSS</a><sup>
+								<a href="https://github.com/withastro/roadmap/discussions/419">beta</a>
+							</sup>
+						</li>
+						<li><a href="https://www.threads.net/@ofcoursekai">Threads</a></li>
+						<li><a href="https://www.linkedin.com/in/kai-magnus-m%C3%BCller-25a176207/">LinkedIn</a></li>
+					</ul>
+					<span>Kai Magnus Müller – <time>{new Date().getFullYear()}</time></span>
+				</footer>
+			</div>
+		</div>
+
+		<div class="content">
+			<slot />
+		</div>
+	</body>
+</html>
+
+<style lang="css" is:global>
+	/* Page Layout */
+	html {
+		background: var(--bg-image), var(--bg-color-elev-0);
+	}
+
+	body {
+		display: grid;
+		position: relative;
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr;
+		margin: auto;
+		height: 100vh;
+		font-size: 1.125rem;
+	}
+
+	.nav-wrapper,
+	.content {
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+	}
+
+	.nav-wrapper {
+		padding-inline: clamp(1rem, 10vw, 10rem);
+		width: 100%;
+	}
+
+	.navigation {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin: auto;
+		width: 100%;
+		max-width: 1184px;
+		height: 100%;
+	}
+
+	/* Footer */
+	footer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.6rem 2rem;
+		margin: 8rem 0 2rem;
+	}
+
+	/* Mobile Responsive */
+	@media (max-width: 768px) {
+		html {
+			padding-inline: clamp(1rem, 4vw, 10rem);
+		}
+	}
+
+	@media (max-width: 640px) {
+		footer {
+			margin: 6rem 0 2rem;
+		}
+	}
+
+	/* Touch Device Optimizations */
+	@media (pointer: coarse) {
+		footer a {
+			display: inline-block;
+			line-height: 1.8em;
+		}
+	}
+</style>
