@@ -1,6 +1,6 @@
 ---
 import { ColorPlayground } from '@utils/ColorPlayground';
-import NodeUI from './NodeUI.astro';
+import NodeCard from './NodeCard.astro';
 
 interface Props {
 	playground: ColorPlayground;
@@ -38,50 +38,25 @@ const summary = playground.getSummary();
 		</div>
 	</div>
 
-	<div class="content">
-		<div class="nodes-list">
-			<h3>Nodes</h3>
-			<div id="nodes-container" class="node-cards">
-				{
-					nodes.length === 0 ? (
-						<div class="empty-state">No nodes yet. Add one to get started!</div>
-					) : (
-						nodes.map((node) => (
-							<button class="node-card" data-node-id={node.id} data-action="select-node">
-								<div class="node-card-type">{node.type}</div>
-								<div class="node-card-name">{node.name}</div>
-							</button>
-						))
-					)
-				}
-			</div>
-		</div>
-
-		<div class="node-editor">
-			<div id="editor-container">
-				<div class="empty-state">Select a node to edit its properties</div>
-			</div>
-		</div>
+	<div class="nodes-grid" id="nodes-grid">
+		{
+			nodes.length === 0 ? (
+				<div class="empty-state">No nodes yet. Add one to get started!</div>
+			) : (
+				nodes.map((node) => <NodeCard node={node} />)
+			)
+		}
 	</div>
 </div>
 
 <script>
 	import { ColorPlayground } from '@utils/ColorPlayground';
 	import type { ColorNode } from '@utils/colorNodes';
-	import { getNodeMetadata, getFieldValue, setFieldValue } from '@utils/nodeUIMetadata';
+	import { getNodeMetadata } from '@utils/nodeUIMetadata';
 
 	let playground: ColorPlayground;
-	let selectedNodeId: string | null = null;
 
-	// Update the entire UI
-	function refreshUI() {
-		if (!playground) return;
-		refreshNodesList();
-		refreshNodeEditor();
-		refreshStats();
-	}
-
-	// Update stats
+	// Update stats only
 	function refreshStats() {
 		const summary = playground.getSummary();
 		const nodeCount = document.getElementById('node-count');
@@ -90,258 +65,7 @@ const summary = playground.getSummary();
 		if (connCount) connCount.textContent = summary.connectionCount.toString();
 	}
 
-	// Update only color previews (for scale nodes)
-	function updateColorPreviews() {
-		const container = document.getElementById('editor-container');
-		if (!container || !selectedNodeId) return;
-
-		const node = playground.getNode(selectedNodeId);
-		if (!node || node.type !== 'scale') return;
-
-		// Find and update color preview
-		const colorPreview = container.querySelector('.color-preview');
-		if (!colorPreview) return;
-
-		const colors = (node as any).getColors();
-		if (colors && colors.length > 0) {
-			colorPreview.innerHTML = `
-				<div class="color-strip">
-					${colors
-						.map((color: any) => {
-							const hex = color.toString({ format: 'hex' });
-							return `<div class="color-swatch" style="background-color: ${hex}" title="${hex}"></div>`;
-						})
-						.join('')}
-				</div>
-				<div class="color-count">${colors.length} colors</div>
-			`;
-		} else {
-			colorPreview.innerHTML = '<div class="no-colors">No colors generated</div>';
-		}
-	}
-
-	// Update nodes list
-	function refreshNodesList() {
-		const container = document.getElementById('nodes-container');
-		if (!container) return;
-
-		const nodes = playground.getAllNodes();
-
-		if (nodes.length === 0) {
-			container.innerHTML = '<div class="empty-state">No nodes yet. Add one to get started!</div>';
-			return;
-		}
-
-		container.innerHTML = nodes
-			.map(
-				(node) => `
-			<button class="node-card ${node.id === selectedNodeId ? 'selected' : ''}" data-node-id="${node.id}" data-action="select-node">
-				<div class="node-card-type">${node.type}</div>
-				<div class="node-card-name">${node.name}</div>
-				<div class="node-card-id">${node.id}</div>
-			</button>
-		`
-			)
-			.join('');
-	}
-
-	// Update node editor
-	function refreshNodeEditor() {
-		const container = document.getElementById('editor-container');
-		if (!container) return;
-
-		if (!selectedNodeId) {
-			container.innerHTML = '<div class="empty-state">Select a node to edit its properties</div>';
-			return;
-		}
-
-		const node = playground.getNode(selectedNodeId);
-		if (!node) {
-			selectedNodeId = null;
-			container.innerHTML = '<div class="empty-state">Node not found</div>';
-			return;
-		}
-
-		const connections = playground.getNodeConnections(selectedNodeId);
-		const metadata = getNodeMetadata(node.type);
-
-		// Build the node editor HTML
-		container.innerHTML = `
-			<div class="editor-header">
-				<h3>Edit Node</h3>
-				<button class="delete-btn" data-action="delete-node">Delete Node</button>
-			</div>
-			${renderNodeUI(node, connections)}
-		`;
-
-		// Attach event listeners to inputs
-		attachNodeInputListeners();
-	}
-
-	// Render node UI HTML
-	function renderNodeUI(node: ColorNode, connections: any) {
-		const metadata = getNodeMetadata(node.type);
-		const nodeColor = metadata?.color || '#666';
-
-		let html = `<div class="node-ui" style="--node-color: ${nodeColor}" data-node-id="${node.id}">`;
-
-		// Header
-		html += `
-			<div class="node-header">
-				<div class="node-type">${metadata?.displayName || node.type}</div>
-				<input class="node-name-input" type="text" value="${node.name}" data-field="name" placeholder="Node name" />
-			</div>
-		`;
-
-		// Description
-		if (metadata?.description) {
-			html += `<div class="node-description">${metadata.description}</div>`;
-		}
-
-		// Input connections
-		if (connections.inputs.length > 0) {
-			html += '<div class="connections-section"><div class="section-label">Inputs</div>';
-			connections.inputs.forEach((conn: any) => {
-				const sourceNode = playground.getNode(conn.sourceNodeId);
-				const sourceName = sourceNode ? sourceNode.name : conn.sourceNodeId.slice(0, 8);
-				html += `
-					<div class="connection-item">
-						<div class="connection-info">
-							<span class="connection-label">← ${sourceName}</span>
-							<span class="connection-id">${conn.id}</span>
-						</div>
-						<button class="disconnect-btn" data-connection-id="${conn.id}" data-action="disconnect" title="Disconnect">×</button>
-					</div>
-				`;
-			});
-			html += '</div>';
-		}
-
-		// Fields
-		if (metadata?.fields && metadata.fields.length > 0) {
-			html += '<div class="fields-section">';
-			metadata.fields.forEach((field) => {
-				const value = getFieldValue(node, field);
-				html += renderField(field, value);
-			});
-			html += '</div>';
-		}
-
-		// Output connections
-		if (connections.outputs.length > 0) {
-			html += '<div class="connections-section"><div class="section-label">Outputs</div>';
-			connections.outputs.forEach((conn: any) => {
-				const targetNode = playground.getNode(conn.targetNodeId);
-				const targetName = targetNode ? targetNode.name : conn.targetNodeId.slice(0, 8);
-				html += `
-					<div class="connection-item">
-						<div class="connection-info">
-							<span class="connection-label">→ ${targetName}</span>
-							<span class="connection-id">${conn.id}</span>
-						</div>
-						<button class="disconnect-btn" data-connection-id="${conn.id}" data-action="disconnect" title="Disconnect">×</button>
-					</div>
-				`;
-			});
-			html += '</div>';
-		}
-
-		html += '</div>';
-		return html;
-	}
-
-	// Render individual field
-	function renderField(field: any, value: any): string {
-		let html = `<div class="field"><label class="field-label">${field.label}`;
-		if (field.unit) html += `<span class="field-unit">${field.unit}</span>`;
-		html += '</label>';
-
-		if (field.inputType === 'number') {
-			html += `<input type="number" value="${value}" min="${field.min}" max="${field.max}" step="${field.step || 1}" ${field.readonly ? 'disabled' : ''} data-field="${field.key}" class="field-input" />`;
-		} else if (field.inputType === 'slider') {
-			html += `<div class="slider-container">
-				<input type="range" value="${value}" min="${field.min}" max="${field.max}" step="${field.step || 0.01}" ${field.readonly ? 'disabled' : ''} data-field="${field.key}" class="field-slider" />
-				<span class="slider-value">${Number(value).toFixed(2)}</span>
-			</div>`;
-		} else if (field.inputType === 'text' || field.inputType === 'bezier') {
-			const displayValue = field.inputType === 'bezier' ? formatBezierString(value) : value;
-			html += `<input type="text" value="${displayValue}" ${field.readonly ? 'disabled' : ''} data-field="${field.key}" class="field-input" placeholder="${field.inputType === 'bezier' ? '0.25,0.5;0.75,0.5' : ''}" />`;
-		} else if (field.inputType === 'color-preview') {
-			if (value && value.length > 0) {
-				html += '<div class="color-preview"><div class="color-strip">';
-				value.forEach((color: any) => {
-					const hex = color.toString({ format: 'hex' });
-					html += `<div class="color-swatch" style="background-color: ${hex}" title="${hex}"></div>`;
-				});
-				html += `</div><div class="color-count">${value.length} colors</div></div>`;
-			} else {
-				html += '<div class="color-preview"><div class="no-colors">No colors generated</div></div>';
-			}
-		} else if (field.inputType === 'readonly') {
-			html += `<div class="field-readonly">${value}</div>`;
-		}
-
-		html += '</div>';
-		return html;
-	}
-
-	// Helper to format bezier for display
-	function formatBezierString(points: any): string {
-		return `${points.p1.x},${points.p1.y};${points.p2.x},${points.p2.y}`;
-	}
-
-	// Attach event listeners to node inputs
-	function attachNodeInputListeners() {
-		const container = document.getElementById('editor-container');
-		if (!container) return;
-
-		// Handle all input changes
-		container.querySelectorAll('input[data-field]').forEach((input) => {
-			const field = (input as HTMLInputElement).dataset.field;
-			if (!field) return;
-
-			input.addEventListener('input', (e) => {
-				if (!selectedNodeId) return;
-				const target = e.target as HTMLInputElement;
-				let value: any = target.value;
-
-				// Convert to appropriate type
-				if (target.type === 'number' || target.type === 'range') {
-					value = parseFloat(value);
-
-					// Update slider value display
-					if (target.type === 'range') {
-						const valueSpan = target.parentElement?.querySelector('.slider-value');
-						if (valueSpan) valueSpan.textContent = value.toFixed(2);
-					}
-				}
-
-				playground.updateNode(selectedNodeId, field, value);
-			});
-		});
-
-		// Handle disconnect buttons
-		container.querySelectorAll('[data-action="disconnect"]').forEach((btn) => {
-			btn.addEventListener('click', () => {
-				const connId = (btn as HTMLElement).dataset.connectionId;
-				if (connId) {
-					playground.disconnect(connId);
-				}
-			});
-		});
-
-		// Handle delete node
-		container.querySelectorAll('[data-action="delete-node"]').forEach((btn) => {
-			btn.addEventListener('click', () => {
-				if (selectedNodeId) {
-					playground.removeNode(selectedNodeId);
-					selectedNodeId = null;
-				}
-			});
-		});
-	}
-
-	// Event delegation for toolbar and node list
+	// Event delegation for toolbar
 	function handleClick(e: MouseEvent) {
 		const target = e.target as HTMLElement;
 		const action = target.dataset.action || target.closest('[data-action]')?.getAttribute('data-action');
@@ -351,17 +75,111 @@ const summary = playground.getSummary();
 			if (type) {
 				const node = playground.createNode(type);
 				if (node) {
-					selectedNodeId = node.id;
-					refreshUI();
+					// Create and append new node card dynamically
+					addNodeCardToDOM(node);
+					refreshStats();
 				}
 			}
-		} else if (action === 'select-node') {
-			const nodeId = target.dataset.nodeId || target.closest('[data-node-id]')?.getAttribute('data-node-id');
-			if (nodeId) {
-				selectedNodeId = nodeId;
-				refreshUI();
-			}
 		}
+	}
+
+	// Dynamically add a node card to the DOM
+	function addNodeCardToDOM(node: ColorNode) {
+		const grid = document.getElementById('nodes-grid');
+		if (!grid) return;
+
+		// Remove empty state if it exists
+		const emptyState = grid.querySelector('.empty-state');
+		if (emptyState) {
+			emptyState.remove();
+		}
+
+		// Get node metadata for styling
+		const metadata = getNodeMetadata(node.type);
+		const nodeColor = metadata?.color || '#666';
+
+		// Determine which sections to show based on node type
+		const showInputs = !['integer', 'hue', 'chroma', 'luminance'].includes(node.type);
+		const showOutputs = node.type !== 'scale';
+		const showColorPreview = node.type === 'scale';
+
+		// Create the node card HTML
+		const nodeCardHTML = `
+			<div class="node-card base-node" style="--node-color: ${nodeColor}" data-node-id="${node.id}">
+				<div class="node-header">
+					<div class="node-type">${metadata?.displayName || node.type}</div>
+					<button class="delete-btn" data-action="delete-node" title="Delete Node">×</button>
+				</div>
+
+				<div class="node-name-container">
+					<input class="node-name-input" type="text" value="${node.name}" data-field="name" placeholder="Node name" />
+				</div>
+
+				${metadata?.description ? `<div class="node-description">${metadata.description}</div>` : ''}
+
+				${
+					showInputs
+						? `
+					<div class="connections-section inputs" data-section="inputs">
+						<div class="section-label">Inputs</div>
+						<div class="connections-list" data-connections-type="inputs">
+							<div class="no-connections">No inputs</div>
+						</div>
+					</div>
+				`
+						: ''
+				}
+
+				<div class="fields-section" data-section="fields">
+					<!-- Will be populated by controller -->
+				</div>
+
+				${
+					showColorPreview
+						? `
+					<div class="color-preview-section" data-section="color-preview">
+						<div class="section-label">Colors</div>
+						<div class="color-preview">
+							<div class="no-colors">Configure inputs to generate colors</div>
+						</div>
+					</div>
+				`
+						: ''
+				}
+
+				${
+					showOutputs
+						? `
+					<div class="connections-section outputs" data-section="outputs">
+						<div class="section-label">Outputs</div>
+						<div class="connections-list" data-connections-type="outputs">
+							<div class="no-connections">No outputs</div>
+						</div>
+					</div>
+				`
+						: ''
+				}
+			</div>
+		`;
+
+		// Add to grid
+		const tempDiv = document.createElement('div');
+		tempDiv.innerHTML = nodeCardHTML.trim();
+		const nodeElement = tempDiv.firstElementChild as HTMLElement;
+		grid.appendChild(nodeElement);
+
+		// Initialize the appropriate controller
+		initializeNodeCard(nodeElement, node.type);
+	}
+
+	// Initialize a node card with the appropriate controller
+	function initializeNodeCard(element: HTMLElement, nodeType: string) {
+		// Trigger the node card initialization event
+		// The individual node card scripts will pick this up
+		const event = new CustomEvent('node-card-added', {
+			detail: { element, nodeType },
+		});
+		window.dispatchEvent(event);
 	}
 
 	// Initialize playground
@@ -373,33 +191,34 @@ const summary = playground.getSummary();
 			return;
 		}
 
-		// Listen to playground changes
+		// Listen to playground changes for stats and connection updates
 		playground.onChange((event) => {
 			console.log('Playground changed:', event);
 
-			// Only refresh on structural changes to avoid losing focus
-			if (event.type === 'node-added' || event.type === 'node-removed') {
-				refreshNodesList();
+			if (event.type === 'node-removed') {
+				// Remove the node card from DOM
+				const nodeCard = document.querySelector(`[data-node-id="${event.nodeId}"]`);
+				if (nodeCard) {
+					nodeCard.remove();
+				}
 				refreshStats();
-				if (event.type === 'node-removed' && event.nodeId === selectedNodeId) {
-					selectedNodeId = null;
-					refreshNodeEditor();
+
+				// Check if grid is empty
+				const grid = document.getElementById('nodes-grid');
+				if (grid && grid.children.length === 0) {
+					grid.innerHTML = '<div class="empty-state">No nodes yet. Add one to get started!</div>';
 				}
 			} else if (event.type === 'connection-added' || event.type === 'connection-removed') {
-				refreshNodeEditor();
+				// Connections are handled by individual node cards
 				refreshStats();
-			} else if (event.type === 'node-updated') {
-				// For node updates, only refresh stats and color previews
-				refreshStats();
-				updateColorPreviews();
 			}
 		});
 
-		// Event delegation for toolbar and node list
+		// Event delegation for toolbar
 		document.addEventListener('click', handleClick);
 
 		// Initial render
-		refreshUI();
+		refreshStats();
 	}
 
 	// Wait for playground to be ready
@@ -464,295 +283,20 @@ const summary = playground.getSummary();
 		font-size: 0.85rem;
 	}
 
-	.content {
+	.nodes-grid {
 		display: grid;
-		grid-template-columns: 300px 1fr;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		flex: 1;
 		gap: 1rem;
-		overflow: hidden;
-	}
-
-	.nodes-list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
+		padding: 0.5rem;
 		overflow-y: auto;
-	}
-
-	.nodes-list h3 {
-		margin: 0;
-		font-weight: 600;
-		font-size: 1rem;
-	}
-
-	.node-cards {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.node-card {
-		transition: all 0.2s;
-		cursor: pointer;
-		border: 1px solid var(--border-color-transparent);
-		border-radius: 6px;
-		background: var(--card-bg-color);
-		padding: 0.75rem;
-		text-align: left;
-	}
-
-	.node-card:hover {
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-		border-color: var(--color-primary, #3b82f6);
-	}
-
-	.node-card.selected {
-		background-color: var(--bg-color-elev-1-hover);
-	}
-
-	.node-card-type {
-		margin-bottom: 0.25rem;
-		color: var(--color-text-secondary, #666);
-		font-size: 0.75rem;
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-	}
-
-	.node-card-name {
-		color: var(--color-text, #333);
-		font-weight: 500;
-		font-size: 0.9rem;
-	}
-
-	.node-card-id {
-		margin-top: 0.25rem;
-		color: var(--color-text-secondary, #999);
-		font-size: 0.7rem;
-		font-family: monospace;
-	}
-
-	.node-editor {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		border: 1px solid var(--border-color-transparent);
-		border-radius: 8px;
-		background: var(--card-bg-color);
-		padding: 1rem;
-		overflow-y: auto;
-	}
-
-	.editor-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.editor-header h3 {
-		margin: 0;
-		font-weight: 600;
-		font-size: 1rem;
-	}
-
-	.delete-btn {
-		transition: background 0.2s;
-		cursor: pointer;
-		border: none;
-		border-radius: 4px;
-		background: var(--color-error, #ef4444);
-		padding: 0.5rem 1rem;
-		color: white;
-		font-size: 0.85rem;
-	}
-
-	.delete-btn:hover {
-		background: var(--color-error-dark, #dc2626);
 	}
 
 	.empty-state {
+		grid-column: 1 / -1;
 		padding: 2rem;
 		color: var(--color-text-secondary, #666);
 		font-style: italic;
-		text-align: center;
-	}
-
-	/* Import NodeUI styles */
-	:global(.node-ui) {
-	}
-
-	:global(.node-header) {
-		margin-bottom: 0.75rem;
-	}
-
-	:global(.node-type) {
-		margin-bottom: 0.25rem;
-		color: var(--node-color);
-		font-weight: 600;
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-	}
-
-	:global(.node-name-input) {
-		border: 1px solid var(--color-border, #ddd);
-		border-radius: 4px;
-		background: transparent;
-		padding: 0.25rem 0.5rem;
-		width: 100%;
-	}
-
-	:global(.node-description) {
-		margin-bottom: 0.75rem;
-		line-height: 1.4;
-	}
-
-	:global(.connections-section) {
-		margin: 0.75rem 0;
-		border-radius: 4px;
-		padding: 0.5rem;
-	}
-
-	:global(.section-label) {
-		margin-bottom: 0.5rem;
-		font-weight: 600;
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-	}
-
-	:global(.connection-item) {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0.25rem 0;
-	}
-
-	:global(.connection-label) {
-		font-family: monospace;
-	}
-
-	:global(.connection-info) {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	:global(.connection-id) {
-		border-radius: 0.25rem;
-		padding: 0.1rem 0.4rem;
-		font-family: monospace;
-	}
-
-	:global(.disconnect-btn) {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		transition: background 0.2s;
-		cursor: pointer;
-		border: none;
-		border-radius: 50%;
-		background: var(--color-error, #ef4444);
-		padding: 0;
-		width: 20px;
-		height: 20px;
-
-		font-size: 1rem;
-		line-height: 1;
-	}
-
-	:global(.disconnect-btn:hover) {
-		background: var(--color-error-dark, #dc2626);
-	}
-
-	:global(.fields-section) {
-		margin: 0.75rem 0;
-	}
-
-	:global(.field) {
-		margin-bottom: 0.75rem;
-	}
-
-	:global(.field:last-child) {
-		margin-bottom: 0;
-	}
-
-	:global(.field-label) {
-		display: block;
-		margin-bottom: 0.25rem;
-		font-weight: 500;
-	}
-
-	:global(.field-unit) {
-		margin-left: 0.25rem;
-		font-weight: 400;
-	}
-
-	:global(.field-input) {
-		border: 1px solid var(--color-border, #ddd);
-		border-radius: 4px;
-		padding: 0.375rem 0.5rem;
-		width: 100%;
-		font-size: 0.9rem;
-	}
-
-	:global(.slider-container) {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	:global(.field-slider) {
-		flex: 1;
-	}
-
-	:global(.slider-value) {
-		min-width: 4ch;
-		font-size: 0.85rem;
-		font-family: monospace;
-		text-align: right;
-	}
-
-	:global(.field-readonly) {
-		border-radius: 4px;
-		background: var(--color-surface, #f9f9f9);
-		padding: 0.375rem 0.5rem;
-		color: var(--color-text-secondary, #666);
-		font-size: 0.9rem;
-	}
-
-	:global(.color-preview) {
-		margin-top: 0.25rem;
-	}
-
-	:global(.color-strip) {
-		display: flex;
-		gap: 2px;
-		margin-bottom: 0.25rem;
-		border-radius: 4px;
-		height: 40px;
-		overflow: hidden;
-	}
-
-	:global(.color-swatch) {
-		flex: 1;
-		transition: transform 0.2s;
-		cursor: pointer;
-	}
-
-	:global(.color-swatch:hover) {
-		transform: scale(1.05);
-		z-index: 1;
-	}
-
-	:global(.color-count) {
-		color: var(--color-text-secondary, #666);
-		font-size: 0.8rem;
-		text-align: center;
-	}
-
-	:global(.no-colors) {
-		padding: 1rem;
-		color: var(--color-text-secondary, #666);
-		font-style: italic;
-		font-size: 0.85rem;
 		text-align: center;
 	}
 </style>

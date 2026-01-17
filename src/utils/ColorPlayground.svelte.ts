@@ -3,18 +3,20 @@
  * Provides high-level API for UI interaction and graph management
  */
 
-import type { ColorNode } from './colorNodes';
 import {
-    IntegerNode,
-    HueNode,
     ChromaNode,
-    LuminanceNode,
-    CurveNode,
-    LinearNode,
     ColorScaleNode,
-    connect as connectNodes,
-    disconnect as disconnectNodes,
-} from './colorNodes';
+    CurveNode,
+    HueNode,
+    IntegerNode,
+    LinearNode,
+    LuminanceNode,
+    connect,
+    disconnect,
+    type ColorNode,
+    type StateGetter,
+} from './colorNodes.svelte';
+
 import { getNodeMetadata, type NodeMetadata } from './nodeUIMetadata';
 import type Color from 'colorjs.io';
 
@@ -99,6 +101,15 @@ export class ColorPlayground {
 
     /**
      * Create and add a new node to the playground
+     *
+     * For reactive state, pass StateGetter callbacks:
+     * ```ts
+     * let stepsValue = $state(10);
+     * playground.createNode('integer', {
+     *   getValue: () => stepsValue,
+     *   name: 'Steps'
+     * })
+     * ```
      */
     createNode(type: string, params?: Record<string, any>): ColorNode | null {
         const id = this.generateId();
@@ -107,16 +118,16 @@ export class ColorPlayground {
 
         switch (type) {
             case 'integer':
-                node = new IntegerNode(id, params?.value ?? 10, name);
+                node = new IntegerNode(id, params?.getValue ?? (() => 10), name);
                 break;
             case 'hue':
-                node = new HueNode(id, params?.start ?? 0, params?.end ?? 360, name);
+                node = new HueNode(id, params?.getStart ?? (() => 0), params?.getEnd ?? (() => 360), name);
                 break;
             case 'chroma':
-                node = new ChromaNode(id, params?.start ?? 0, params?.end ?? 0.4, name);
+                node = new ChromaNode(id, params?.getStart ?? (() => 0), params?.getEnd ?? (() => 0.4), name);
                 break;
             case 'luminance':
-                node = new LuminanceNode(id, params?.start ?? 100, params?.end ?? 0, name);
+                node = new LuminanceNode(id, params?.getStart ?? (() => 100), params?.getEnd ?? (() => 0), name);
                 break;
             case 'curve':
                 node = new CurveNode(id, params?.p1 ?? { x: 0.25, y: 0.5 }, params?.p2 ?? { x: 0.75, y: 0.5 }, name);
@@ -223,7 +234,7 @@ export class ColorPlayground {
         };
 
         this.connections.set(connId, connection);
-        connectNodes(sourceNode, targetNode, targetInputKey);
+        connect(sourceNode, targetNode, targetInputKey);
 
         this.notifyChange({ type: 'connection-added', connectionId: connId });
         return connId;
@@ -240,7 +251,7 @@ export class ColorPlayground {
         const targetNode = this.nodes.get(connection.targetNodeId);
 
         if (sourceNode && targetNode) {
-            disconnectNodes(sourceNode, targetNode, connection.targetInputKey);
+            disconnect(sourceNode, targetNode, connection.targetInputKey);
         }
 
         this.connections.delete(connectionId);

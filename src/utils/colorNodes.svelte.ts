@@ -1,6 +1,12 @@
 /**
  * Node-based color scale generator using OKLCH color space
- * Implements both pull-based computation and push-based reactivity
+ * Implements pull-based computation with Svelte 5 reactivity integration
+ *
+ * State management approach:
+ * - Reactive state (numbers) lives in Svelte components using $state rune
+ * - Nodes read these values via callbacks/getters (pull-based)
+ * - When state changes, Svelte re-renders and nodes recompute on-demand
+ * - Change listeners notify downstream nodes to mark cache as dirty
  */
 
 import Color from 'colorjs.io';
@@ -9,6 +15,13 @@ import Color from 'colorjs.io';
  * Change listener callback type
  */
 export type ChangeListener = (node: ColorNode) => void;
+
+/**
+ * State getter for reactive values
+ * Called by nodes to read current state values
+ * Enables clean separation: Svelte owns state, nodes read it
+ */
+export type StateGetter<T> = () => T;
 
 /**
  * Base node interface - all nodes extend this
@@ -29,6 +42,7 @@ export interface ColorNode {
 
 /**
  * Abstract base node with reactivity built-in
+ * Can optionally accept reactive rune objects for state management
  */
 export abstract class BaseNode implements ColorNode {
     id: string;
@@ -101,38 +115,54 @@ export interface ScaleNode extends ColorNode {
 
 /**
  * Integer value node - provides step counts or other discrete values
+ *
+ * Usage:
+ * ```svelte
+ * let steps = $state(10);
+ * const stepsNode = new IntegerNode('steps', () => steps);
+ * // When steps updates, recompute colors by calling stepsNode.getValue()
+ * ```
  */
 export class IntegerNode extends BaseNode implements ValueNode {
     constructor(
         id: string,
-        private value: number,
+        private getValueFn: StateGetter<number>,
         name?: string,
     ) {
         super(id, 'integer', name);
     }
 
     getValue(): number {
-        return this.value;
+        return Math.round(this.getValueFn());
     }
 
+    /**
+     * Note: setValue is called from UI but just notifies graph to recompute
+     * Actual state lives in parent component via StateGetter callback
+     */
     setValue(value: number): void {
-        const newValue = Math.round(value);
-        if (newValue !== this.value) {
-            this.value = newValue;
-            this.notifyChange();
-        }
+        // Trigger downstream recalculation
+        // (Svelte will update the reactive state separately)
+        this.notifyChange();
     }
 }
 
 /**
  * Abstract base for channel nodes (Hue, Chroma, Luminance)
+ *
+ * Usage:
+ * ```svelte
+ * let hueStart = $state(0);
+ * let hueEnd = $state(360);
+ * const hueNode = new HueNode('hue', () => hueStart, () => hueEnd);
+ * ```
  */
 export abstract class ChannelNode extends BaseNode implements RangeNode {
     constructor(
         id: string,
         type: string,
-        protected start: number,
-        protected end: number,
+        private getStartFn: StateGetter<number>,
+        private getEndFn: StateGetter<number>,
         protected min: number,
         protected max: number,
         name?: string,
@@ -142,55 +172,49 @@ export abstract class ChannelNode extends BaseNode implements RangeNode {
 
     getRange() {
         return {
-            start: this.start,
-            end: this.end,
+            start: this.clamp(this.getStartFn()),
+            end: this.clamp(this.getEndFn()),
             min: this.min,
             max: this.max,
         };
     }
 
+    private clamp(value: number): number {
+        return Math.max(this.min, Math.min(this.max, value));
+    }
+
+    /**
+     * Called from UI - triggers graph recalculation
+     * Actual state update happens in parent component
+     */
     setStart(value: number): void {
-        const clamped = Math.max(this.min, Math.min(this.max, value));
-        if (clamped !== this.start) {
-            this.start = clamped;
-            this.notifyChange();
-        }
+        this.notifyChange();
     }
 
     setEnd(value: number): void {
-        const clamped = Math.max(this.min, Math.min(this.max, value));
-        if (clamped !== this.end) {
-            this.end = clamped;
-            this.notifyChange();
-        }
+        this.notifyChange();
     }
 
     setRange(start: number, end: number): void {
-        const newStart = Math.max(this.min, Math.min(this.max, start));
-        const newEnd = Math.max(this.min, Math.min(this.max, end));
-        if (newStart !== this.start || newEnd !== this.end) {
-            this.start = newStart;
-            this.end = newEnd;
-            this.notifyChange();
-        }
+        this.notifyChange();
     }
 }
 
 export class HueNode extends ChannelNode {
-    constructor(id: string, start = 0, end = 360, name?: string) {
-        super(id, 'hue', start, end, 0, 360, name);
+    constructor(id: string, getStart: StateGetter<number>, getEnd: StateGetter<number>, name?: string) {
+        super(id, 'hue', getStart, getEnd, 0, 360, name);
     }
 }
 
 export class ChromaNode extends ChannelNode {
-    constructor(id: string, start = 0, end = 0.4, name?: string) {
-        super(id, 'chroma', start, end, 0, 0.4, name);
+    constructor(id: string, getStart: StateGetter<number>, getEnd: StateGetter<number>, name?: string) {
+        super(id, 'chroma', getStart, getEnd, 0, 0.4, name);
     }
 }
 
 export class LuminanceNode extends ChannelNode {
-    constructor(id: string, start = 100, end = 0, name?: string) {
-        super(id, 'luminance', start, end, 0, 100, name);
+    constructor(id: string, getStart: StateGetter<number>, getEnd: StateGetter<number>, name?: string) {
+        super(id, 'luminance', getStart, getEnd, 0, 100, name);
     }
 }
 

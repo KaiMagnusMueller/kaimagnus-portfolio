@@ -1,0 +1,36 @@
+---
+import type { ColorNode } from '@utils/colorNodes';
+import IntegerNodeCard from './nodes/IntegerNodeCard.astro';
+import ChannelNodeCard from './nodes/ChannelNodeCard.astro';
+import InterpolatorNodeCard from './nodes/InterpolatorNodeCard.astro';
+import ScaleNodeCard from './nodes/ScaleNodeCard.astro';
+
+interface Props {
+	node: ColorNode;
+}
+
+const { node } = Astro.props;
+
+// Route to specialized component based on node type
+const renderNode = () => {
+	switch (node.type) {
+		case 'integer':
+			return IntegerNodeCard;
+		case 'hue':
+		case 'chroma':
+		case 'luminance':
+			return ChannelNodeCard;
+		case 'curve':
+		case 'linear':
+			return InterpolatorNodeCard;
+		case 'scale':
+			return ScaleNodeCard;
+		default:
+			return null;
+	}
+};
+
+const NodeComponent = renderNode();
+---
+
+{NodeComponent && <NodeComponent node={node} />}

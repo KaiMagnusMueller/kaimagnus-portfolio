@@ -1,0 +1,260 @@
+---
+import type { ColorNode } from '@utils/colorNodes';
+import { getNodeMetadata } from '@utils/nodeUIMetadata';
+
+interface Props {
+	node: ColorNode;
+	showInputs?: boolean;
+	showOutputs?: boolean;
+}
+
+const { node, showInputs = true, showOutputs = true } = Astro.props;
+const metadata = getNodeMetadata(node.type);
+const nodeColor = metadata?.color || '#666';
+---
+
+<div class="node-card base-node" style={`--node-color: ${nodeColor}`} data-node-id={node.id}>
+	<div class="node-header">
+		<div class="node-type">{metadata?.displayName || node.type}</div>
+		<button class="delete-btn" data-action="delete-node" title="Delete Node">×</button>
+	</div>
+
+	<div class="node-name-container">
+		<input class="node-name-input" type="text" value={node.name} data-field="name" placeholder="Node name" />
+	</div>
+
+	{metadata?.description && <div class="node-description">{metadata.description}</div>}
+
+	{showInputs && (
+		<div class="connections-section inputs" data-section="inputs">
+			<div class="section-label">Inputs</div>
+			<div class="connections-list" data-connections-type="inputs">
+				<!-- Dynamically populated -->
+			</div>
+		</div>
+	)}
+
+	<!-- Fields section (to be filled by script) -->
+	<div class="fields-section" data-section="fields">
+		<!-- Dynamically populated -->
+	</div>
+
+	<!-- Slot for additional content (like color preview) -->
+	<slot />
+
+	{showOutputs && (
+		<div class="connections-section outputs" data-section="outputs">
+			<div class="section-label">Outputs</div>
+			<div class="connections-list" data-connections-type="outputs">
+				<!-- Dynamically populated -->
+			</div>
+		</div>
+	)}
+</div>
+
+<style>
+	.node-card {
+		border: 2px solid var(--node-color);
+		border-radius: 8px;
+		background: var(--card-bg-color);
+		padding: 1rem;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.node-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 0.75rem;
+	}
+
+	.node-type {
+		color: var(--node-color);
+		font-weight: 600;
+		font-size: 0.85rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.delete-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: background 0.2s;
+		cursor: pointer;
+		border: none;
+		border-radius: 50%;
+		background: var(--color-error, #ef4444);
+		padding: 0;
+		width: 24px;
+		height: 24px;
+		color: white;
+		font-size: 1.2rem;
+		line-height: 1;
+	}
+
+	.delete-btn:hover {
+		background: var(--color-error-dark, #dc2626);
+	}
+
+	.node-name-container {
+		margin-bottom: 0.75rem;
+	}
+
+	.node-name-input {
+		border: 1px solid var(--color-border, #ddd);
+		border-radius: 4px;
+		background: transparent;
+		padding: 0.5rem;
+		width: 100%;
+		font-size: 0.9rem;
+	}
+
+	.node-description {
+		margin-bottom: 0.75rem;
+		padding: 0.5rem;
+		background: var(--bg-color-elev-1);
+		border-radius: 4px;
+		font-size: 0.85rem;
+		line-height: 1.4;
+	}
+
+	.connections-section {
+		margin-bottom: 0.75rem;
+		border-radius: 4px;
+		background: var(--bg-color-elev-1);
+		padding: 0.5rem;
+	}
+
+	.section-label {
+		margin-bottom: 0.5rem;
+		color: var(--color-text-secondary);
+		font-weight: 600;
+		font-size: 0.75rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.connections-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	:global(.connection-item) {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.25rem;
+		border-radius: 4px;
+		background: var(--card-bg-color);
+	}
+
+	:global(.connection-info) {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex: 1;
+	}
+
+	:global(.connection-label) {
+		font-size: 0.85rem;
+		font-family: monospace;
+	}
+
+	:global(.connection-field) {
+		padding: 0.1rem 0.4rem;
+		border-radius: 0.25rem;
+		background: var(--bg-color-elev-1);
+		color: var(--color-text-secondary);
+		font-size: 0.75rem;
+		font-family: monospace;
+	}
+
+	:global(.no-connections) {
+		padding: 0.5rem;
+		color: var(--color-text-secondary);
+		font-style: italic;
+		font-size: 0.8rem;
+		text-align: center;
+	}
+
+	:global(.disconnect-btn) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: background 0.2s;
+		cursor: pointer;
+		border: none;
+		border-radius: 50%;
+		background: var(--color-error, #ef4444);
+		padding: 0;
+		width: 20px;
+		height: 20px;
+		color: white;
+		font-size: 1rem;
+		line-height: 1;
+	}
+
+	:global(.disconnect-btn:hover) {
+		background: var(--color-error-dark, #dc2626);
+	}
+
+	.fields-section {
+		margin-bottom: 0.75rem;
+	}
+
+	:global(.field) {
+		margin-bottom: 0.75rem;
+	}
+
+	:global(.field:last-child) {
+		margin-bottom: 0;
+	}
+
+	:global(.field-label) {
+		display: block;
+		margin-bottom: 0.25rem;
+		font-weight: 500;
+		font-size: 0.85rem;
+	}
+
+	:global(.field-unit) {
+		margin-left: 0.25rem;
+		color: var(--color-text-secondary);
+		font-weight: 400;
+	}
+
+	:global(.field-input) {
+		border: 1px solid var(--color-border, #ddd);
+		border-radius: 4px;
+		padding: 0.5rem;
+		width: 100%;
+		font-size: 0.9rem;
+	}
+
+	:global(.slider-container) {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	:global(.field-slider) {
+		flex: 1;
+	}
+
+	:global(.slider-value) {
+		min-width: 4ch;
+		font-size: 0.85rem;
+		font-family: monospace;
+		text-align: right;
+	}
+
+	:global(.field-readonly) {
+		border-radius: 4px;
+		background: var(--bg-color-elev-1);
+		padding: 0.5rem;
+		color: var(--color-text-secondary);
+		font-size: 0.9rem;
+	}
+</style>

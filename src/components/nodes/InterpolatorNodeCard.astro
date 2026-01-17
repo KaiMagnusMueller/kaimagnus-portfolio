@@ -1,0 +1,204 @@
+---
+import type { ColorNode } from '@utils/colorNodes';
+import BaseNodeCard from './BaseNodeCard.astro';
+
+interface Props {
+	node: ColorNode;
+}
+
+const { node } = Astro.props;
+---
+
+<BaseNodeCard node={node}>
+	<!-- Interpolator nodes (curve, linear) have no additional content -->
+</BaseNodeCard>
+
+<script>
+	import type { ColorNode } from '@utils/colorNodes';
+	import type { ColorPlayground } from '@utils/ColorPlayground';
+	import { getNodeMetadata, getFieldValue, formatBezierString } from '@utils/nodeUIMetadata';
+
+	class InterpolatorNodeController {
+		private element: HTMLElement;
+		private nodeId: string;
+		private playground: ColorPlayground;
+		private changeListener: (() => void) | null = null;
+
+		constructor(element: HTMLElement, playground: ColorPlayground) {
+			this.element = element;
+			this.nodeId = element.dataset.nodeId!;
+			this.playground = playground;
+			this.initialize();
+		}
+
+		private initialize() {
+			this.render();
+
+			const node = this.playground.getNode(this.nodeId);
+			if (node) {
+				// Don't re-render on change to avoid losing focus
+				this.changeListener = () => {};
+				node.onChange(this.changeListener);
+			}
+
+			// Listen to playground-level changes for connections
+			this.playground.onChange((event) => {
+				if (event.type === 'connection-added' || event.type === 'connection-removed') {
+					// Always update connections for all nodes
+					this.renderConnections();
+				}
+			});
+
+			this.attachEventListeners();
+		}
+
+		private render() {
+			this.renderConnections();
+			this.renderFields();
+		}
+
+		private renderConnections() {
+			const connections = this.playground.getNodeConnections(this.nodeId);
+
+			// Render inputs
+			const inputsList = this.element.querySelector('[data-connections-type="inputs"]');
+			if (inputsList) {
+				if (connections.inputs.length === 0) {
+					inputsList.innerHTML = '<div class="no-connections">No inputs</div>';
+				} else {
+					inputsList.innerHTML = connections.inputs
+						.map((conn) => {
+							const sourceNode = this.playground.getNode(conn.sourceNodeId);
+							const sourceName = sourceNode ? sourceNode.name : conn.sourceNodeId.slice(0, 8);
+							return `
+								<div class="connection-item">
+									<div class="connection-info">
+										<span class="connection-label">← ${sourceName}</span>
+										<span class="connection-field">${conn.targetInputKey}</span>
+									</div>
+									<button class="disconnect-btn" data-connection-id="${conn.id}" data-action="disconnect" title="Disconnect">×</button>
+								</div>
+							`;
+						})
+						.join('');
+				}
+			}
+
+			// Render outputs
+			const outputsList = this.element.querySelector('[data-connections-type="outputs"]');
+			if (outputsList) {
+				if (connections.outputs.length === 0) {
+					outputsList.innerHTML = '<div class="no-connections">No outputs</div>';
+				} else {
+					outputsList.innerHTML = connections.outputs
+						.map((conn) => {
+							const targetNode = this.playground.getNode(conn.targetNodeId);
+							const targetName = targetNode ? targetNode.name : conn.targetNodeId.slice(0, 8);
+							return `
+								<div class="connection-item">
+									<div class="connection-info">
+										<span class="connection-label">→ ${targetName}</span>
+										<span class="connection-field">${conn.targetInputKey}</span>
+									</div>
+									<button class="disconnect-btn" data-connection-id="${conn.id}" data-action="disconnect" title="Disconnect">×</button>
+								</div>
+							`;
+						})
+						.join('');
+				}
+			}
+		}
+
+		private renderFields() {
+			const node = this.playground.getNode(this.nodeId);
+			if (!node) return;
+
+			const metadata = getNodeMetadata(node.type);
+			const fieldsSection = this.element.querySelector('[data-section="fields"]');
+
+			if (!fieldsSection || !metadata?.fields || metadata.fields.length === 0) return;
+
+			fieldsSection.innerHTML = metadata.fields
+				.map((field) => {
+					const value = getFieldValue(node, field);
+					return this.renderField(field, value);
+				})
+				.join('');
+		}
+
+		private renderField(field: any, value: any): string {
+			let html = `<div class="field"><label class="field-label">${field.label}`;
+			if (field.unit) html += `<span class="field-unit">${field.unit}</span>`;
+			html += '</label>';
+
+			if (field.inputType === 'text' || field.inputType === 'bezier') {
+				const displayValue = field.inputType === 'bezier' ? formatBezierString(value) : value;
+				html += `<input type="text" value="${displayValue}" ${field.readonly ? 'disabled' : ''} data-field="${field.key}" class="field-input" placeholder="${field.inputType === 'bezier' ? '0.25,0.5;0.75,0.5' : ''}" />`;
+			}
+
+			html += '</div>';
+			return html;
+		}
+
+		private attachEventListeners() {
+			this.element.addEventListener('input', (e) => {
+				const target = e.target as HTMLInputElement;
+				const field = target.dataset.field;
+				if (!field) return;
+
+				this.playground.updateNode(this.nodeId, field, target.value);
+			});
+
+			this.element.addEventListener('click', (e) => {
+				const target = e.target as HTMLElement;
+				const action = target.dataset.action;
+
+				if (action === 'disconnect') {
+					const connId = target.dataset.connectionId;
+					if (connId) {
+						this.playground.disconnect(connId);
+						this.renderConnections();
+					}
+				} else if (action === 'delete-node') {
+					this.playground.removeNode(this.nodeId);
+				}
+			});
+		}
+	}
+
+	function initializeInterpolatorNodes() {
+		const playground = (window as any).__playground;
+		if (!playground) return;
+
+		document.querySelectorAll('.base-node[data-node-id]').forEach((element) => {
+			const nodeId = (element as HTMLElement).dataset.nodeId;
+			if (!nodeId) return;
+
+			const node = playground.getNode(nodeId);
+			if (node && (node.type === 'curve' || node.type === 'linear')) {
+				// Skip if already initialized
+				if ((element as any).__initialized) return;
+				(element as any).__initialized = true;
+				new InterpolatorNodeController(element as HTMLElement, playground);
+			}
+		});
+	}
+
+	if ((window as any).__playground) {
+		initializeInterpolatorNodes();
+	} else {
+		window.addEventListener('playground-ready', initializeInterpolatorNodes);
+	}
+
+	// Handle dynamically added nodes
+	window.addEventListener('node-card-added', ((e: CustomEvent) => {
+		const { element, nodeType } = e.detail;
+		if (nodeType === 'curve' || nodeType === 'linear') {
+			const playground = (window as any).__playground;
+			if (playground && element && !(element as any).__initialized) {
+				(element as any).__initialized = true;
+				new InterpolatorNodeController(element as HTMLElement, playground);
+			}
+		}
+	}) as EventListener);
+</script>

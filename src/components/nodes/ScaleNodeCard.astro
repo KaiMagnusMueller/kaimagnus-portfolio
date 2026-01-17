@@ -1,0 +1,270 @@
+---
+import type { ColorNode } from '@utils/colorNodes';
+import BaseNodeCard from './BaseNodeCard.astro';
+
+interface Props {
+	node: ColorNode;
+}
+
+const { node } = Astro.props;
+---
+
+<BaseNodeCard node={node} showOutputs={false}>
+	<!-- Color Preview Section -->
+	<div class="color-preview-section" data-section="color-preview">
+		<div class="section-label">Colors</div>
+		<div class="color-preview">
+			<!-- Dynamically populated -->
+		</div>
+	</div>
+</BaseNodeCard>
+
+<script>
+	import type { ColorNode } from '@utils/colorNodes';
+	import type { ColorPlayground } from '@utils/ColorPlayground';
+	import { getNodeMetadata, getFieldValue } from '@utils/nodeUIMetadata';
+
+	class ScaleNodeController {
+		private element: HTMLElement;
+		private nodeId: string;
+		private playground: ColorPlayground;
+		private changeListener: (() => void) | null = null;
+
+		constructor(element: HTMLElement, playground: ColorPlayground) {
+			this.element = element;
+			this.nodeId = element.dataset.nodeId!;
+			this.playground = playground;
+			this.initialize();
+		}
+
+		private initialize() {
+			this.render();
+
+			const node = this.playground.getNode(this.nodeId);
+			if (node) {
+				this.changeListener = () => this.handleNodeChange();
+				node.onChange(this.changeListener);
+			}
+
+			// Listen to playground-level changes for connections
+			this.playground.onChange((event) => {
+				if (event.type === 'connection-added' || event.type === 'connection-removed') {
+					// Check if this node is affected by the connection change
+					const connections = this.playground.getNodeConnections(this.nodeId);
+					this.renderConnections();
+					this.renderColorPreview();
+				}
+			});
+
+			this.attachEventListeners();
+		}
+
+		private handleNodeChange() {
+			// Only update color preview, not fields (to avoid losing focus)
+			this.renderColorPreview();
+		}
+
+		private render() {
+			this.renderConnections();
+			this.renderFields();
+			this.renderColorPreview();
+		}
+
+		private renderConnections() {
+			const connections = this.playground.getNodeConnections(this.nodeId);
+
+			// Render inputs
+			const inputsList = this.element.querySelector('[data-connections-type="inputs"]');
+			if (inputsList) {
+				if (connections.inputs.length === 0) {
+					inputsList.innerHTML = '<div class="no-connections">No inputs</div>';
+				} else {
+					inputsList.innerHTML = connections.inputs
+						.map((conn) => {
+							const sourceNode = this.playground.getNode(conn.sourceNodeId);
+							const sourceName = sourceNode ? sourceNode.name : conn.sourceNodeId.slice(0, 8);
+							return `
+								<div class="connection-item">
+									<div class="connection-info">
+										<span class="connection-label">← ${sourceName}</span>
+										<span class="connection-field">${conn.targetInputKey}</span>
+									</div>
+									<button class="disconnect-btn" data-connection-id="${conn.id}" data-action="disconnect" title="Disconnect">×</button>
+								</div>
+							`;
+						})
+						.join('');
+				}
+			}
+		}
+
+		private renderFields() {
+			const node = this.playground.getNode(this.nodeId);
+			if (!node) return;
+
+			const metadata = getNodeMetadata(node.type);
+			const fieldsSection = this.element.querySelector('[data-section="fields"]');
+
+			if (!fieldsSection || !metadata?.fields || metadata.fields.length === 0) return;
+
+			fieldsSection.innerHTML = metadata.fields
+				.map((field) => {
+					const value = getFieldValue(node, field);
+					return this.renderField(field, value);
+				})
+				.join('');
+		}
+
+		private renderField(field: any, value: any): string {
+			let html = `<div class="field"><label class="field-label">${field.label}`;
+			if (field.unit) html += `<span class="field-unit">${field.unit}</span>`;
+			html += '</label>';
+
+			if (field.inputType === 'readonly') {
+				html += `<div class="field-readonly">${value}</div>`;
+			}
+
+			html += '</div>';
+			return html;
+		}
+
+		private renderColorPreview() {
+			const node = this.playground.getNode(this.nodeId);
+			if (!node) return;
+
+			const previewSection = this.element.querySelector('.color-preview');
+			if (!previewSection) return;
+
+			try {
+				const colors = (node as any).getColors();
+				if (colors && colors.length > 0) {
+					previewSection.innerHTML = `
+						<div class="color-strip">
+							${colors
+								.map((color: any) => {
+									const hex = color.toString({ format: 'hex' });
+									return `<div class="color-swatch" style="background-color: ${hex}" title="${hex}"></div>`;
+								})
+								.join('')}
+						</div>
+						<div class="color-count">${colors.length} colors</div>
+					`;
+				} else {
+					previewSection.innerHTML = '<div class="no-colors">Configure inputs to generate colors</div>';
+				}
+			} catch (error) {
+				previewSection.innerHTML = '<div class="no-colors">Configure inputs to generate colors</div>';
+			}
+		}
+
+		private attachEventListeners() {
+			this.element.addEventListener('click', (e) => {
+				const target = e.target as HTMLElement;
+				const action = target.dataset.action;
+
+				if (action === 'disconnect') {
+					const connId = target.dataset.connectionId;
+					if (connId) {
+						this.playground.disconnect(connId);
+						this.renderConnections();
+					}
+				} else if (action === 'delete-node') {
+					this.playground.removeNode(this.nodeId);
+				}
+			});
+		}
+	}
+
+	function initializeScaleNodes() {
+		const playground = (window as any).__playground;
+		if (!playground) return;
+
+		document.querySelectorAll('.base-node[data-node-id]').forEach((element) => {
+			const nodeId = (element as HTMLElement).dataset.nodeId;
+			if (!nodeId) return;
+
+			const node = playground.getNode(nodeId);
+			if (node && node.type === 'scale') {
+				// Skip if already initialized
+				if ((element as any).__initialized) return;
+				(element as any).__initialized = true;
+				new ScaleNodeController(element as HTMLElement, playground);
+			}
+		});
+	}
+
+	if ((window as any).__playground) {
+		initializeScaleNodes();
+	} else {
+		window.addEventListener('playground-ready', initializeScaleNodes);
+	}
+
+	// Handle dynamically added nodes
+	window.addEventListener('node-card-added', ((e: CustomEvent) => {
+		const { element, nodeType } = e.detail;
+		if (nodeType === 'scale') {
+			const playground = (window as any).__playground;
+			if (playground && element && !(element as any).__initialized) {
+				(element as any).__initialized = true;
+				new ScaleNodeController(element as HTMLElement, playground);
+			}
+		}
+	}) as EventListener);
+</script>
+
+<style>
+	.color-preview-section {
+		margin-top: 0.75rem;
+		border-radius: 4px;
+		background: var(--bg-color-elev-1);
+		padding: 0.5rem;
+	}
+
+	.section-label {
+		margin-bottom: 0.5rem;
+		color: var(--color-text-secondary);
+		font-weight: 600;
+		font-size: 0.75rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.color-preview {
+		margin-top: 0.5rem;
+	}
+
+	:global(.color-strip) {
+		display: flex;
+		gap: 2px;
+		margin-bottom: 0.5rem;
+		border-radius: 4px;
+		height: 60px;
+		overflow: hidden;
+	}
+
+	:global(.color-swatch) {
+		flex: 1;
+		transition: transform 0.2s;
+		cursor: pointer;
+		min-width: 2px;
+	}
+
+	:global(.color-swatch:hover) {
+		transform: scale(1.05);
+		z-index: 1;
+	}
+
+	:global(.color-count) {
+		color: var(--color-text-secondary);
+		font-size: 0.8rem;
+		text-align: center;
+	}
+
+	:global(.no-colors) {
+		padding: 1rem;
+		color: var(--color-text-secondary);
+		font-style: italic;
+		font-size: 0.85rem;
+		text-align: center;
+	}
+</style>
