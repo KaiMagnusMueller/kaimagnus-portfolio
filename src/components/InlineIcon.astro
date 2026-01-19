@@ -8,7 +8,7 @@ export interface Props {
 const { classList = 'company-logo', src = '', alt = '' } = Astro.props;
 ---
 
-<span><img {src} class={classList} {alt} /><slot /></span>
+<span><img {src} class={classList} {alt} aria-hidden="true" /><slot /></span>
 
 <style lang="css">
 	img {
@@ -21,7 +21,7 @@ const { classList = 'company-logo', src = '', alt = '' } = Astro.props;
 		aspect-ratio: 1;
 		height: 1.25em;
 		object-fit: contain;
-
+		user-select: none;
 		@media (max-width: 640px) {
 			height: 1.5em;
 		}

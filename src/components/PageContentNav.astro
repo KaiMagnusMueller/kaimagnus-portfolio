@@ -16,7 +16,7 @@ const { headings } = Astro.props;
 					<a href={`#${heading.slug}`}>
 						<div>
 							{heading.text}
-							<span>{heading.text}</span>
+							<span aria-hidden="true">{heading.text}</span>
 						</div>
 					</a>
 				</li>
@@ -127,11 +127,6 @@ const { headings } = Astro.props;
 			transform: translate(0);
 		}
 
-		div,
-		span {
-			visibility: visible;
-		}
-
 		span {
 			opacity: 0.4;
 		}
@@ -142,7 +137,6 @@ const { headings } = Astro.props;
 		}
 
 		&::before {
-			visibility: visible;
 			opacity: 1;
 		}
 
@@ -195,7 +189,6 @@ const { headings } = Astro.props;
 			right: 0;
 			grid-row: 1;
 			grid-column: 1;
-			visibility: hidden;
 			padding-block: 0.5rem;
 			padding: 0.5rem 1rem;
 			padding-inline-end: 2.75rem;
