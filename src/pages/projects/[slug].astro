@@ -1,7 +1,7 @@
 ---
 import Posts from '@layouts/Posts.astro';
 import { getHeadingsRender } from '@utils/getHeadingsRender';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
 	const entries = await getCollection('projects');
@@ -9,19 +9,19 @@ export async function getStaticPaths() {
 	const headings = await getHeadingsRender(entries);
 
 	return entries.map((entry, index) => ({
-		params: { slug: entry.slug },
+		params: { slug: entry.id },
 		props: { entry, headings: headings[index] },
 	}));
 }
 // 2. When it's time to render, you can get the entry directly from the prop
 const { entry, headings } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Posts entryCollection={entry.collection} {...entry.data} {headings}>
 	<header>
 		<div class="header-inner-wrapper">
-			<h1 id={entry.slug}>{entry.data.title}</h1>
+			<h1 id={entry.id}>{entry.data.title}</h1>
 			<span class="course-data color-text-low-contrast">
 				<span class="sr-only">Course:</span>
 				<span>{entry.data.course}</span>
@@ -41,6 +41,4 @@ const { Content } = await entry.render();
 		</div>
 	</header>
 	<Content />
-
-	<style lang="css"></style>
 </Posts>

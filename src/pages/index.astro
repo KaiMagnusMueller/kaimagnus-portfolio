@@ -150,8 +150,8 @@ const headings = [
 					I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student,
 					and we later developed an extended version for the exhibition
 					<a
-						href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/"
-						>100 Prozent Baumwolle</a
+						href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/">
+						100 Prozent Baumwolle</a
 					> at Übersee-Museum Bremen.
 				</p>
 			</span>
@@ -164,11 +164,8 @@ const headings = [
 		.hero--section {
 			display: flex;
 			align-items: center;
+			margin-block: clamp(4rem, 13vh, 8rem);
 			max-width: 50ch;
-		}
-
-		.hero--section-content-wrapper {
-			padding-block: clamp(4rem, 13vh, 8rem);
 		}
 
 		section {
@@ -191,8 +188,8 @@ const headings = [
 		}
 
 		@media (max-width: 768px) {
-			.hero--section-content-wrapper {
-				padding-block: clamp(4rem, 10vh, 8rem);
+			.hero--section {
+				margin-block: clamp(4rem, 10vh, 8rem);
 			}
 
 			section {

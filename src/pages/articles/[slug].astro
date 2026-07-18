@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 	const headings = await getHeadingsRender(blogEntries);
 
 	return blogEntries.map((entry, index) => ({
-		params: { slug: entry.slug },
+		params: { slug: entry.id },
 		props: { entry, headings: headings[index] },
 	}));
 }
@@ -24,7 +24,7 @@ const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { da
 <Posts entryCollection={entry.collection} {...entry.data} {headings}>
 	<header>
 		<div class="header-inner-wrapper">
-			<h1 id={entry.slug}>{entry.data.title}</h1>
+			<h1 id={entry.id}>{entry.data.title}</h1>
 			<span hidden class="course-data color-text-low-contrast">
 				<span>
 					<span class="sr-only">Published on:</span>
@@ -38,5 +38,3 @@ const date = new Date(entry.data.datePublished).toLocaleDateString('en-US', { da
 	</header>
 	<Content />
 </Posts>
-
-<style lang="css"></style>

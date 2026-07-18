@@ -35,7 +35,7 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 			<ul>
 				{sortedEntries.map((entry) => (
 					<li>
-						<a href={`/${entry.collection}/${entry.slug}`} aria-label={entry.data.description}>
+						<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description}>
 							{entry.data.title}
 						</a>
 					</li>

@@ -7,7 +7,7 @@ export async function getHeadingsRender(entries: CollectionEntry<CollectionKey>[
             render(entry).then((data) => {
                 const headings = data.headings;
                 // Add the title of the page manually, because they are not part of the .md files
-                headings.unshift({ depth: 1, text: entry.data.title, slug: entry.slug });
+                headings.unshift({ depth: 1, text: entry.data.title, slug: entry.id });
                 return data.headings;
             }),
         ),
