@@ -1,17 +1,12 @@
 import { defineConfig } from 'astro/config';
-
-// https://astro.build/config
 import svelte from '@astrojs/svelte';
-
-// https://astro.build/config
 import mdx from '@astrojs/mdx';
-
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { autolinkConfig } from './plugins/rehype-autolink-config';
-import vercel from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel';
+import { unified } from '@astrojs/markdown-remark';
 
-// https://astro.build/config
 export default defineConfig({
     adapter: vercel({
         webAnalytics: {
@@ -20,25 +15,22 @@ export default defineConfig({
     }),
     site: 'https://kaimagnus.de/',
     integrations: [svelte(), mdx()],
+    compressHTML: true, //prevent spaces between inline elements from being deleted
     vite: {
         plugins: [],
     },
-
-    compressHTML: false,
     devToolbar: {
         enabled: false,
     },
-
     image: {
         remotePatterns: [{ protocol: 'https' }],
     },
-
     markdown: {
+        processor: unified({ rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, autolinkConfig]] }), //possibly remove this?
         shikiConfig: {
             wrap: false,
             theme: 'github-dark',
             defaultColor: false,
         },
-        rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, autolinkConfig]],
     },
 });

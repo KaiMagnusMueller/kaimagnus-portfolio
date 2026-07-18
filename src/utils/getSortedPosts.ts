@@ -1,4 +1,4 @@
-import { collections } from '@content/config';
+import { collections } from '@content.config';
 import type { CollectionEntry } from 'astro:content';
 
 const getSortedPosts = (posts: CollectionEntry<'articles' | 'projects'>[]) =>

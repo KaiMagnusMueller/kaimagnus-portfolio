@@ -32,7 +32,7 @@ const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: navTitle }];
 		{
 			entriesSorted.map((elem) => (
 				<li>
-					<a href={`/${elem.collection}/${elem.slug}`}>
+					<a href={`/${elem.collection}/${elem.id}`}>
 						<p>{elem.data.title}</p>
 						<span>
 							{elem.data.datePublished.toLocaleDateString('en-US', { dateStyle: 'long' }).toString()}

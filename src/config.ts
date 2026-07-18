@@ -1,5 +1,3 @@
-import type { SocialObjects } from './types';
-
 export const SITE = {
     // website: 'https://www.kaimagnus.de/',
     author: 'Kai Magnus Müller',
@@ -9,12 +7,3 @@ export const SITE = {
     ogImage: '',
     lightAndDarkMode: true,
 };
-
-export const SOCIALS: SocialObjects = [
-    {
-        name: 'Github',
-        href: 'https://github.com/kaimagnusmueller',
-        linkTitle: ` ${SITE.title} on Github`,
-        active: true,
-    },
-];
