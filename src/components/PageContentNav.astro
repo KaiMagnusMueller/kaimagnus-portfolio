@@ -68,7 +68,7 @@ const { headings } = Astro.props;
 					}
 				});
 			},
-			{ root: null, rootMargin: '0px', threshold: 0.5 }
+			{ root: null, rootMargin: '0px', threshold: 0.5 },
 		);
 
 		document.querySelectorAll('h1[id], h2[id], h3[id], h4[id]').forEach((heading) => {
@@ -98,7 +98,7 @@ const { headings } = Astro.props;
 			transition: 0.2s all ease-in-out;
 			background: linear-gradient(to left, var(--bg-color-elev-0) 35%, transparent);
 			width: 500%;
-			// max-width: 500px;
+			/* max-width: 500px; */
 			height: 100%;
 			pointer-events: none;
 			content: '';
@@ -135,8 +135,8 @@ const { headings } = Astro.props;
 		}
 
 		&::before {
-			opacity: 1;
 			visibility: visible;
+			opacity: 1;
 		}
 
 		a::after {
