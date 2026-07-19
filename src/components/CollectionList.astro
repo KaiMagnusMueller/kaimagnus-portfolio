@@ -4,11 +4,10 @@ import type { CollectionEntry } from 'astro:content';
 export interface Props {
 	title?: string;
 	entries: CollectionEntry<'projects' | 'articles' | 'work'>[];
-	ariaDetails?: string;
 	id?: string;
 }
 
-const { title, entries, ariaDetails, id } = Astro.props;
+const { title, entries, id } = Astro.props;
 
 const sortedEntries = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
 
@@ -32,15 +31,40 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 
 			<slot />
 
-			<ul>
-				{sortedEntries.map((entry) => (
-					<li>
-						<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description}>
-							{entry.data.title}
-						</a>
-					</li>
-				))}
-			</ul>
+			<div class="post-list--scroll">
+				<table>
+					<colgroup>
+						<col class="col-title" />
+						<col class="col-date" />
+						<col class="col-tags" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">Title</th>
+							<th scope="col">Date</th>
+							<th scope="col">Tags</th>
+						</tr>
+					</thead>
+					<tbody>
+						{sortedEntries.map((entry) => (
+							<tr>
+								<td>
+									<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description}>
+										{entry.data.title}
+									</a>
+								</td>
+								<td class="color-text-low-contrast">
+									{entry.data.datePublished.toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+									})}
+								</td>
+								<td class="color-text-low-contrast">{entry.data.tags.filter(Boolean).join(', ')}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	)
 }
@@ -52,13 +76,8 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 </style>
 
 <style lang="css">
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
 	h2 {
+		margin: 0.3rem 0;
 		font-size: inherit;
 
 		a {
@@ -66,22 +85,69 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 		}
 	}
 
-	li,
-	h2 {
-		margin: 0.3rem 0;
+	.post-list--scroll {
+		overflow-x: auto;
 	}
 
-	a {
-		display: inline-block;
-		text-decoration: none;
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		table-layout: fixed;
+		white-space: nowrap;
+	}
 
-		&:hover {
-			text-decoration: revert;
-		}
+	.col-title {
+		width: 50ch;
+	}
+
+	.col-date {
+		width: 160px;
+	}
+
+	.col-tags {
+		/* width: 50%; */
+	}
+
+	thead {
+		display: none;
+	}
+
+	th,
+	td {
+		border: none;
+		border-block-end: 1px solid var(--border-color-transparent);
+		padding: 0.4rem 1.4rem 0.4rem 0rem;
+		overflow: hidden;
+		font-weight: 400;
+		text-align: left;
+		text-overflow: ellipsis;
+	}
+
+	th:last-child,
+	td:last-child {
+		padding-inline-end: 0;
+	}
+
+	th {
+		color: var(--text-color-low-contrast);
+		/* font-size: var(--font-size-small); */
+	}
+
+	td:nth-of-type(2) {
+		text-align: right;
+	}
+
+	td a {
+		text-decoration: none;
+	}
+
+	td a:hover {
+		text-decoration: underline;
 	}
 
 	@media (pointer: coarse) {
-		a {
+		td a {
+			display: inline-block;
 			padding-block: 0.125rem;
 		}
 	}

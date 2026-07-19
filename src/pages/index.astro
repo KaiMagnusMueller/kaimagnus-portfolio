@@ -53,21 +53,17 @@ const headings = [
 					>,
 				</h1>
 				<p>
-					a product designer and developer, currently at Sopea, where I drive product design, management and
-					growth. Previously I led design for <a href="/work/epic-designing-internal-applications"
-						>insurance and investment</a
-					>
-					applications and <a href="/work/grid-component-system">design systems</a>
-					at <a href="https://www.kaiser-x.com">Allianz</a>.
+					a product designer and developer. I specialize in designing complex systems, tools for experts and
+					form close relationships with developers through my deep technical understanding.
 				</p>
 				<p
-					>I also teach Interactive Communications Systems at <a href="https://www.hfg-gmuend.de/"
-						>HfG Schwäbisch Gmünd</a
-					> and develop small hobby projects, like
+					>Currently I’m at Sopea, where I drive product design, strategy and growth for HR products. I also
+					teach at <a href="https://www.hfg-gmuend.de/">HfG Schwäbisch Gmünd</a> and develop small hobby projects,
+					like
 					<a href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a> and <a
 						href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a
-					> for Figma.
-				</p>
+					> for Figma.</p
+				>
 			</div>
 		</div>
 
@@ -94,31 +90,20 @@ const headings = [
 
 		<section>
 			<!-- Featured means noteworthy -->
-			<CollectionList
-				id="highlights"
-				title="Highlights"
-				ariaDetails="Noteworthy projects and articles"
-				entries={featured}
-			/>
+			<CollectionList id="highlights" title="Highlights" entries={featured} />
 		</section>
 
 		<section>
 			<!-- WORK -->
-			<!-- <div class="insert-text color-text-low-contrast">
-                <p class="">
-                    During my work at Syncier and Kaiser X Labs, I worked on a number of investment management
-                    applications for <a href="https://www.idsdata.com/solutions/de/esg/">IDS</a> as designer and design lead
-                    and was part of an in-house innovation lab.
-                </p>
-                <p>
-                    I also love to tinker, improve my workflow and make my MacBook work for me. Some of the results even
-                    made it here:
-                </p>
-            </div> -->
-			<span class="insert-text">
+			<div class="insert-text">
 				<p
-					>Before Allianz, I spent some time at <a href="https://www.intuity.de/">Intuity</a> and <a
-						href="https://web.archive.org/web/20181229164945/http://precious-forever.com/">Precious</a
+					>Previously I led design for <a href="/work/epic-designing-internal-applications"
+						>insurance and investment</a
+					>
+					applications and <a href="/work/grid-component-system">design systems</a>
+					at <a href="https://www.kaiser-x.com">Allianz</a>. Before Allianz, I spent some time at <a
+						href="https://www.intuity.de/">Intuity</a
+					> and <a href="https://web.archive.org/web/20181229164945/http://precious-forever.com/">Precious</a
 					>, where I worked on fleet management applications and point of sale terminals.
 				</p>
 				<p>
@@ -128,17 +113,16 @@ const headings = [
 					experimental platform for knowledge management to explore how computers can help us think and
 					create.
 				</p>
-			</span>
-			<CollectionList id="work" title="Professional Work" ariaDetails="Professional projects" entries={work} />
+			</div>
+			<CollectionList id="work" title="Professional Work" entries={work} />
 		</section>
 		<section>
 			<!-- POSTS -->
-			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 			<CollectionList id="writing" title="Writing" entries={articles} />
 		</section>
 		<section>
 			<!-- UNIVERSITY -->
-			<span class="insert-text">
+			<div class="insert-text">
 				<p>
 					While studying, I wrote a bachelor thesis about <a href="projects/destinations"
 						>building wayfinding systems</a
@@ -154,7 +138,7 @@ const headings = [
 						100 Prozent Baumwolle</a
 					> at Übersee-Museum Bremen.
 				</p>
-			</span>
+			</div>
 			<!-- https://archive.is/3R3EH -->
 			<CollectionList id="projects" title="University Projects" entries={universityProjects} />
 		</section>
@@ -170,11 +154,14 @@ const headings = [
 
 		section {
 			margin-block-start: 8rem;
-			max-width: 50ch;
 		}
 
 		section:first-of-type {
 			margin-block-start: 0;
+		}
+
+		.insert-text {
+			max-width: 50ch;
 		}
 
 		section .insert-text p {
