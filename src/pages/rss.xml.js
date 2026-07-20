@@ -5,7 +5,7 @@ import sanitizeHtml from 'sanitize-html';
 import MarkdownIt from 'markdown-it';
 const parser = new MarkdownIt();
 
-export async function get(context) {
+export async function GET(context) {
     const projects = await getCollection('projects', ({ data }) => !data.draft);
     const articles = await getCollection('articles', ({ data }) => !data.draft);
 
@@ -17,9 +17,9 @@ export async function get(context) {
     );
 
     let _items = _blog.map((elem) => ({
-        link: elem.collection + '/' + elem.slug,
+        link: elem.collection + '/' + elem.id,
         title: elem.data.title,
-        author: 'author@example.org (' + elem.data.author + ')',
+        author: elem.data.author,
         description: elem.data.description,
         pubDate: new Date(elem.data.datePublished),
         content:
@@ -28,7 +28,7 @@ export async function get(context) {
             '<a href="' +
             elem.collection +
             '/' +
-            elem.slug +
+            elem.id +
             '">View the full post here -></a>',
         ...elem.data,
     }));
