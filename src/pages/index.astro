@@ -30,6 +30,8 @@ const headings = [
 	{ text: 'Writing', depth: 2, slug: 'writing' },
 	{ text: 'University Projects', depth: 2, slug: 'projects' },
 ];
+
+// My technical background allows me to prototype, ship, and speak the same language as the developers in my team.
 ---
 
 <Layout pageTitle={SITE.title} pageDescr={SITE.desc}>
@@ -53,97 +55,49 @@ const headings = [
 					>,
 				</h1>
 				<p>
-					a product designer and developer, currently at Sopea, where I drive product design, management and
-					growth. Previously I led design for <a href="/work/epic-designing-internal-applications"
-						>insurance and investment</a
-					>
-					applications and <a href="/work/grid-component-system">design systems</a>
-					at <a href="https://www.kaiser-x.com">Allianz</a>.
+					a product designer and developer who specializes in complex systems and tools for experts. At Sopea
+					I drive design, strategy and growth for a suite of HR products and use my coding skills to develop
+					prototypes and collaborate with developers.
 				</p>
 				<p
-					>I also teach Interactive Communications Systems at <a href="https://www.hfg-gmuend.de/"
-						>HfG Schwäbisch Gmünd</a
-					> and develop small hobby projects, like
-					<a href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a> and <a
-						href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a
-					> for Figma.
-				</p>
+					>I also teach Interaction Design at <a href="https://www.hfg-gmuend.de/">HfG Schwäbisch Gmünd</a> and
+					led design for <a href="/work/epic-designing-internal-applications">insurance and investment</a>
+					applications and <a href="/work/grid-component-system">design systems</a>
+					at <a href="https://www.kaiser-x.com">Allianz</a>.</p
+				>
 			</div>
 		</div>
-
-		<!-- <aside class="quick-links">
-			<a href="/project-timeline">
-				<div class="link-card text-regular">
-					<h2>Project Timeline Visualization</h2>
-					<p class="color-text-low-contrast">A visual timeline of my past and current projects</p>
-				</div>
-			</a>
-			<a href="https://www.figma.com/community/plugin/1229905434435887252/">
-				<div class="link-card text-regular">
-					<h2>Tree Navigator</h2>
-					<p class="color-text-low-contrast">Download for Figma</p>
-				</div>
-			</a>
-			<a href="https://www.figma.com/community/plugin/1229905434435887252/">
-				<div class="link-card text-regular">
-					<h2>Tree Navigator</h2>
-					<p class="color-text-low-contrast">Download for Figma</p>
-				</div>
-			</a>
-		</aside> -->
-
 		<section>
 			<!-- Featured means noteworthy -->
-			<CollectionList
-				id="highlights"
-				title="Highlights"
-				ariaDetails="Noteworthy projects and articles"
-				entries={featured}
-			/>
+			<CollectionList id="highlights" title="Highlights" entries={featured} />
 		</section>
 
 		<section>
 			<!-- WORK -->
-			<!-- <div class="insert-text color-text-low-contrast">
-                <p class="">
-                    During my work at Syncier and Kaiser X Labs, I worked on a number of investment management
-                    applications for <a href="https://www.idsdata.com/solutions/de/esg/">IDS</a> as designer and design lead
-                    and was part of an in-house innovation lab.
-                </p>
-                <p>
-                    I also love to tinker, improve my workflow and make my MacBook work for me. Some of the results even
-                    made it here:
-                </p>
-            </div> -->
-			<span class="insert-text">
-				<p
-					>Before Allianz, I spent some time at <a href="https://www.intuity.de/">Intuity</a> and <a
-						href="https://web.archive.org/web/20181229164945/http://precious-forever.com/">Precious</a
-					>, where I worked on fleet management applications and point of sale terminals.
-				</p>
+			<div class="insert-text">
 				<p>
-					Whenever I get that creative itch, I am working on projects under the banner of <a
-						href="https://intersectionslab.com/">Intersections Lab</a
-					>, for example <a href="https://collections-prototype.intersectionslab.com/">Collections</a>, an
+					Whenever I get that creative itch, I develop small hobby projects, like
+					<a href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a> and <a
+						href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a
+					> for Figma, or <a href="https://collections-prototype.intersectionslab.com/">Collections</a>, an
 					experimental platform for knowledge management to explore how computers can help us think and
 					create.
 				</p>
-			</span>
-			<CollectionList id="work" title="Professional Work" ariaDetails="Professional projects" entries={work} />
+			</div>
+			<CollectionList id="work" title="Professional Work" entries={work} />
 		</section>
 		<section>
 			<!-- POSTS -->
-			<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 			<CollectionList id="writing" title="Writing" entries={articles} />
 		</section>
 		<section>
 			<!-- UNIVERSITY -->
-			<span class="insert-text">
+			<div class="insert-text">
 				<p>
 					While studying, I wrote a bachelor thesis about <a href="projects/destinations"
 						>building wayfinding systems</a
 					>, designed a <a href="/projects/halo">browser built for research</a> (which inspired <a
-						href="https://app.intersectionslab.com">Collections</a
+						href="https://collections-prototype.intersectionslab.com/">Collections</a
 					>), and went to Japan.
 				</p>
 				<p>
@@ -154,7 +108,7 @@ const headings = [
 						100 Prozent Baumwolle</a
 					> at Übersee-Museum Bremen.
 				</p>
-			</span>
+			</div>
 			<!-- https://archive.is/3R3EH -->
 			<CollectionList id="projects" title="University Projects" entries={universityProjects} />
 		</section>
@@ -170,11 +124,14 @@ const headings = [
 
 		section {
 			margin-block-start: 8rem;
-			max-width: 50ch;
 		}
 
 		section:first-of-type {
 			margin-block-start: 0;
+		}
+
+		.insert-text {
+			max-width: 50ch;
 		}
 
 		section .insert-text p {
