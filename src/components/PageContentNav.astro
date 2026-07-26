@@ -123,6 +123,7 @@ const { headings } = Astro.props;
 	#page-toc-container:has(ul:hover) {
 		div {
 			transform: translate(0);
+			pointer-events: auto;
 		}
 
 		span {
@@ -180,6 +181,7 @@ const { headings } = Astro.props;
 			transition: 0.5s all cubic-bezier(0.165, 0.84, 0.44, 1);
 			margin-inline-end: -0.5rem;
 			color: transparent;
+			pointer-events: none;
 		}
 
 		div,
@@ -225,6 +227,8 @@ const { headings } = Astro.props;
 			}
 		}
 	}
+
+
 
 	@media (max-width: 768px) {
 		#page-toc-container {

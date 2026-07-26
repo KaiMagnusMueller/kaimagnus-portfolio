@@ -31,39 +31,27 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 
 			<slot />
 
-			<div class="post-list--scroll">
-				<table>
-					<colgroup>
-						<col class="col-title" />
-						<col class="col-date" />
-						<col class="col-tags" />
-					</colgroup>
-					<thead>
-						<tr>
-							<th scope="col">Title</th>
-							<th scope="col">Date</th>
-							<th scope="col">Tags</th>
-						</tr>
-					</thead>
-					<tbody>
-						{sortedEntries.map((entry) => (
-							<tr>
-								<td>
-									<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description}>
-										{entry.data.title}
-									</a>
-								</td>
-								<td class="color-text-low-contrast">
-									{entry.data.datePublished.toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: 'long',
-									})}
-								</td>
-								<td class="color-text-low-contrast">{entry.data.tags.filter(Boolean).join(', ')}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+			<div>
+				<div class="post-table">
+					{sortedEntries.map((entry) => (
+						<div class="post-table-row">
+							<span class="post-table-cell cell-title">
+								<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description}>
+									{entry.data.title}
+								</a>
+							</span>
+							<span class="post-table-cell color-text-low-contrast cell-date">
+								{entry.data.datePublished.toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: 'long',
+								})}
+							</span>
+							<span class="post-table-cell color-text-low-contrast cell-tags">
+								{entry.data.tags.filter(Boolean).join(', ')}
+							</span>
+						</div>
+					))}
+				</div>
 			</div>
 		</div>
 	)
@@ -85,70 +73,74 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 		}
 	}
 
-	.post-list--scroll {
-		overflow-x: auto;
-	}
-
-	table {
-		border-collapse: collapse;
+	.post-table {
+		display: grid;
+		grid-template-columns: 1fr 160px 1fr;
 		width: 100%;
-		table-layout: fixed;
-		white-space: nowrap;
 	}
 
-	.col-title {
-		width: 50ch;
+	.post-table-row {
+		display: contents;
 	}
 
-	.col-date {
-		width: 160px;
-	}
-
-	.col-tags {
-		/* width: 50%; */
-	}
-
-	thead {
-		display: none;
-	}
-
-	th,
-	td {
-		border: none;
+	.post-table-cell {
 		border-block-end: 1px solid var(--border-color-transparent);
 		padding: 0.4rem 1.4rem 0.4rem 0rem;
 		overflow: hidden;
 		font-weight: 400;
 		text-align: left;
 		text-overflow: ellipsis;
+
+		a {
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
 	}
 
-	th:last-child,
-	td:last-child {
+	.post-table-cell:last-child {
 		padding-inline-end: 0;
 	}
 
-	th {
-		color: var(--text-color-low-contrast);
-		/* font-size: var(--font-size-small); */
-	}
-
-	td:nth-of-type(2) {
+	.cell-date {
 		text-align: right;
 	}
 
-	td a {
-		text-decoration: none;
-	}
-
-	td a:hover {
-		text-decoration: underline;
-	}
-
 	@media (pointer: coarse) {
-		td a {
+		.post-table-cell a {
 			display: inline-block;
 			padding-block: 0.125rem;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.post-table {
+			grid-template-columns: 2fr minmax(min-content, auto);
+		}
+
+		.cell-date {
+			padding-inline-end: 0;
+		}
+
+		.cell-tags {
+			display: none;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.post-table {
+			grid-template-columns: 1fr;
+		}
+
+		.cell-title {
+			padding-inline-end: 0;
+		}
+
+		.cell-date,
+		.cell-tags {
+			display: none;
 		}
 	}
 </style>
