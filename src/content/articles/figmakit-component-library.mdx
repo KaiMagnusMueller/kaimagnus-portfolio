@@ -8,28 +8,24 @@ tags:
     - Component Library
     - Plugin Development
 ogImage: ''
-description: Learn how I built FigmaKit, a comprehensive Svelte component library that replicates Figma's native UI, and how it powers ContentKit and other plugin projects.
+description: Learn how I built FigmaKit, a Svelte component library that replicates Figma's native UI, and how it powers my plugin projects.
 ---
 
 import Figure from '@components/Figure.astro';
 
-While building [ContentKit](/work/contentkit-a-platform-for-design-automation) over the past year, I also built a component library alongside it. It is a modernized and extended version of [figma-plugin-ds-svelte](https://github.com/thomas-lowry/figma-plugin-ds-svelte), a library created by Thomas Lowry (designer advocate at Figma), which I've used in plugins like [Tree Navigator](using-the-tree-navigator-plugin) before.
+FigmaKit is a modernized and extended version of [figma-plugin-ds-svelte](https://github.com/thomas-lowry/figma-plugin-ds-svelte), a library created by Thomas Lowry (designer advocate at Figma), which I've used in plugins like [Tree Navigator](using-the-tree-navigator-plugin) before.
 
 You can find the library on npm as [figmakit-plugin-ui-svelte](https://www.npmjs.com/package/figmakit-plugin-ui-svelte) and on GitHub at [KaiMagnusMueller/figmakit-plugin-ui](https://www.github.com/KaiMagnusMueller/figmakit-plugin-ui). A demo page is available at [https://kaimagnusmueller.github.io/figmakit-plugin-ui/](https://kaimagnusmueller.github.io/figmakit-plugin-ui/), where you can see all components in action.
 
 ## Introduction
 
-If you've used Figma plugins extensively, you've probably noticed how inconsistent their interfaces can be. Some plugins feel native and integrated, some look decent with minor inconsistencies, while others feel like they were built with random components and dropped into Figma. This creates aesthetic inconsistency, but sometimes basic functionality is broken as well, leading to a poor user experience.
+If you've used Figma plugins before, you've probably noticed how inconsistent their interfaces can be. Some plugins feel native and integrated, some look decent with minor inconsistencies, while others feel like they were built with random components and dropped into Figma. To improve this aesthetic inconsistency, and to provide a baseline of basic functionality I started building this library.
 
-When I started building ContentKit, I initially used basic HTML elements and a small stylesheet to make them look like Figma's new UI. While that worked in the beginning for testing basic functionality, ContentKit quickly required more complex UI elements that weren't possible with CSS alone.
-
-Additionally, I actually wanted to build two things: a web app and a plugin. From that perspective, it was only logical for them to share the same Svelte 5 base, which led me to take figma-plugin-ds-svelte and use it as a starting point for my own library based on Svelte 5 and UI3.
-
-So my goals for this library were: a look and feel close to Figma's native UI3 and lightweight but complete components, using modern Svelte 5.
+My goals for this library were: a look and feel close to Figma's native UI3 and lightweight but complete components, using modern Svelte 5.
 
 ## Building FigmaKit
 
-FigmaKit uses a very similar prop structure as the original library, so many components are drop-in replacements. However, some components have been extended or modified for consistency.
+FigmaKit uses a very similar prop structure as the original library, so many components are drop-in replacements. However, some components have been extended or modified for consistency with Figma.
 
 The `SelectMenu` has been replaced with the more powerful `MultiMenu`, which now supports grouping and nesting of options. There are also new components, like the `ToggleButton` and `Dialog`.
 
@@ -76,7 +72,7 @@ The new `MultiMenu` is FigmaKit's most complex component. It is an improved vers
 <MultiMenu groups={menuGroups} showSelectedValues/>
 ```
 
-While building ContentKit, I needed dropdown menus that could handle complex hierarchies with nested groups, which turned out to be quite a challenge. In the end, I settled on an architecture of `menuGroup` objects that contain `menuOption` or nested `menuGroup` objects. Nested `menuGroups` create their own nested popovers that are positioned next to the parent menu, just like how context menus behave in other apps.
+I also needed dropdown menus that could handle complex hierarchies with nested groups, which turned out to be quite a challenge. In the end, I settled on an architecture of `menuGroup` objects that contain `menuOption` or nested `menuGroup` objects. Nested `menuGroups` create their own nested popovers that are positioned next to the parent menu, just like how context menus behave in other apps.
 
 ```javascript
 const menuGroups = [
@@ -122,6 +118,8 @@ Of course SwiftUI works very differently, but the nested menu structure is simil
 Along the way, I also had to wrap my head around recursion. The `MultiMenu` consists of multiple `Snippets` that are organized like this: `popoverContainer` → `menuGroup` → `menuElement`. The recursive magic happens in the `menuElement`: Based on whether the `menuElement` has children or not, it decides to either render the final menu option or render a new `popoverContainer`, which makes the whole process start again in a new popover.
 
 Now this looks deceivingly simple, but handling the positioning, visibility, and interaction between multiple open popovers was quite a challenge.
+
+This could also be handled in a more declarative way with Svelte's `{#snippet}` blocks and separate components for items, groups and so on, but for now I opted for a configuration prop approach, which I feel is simpler.
 
 ### Dialog
 
