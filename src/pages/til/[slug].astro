@@ -17,11 +17,9 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 
 const date = entry.data.datePublished.toLocaleDateString('en-US', { dateStyle: 'long' });
-// TILs are short, so no table of contents beyond the title
-const headings = [{ depth: 1, text: entry.data.title, slug: entry.id }];
 ---
 
-<Posts entryCollection={entry.collection} {...entry.data} description={entry.data.description ?? entry.data.title} {headings}>
+<Posts entryCollection={entry.collection} {...entry.data} description={entry.data.description ?? entry.data.title}>
 	<header>
 		<div class="header-inner-wrapper">
 			<h1 id={entry.id}>{entry.data.title}</h1>
