@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@config';
+import { SITE, COLLECTIONS } from '@config';
 import Layout from '@layouts/Layout.astro';
 import Navigation from '@components/Navigation.astro';
 import TilEntry from '@components/TilEntry.astro';
@@ -19,10 +19,10 @@ export async function getStaticPaths() {
 const { tag } = Astro.params;
 const { tags, entries } = Astro.props;
 
-const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { href: '/til', label: 'TIL' }, { label: `#${tag}` }];
+const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { href: '/til', label: COLLECTIONS.til.navTitle }, { label: `#${tag}` }];
 ---
 
-<Layout pageTitle={`#${tag} – Today I Learned from ${SITE.titleShort}`} pageDescr={`Things I learned about ${tag}.`}>
+<Layout pageTitle={`#${tag} – ${COLLECTIONS.til.title} from ${SITE.titleShort}`} pageDescr={`Things I learned about ${tag}.`}>
 	<Navigation {breadcrumbs} />
 	<main class="til-page color-text">
 		<header>

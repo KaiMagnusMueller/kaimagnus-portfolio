@@ -1,16 +1,15 @@
 ---
-import { SITE } from '@config';
+import { COLLECTIONS } from '@config';
 import Layout from './Layout.astro';
 import Navigation from '@components/Navigation.astro';
 import { getCollection } from 'astro:content';
 
 export interface Props {
-	navTitle: string;
-	pageTitle: string;
 	collectionName: 'articles' | 'work' | 'projects';
 }
 
-const { navTitle, pageTitle, collectionName } = Astro.props;
+const { collectionName } = Astro.props;
+const { navTitle, title } = COLLECTIONS[collectionName];
 
 const entries = await getCollection(collectionName, ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
@@ -25,7 +24,7 @@ const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: navTitle }];
 <Navigation {breadcrumbs} />
 <main class="list-page color-text">
 	<div>
-		<h1 class="text-huge">{pageTitle}</h1>
+		<h1 class="text-huge">{title}</h1>
 		<!-- <p class="insert-text color-text-low-contrast">Sometimes I write about what's on my mind. Sometimes…</p> -->
 	</div>
 	<ul>

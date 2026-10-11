@@ -3,9 +3,11 @@ import Layout from './Layout.astro';
 import PageContentNav from '@components/PageContentNav.astro';
 import Navigation from '@components/Navigation.astro';
 import type { MarkdownHeading } from 'astro';
+import type { CollectionKey } from 'astro:content';
+import { COLLECTIONS } from '@config';
 
 export interface Props {
-	entryCollection: string;
+	entryCollection: CollectionKey;
 	headings: MarkdownHeading[];
 	[key: string]: any;
 }
@@ -14,10 +16,9 @@ const { entryCollection, headings, ...props } = Astro.props;
 
 // Build breadcrumbs array
 const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }];
-const collectionLabels: Record<string, string> = { til: 'TIL' };
 
 if (entryCollection !== undefined) {
-	breadcrumbs.push({ href: `/${entryCollection}`, label: collectionLabels[entryCollection] ?? entryCollection });
+	breadcrumbs.push({ href: `/${entryCollection}`, label: COLLECTIONS[entryCollection].navTitle });
 }
 ---
 

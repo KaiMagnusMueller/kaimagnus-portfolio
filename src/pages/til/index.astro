@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@config';
+import { SITE, COLLECTIONS } from '@config';
 import Layout from '@layouts/Layout.astro';
 import Navigation from '@components/Navigation.astro';
 import TilEntry from '@components/TilEntry.astro';
@@ -9,16 +9,16 @@ import { getTils, getTilTags } from '@utils/getTils';
 const entries = await getTils();
 const tags = getTilTags(entries).map(({ tag }) => tag);
 
-const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: 'TIL' }];
+const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: COLLECTIONS.til.navTitle }];
 ---
 
 <Layout
-	pageTitle={'Today I Learned from ' + SITE.titleShort}
+	pageTitle={COLLECTIONS.til.title + ' from ' + SITE.titleShort}
 	pageDescr={'Small code snippets, facts and links I found interesting.'}>
 	<Navigation {breadcrumbs} />
 	<main class="til-page color-text">
 		<header>
-			<h1 class="text-huge">Today I Learned</h1>
+			<h1 class="text-huge">{COLLECTIONS.til.title}</h1>
 			<p class="color-text-low-contrast">Small code snippets, facts and links I found interesting.</p>
 			<TilTags {tags} />
 		</header>

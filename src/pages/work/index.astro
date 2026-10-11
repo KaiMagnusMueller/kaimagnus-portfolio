@@ -1,14 +1,12 @@
 ---
-import { SITE } from '@config';
+import { SITE, COLLECTIONS } from '@config';
 
 import Layout from '../../layouts/Layout.astro';
 import PostList from '../../layouts/PostList.astro';
-
-let pageTitle = 'Professional Work';
 ---
 
 <Layout
-	pageTitle={pageTitle + ' of ' + SITE.titleShort}
+	pageTitle={COLLECTIONS.work.title + ' of ' + SITE.titleShort}
 	pageDescr={'Browse all professional projects that I was part of in chronological order. This list is incomplete, reach out to discuss these and other projects in more detail.'}>
-	<PostList collectionName={'work'} navTitle="Work" pageTitle={pageTitle} />
+	<PostList collectionName={'work'} />
 </Layout>
