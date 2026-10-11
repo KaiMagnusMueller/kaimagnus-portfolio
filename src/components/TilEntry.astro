@@ -1,0 +1,76 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import TilTags from '@components/TilTags.astro';
+
+export interface Props {
+	entry: CollectionEntry<'til'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const date = entry.data.datePublished.toLocaleDateString('en-US', { dateStyle: 'long' });
+---
+
+<article class="til-entry">
+	<header>
+		<h2><a href={`/til/${entry.id}`}>{entry.data.title}</a></h2>
+		<div class="til-meta color-text-low-contrast">
+			<time datetime={entry.data.datePublished.toISOString()}>{date}</time>
+			<TilTags tags={entry.data.tags} />
+		</div>
+	</header>
+	<div class="post-content til-content">
+		<Content />
+	</div>
+	{
+		entry.data.link && (
+			<a class="til-link" href={entry.data.link}>
+				{new URL(entry.data.link).hostname} ↗
+			</a>
+		)
+	}
+</article>
+
+<style lang="css">
+	.til-entry {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		border-block-end: 1px solid var(--border-color-transparent);
+		padding-block: 2rem;
+	}
+
+	h2 {
+		margin: 0;
+		font-weight: 400;
+		font-size: var(--font-size-large);
+
+		a {
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.til-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 1rem;
+	}
+
+	.til-content :global(> :first-child) {
+		margin-block-start: 0;
+	}
+
+	.til-content :global(> :last-child) {
+		margin-block-end: 0;
+	}
+
+	.til-link {
+		width: fit-content;
+	}
+</style>

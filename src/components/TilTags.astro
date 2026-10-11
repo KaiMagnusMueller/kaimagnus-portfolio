@@ -1,0 +1,42 @@
+---
+export interface Props {
+	tags: string[];
+	active?: string;
+}
+
+const { tags, active } = Astro.props;
+---
+
+<ul class="til-tags">
+	{
+		tags.map((tag) => (
+			<li>
+				<a href={`/til/tags/${tag}`} aria-current={tag === active ? 'page' : undefined}>
+					#{tag}
+				</a>
+			</li>
+		))
+	}
+</ul>
+
+<style lang="css">
+	.til-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 0.75rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	a {
+		color: var(--text-color-low-contrast);
+		text-decoration: none;
+
+		&:hover,
+		&[aria-current='page'] {
+			color: inherit;
+			text-decoration: underline;
+		}
+	}
+</style>

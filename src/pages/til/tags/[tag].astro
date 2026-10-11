@@ -1,0 +1,58 @@
+---
+import { SITE } from '@config';
+import Layout from '@layouts/Layout.astro';
+import Navigation from '@components/Navigation.astro';
+import TilEntry from '@components/TilEntry.astro';
+import TilTags from '@components/TilTags.astro';
+import { getTils, getTilTags } from '@utils/getTils';
+
+export async function getStaticPaths() {
+	const entries = await getTils();
+	const tags = getTilTags(entries).map(({ tag }) => tag);
+
+	return tags.map((tag) => ({
+		params: { tag },
+		props: { tags, entries: entries.filter((entry) => entry.data.tags.includes(tag)) },
+	}));
+}
+
+const { tag } = Astro.params;
+const { tags, entries } = Astro.props;
+
+const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { href: '/til', label: 'TIL' }, { label: `#${tag}` }];
+---
+
+<Layout pageTitle={`#${tag} – Today I Learned from ${SITE.titleShort}`} pageDescr={`Things I learned about ${tag}.`}>
+	<Navigation {breadcrumbs} />
+	<main class="til-page color-text">
+		<header>
+			<h1 class="text-huge">#{tag}</h1>
+			<TilTags {tags} active={tag} />
+		</header>
+		<div>{entries.map((entry) => <TilEntry {entry} />)}</div>
+	</main>
+</Layout>
+
+<style lang="css">
+	header {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-block: 8rem 1rem;
+		max-width: 40rem;
+	}
+
+	h1 {
+		margin: 0;
+	}
+
+	main > div {
+		max-width: 40rem;
+	}
+
+	@media (max-width: 768px) {
+		header {
+			margin-block: 4rem 1rem;
+		}
+	}
+</style>

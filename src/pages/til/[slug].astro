@@ -1,0 +1,42 @@
+---
+import Posts from '@layouts/Posts.astro';
+import TilTags from '@components/TilTags.astro';
+import { render } from 'astro:content';
+import { getTils } from '@utils/getTils';
+
+export async function getStaticPaths() {
+	const entries = await getTils();
+
+	return entries.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const date = entry.data.datePublished.toLocaleDateString('en-US', { dateStyle: 'long' });
+// TILs are short, so no table of contents beyond the title
+const headings = [{ depth: 1, text: entry.data.title, slug: entry.id }];
+---
+
+<Posts entryCollection={entry.collection} {...entry.data} description={entry.data.description ?? entry.data.title} {headings}>
+	<header>
+		<div class="header-inner-wrapper">
+			<h1 id={entry.id}>{entry.data.title}</h1>
+			<span class="course-data color-text-low-contrast">
+				<time datetime={entry.data.datePublished.toISOString()}>{date}</time>
+				<TilTags tags={entry.data.tags} />
+			</span>
+		</div>
+	</header>
+	<Content />
+	{
+		entry.data.link && (
+			<p>
+				<a href={entry.data.link}>{new URL(entry.data.link).hostname} ↗</a>
+			</p>
+		)
+	}
+</Posts>

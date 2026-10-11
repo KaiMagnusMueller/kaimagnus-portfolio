@@ -1,0 +1,55 @@
+---
+import { SITE } from '@config';
+import Layout from '@layouts/Layout.astro';
+import Navigation from '@components/Navigation.astro';
+import TilEntry from '@components/TilEntry.astro';
+import TilTags from '@components/TilTags.astro';
+import { getTils, getTilTags } from '@utils/getTils';
+
+const entries = await getTils();
+const tags = getTilTags(entries).map(({ tag }) => tag);
+
+const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: 'TIL' }];
+---
+
+<Layout
+	pageTitle={'Today I Learned from ' + SITE.titleShort}
+	pageDescr={'Small code snippets, facts and links I found interesting.'}>
+	<Navigation {breadcrumbs} />
+	<main class="til-page color-text">
+		<header>
+			<h1 class="text-huge">Today I Learned</h1>
+			<p class="color-text-low-contrast">Small code snippets, facts and links I found interesting.</p>
+			<TilTags {tags} />
+		</header>
+		<div>{entries.map((entry) => <TilEntry {entry} />)}</div>
+	</main>
+</Layout>
+
+<style lang="css">
+	header {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-block: 8rem 1rem;
+		max-width: 40rem;
+	}
+
+	h1 {
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	main > div {
+		max-width: 40rem;
+	}
+
+	@media (max-width: 768px) {
+		header {
+			margin-block: 4rem 1rem;
+		}
+	}
+</style>

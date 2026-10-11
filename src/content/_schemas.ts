@@ -51,3 +51,18 @@ export const workSchema = z
     .strict();
 
 export type WorkFrontmatter = z.infer<typeof workSchema>;
+
+export const tilSchema = z
+    .object({
+        datePublished: z.date(),
+        title: z.string(),
+        draft: z.boolean().optional(),
+        // Lowercase slugs, used for /til/tags/[tag] pages
+        tags: z.array(z.string().regex(/^[a-z0-9-]+$/)).min(1),
+        description: z.string().optional(),
+        // For link posts: the external resource the note is about
+        link: z.url().optional(),
+    })
+    .strict();
+
+export type TilFrontmatter = z.infer<typeof tilSchema>;

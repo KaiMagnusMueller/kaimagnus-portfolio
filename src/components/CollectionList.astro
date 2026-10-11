@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
 	title?: string;
-	entries: CollectionEntry<'projects' | 'articles' | 'work'>[];
+	entries: CollectionEntry<'projects' | 'articles' | 'work' | 'til'>[];
 	id?: string;
 }
 
@@ -36,7 +36,7 @@ const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 					{sortedEntries.map((entry) => (
 						<div class="post-table-row">
 							<span class="post-table-cell cell-title">
-								<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description}>
+								<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description ?? entry.data.title}>
 									{entry.data.title}
 								</a>
 							</span>

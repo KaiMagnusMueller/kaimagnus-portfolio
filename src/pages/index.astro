@@ -6,6 +6,7 @@ import Layout from '../layouts/Layout.astro';
 import CollectionList from '@components/CollectionList.astro';
 import InlineIcon from '../components/InlineIcon.astro';
 import PageContentNav from '@components/PageContentNav.astro';
+import { getTils } from '@utils/getTils';
 
 const articles = await getCollection('articles', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
@@ -16,6 +17,8 @@ const universityProjects = await getCollection('projects', ({ data }) => {
 const work = await getCollection('work', ({ data }) => {
 	return import.meta.env.PROD ? data.draft !== true : true;
 });
+
+const latestTils = (await getTils()).slice(0, 5);
 
 let allEntries = [...universityProjects, ...articles, ...work];
 
@@ -28,6 +31,7 @@ const headings = [
 	{ text: 'Highlights', depth: 2, slug: 'highlights' },
 	{ text: 'Professional Work', depth: 2, slug: 'work' },
 	{ text: 'Writing', depth: 2, slug: 'writing' },
+	...(latestTils.length > 0 ? [{ text: 'Today I Learned', depth: 2, slug: 'til' }] : []),
 	{ text: 'University Projects', depth: 2, slug: 'projects' },
 ];
 
@@ -90,6 +94,13 @@ const headings = [
 			<!-- POSTS -->
 			<CollectionList id="writing" title="Writing" entries={articles} />
 		</section>
+		{
+			latestTils.length > 0 && (
+				<section>
+					<CollectionList id="til" title="Today I Learned" entries={latestTils} />
+				</section>
+			)
+		}
 		<section>
 			<!-- UNIVERSITY -->
 			<div class="insert-text">
