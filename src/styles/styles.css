@@ -6,10 +6,10 @@
     --bg-color-elev-0-negative: #242424;
     --bg-image: url(/200-20-5-monochrome.png);
 
-    --text-color: #100f0f;
-    --text-color-low-contrast: #666;
-    --text-color-lowest-contrast: #b3b3b3;
-    --text-color-negative: #e4e4e4;
+    --text-color: #131313;
+    --text-color-low-contrast: #727272;
+    --text-color-lowest-contrast: #8f8f8f;
+    /* --text-color-negative: #e4e4e4; */
 
     --link-color: #0c93ec;
     --link-color-visited: #840be0;
@@ -18,17 +18,20 @@
     --border-color-transparent: rgba(0, 0, 0, 0.15);
     --border-color-negative-secondary: #424242;
 
-    --color-highlight: #ffbb0b;
+    /* --color-highlight: #ffbb0b; */
 
     /* Layout & Components */
     --card-border-color: var(--border-color-transparent);
-    --card-bg-color: var(--bg-image), var(--bg-color-elev-1);
-    --card-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+    --card-bg-color: hsl(40, 33%, 99.5%);
+    --card-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.06), 0px 4px 12px 0px rgba(0, 0, 0, 0.08);
+    --card-shadow-raised: 0px 2px 4px 0px rgba(0, 0, 0, 0.06), 0px 16px 32px 0px rgba(0, 0, 0, 0.14);
     --border-radius-medium: 4px;
 
     /* Typography */
-    --font-stack: 'Charter', 'Cambria', 'Constantia', serif, system-ui;
+    --font-stack: system-ui, helvetica, sans-serif;
     --font-size-small: 0.875rem;
+    --font-size-regular: 1rem;
+    --font-size-medium: 1.25rem;
     --font-size-large: 1.75rem;
     --font-size-huge: 2.25rem;
 
@@ -46,7 +49,7 @@
         --bg-color-elev-0-negative: #fbfbf9;
 
         --text-color: #f2f2f2;
-        --text-color-low-contrast: #aaa;
+        --text-color-low-contrast: #979797;
         --text-color-lowest-contrast: #6b6b6b;
 
         --text-color-negative: #030303;
@@ -58,13 +61,26 @@
         --border-color-transparent: rgba(255, 255, 255, 0.2);
         --border-color-negative-secondary: #5e5e5e;
 
-        --card-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.55);
+        --card-bg-color: hsl(0, 0%, 13%);
+        --card-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.06) inset, 0px 4px 16px 0px rgba(0, 0, 0, 0.55);
+        --card-shadow-raised: 0px 1px 0px 0px rgba(255, 255, 255, 0.06) inset, 0px 20px 40px 0px rgba(0, 0, 0, 0.7);
     }
 
     img,
     video,
     iframe {
         filter: brightness(0.95);
+    }
+}
+
+/* Horizontal page padding, also used by elements that bleed to the screen edge */
+:root {
+    --page-gutter: clamp(1rem, 10vw, 10rem);
+}
+
+@media (max-width: 768px) {
+    :root {
+        --page-gutter: clamp(1rem, 4vw, 10rem);
     }
 }
 

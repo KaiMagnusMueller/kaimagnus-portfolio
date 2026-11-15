@@ -1,0 +1,49 @@
+---
+export interface Props {
+	id: string;
+	title: string;
+	href?: string;
+}
+
+const { id, title, href } = Astro.props;
+const hasBody = Astro.slots.has('default');
+---
+
+<section class="home-section">
+	<h2 class="color-text-low-contrast" {id}>{href ? <a {href}>{title}</a> : title}</h2>
+	{
+		hasBody && (
+			<div class="home-section-body">
+				<slot />
+			</div>
+		)
+	}
+</section>
+
+<style lang="css">
+	.home-section {
+		margin-block-start: 6rem;
+	}
+
+	h2 {
+		margin: 0 0 0.5rem;
+		font-weight: 400;
+		font-size: var(--font-size-regular);
+
+		a {
+			text-decoration: underline;
+			text-decoration-color: var(--text-color-lowest-contrast);
+			text-underline-offset: 0.2em;
+		}
+
+		a:hover {
+			text-decoration-color: currentColor;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.home-section {
+			margin-block-start: 4rem;
+		}
+	}
+</style>

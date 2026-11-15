@@ -1,0 +1,81 @@
+---
+import { SITE } from '@config';
+import Layout from '@layouts/Layout.astro';
+import Navigation from '@components/Navigation.astro';
+
+const breadcrumbs = [{ href: '/', label: 'Kai Magnus' }, { label: 'About' }];
+---
+
+<Layout pageTitle={'About ' + SITE.titleShort} pageDescr={'About me, my side projects and my time as a student.'}>
+	<Navigation {breadcrumbs} />
+	<main class="about-page color-text">
+		<header>
+			<h1 class="text-huge">About</h1>
+		</header>
+
+		<section>
+			<h2 class="color-text-low-contrast">Side Projects</h2>
+			<p>
+				Whenever I get that creative itch, I develop small hobby projects, like
+				<a href="https://www.figma.com/community/plugin/1229905434435887252/">Tree Navigator</a> and <a
+					href="https://www.figma.com/community/plugin/1289313190495880345">Icon Library Manager</a
+				> for Figma, or <a href="https://collections-prototype.intersectionslab.com/">Collections</a>, an
+				experimental platform for knowledge management to explore how computers can help us think and create.
+			</p>
+		</section>
+
+		<section>
+			<h2 class="color-text-low-contrast">University</h2>
+			<p>
+				While studying, I wrote a bachelor thesis about <a href="/projects/destinations"
+					>building wayfinding systems</a
+				>, designed a <a href="/projects/halo">browser built for research</a> (which inspired <a
+					href="https://collections-prototype.intersectionslab.com/">Collections</a
+				>), and went to Japan.
+			</p>
+			<p>
+				I also prototyped an <a href="/projects/aralsea">interactive exhibit</a> during my time as a student, and
+				we later developed an extended version for the exhibition
+				<a
+					href="https://www.uebersee-museum.de/ausstellungen/sonderausstellungen/vorschau/100-prozent-baumwolle/">
+					100 Prozent Baumwolle</a
+				> at Übersee-Museum Bremen.
+			</p>
+		</section>
+	</main>
+</Layout>
+
+<style lang="css">
+	main {
+		max-width: 40rem;
+	}
+
+	header {
+		margin-block: 8rem 1rem;
+	}
+
+	h1 {
+		margin: 0;
+	}
+
+	section {
+		margin-block-start: 3rem;
+	}
+
+	h2 {
+		margin: 0 0 0.5rem;
+		font-weight: 400;
+		font-size: var(--font-size-small);
+	}
+
+	p {
+		margin-block: 0 0.75em;
+		line-height: 1.5;
+	}
+
+	@media (max-width: 768px) {
+		header {
+			margin-block: 4rem 1rem;
+		}
+	}
+</style>

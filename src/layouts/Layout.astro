@@ -68,14 +68,14 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 	/* Page Layout */
 	html {
 		background: var(--bg-image), var(--bg-color-elev-0);
-		padding-inline: clamp(1rem, 10vw, 10rem);
+		padding-inline: var(--page-gutter);
 	}
 
 	body {
 		position: relative;
 		margin: auto;
 		max-width: 1184px;
-		font-size: 1.125rem;
+		font-size: 1rem;
 	}
 
 	/* Footer */
@@ -85,13 +85,6 @@ const currentPath = new URL(Astro.url.pathname, Astro.site?.href);
 		align-items: baseline;
 		gap: 0.6rem 2rem;
 		margin: 8rem 0 2rem;
-	}
-
-	/* Mobile Responsive */
-	@media (max-width: 768px) {
-		html {
-			padding-inline: clamp(1rem, 4vw, 10rem);
-		}
 	}
 
 	@media (max-width: 640px) {

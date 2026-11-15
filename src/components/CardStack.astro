@@ -1,0 +1,153 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCardImage } from '@utils/getCardImage';
+
+export interface Props {
+	entries: CollectionEntry<'projects' | 'articles' | 'work'>[];
+}
+
+const { entries } = Astro.props;
+
+// A random spot inside a circle (unit radius) and a tilt of up to ±6°.
+// These are the build-time defaults; the inline script below rolls new ones once per visit.
+function deal() {
+	const angle = Math.random() * 2 * Math.PI;
+	const distance = Math.sqrt(Math.random()); // sqrt spreads cards evenly over the area
+	return {
+		x: (Math.cos(angle) * distance).toFixed(3),
+		y: (Math.sin(angle) * distance).toFixed(3),
+		r: ((Math.random() * 2 - 1) * 6).toFixed(2),
+	};
+}
+
+const cards = entries
+	.map((entry) => ({ entry, image: getCardImage(entry) }))
+	.filter((card) => card.image);
+---
+
+<script is:inline>
+	// Runs before the pile is parsed: when coming back from another page of the site and the
+	// cards were already dealt in this tab, skip the animation. Reloads and visits from
+	// elsewhere deal again.
+	try {
+		const fromSite = document.referrer && new URL(document.referrer).origin === location.origin;
+		const reload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+		if (fromSite && !reload && sessionStorage.getItem('card-stack')) {
+			document.documentElement.classList.add('cards-dealt');
+		}
+	} catch {}
+</script>
+
+<div class="card-stack">
+	{
+		cards.map(({ entry, image }, i) => {
+			const { x, y, r } = deal();
+			return (
+				<a
+					class="stack-card"
+					href={`/${entry.collection}/${entry.id}`}
+					style={`--i: ${i}; --x: ${x}; --y: ${y}; --r: ${r}deg`}
+				>
+					<img src={image} alt={entry.data.title} width="280" height="220" decoding="async" />
+				</a>
+			);
+		})
+	}
+</div>
+
+<script is:inline>
+	// Deal and keep the result, so the pile looks the same when coming back without animation.
+	// The animation reads these values live, so it doesn't matter when exactly this runs.
+	(() => {
+		const cards = [...document.currentScript.previousElementSibling.querySelectorAll('.stack-card')];
+		let positions;
+		if (document.documentElement.classList.contains('cards-dealt')) {
+			try {
+				positions = JSON.parse(sessionStorage.getItem('card-stack'));
+			} catch {}
+		}
+		if (positions?.length !== cards.length) {
+			positions = cards.map(() => {
+				const angle = Math.random() * 2 * Math.PI;
+				const distance = Math.sqrt(Math.random());
+				return [Math.cos(angle) * distance, Math.sin(angle) * distance, (Math.random() * 2 - 1) * 6].map((n) =>
+					n.toFixed(3),
+				);
+			});
+			try {
+				sessionStorage.setItem('card-stack', JSON.stringify(positions));
+			} catch {}
+		}
+		cards.forEach((card, i) => {
+			const [x, y, r] = positions[i];
+			card.style.setProperty('--x', x);
+			card.style.setProperty('--y', y);
+			card.style.setProperty('--r', `${r}deg`);
+		});
+	})();
+</script>
+
+<style lang="css">
+	/* The pile fills the box it's given; cards and the circle they land in are sized
+	   from that box's shorter side, so the circle is always centered and fits */
+	.card-stack {
+		container-type: size;
+		position: relative;
+		height: 100%;
+	}
+
+	.stack-card {
+		--card-width: min(16rem, 48cqmin);
+		/* Card centers land in this circle; leave room so the cards stay inside the box */
+		--radius: calc(50cqmin - var(--card-width) * 0.55);
+
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: calc(-50% + var(--x) * var(--radius)) calc(-50% + var(--y) * var(--radius));
+		rotate: var(--r);
+		transition: scale 0.2s ease;
+		animation: deal 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) calc(0.2s + var(--i) * 0.12s) backwards;
+		box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+		border: 4px solid #fff;
+		border-radius: 8px;
+		background: #fff;
+		aspect-ratio: 28 / 22;
+		width: var(--card-width);
+		overflow: hidden;
+
+		img {
+			display: block;
+			border-radius: 4px;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		&:hover,
+		&:focus-visible {
+			z-index: 1;
+			scale: 1.05;
+		}
+	}
+
+	/* Only "from" is defined: each card flies in from below the screen, straight up from
+	   the pile's center and untilted, to its own position and rotation */
+	@keyframes deal {
+		from {
+			translate: -50% calc(-50% + 100vh);
+			rotate: 0deg;
+		}
+	}
+
+	:global(.cards-dealt) .stack-card {
+		animation: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.stack-card {
+			transition: none;
+			animation: none;
+		}
+	}
+</style>

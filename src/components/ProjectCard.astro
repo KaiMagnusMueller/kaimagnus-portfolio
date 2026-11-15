@@ -1,0 +1,83 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+	entry: CollectionEntry<'projects' | 'articles' | 'work'>;
+}
+
+const { entry } = Astro.props;
+const { title, ogImage } = entry.data;
+
+// Ask Cloudinary for a small, cropped version instead of the full-size original
+const image = ogImage?.includes('res.cloudinary.com')
+	? ogImage.replace('/upload/', '/upload/c_fill,g_auto,w_560,h_440,f_auto,q_auto/')
+	: ogImage;
+---
+
+<a class="project-card" href={`/${entry.collection}/${entry.id}`}>
+	<div class="project-card-image">
+		{image && <img src={image} alt="" loading="lazy" decoding="async" width="280" height="220" />}
+	</div>
+	<span class="project-card-title">{title}</span>
+</a>
+
+<style lang="css">
+	.project-card {
+		--rotation: 0deg;
+
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		gap: 0.6rem;
+		transform: rotate(var(--rotation)) translateY(var(--translation, 0));
+		transition:
+			transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1.2),
+			box-shadow 0.3s ease;
+		box-shadow: var(--card-shadow);
+		border: 1px solid var(--card-border-color);
+		border-radius: 1rem;
+		background: var(--card-bg-color);
+		padding: 0.5rem 0.5rem 0.5rem;
+		color: var(--text-color);
+		text-decoration: none;
+
+		&:hover,
+		&:focus-visible {
+			transform: rotate(0deg) translateY(-0.5rem) scale(1.04);
+			z-index: 1;
+			box-shadow: var(--card-shadow-raised);
+			color: var(--text-color);
+			text-decoration: none;
+		}
+	}
+
+	.project-card-image {
+		border-radius: 0.6rem;
+		background-color: var(--bg-color-elev-1);
+		aspect-ratio: 28 / 22;
+		overflow: hidden;
+
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.project-card-title {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		padding-inline: 0.25rem;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		/* font-size: var(--font-size-small); */
+		line-height: 1.3;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.project-card {
+			transition: none;
+		}
+	}
+</style>

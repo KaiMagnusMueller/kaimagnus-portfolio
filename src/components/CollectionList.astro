@@ -2,145 +2,46 @@
 import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
-	title?: string;
 	entries: CollectionEntry<'projects' | 'articles' | 'work' | 'til'>[];
-	id?: string;
 }
 
-const { title, entries, id } = Astro.props;
+const { entries } = Astro.props;
 
 const sortedEntries = entries.sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
-
-function allSameValue(keyName: string, arr: any[]): boolean {
-	const values = arr.map((obj) => obj[keyName]);
-	return new Set(values).size === 1;
-}
-
-const shouldLinkTitle = title && allSameValue('collection', sortedEntries);
-const titleLink = shouldLinkTitle ? `/${sortedEntries[0].collection}` : null;
 ---
 
 {
 	sortedEntries.length > 0 && (
-		<div class="post-list">
-			{title && (
-				<h2 class="color-text-low-contrast" id={id}>
-					{titleLink ? <a href={titleLink}>{title}</a> : title}
-				</h2>
-			)}
-
-			<slot />
-
-			<div>
-				<div class="post-table">
-					{sortedEntries.map((entry) => (
-						<div class="post-table-row">
-							<span class="post-table-cell cell-title">
-								<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description ?? entry.data.title}>
-									{entry.data.title}
-								</a>
-							</span>
-							<span class="post-table-cell color-text-low-contrast cell-date">
-								{entry.data.datePublished.toLocaleDateString('en-US', {
-									year: 'numeric',
-									month: 'long',
-								})}
-							</span>
-							<span class="post-table-cell color-text-low-contrast cell-tags">
-								{entry.data.tags.filter(Boolean).join(', ')}
-							</span>
-						</div>
-					))}
-				</div>
-			</div>
-		</div>
+		<ul class="post-list">
+			{sortedEntries.map((entry) => (
+				<li>
+					<a href={`/${entry.collection}/${entry.id}`} aria-label={entry.data.description || entry.data.title}>
+						{entry.data.title}
+					</a>
+				</li>
+			))}
+		</ul>
 	)
 }
 
-<style is:global>
-	.insert-text + .post-list {
-		margin-block-start: 2rem;
-	}
-</style>
-
 <style lang="css">
-	h2 {
-		margin: 0.3rem 0;
-		font-size: inherit;
-
-		a {
-			text-decoration: revert;
-		}
+	.post-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
 	}
 
-	.post-table {
-		display: grid;
-		grid-template-columns: 1fr 160px 1fr;
-		width: 100%;
-	}
+	a {
+		color: var(--text-color);
+		text-decoration: underline;
+		text-decoration-color: var(--text-color-lowest-contrast);
+		text-underline-offset: 0.15em;
 
-	.post-table-row {
-		display: contents;
-	}
-
-	.post-table-cell {
-		border-block-end: 1px solid var(--border-color-transparent);
-		padding: 0.4rem 1.4rem 0.4rem 0rem;
-		overflow: hidden;
-		font-weight: 400;
-		text-align: left;
-		text-overflow: ellipsis;
-
-		a {
-			text-decoration: none;
-		}
-
-		a:hover {
-			text-decoration: underline;
-		}
-	}
-
-	.post-table-cell:last-child {
-		padding-inline-end: 0;
-	}
-
-	.cell-date {
-		text-align: right;
-	}
-
-	@media (pointer: coarse) {
-		.post-table-cell a {
-			display: inline-block;
-			padding-block: 0.125rem;
-		}
-	}
-
-	@media (max-width: 1024px) {
-		.post-table {
-			grid-template-columns: 2fr minmax(min-content, auto);
-		}
-
-		.cell-date {
-			padding-inline-end: 0;
-		}
-
-		.cell-tags {
-			display: none;
-		}
-	}
-
-	@media (max-width: 768px) {
-		.post-table {
-			grid-template-columns: 1fr;
-		}
-
-		.cell-title {
-			padding-inline-end: 0;
-		}
-
-		.cell-date,
-		.cell-tags {
-			display: none;
+		&:hover {
+			text-decoration-color: currentColor;
 		}
 	}
 </style>
