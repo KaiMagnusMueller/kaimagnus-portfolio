@@ -123,15 +123,14 @@ const handpickedWork = [
 		/* --page-top is also read by CardStack, which positions itself against this container */
 		.index-page {
 			--page-top: clamp(4rem, 13vh, 8rem);
-
-			position: relative;
 			padding-block-start: var(--page-top);
+			position: relative;
 		}
 
 		.hero--section {
 			/* Can run under the pile a little */
 			max-width: 40.5rem;
-			color: var(--text-color-lowest-contrast);
+			color: var(--text-color-low-contrast);
 			font-size: var(--font-size-large);
 			line-height: 1.3;
 
@@ -155,7 +154,9 @@ const handpickedWork = [
 		}
 
 		.hero--section:has(.highlight--job:hover) .highlight--default,
-		.hero--section:has(.highlight--skill:hover) .highlight--default {
+		.hero--section:has(.highlight--skill:hover) .highlight--default, 
+		.hero--section:has(.highlight--job:hover),
+		.hero--section:has(.highlight--skill:hover) {
 			color: var(--text-color-lowest-contrast);
 		}
 

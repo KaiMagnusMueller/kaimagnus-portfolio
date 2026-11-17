@@ -59,8 +59,8 @@ const hand = cards.map((card) => ({
 </aside>
 
 <style lang="css">
-	/* Built mobile first: a tall, centered zigzag pile, then a wrapping row of cards on
-	   tablets, then the tilted pile on the right of the first screen on desktop. */
+	/* Built mobile first: a tall, centered zigzag pile, then the tilted pile on the right of
+	   the first screen from tablets up, pushed a bit further down on tablets. */
 
 	/* Mobile: a section of its own below the hero, in the normal flow. Cards near the edges
 	   may stick out of the pile, so the box reaches the screen edges and clips there, so they
@@ -112,7 +112,7 @@ const hand = cards.map((card) => ({
 		*/
 		left: calc(
 			var(--start) -
-			var(--i) * var(--step) +
+			var(--i) * var(--i) * var(--step) +
 			var(--dir) * (var(--amp) + var(--i) * var(--amp-growth)) +
 			var(--jitter, 0%)
 		);
@@ -188,18 +188,19 @@ const hand = cards.map((card) => ({
 			--spread: clamp(0.4, (100vw - 1024px) / 276px, 1);
 
 			position: absolute;
-			inset-block-start: var(--page-top);
+			padding-block: var(--page-top);
 			/* The narrower the screen, the further right the pile starts, away from the hero text */
 			/* inset-inline: calc(20rem + var(--page-gutter) + (1 - var(--spread)) * 10rem) 0; */
 			/* height: calc(100svh - 2 * var(--page-top)); */
-			inset-inline-end: var(--page-gutter);
+			padding-inline: 0;
 			/* aspect-ratio: 4 / 6; */
 			right: 0;
 			margin: 0;
-			padding: 0;
+			top: 0;
 			width: 55%;
-			height: 80vw;
-			max-height: 960px;
+			height: 100vh;
+			/* max-height: 960px; */
+			min-height: 1200px;
 			overflow: visible;
 			z-index: 1;
 		}
@@ -241,12 +242,31 @@ const hand = cards.map((card) => ({
 			--deal-x: -50%;
 
 			--start: 75%;
-			--step: 8%;
+			--step: 3%;
 			--amp: 14%;
 			--amp-growth: 3%;
 
 			rotate: calc(var(--r) * 2);
 			translate: -50% -50%;
+		}
+	}
+
+	/* Tablet: the hero text takes up more of the width, so the pile gets taller, its zigzag
+	   tighter, and the cards move down, out of the text's way */
+	@media (min-width: 769px) and (max-width: 1024px) {
+		.card-stack {
+			--spread: clamp(0.4, (100vw - 1024px) / 186px, 1);
+			margin-top: 360px;
+			min-height:900px;
+
+		}
+
+		.stack-card {
+			--card-width: min(230px, 18vw);
+
+			top: calc(var(--t) * 100% + 0%);
+			--step: 0%;
+			--amp: 8%;
 		}
 	}
 
