@@ -5,109 +5,126 @@ import { getCardImage } from '@utils/getCardImage';
 export interface Props {
 	entries: CollectionEntry<'projects' | 'articles' | 'work'>[];
 }
-
 const { entries } = Astro.props;
-
-// A random spot inside a circle (unit radius) and a tilt of up to ±6°.
-// These are the build-time defaults; the inline script below rolls new ones once per visit.
-function deal() {
-	const angle = Math.random() * 2 * Math.PI;
-	const distance = Math.sqrt(Math.random()); // sqrt spreads cards evenly over the area
-	return {
-		x: (Math.cos(angle) * distance).toFixed(3),
-		y: (Math.sin(angle) * distance).toFixed(3),
-		r: ((Math.random() * 2 - 1) * 6).toFixed(2),
-	};
-}
 
 const cards = entries
 	.map((entry) => ({ entry, image: getCardImage(entry) }))
 	.filter((card) => card.image);
+
+const random = (min: number, max: number) => min + Math.random() * (max - min);
+
+const hand = cards.map((card) => ({
+	...card,
+	jitter: random(-4, 4).toFixed(1),
+	r: random(-8, 8).toFixed(2),
+}));
 ---
 
 <script is:inline>
-	// Runs before the pile is parsed: when coming back from another page of the site and the
-	// cards were already dealt in this tab, skip the animation. Reloads and visits from
-	// elsewhere deal again.
+	// Runs before the pile is parsed and decides whether the cards fly in or are simply in
+	// place. They only fly in when the page opens at the top for a fresh visit: arriving
+	// from elsewhere, or reloading while at the top.
 	try {
+		const type = performance.getEntriesByType('navigation')[0]?.type;
 		const fromSite = document.referrer && new URL(document.referrer).origin === location.origin;
-		const reload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
-		if (fromSite && !reload && sessionStorage.getItem('card-stack')) {
-			document.documentElement.classList.add('cards-dealt');
-		}
+
+		console.log({ type, fromSite });
+		// Where the page was scrolled to when it was last left. The browser restores that
+		// position on reload, but only after this script has run, so it's saved on the way out.
+		const lastScroll = Number(sessionStorage.getItem('home-scroll')) || 0;
+		addEventListener('pagehide', () => sessionStorage.setItem('home-scroll', String(scrollY)));
+
+		const skip =
+			type === 'back_forward' || // back/forward: referrer is the old one, so check the type
+			location.hash !== '' || // jumps to a section, the pile is out of view
+			(type === 'reload' ? lastScroll > 0 : fromSite); // reload mid-page, or a link on this site
+		if (skip) document.documentElement.classList.add('cards-dealt');
 	} catch {}
 </script>
 
-<div class="card-stack">
-	{
-		cards.map(({ entry, image }, i) => {
-			const { x, y, r } = deal();
-			return (
+<aside class="card-stack">
+	<div class="pile">
+		{
+			hand.map(({ entry, image, jitter, r }) => (
 				<a
 					class="stack-card"
 					href={`/${entry.collection}/${entry.id}`}
-					style={`--i: ${i}; --x: ${x}; --y: ${y}; --r: ${r}deg`}
+					style={`--jitter: ${jitter}%; --r: ${r}deg`}
 				>
 					<img src={image} alt={entry.data.title} width="280" height="220" decoding="async" />
 				</a>
-			);
-		})
-	}
-</div>
-
-<script is:inline>
-	// Deal and keep the result, so the pile looks the same when coming back without animation.
-	// The animation reads these values live, so it doesn't matter when exactly this runs.
-	(() => {
-		const cards = [...document.currentScript.previousElementSibling.querySelectorAll('.stack-card')];
-		let positions;
-		if (document.documentElement.classList.contains('cards-dealt')) {
-			try {
-				positions = JSON.parse(sessionStorage.getItem('card-stack'));
-			} catch {}
+			))
 		}
-		if (positions?.length !== cards.length) {
-			positions = cards.map(() => {
-				const angle = Math.random() * 2 * Math.PI;
-				const distance = Math.sqrt(Math.random());
-				return [Math.cos(angle) * distance, Math.sin(angle) * distance, (Math.random() * 2 - 1) * 6].map((n) =>
-					n.toFixed(3),
-				);
-			});
-			try {
-				sessionStorage.setItem('card-stack', JSON.stringify(positions));
-			} catch {}
-		}
-		cards.forEach((card, i) => {
-			const [x, y, r] = positions[i];
-			card.style.setProperty('--x', x);
-			card.style.setProperty('--y', y);
-			card.style.setProperty('--r', `${r}deg`);
-		});
-	})();
-</script>
+	</div>
+</aside>
 
 <style lang="css">
-	/* The pile fills the box it's given; cards and the circle they land in are sized
-	   from that box's shorter side, so the circle is always centered and fits */
+	/* Built mobile first: a tall, centered zigzag pile, then a wrapping row of cards on
+	   tablets, then the tilted pile on the right of the first screen on desktop. */
+
+	/* Mobile: a section of its own below the hero, in the normal flow. Cards near the edges
+	   may stick out of the pile, so the box reaches the screen edges and clips there, so they
+	   can't make the page scroll sideways. Only sideways: the cards fly in from below. */
 	.card-stack {
+		margin-block-start: 4rem;
+		margin-inline: calc(-1 * var(--page-gutter));
+		padding-inline: var(--page-gutter);
+		overflow-x: clip;
+	}
+
+	/* Most of the screen's height, but never too short, for phones held sideways */
+	.pile {
 		container-type: size;
 		position: relative;
-		height: 100%;
+		margin-inline: auto;
+		max-width: 25rem;
+		height: 80svh;
+		max-height: 580px;
 	}
 
 	.stack-card {
-		--card-width: min(16rem, 48cqmin);
-		/* Card centers land in this circle; leave room so the cards stay inside the box */
-		--radius: calc(50cqmin - var(--card-width) * 0.55);
-
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		translate: calc(-50% + var(--x) * var(--radius)) calc(-50% + var(--y) * var(--radius));
+		--card-width: min(13rem, 55vw);
+		/* Each card a little bigger than the one before */
+		--scale: calc(1 + 0.05 * sibling-index());
+		/* The deal-in starts from the middle of the pile */
+		--deal-x: -50%;
+
+		/* Divide the vertical space evenly among the cards */
+		--t: calc(sibling-index() / (sibling-count() + 1));
+		top: calc(var(--t) * 100%);
+
+		/* Centered zigzag that opens up towards the bottom. Desktop adds the diagonal. */
+		--start: 50%;
+		--step: 0%;
+		--amp: 12%;
+		--amp-growth: 4%;
+		/* 0-based index */
+		--i: calc(sibling-index() - 1);
+		/* Alternate direction for each card (+1, -1, +1, -1, …) */
+		--dir: calc(2 * mod(sibling-index(), 2) - 1);
+
+		/*
+			Start												var(--start) -
+			Decrease with each card								var(--i) * var(--step) +
+			Swing left and right with increasing amplitude		var(--dir) * (var(--amp) + var(--i) * var(--amp-growth)) +
+			Random component									var(--jitter, 0%)
+		*/
+		left: calc(
+			var(--start) -
+				var(--i) * var(--step) +
+				var(--dir) * (var(--amp) + var(--i) * var(--amp-growth)) +
+				var(--jitter, 0%)
+		);
+
+		translate: -50% -50%;
 		rotate: var(--r);
-		transition: scale 0.2s ease;
-		animation: deal 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) calc(0.2s + var(--i) * 0.12s) backwards;
+		scale: var(--scale);
+		/* The deal-in is an animation, so its staggered delay can't get in the way of the
+		   hover transition on `scale` */
+		transition: scale 0.25s ease;
+		animation: deal 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) backwards
+			calc(0.2s + sibling-index() * 0.12s);
 		box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
 		border: 4px solid #fff;
 		border-radius: 8px;
@@ -124,30 +141,121 @@ const cards = entries
 			object-fit: cover;
 		}
 
-		&:hover,
 		&:focus-visible {
 			z-index: 1;
-			scale: 1.05;
+			scale: calc(var(--scale) * 1.06);
+		}
+
+		@media (hover: hover) {
+			&:hover {
+				z-index: 1;
+				scale: calc(var(--scale) * 1.06);
+			}
 		}
 	}
 
-	/* Only "from" is defined: each card flies in from below the screen, straight up from
-	   the pile's center and untilted, to its own position and rotation */
+	/* Tablet: the cards leave their positions and wrap in rows, left aligned with the text,
+	   keeping only their random tilt */
+	@media (min-width: 769px) {
+		.pile {
+			container-type: normal;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+			margin-inline: 0;
+			/* Room for the tilted corners */
+			padding-block: 1rem;
+			max-width: none;
+			height: auto;
+			max-height: unset;
+		}
+
+		.stack-card {
+			position: static;
+			--card-width: 13rem;
+			--scale: 1;
+			--deal-x: 0;
+
+			translate: none;
+		}
+	}
+
+	/* Desktop: the pile sits on the right of the first screen and scrolls with the page.
+	   Expects --page-top and --page-gutter from the page. It mirrors the page's margins: the
+	   gutter separates it from the text column and sits to its right. */
+	@media (min-width: 1180px) {
+		.card-stack {
+			/* How much of the layout is kept: 1 from 1300px wide, shrinking linearly down to 0.4
+			   at 1024px, where the pile is squeezed in next to the text. Dividing two lengths
+			   gives a plain number, which scales the zigzag below and moves the pile's left edge. */
+			--spread: clamp(0.4, (100vw - 1024px) / 276px, 1);
+
+			position: absolute;
+			inset-block-start: var(--page-top);
+			/* The narrower the screen, the further right the pile starts, away from the hero text */
+			/* inset-inline: calc(20rem + var(--page-gutter) + (1 - var(--spread)) * 10rem) 0; */
+			/* height: calc(100svh - 2 * var(--page-top)); */
+			inset-inline-end: var(--page-gutter);
+			/* aspect-ratio: 4 / 6; */
+			right: 0;
+			margin: 0;
+			padding: 0;
+			width: 55%;
+			height: 80vw;
+			max-height: 960px;
+			overflow: visible;
+			z-index: 1;
+		}
+
+		.pile {
+			container-type: size;
+			display: block;
+			padding: 0;
+			height: 100%;
+		}
+
+		/* Back to the mobile positioning, now running diagonally down to the left */
+		.stack-card {
+			position: absolute;
+			--card-width: min(230px, 16vw);
+			--scale: calc(1 + 0.05 * sibling-index());
+			--deal-x: -50%;
+
+			--start: 75%;
+			--step: 8%;
+			--amp: 14%;
+			--amp-growth: 3%;
+
+			translate: -50% -50%;
+		}
+	}
+
+	/* Only the start is given, the end is the card's own resting position. `left` only
+	   matters where the cards are positioned. */
 	@keyframes deal {
 		from {
-			translate: -50% calc(-50% + 100vh);
+			left: 50%;
+			translate: var(--deal-x, 0) 100vh;
 			rotate: 0deg;
+			opacity: 0;
 		}
 	}
 
+	@keyframes fade {
+		from {
+			opacity: 0;
+		}
+	}
+
+	/* Coming back (see the script above): the cards are simply in place */
 	:global(.cards-dealt) .stack-card {
 		animation: none;
 	}
 
+	/* The cards are in place from the start and only fade in, one after another */
 	@media (prefers-reduced-motion: reduce) {
 		.stack-card {
-			transition: none;
-			animation: none;
+			animation: fade 0.6s ease backwards calc(0.2s + var(--i) * 0.12s);
 		}
 	}
 </style>

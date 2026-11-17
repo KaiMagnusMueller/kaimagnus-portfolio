@@ -23,6 +23,7 @@ const hasBody = Astro.slots.has('default');
 <style lang="css">
 	.home-section {
 		margin-block-start: 6rem;
+		max-width: 25rem;
 	}
 
 	h2 {
@@ -44,6 +45,7 @@ const hasBody = Astro.slots.has('default');
 	@media (max-width: 768px) {
 		.home-section {
 			margin-block-start: 4rem;
+			max-width: unset;
 		}
 	}
 </style>
